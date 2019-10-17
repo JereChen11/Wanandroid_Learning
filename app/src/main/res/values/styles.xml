@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <declare-styleable name="HomeBottomBarCustomView">
+<!--        <attr name="artistText" format="string" />-->
+<!--        <attr name="trackText" format="string" />-->
+<!--        <attr name="buyButton" format="string" />-->
+    </declare-styleable>
+
 </resources>
