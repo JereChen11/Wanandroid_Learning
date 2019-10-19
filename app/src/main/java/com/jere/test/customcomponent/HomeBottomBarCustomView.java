@@ -1,5 +1,6 @@
 package com.jere.test;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -12,10 +13,6 @@ import android.widget.LinearLayout;
  * @author jere
  */
 public class HomeBottomBarCustomView extends LinearLayout implements View.OnClickListener {
-    private Button homePageBtn;
-    private Button page1Btn;
-    private Button page2Btn;
-    private Button page3Btn;
 
     public HomeBottomBarCustomView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -37,10 +34,10 @@ public class HomeBottomBarCustomView extends LinearLayout implements View.OnClic
     }
 
     private void initComponents() {
-        homePageBtn = findViewById(R.id.btn_home_page);
-        page1Btn = findViewById(R.id.btn_page_1);
-        page2Btn = findViewById(R.id.btn_page_2);
-        page3Btn = findViewById(R.id.btn_page_3);
+        Button homePageBtn = findViewById(R.id.btn_home_page);
+        Button page1Btn = findViewById(R.id.btn_page_1);
+        Button page2Btn = findViewById(R.id.btn_page_2);
+        Button page3Btn = findViewById(R.id.btn_page_3);
         homePageBtn.setOnClickListener(this);
         page1Btn.setOnClickListener(this);
         page2Btn.setOnClickListener(this);
