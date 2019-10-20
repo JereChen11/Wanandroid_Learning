@@ -30,7 +30,7 @@ public class BaseBarActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_home_page:
-                Intent homeIntent = new Intent(this, MainActivity.class);
+                Intent homeIntent = new Intent(this, HomeActivity.class);
                 startActivity(homeIntent);
                 break;
             case R.id.btn_page_1:

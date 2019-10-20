@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">JereTestApp</string>
+    <string name="hi">Hi</string>
+    <string name="welcome_to">Welcome To</string>
+    <string name="jere_test_app">Jere Test App</string>
     <string name="home_page">Home</string>
     <string name="page_1">Page 1</string>
     <string name="page_2">Page 2</string>

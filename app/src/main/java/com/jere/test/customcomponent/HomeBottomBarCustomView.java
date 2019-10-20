@@ -1,15 +1,13 @@
 package com.jere.test.customcomponent;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.jere.test.MainActivity;
+import com.jere.test.HomeActivity;
 import com.jere.test.Page1Activity;
 import com.jere.test.Page2Activity;
 import com.jere.test.Page3Activity;
@@ -54,7 +52,7 @@ public class HomeBottomBarCustomView extends LinearLayout implements View.OnClic
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_home_page:
-                Intent homePageIntent = new Intent(getContext(), MainActivity.class);
+                Intent homePageIntent = new Intent(getContext(), HomeActivity.class);
                 getContext().startActivity(homePageIntent);
                 break;
             case R.id.btn_page_1:
