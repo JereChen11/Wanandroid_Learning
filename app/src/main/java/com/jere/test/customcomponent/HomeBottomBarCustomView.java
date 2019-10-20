@@ -1,4 +1,4 @@
-package com.jere.test;
+package com.jere.test.customcomponent;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,6 +8,12 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+
+import com.jere.test.MainActivity;
+import com.jere.test.Page1Activity;
+import com.jere.test.Page2Activity;
+import com.jere.test.Page3Activity;
+import com.jere.test.R;
 
 /**
  * @author jere

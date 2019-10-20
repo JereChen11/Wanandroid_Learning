@@ -1,8 +1,10 @@
 package com.jere.test;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+/**
+ * @author jere
+ */
 public class Page1Activity extends BaseBarActivity {
 
     @Override
