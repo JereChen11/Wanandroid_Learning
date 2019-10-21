@@ -1,11 +1,13 @@
 package com.jere.test.tutorial;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.jere.test.HomeActivity;
 import com.jere.test.R;
 
 /**
@@ -14,7 +16,7 @@ import com.jere.test.R;
 public class TutorialActivity extends AppCompatActivity {
     private View[] navigationPoints;
     private ViewPager viewPager;
-    private TextView introduceTv;
+    private TextView finishTutorialTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +36,13 @@ public class TutorialActivity extends AppCompatActivity {
                 for (int i = 0; i < navigationPoints.length; i++) {
                     if (position == i) {
                         navigationPoints[i].setBackgroundResource(R.drawable.banner_navigation_point_highlight_shape);
-                        introduceTv.setText(R.string.hi);
-                    } else if (position == navigationPoints.length) {
-                        navigationPoints[0].setBackgroundResource(R.drawable.banner_navigation_point_highlight_shape);
-                        navigationPoints[2].setBackgroundResource(R.drawable.banner_navigation_point_gray_shape);
-                        introduceTv.setText(R.string.jere_test_app);
                     } else {
                         navigationPoints[i].setBackgroundResource(R.drawable.banner_navigation_point_gray_shape);
-                        introduceTv.setText(R.string.welcome_to);
+                    }
+                    if (position == 2) {
+                        finishTutorialTv.setVisibility(View.VISIBLE);
+                    } else {
+                        finishTutorialTv.setVisibility(View.GONE);
                     }
                 }
             }
@@ -49,6 +50,14 @@ public class TutorialActivity extends AppCompatActivity {
             @Override
             public void onPageScrollStateChanged(int i) {
 
+            }
+        });
+
+        finishTutorialTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent homeIntent = new Intent(TutorialActivity.this, HomeActivity.class);
+                startActivity(homeIntent);
             }
         });
 
@@ -60,7 +69,7 @@ public class TutorialActivity extends AppCompatActivity {
         View rightNavigationPoint = findViewById(R.id.navigation_point_right);
         navigationPoints = new View[] {leftNavigationPoint, centerNavigationPoint, rightNavigationPoint};
         viewPager = findViewById(R.id.tutorial_vp);
-        introduceTv = findViewById(R.id.introduce_tv);
+        finishTutorialTv = findViewById(R.id.finish_tutorial_tv);
     }
 
 
