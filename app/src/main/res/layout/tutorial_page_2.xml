@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:text="To"
         android:textSize="30sp"
+        android:textColor="@color/white"
         android:background="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

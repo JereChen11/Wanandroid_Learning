@@ -1,0 +1,76 @@
+package com.jere.test.home;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.widget.Button;
+
+import com.jere.test.R;
+
+/**
+ * @author jere
+ */
+public class HomeActivity extends FragmentActivity implements View.OnClickListener
+        , Page1Fragment.OnFragmentInteractionListener, Page2Fragment.OnFragmentInteractionListener {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        initComponents();
+    }
+
+    private void initComponents() {
+        Button homePageBtn = findViewById(R.id.btn_home_page);
+        Button page1Btn = findViewById(R.id.btn_fragment_1);
+        Button page2Btn = findViewById(R.id.btn_fragment_2);
+        Button page3Btn = findViewById(R.id.btn_fragment_3);
+        homePageBtn.setOnClickListener(this);
+        page1Btn.setOnClickListener(this);
+        page2Btn.setOnClickListener(this);
+//        page3Btn.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_home_page:
+                Intent homeIntent = new Intent(this, HomeActivity.class);
+                startActivity(homeIntent);
+                break;
+            case R.id.btn_fragment_1:
+                Page1Fragment page1Fragment = Page1Fragment.newInstance("page 1 Fragment", "jere test 1");
+                replaceFragment(page1Fragment);
+                break;
+            case R.id.btn_fragment_2:
+                Page2Fragment page2Fragment = Page2Fragment.newInstance("page 2 Fragment", "jere test 2");
+                replaceFragment(page2Fragment);
+                break;
+            case R.id.btn_fragment_3:
+//                Intent page3Intent = new Intent(this, Page3Activity.class);
+//                startActivity(page3Intent);
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    private void replaceFragment(Fragment replaceFragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.content_fragment, replaceFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+}

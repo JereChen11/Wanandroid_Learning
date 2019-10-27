@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.jere.test.HomeActivity;
+import com.jere.test.home.HomeActivity;
 import com.jere.test.R;
 
 /**

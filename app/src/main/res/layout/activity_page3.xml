@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Page3Activity">
+    tools:context=".home.Page3Activity">
 
     <com.jere.test.customcomponent.TitleBarCustomView
         android:layout_width="match_parent"
