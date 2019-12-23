@@ -1,6 +1,5 @@
 package com.jere.test.home;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,12 +10,15 @@ import android.view.View;
 import android.widget.Button;
 
 import com.jere.test.R;
+import com.jere.test.article.ArticleListFragment;
 
 /**
  * @author jere
  */
-public class HomeActivity extends FragmentActivity implements View.OnClickListener
-        , Page1Fragment.OnFragmentInteractionListener, Page2Fragment.OnFragmentInteractionListener {
+public class HomeActivity extends FragmentActivity implements View.OnClickListener,
+        ArticleListFragment.OnFragmentInteractionListener,
+        Page2Fragment.OnFragmentInteractionListener,
+        HomeFragment.OnFragmentInteractionListener{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,12 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
         setContentView(R.layout.activity_main);
 
         initComponents();
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.content_fragment, new HomeFragment());
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     private void initComponents() {
@@ -41,11 +49,13 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_home_page:
-                Intent homeIntent = new Intent(this, HomeActivity.class);
-                startActivity(homeIntent);
+//                Intent homeIntent = new Intent(this, HomeActivity.class);
+//                startActivity(homeIntent);
+                HomeFragment homeFragment = HomeFragment.newInstance("Home Fragment", "jere test home");
+                replaceFragment(homeFragment);
                 break;
             case R.id.btn_fragment_1:
-                Page1Fragment page1Fragment = Page1Fragment.newInstance("page 1 Fragment", "jere test 1");
+                ArticleListFragment page1Fragment = ArticleListFragment.newInstance("page 1 Fragment", "jere test 1");
                 replaceFragment(page1Fragment);
                 break;
             case R.id.btn_fragment_2:

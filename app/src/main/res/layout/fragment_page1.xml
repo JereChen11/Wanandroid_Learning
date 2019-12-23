@@ -3,16 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.Page1Fragment"
-    android:background="@color/yellow">
+    tools:context=".article.ArticleListFragment"
+    android:background="@color/light_goldenrod_yellow">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="content fragment"
+        android:text="fragment 1"
         android:textSize="30sp"
         android:textColor="@color/black"
         android:gravity="center"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/article_recycle_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:background="@color/orange"/>
 
 </FrameLayout>

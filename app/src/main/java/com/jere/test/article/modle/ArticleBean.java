@@ -5,6 +5,7 @@ public class ArticleBean {
     private String publishDate;
     private String content;
     private String title;
+    private int background;
 
     public String getAuthor() {
         return author;
@@ -36,5 +37,13 @@ public class ArticleBean {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getBackground() {
+        return background;
+    }
+
+    public void setBackground(int background) {
+        this.background = background;
     }
 }
