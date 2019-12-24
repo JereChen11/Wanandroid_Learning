@@ -6,11 +6,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.jere.test.R;
 import com.jere.test.article.ArticleListFragment;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * @author jere
@@ -51,8 +58,15 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
             case R.id.btn_home_page:
 //                Intent homeIntent = new Intent(this, HomeActivity.class);
 //                startActivity(homeIntent);
-                HomeFragment homeFragment = HomeFragment.newInstance("Home Fragment", "jere test home");
-                replaceFragment(homeFragment);
+//                HomeFragment homeFragment = HomeFragment.newInstance("Home Fragment", "jere test home");
+//                replaceFragment(homeFragment);
+//                jereTest();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        jereTest();
+                    }
+                }).start();
                 break;
             case R.id.btn_fragment_1:
                 ArticleListFragment page1Fragment = ArticleListFragment.newInstance("page 1 Fragment", "jere test 1");
@@ -82,5 +96,34 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
         fragmentTransaction.replace(R.id.content_fragment, replaceFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+
+    private void jereTest() {
+        try {
+            String str1;
+            HttpURLConnection localHttpURLConnection = (HttpURLConnection)
+                    new URL("http://www.yuntsoft.com:7417/warehouse-api/reagent/material/722").openConnection();
+            localHttpURLConnection.setConnectTimeout(10000);
+            localHttpURLConnection.setRequestMethod("GET");
+            localHttpURLConnection.connect();
+            InputStream localInputStream = localHttpURLConnection.getInputStream();
+            BufferedReader localBufferedReader = new BufferedReader(new InputStreamReader(localInputStream, "UTF-8"));
+            StringBuffer localStringBuffer = new StringBuffer("");
+            while (true) {
+                String str2 = localBufferedReader.readLine();
+                if (str2 == null) {
+//                bool = true;
+                    str1 = localStringBuffer.toString();
+                    localInputStream.close();
+                    Log.e("jereTest", "info:  " + str1);
+                    return;
+                }
+                localStringBuffer.append(str2);
+                localStringBuffer.append("\n");
+            }
+        } catch (Exception localException) {
+            localException.printStackTrace();
+        }
     }
 }

@@ -101,7 +101,7 @@ public class ArticleListFragment extends Fragment implements RecyclerView.OnItem
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
 
-        recyclerView.setOnClickListener(this);
+//        recyclerView.setOnClickListener(this);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
