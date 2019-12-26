@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".automaticchart.AutomaticChartActivity"></activity>
         <activity android:name=".article.ArticleDetailActivity" />
         <activity android:name=".article.ArticleActivity" />
         <activity android:name=".tutorial.TutorialActivity" />
@@ -19,6 +20,7 @@
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
