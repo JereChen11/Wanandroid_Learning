@@ -1,16 +1,21 @@
 package com.jere.test.automaticchart;
 
+import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,14 +31,33 @@ import java.util.ArrayList;
 public class AutomaticChartActivity extends AppCompatActivity {
     private static final String TAG = "AutomaticChartActivity";
     private ChartMessageViewModel chartMessageVm;
-
+    private ArrayList<String> messageArrayList;
+    private MyAdapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_automatic_chart);
 
         RecyclerView recyclerView = findViewById(R.id.chart_recycle_view);
-        recyclerView.setAdapter();
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(mLayoutManager);
+
+        messageArrayList = new ArrayList<>();
+        messageArrayList.add("Hi, Im Jere");
+        mAdapter = new MyAdapter(messageArrayList);
+        recyclerView.setAdapter(mAdapter);
+
+        final EditText inputEt = findViewById(R.id.input_et);
+        Button sendBtn = findViewById(R.id.send_btn);
+        sendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                messageArrayList.add(inputEt.getText().toString());
+                mAdapter.notifyDataSetChanged();
+                inputEt.setText("");
+                inputEt.setFocusable(false);
+            }
+        });
 
         chartMessageVm = ViewModelProviders.of(this).get(ChartMessageViewModel.class);
         chartMessageVm.getMessageLd().observe(this, chartMessageObserver);
@@ -58,13 +82,15 @@ public class AutomaticChartActivity extends AppCompatActivity {
         @Override
         public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             View view = LayoutInflater.from(viewGroup.getContext())
-                    .inflate(R.layout.item_view_recycley_list_article, viewGroup, false);
+                    .inflate(R.layout.item_view_recycler_list_chart, viewGroup, false);
             return new MyViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-
+            String messageContent = dataList.get(i);
+            myViewHolder.messgeContentTv.setText(messageContent);
+//            myViewHolder.avatarIv.setImageResource(R.drawable.avatar_circle);
         }
 
         @Override
@@ -73,16 +99,25 @@ public class AutomaticChartActivity extends AppCompatActivity {
         }
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
-            private ImageView iv;
-            private TextView timeTv;
-            private TextView titleTv;
+            private ImageView avatarIv;
+            private TextView messgeContentTv;
 
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
-                iv = itemView.findViewById(R.id.cover_iv);
-                timeTv = itemView.findViewById(R.id.time_tv);
-                titleTv = itemView.findViewById(R.id.title_tv);
+                avatarIv = itemView.findViewById(R.id.avatar_iv);
+                messgeContentTv = itemView.findViewById(R.id.message_content_tv);
             }
         }
+    }
 
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".automaticchart.AutomaticChartActivity"
-    android:background="@color/white">
+    android:background="@color/floral_white">
 
     <TextView
         android:id="@+id/title_tv"
@@ -30,17 +30,21 @@
         android:id="@+id/input_et"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:hint="pls input!!"
+        android:hint="pls input anything!!"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:inputType="text"
+        android:imeOptions="actionDone"
         android:textColorHint="@color/orange"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/send_icon" />
+        app:layout_constraintEnd_toStartOf="@+id/send_btn" />
 
-    <ImageView
-        android:id="@+id/send_icon"
+    <Button
+        android:id="@+id/send_btn"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/ic_launcher_background"
+        android:background="@mipmap/ic_launcher_round"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ImageView
+        android:id="@+id/avatar_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/avatar_circle"
+        android:layout_gravity="center_vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
+        android:id="@+id/message_content_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hi, How Are You!"
         android:textSize="25sp"
         android:textColor="@color/white"
-        android:gravity="center"
-        android:background="@drawable/my_bublle_message_style"
+        android:gravity="center_vertical"
         android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/my_bublle_message_style"
+        app:layout_constraintEnd_toStartOf="@id/avatar_iv"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    
 
 </android.support.constraint.ConstraintLayout>

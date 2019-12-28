@@ -1,5 +1,6 @@
 package com.jere.test.home;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.widget.Button;
 
 import com.jere.test.R;
 import com.jere.test.article.ArticleListFragment;
+import com.jere.test.automaticchart.AutomaticChartActivity;
 
 /**
  * @author jere
@@ -42,7 +44,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
         homePageBtn.setOnClickListener(this);
         page1Btn.setOnClickListener(this);
         page2Btn.setOnClickListener(this);
-//        page3Btn.setOnClickListener(this);
+        page3Btn.setOnClickListener(this);
     }
 
     @Override
@@ -65,6 +67,8 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
             case R.id.btn_fragment_3:
 //                Intent page3Intent = new Intent(this, Page3Activity.class);
 //                startActivity(page3Intent);
+                Intent autoChartActivity = new Intent(HomeActivity.this, AutomaticChartActivity.class);
+                startActivity(autoChartActivity);
                 break;
             default:
                 break;
