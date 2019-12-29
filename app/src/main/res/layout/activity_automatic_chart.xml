@@ -15,6 +15,7 @@
         android:textSize="25sp"
         android:gravity="center"
         android:textColor="@color/black"
+        android:background="@color/light_goldenrod_yellow"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <android.support.v7.widget.RecyclerView
@@ -32,7 +33,7 @@
         android:layout_height="50dp"
         android:hint="pls input anything!!"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="22sp"
         android:inputType="text"
         android:imeOptions="actionDone"
         android:textColorHint="@color/orange"
@@ -44,7 +45,7 @@
         android:id="@+id/send_btn"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@mipmap/ic_launcher_round"
+        android:background="@drawable/send_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
