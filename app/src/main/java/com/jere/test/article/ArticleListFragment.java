@@ -1,6 +1,7 @@
 package com.jere.test.article;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,12 +10,13 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.jere.test.R;
 import com.jere.test.article.modle.ArticleBean;
+import com.jere.test.home.HomeActivity;
+import com.jere.test.util.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 
@@ -28,7 +30,7 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  * @author jere
  */
-public class ArticleListFragment extends Fragment implements RecyclerView.OnItemTouchListener{
+public class ArticleListFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -85,23 +87,31 @@ public class ArticleListFragment extends Fragment implements RecyclerView.OnItem
         articleBean.setAuthor("jere");
         articleBean.setBackground(R.drawable.ic_launcher_background);
         articleBean.setPublishDate("2019/12/23");
-        articleBean.setTitle("Android学习笔记-Activity与Fragment的联系与区别");
-        articleBean.setContent("Fragment是Activity的一部分，对于Activity能构建自己的UI到相对应的Activity。可以认为Fragment是Activity的子类。但是Fragment不能独立存在，它必须和Activity相联系，有自己的生命周期，可以接受自己的输入事件，但是它的生命周期是基于对应Activity的生命周期，例如，当Activity暂停时，其中的所有Fragment也都会暂停，当Activity被销毁时，所有Fragment也都会被销毁。\n" +
-                "\n" +
-                "Activity是一个应用程序组件，用于构建用户交互界面，在Activity中添加Fragment是为了创建多窗口UI界面，一个Activity可以包含多个Fragment，同一个Fragment也可以在不同的Activity间重用。\n" +
-                "\n" +
-                "Activity和Fragment之间的生命周期中，最重要的区别就是：如何存储到各自的后台堆栈中。默认情况下，Activity会被放到系统管理Activity的后台堆栈中(以便用户可以使用后退按钮导航回该Activity)。但是对于Fragment，只有当显式地请求在删除Fragment期间通过调用addToBackStack()来保存实例时，才会将Fragment放入由对应Activity管理的后台堆栈中。\n");
+        articleBean.setTitle("Android学习笔记");
+        articleBean.setContent("Fragment是Activity的一部分，对于Activity能构建自己的UI到相对应的Activity。可以认为Fragment是Activity的子类。");
         ArrayList<ArticleBean> articleBeans = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             articleBeans.add(articleBean);
         }
         MyAdapter adapter = new MyAdapter(articleBeans);
         RecyclerView recyclerView = view.findViewById(R.id.article_recycle_view);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
 
-//        recyclerView.setOnClickListener(this);
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(getActivity(), ArticleDetailActivity.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
+                startActivity(intent);
+            }
+        }));
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -126,22 +136,6 @@ public class ArticleListFragment extends Fragment implements RecyclerView.OnItem
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    @Override
-    public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
-        
-        return false;
-    }
-
-    @Override
-    public void onTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
-
-    }
-
-    @Override
-    public void onRequestDisallowInterceptTouchEvent(boolean b) {
-
     }
 
     /**
