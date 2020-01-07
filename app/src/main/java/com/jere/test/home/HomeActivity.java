@@ -13,6 +13,7 @@ import android.widget.Button;
 import com.jere.test.R;
 import com.jere.test.article.ArticleListFragment;
 import com.jere.test.automaticchart.AutomaticChartActivity;
+import com.jere.test.navigation.NavigationActivity;
 
 /**
  * @author jere
@@ -67,8 +68,11 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
             case R.id.btn_fragment_3:
 //                Intent page3Intent = new Intent(this, Page3Activity.class);
 //                startActivity(page3Intent);
-                Intent autoChartActivity = new Intent(HomeActivity.this, AutomaticChartActivity.class);
-                startActivity(autoChartActivity);
+//                Intent autoChartActivity = new Intent(HomeActivity.this, AutomaticChartActivity.class);
+//                startActivity(autoChartActivity);
+
+                Intent navigationActivityIntent = new Intent(HomeActivity.this, NavigationActivity.class);
+                startActivity(navigationActivityIntent);
                 break;
             default:
                 break;

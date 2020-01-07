@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".automaticchart.AutomaticChartActivity"></activity>
+        <activity android:name=".navigation.NavigationActivity"></activity>
+        <activity android:name=".automaticchart.AutomaticChartActivity" />
         <activity android:name=".article.ArticleDetailActivity" />
         <activity android:name=".article.ArticleActivity" />
         <activity android:name=".tutorial.TutorialActivity" />

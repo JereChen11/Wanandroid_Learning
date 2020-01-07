@@ -8,15 +8,15 @@ import com.jere.test.R;
 
 public enum TutorialObject {
     /**
-     * tutorial left navigation point
+     * tutorial left notifications point
      */
     LEFT(R.layout.tutorial_page_1),
     /**
-     * tutorial center navigation point
+     * tutorial center notifications point
      */
     CENTER(R.layout.tutorial_page_2),
     /**
-     * tutorial right navigation point
+     * tutorial right notifications point
      */
     RIGHT(R.layout.tutorial_page_3);
 
