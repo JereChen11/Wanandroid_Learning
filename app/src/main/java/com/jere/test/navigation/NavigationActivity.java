@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -23,7 +22,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
+import com.jere.test.AboutMeActivity;
 import com.jere.test.R;
 import com.jere.test.article.ArticleListFragment;
 import com.jere.test.automaticchart.AutomaticChartActivity;
@@ -34,10 +33,10 @@ import com.jere.test.automaticchart.AutomaticChartActivity;
 public class NavigationActivity extends AppCompatActivity implements ArticleListFragment.OnFragmentInteractionListener{
     private NavigationView navigationView;
     private DrawerLayout drawer;
-    private ImageView imgNavHeaderBg, avatarIv;
+    private ImageView navHeaderBgIv, avatarIv;
     private TextView nameTv, emailTv;
     private Toolbar toolbar;
-    private FloatingActionButton fab;
+    private FloatingActionButton chatFloatingActionBtn;
 
     // index to identify current nav menu item
     public static int navItemIndex = 0;
@@ -61,40 +60,40 @@ public class NavigationActivity extends AppCompatActivity implements ArticleList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_navigation);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         mHandler = new Handler();
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        chatFloatingActionBtn = findViewById(R.id.chat_floating_action_btn);
 
         // Navigation view header
         View navHeader = navigationView.getHeaderView(0);
-        nameTv = (TextView) navHeader.findViewById(R.id.name_tv);
-        emailTv = (TextView) navHeader.findViewById(R.id.email_tv);
-        imgNavHeaderBg = (ImageView) navHeader.findViewById(R.id.img_header_bg);
-        avatarIv = (ImageView) navHeader.findViewById(R.id.avatar_iv);
+        nameTv = navHeader.findViewById(R.id.name_tv);
+        emailTv = navHeader.findViewById(R.id.email_tv);
+        navHeaderBgIv = navHeader.findViewById(R.id.img_header_bg);
+        avatarIv = navHeader.findViewById(R.id.avatar_iv);
 
         // load toolbar titles from string resources
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        chatFloatingActionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent chartMsgIntent = new Intent(NavigationActivity.this, AutomaticChartActivity.class);
+                startActivity(chartMsgIntent);
             }
         });
 
         // load nav menu header data
-        loadNavHeader();
+        loadNavHeaderView();
 
         // initializing notifications menu
-        setUpNavigationView();
+        setNavigationMenuView();
 
         if (savedInstanceState == null) {
             navItemIndex = 0;
@@ -103,12 +102,7 @@ public class NavigationActivity extends AppCompatActivity implements ArticleList
         }
     }
 
-    /***
-     * Load notifications menu header information
-     * like background image, profile image
-     * name, website, notifications action view (dot)
-     */
-    private void loadNavHeader() {
+    private void loadNavHeaderView() {
         // name, website
         nameTv.setText("Jere Chen");
         emailTv.setText("jerechen11@gmail.com");
@@ -117,7 +111,7 @@ public class NavigationActivity extends AppCompatActivity implements ArticleList
         Glide.with(this).load(R.color.gray)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(imgNavHeaderBg);
+                .into(navHeaderBgIv);
 
         // Loading profile image
         Glide.with(this).load(R.drawable.robot_avatar_icon)
@@ -147,7 +141,7 @@ public class NavigationActivity extends AppCompatActivity implements ArticleList
         if (getSupportFragmentManager().findFragmentByTag(CURRENT_TAG) != null) {
             drawer.closeDrawers();
 
-            // show or hide the fab button
+            // show or hide the chatFloatingActionBtn button
             toggleFab();
             return;
         }
@@ -174,7 +168,7 @@ public class NavigationActivity extends AppCompatActivity implements ArticleList
             mHandler.post(mPendingRunnable);
         }
 
-        // show or hide the fab button
+        // show or hide the chatFloatingActionBtn button
         toggleFab();
 
         //Closing drawer on item click
@@ -221,15 +215,11 @@ public class NavigationActivity extends AppCompatActivity implements ArticleList
         navigationView.getMenu().getItem(navItemIndex).setChecked(true);
     }
 
-    private void setUpNavigationView() {
+    private void setNavigationMenuView() {
         //Setting Navigation View Item Selected Listener to handle the item click of the notifications menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-
-            // This method will trigger on item Click of notifications menu
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-
-                //Check to see which item was being clicked and perform appropriate action
                 switch (menuItem.getItemId()) {
                     //Replacing the main content with ContentFragment Which is our Inbox View;
                     case R.id.nav_home:
@@ -253,17 +243,16 @@ public class NavigationActivity extends AppCompatActivity implements ArticleList
                         CURRENT_TAG = TAG_SETTINGS;
                         break;
                     case R.id.nav_about_us:
-                        // launch new intent instead of loading fragment
-                        startActivity(new Intent(NavigationActivity.this, AutomaticChartActivity.class));
+                        startActivity(new Intent(NavigationActivity.this, AboutMeActivity.class));
                         drawer.closeDrawers();
                         return true;
                     case R.id.nav_privacy_policy:
-                        // launch new intent instead of loading fragment
                         startActivity(new Intent(NavigationActivity.this, AutomaticChartActivity.class));
                         drawer.closeDrawers();
                         return true;
                     default:
                         navItemIndex = 0;
+                        break;
                 }
 
                 //Checking if the item is in checked state or not, if not make it in checked state
@@ -370,12 +359,12 @@ public class NavigationActivity extends AppCompatActivity implements ArticleList
         return super.onOptionsItemSelected(item);
     }
 
-    // show or hide the fab
+    // show or hide the chatFloatingActionBtn
     private void toggleFab() {
         if (navItemIndex == 0) {
-            fab.show();
+            chatFloatingActionBtn.show();
         } else {
-            fab.hide();
+            chatFloatingActionBtn.hide();
         }
     }
 

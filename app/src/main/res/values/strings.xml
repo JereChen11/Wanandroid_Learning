@@ -26,7 +26,7 @@
     <string name="nav_movies">Movies</string>
     <string name="nav_notifications">Notifications</string>
     <string name="nav_settings">Settings</string>
-    <string name="nav_about_us">About Us</string>
+    <string name="nav_about_me">About Me</string>
 
     <!-- Toolbar titles when notifications menu item is selected -->
     <string-array name="nav_item_activity_titles">
@@ -37,11 +37,13 @@
         <item>Settings</item>
     </string-array>
 
-    <string name="activity_title_about_us">About Us</string>
+    <string name="activity_title_about_me">About Me</string>
     <string name="activity_title_privacy_policy">Privacy Policy</string>
     <string name="action_clear_all">Clear All</string>
     <string name="action_logout">Logout</string>
     <string name="action_mark_all_read">Mark All as Read</string>
     <string name="privacy_policy">Privacy Policy</string>
-
+    
+<!--  About me  -->
+    <string name="about_me_introduction">My name is Jere, I from China, I\'m an Android soft engineer!</string>
 </resources>
