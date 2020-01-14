@@ -13,6 +13,9 @@ import com.jere.test.article.modle.ArticleBean;
 
 import java.util.ArrayList;
 
+/**
+ * @author jere
+ */
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private ArrayList<ArticleBean> dataList;
 
