@@ -3,6 +3,10 @@
     package="com.jere.test">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".AboutMeActivity"></activity>
-        <activity android:name=".navigation.NavigationActivity" />
         <activity android:name=".automaticchart.AutomaticChartActivity" />
         <activity android:name=".article.ArticleDetailActivity" />
         <activity android:name=".article.ArticleActivity" />

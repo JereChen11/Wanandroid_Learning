@@ -1,4 +1,4 @@
-package com.jere.test.navigation;
+package com.jere.test.home;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -21,7 +21,9 @@ public class CircleTransform extends BitmapTransformation {
     }
 
     private static Bitmap circleCrop(BitmapPool pool, Bitmap source) {
-        if (source == null) return null;
+        if (source == null) {
+            return null;
+        }
 
         int size = Math.min(source.getWidth(), source.getHeight());
         int x = (source.getWidth() - size) / 2;
