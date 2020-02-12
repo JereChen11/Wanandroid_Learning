@@ -1,9 +1,10 @@
 package com.jere.test.home;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -60,8 +61,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     // flag to load home fragment when user presses back key
     private boolean shouldLoadHomeFragOnBackPress = true;
-    private Handler mHandler;
-
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,8 +73,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mHandler = new Handler();
-
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         chatFloatingActionBtn = findViewById(R.id.chat_floating_action_btn);
@@ -85,6 +83,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         emailTv = navHeader.findViewById(R.id.email_tv);
         navHeaderBgIv = navHeader.findViewById(R.id.img_header_bg);
         avatarIv = navHeader.findViewById(R.id.avatar_iv);
+        avatarIv.setOnClickListener(this);
 
         // load toolbar titles from string resources
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
@@ -147,6 +146,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //                Intent navigationActivityIntent = new Intent(HomeActivity.this, NavigationActivity.class);
 //                startActivity(navigationActivityIntent);
                 break;
+            case R.id.avatar_iv:
+                dispatchTakePictureIntent();
+                break;
             default:
                 break;
         }
@@ -205,35 +207,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if (getSupportFragmentManager().findFragmentByTag(CURRENT_TAG) != null) {
             drawer.closeDrawers();
 
-            // show or hide the chatFloatingActionBtn button
-            toggleFab();
+            showOrHideFloatingActionBtn();
             return;
         }
 
-        // Sometimes, when fragment has huge data, screen seems hanging
-        // when switching between notifications menus
-        // So using runnable, the fragment is loaded with cross fade effect
-        // This effect can be seen in GMail app
-        Runnable mPendingRunnable = new Runnable() {
-            @Override
-            public void run() {
-                // update the main content by replacing fragments
-                Fragment fragment = getHomeFragment();
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
-                        android.R.anim.fade_out);
-                fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
-                fragmentTransaction.commitAllowingStateLoss();
-            }
-        };
+        Fragment fragment = getHomeFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                android.R.anim.fade_out);
+        fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
+        fragmentTransaction.commitAllowingStateLoss();
 
-        // If mPendingRunnable is not null, then add to the message queue
-        if (mPendingRunnable != null) {
-            mHandler.post(mPendingRunnable);
-        }
-
-        // show or hide the chatFloatingActionBtn button
-        toggleFab();
+        showOrHideFloatingActionBtn();
 
         //Closing drawer on item click
         drawer.closeDrawers();
@@ -423,12 +408,28 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
-    // show or hide the chatFloatingActionBtn
-    private void toggleFab() {
+    private void showOrHideFloatingActionBtn() {
         if (navItemIndex == 0) {
             chatFloatingActionBtn.show();
         } else {
             chatFloatingActionBtn.hide();
         }
     }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            avatarIv.setImageBitmap(imageBitmap);
+        }
+    }
+
 }
