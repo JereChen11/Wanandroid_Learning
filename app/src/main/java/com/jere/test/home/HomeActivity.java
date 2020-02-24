@@ -18,7 +18,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,7 +74,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+        //hide chat floating action button
         chatFloatingActionBtn = findViewById(R.id.chat_floating_action_btn);
+        chatFloatingActionBtn.hide();
 
         // Navigation view header
         View navHeader = navigationView.getHeaderView(0);
@@ -110,14 +111,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initComponents() {
-        Button homePageBtn = findViewById(R.id.btn_home_page);
-        Button page1Btn = findViewById(R.id.btn_fragment_1);
-        Button page2Btn = findViewById(R.id.btn_fragment_2);
-        Button page3Btn = findViewById(R.id.btn_fragment_3);
-        homePageBtn.setOnClickListener(this);
-        page1Btn.setOnClickListener(this);
-        page2Btn.setOnClickListener(this);
-        page3Btn.setOnClickListener(this);
+        ImageView homePageIv = findViewById(R.id.btn_home_page);
+        ImageView page1Iv = findViewById(R.id.btn_fragment_1);
+        ImageView page2Iv = findViewById(R.id.btn_fragment_2);
+        ImageView page3Iv = findViewById(R.id.btn_fragment_3);
+        homePageIv.setOnClickListener(this);
+        page1Iv.setOnClickListener(this);
+        page2Iv.setOnClickListener(this);
+        page3Iv.setOnClickListener(this);
     }
 
     @Override
@@ -207,7 +208,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if (getSupportFragmentManager().findFragmentByTag(CURRENT_TAG) != null) {
             drawer.closeDrawers();
 
-            showOrHideFloatingActionBtn();
+//            showOrHideFloatingActionBtn();
             return;
         }
 
@@ -218,7 +219,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
         fragmentTransaction.commitAllowingStateLoss();
 
-        showOrHideFloatingActionBtn();
+//        showOrHideFloatingActionBtn();
 
         //Closing drawer on item click
         drawer.closeDrawers();

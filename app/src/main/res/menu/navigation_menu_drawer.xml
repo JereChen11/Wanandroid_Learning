@@ -3,25 +3,25 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/send_icon"
+            android:icon="@drawable/home_icon"
             android:title="@string/nav_home" />
         <item
             android:id="@+id/nav_photos"
-            android:icon="@drawable/send_icon"
-            android:title="@string/nav_photos" />
+            android:icon="@drawable/learning_icon"
+            android:title="@string/nav_learning" />
         <item
             android:id="@+id/nav_movies"
-            android:icon="@drawable/close_icon"
-            android:title="@string/nav_movies" />
+            android:icon="@drawable/interest_icon"
+            android:title="@string/nav_interest" />
 
         <item
             android:id="@+id/nav_notifications"
-            android:icon="@drawable/close_icon"
-            android:title="@string/nav_notifications" />
+            android:icon="@drawable/play_icon"
+            android:title="@string/nav_play" />
 
         <item
             android:id="@+id/nav_settings"
-            android:icon="@drawable/close_icon"
+            android:icon="@drawable/my_account_icon"
             android:title="@string/nav_settings" />
     </group>
 

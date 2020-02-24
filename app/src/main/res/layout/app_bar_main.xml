@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".home.NavigationActivity">
+    android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -41,39 +39,47 @@
     <LinearLayout
         android:id="@+id/home_bottom_bar_include"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="45dp"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="4"
-        android:layout_gravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <Button
+        <ImageView
             android:id="@+id/btn_home_page"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/home_page" />
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/home_icon" />
 
-        <Button
+        <ImageView
             android:id="@+id/btn_fragment_1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/fragment_1" />
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/learning_icon" />
 
-        <Button
+        <ImageView
             android:id="@+id/btn_fragment_2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/fragment_2" />
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/interest_icon" />
 
-        <Button
+        <ImageView
+            android:id="@+id/play_iv"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/play_icon" />
+
+        <ImageView
             android:id="@+id/btn_fragment_3"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/fragment_3" />
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/my_account_icon" />
 
     </LinearLayout>
 
