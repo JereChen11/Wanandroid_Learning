@@ -48,4 +48,10 @@
     <string name="about_me_introduction">My name is Jere, I from China, I\'m an Android soft engineer!</string>
 
     <string name="personal_information">个人信息</string>
+    <string name="personal_info_name">名字</string>
+    <string name="personal_info_avatar">头像</string>
+    <string name="personal_info_email">邮箱</string>
+    <string name="personal_info_my_qrcode">我的二维码</string>
+    <string name="personal_info_more">更多</string>
+    <string name="personal_info_my_address">我的地址</string>
 </resources>
