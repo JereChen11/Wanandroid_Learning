@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
+    android:id="@+id/title_cl"
     android:background="#60D81B60">
 
     <ImageView

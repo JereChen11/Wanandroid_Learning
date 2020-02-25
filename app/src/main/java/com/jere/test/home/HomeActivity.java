@@ -26,6 +26,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.jere.test.AboutMeActivity;
 import com.jere.test.R;
+import com.jere.test.account.MyAccountFragment;
 import com.jere.test.article.ArticleListFragment;
 import com.jere.test.automaticchart.AutomaticChartActivity;
 
@@ -114,11 +115,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         ImageView homePageIv = findViewById(R.id.btn_home_page);
         ImageView page1Iv = findViewById(R.id.btn_fragment_1);
         ImageView page2Iv = findViewById(R.id.btn_fragment_2);
-        ImageView page3Iv = findViewById(R.id.btn_fragment_3);
+        ImageView myAccountIv = findViewById(R.id.my_account_iv);
         homePageIv.setOnClickListener(this);
         page1Iv.setOnClickListener(this);
         page2Iv.setOnClickListener(this);
-        page3Iv.setOnClickListener(this);
+        myAccountIv.setOnClickListener(this);
     }
 
     @Override
@@ -138,14 +139,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 Page2Fragment page2Fragment = Page2Fragment.newInstance("page 2 Fragment", "jere test 2");
                 replaceFragment(page2Fragment);
                 break;
-            case R.id.btn_fragment_3:
-//                Intent page3Intent = new Intent(this, Page3Activity.class);
-//                startActivity(page3Intent);
-//                Intent autoChartActivity = new Intent(HomeActivity.this, AutomaticChartActivity.class);
-//                startActivity(autoChartActivity);
-
-//                Intent navigationActivityIntent = new Intent(HomeActivity.this, NavigationActivity.class);
-//                startActivity(navigationActivityIntent);
+            case R.id.my_account_iv:
+                MyAccountFragment myAccountFragment = MyAccountFragment.newInstance();
+                replaceFragment(myAccountFragment);
+                break;
+            case R.id.play_iv:
+                //todo play activity or fragment
                 break;
             case R.id.avatar_iv:
                 dispatchTakePictureIntent();

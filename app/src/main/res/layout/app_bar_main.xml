@@ -75,7 +75,7 @@
             android:src="@drawable/play_icon" />
 
         <ImageView
-            android:id="@+id/btn_fragment_3"
+            android:id="@+id/my_account_iv"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="30dp"

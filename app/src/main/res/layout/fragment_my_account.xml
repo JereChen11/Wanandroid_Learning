@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/my_info_cl"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/portrait_iv"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/default_portrait"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/my_account_name_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Jere Chen"
+            android:textSize="25sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/portrait_iv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/portrait_iv" />
+
+        <TextView
+            android:id="@+id/my_account_email_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="50dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="jerechen11@gmail.com"
+            android:textSize="20sp"
+            android:textColor="@color/gray"
+            app:layout_constraintStart_toStartOf="@id/my_account_name_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/my_account_name_tv" />
+
+        <ImageView
+            android:id="@+id/turn_right_arrow"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/turn_right_arrow"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_gray"
+    tools:context=".account.PersonalInformationActivity">
+
+    <com.jere.test.customcomponent.TitleBarCustomView
+        android:id="@+id/personal_info_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleBackIcon="@drawable/back_icon"
+        app:titleBackgroundColor="@color/dark_gray"
+        app:titleText="@string/personal_information"
+        app:titleTextColor="@color/black"
+        app:titleTextSize="15sp"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/personal_info_title_bar"
+        >
+
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

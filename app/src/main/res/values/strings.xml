@@ -46,4 +46,6 @@
 
     <!--  About me  -->
     <string name="about_me_introduction">My name is Jere, I from China, I\'m an Android soft engineer!</string>
+
+    <string name="personal_information">个人信息</string>
 </resources>

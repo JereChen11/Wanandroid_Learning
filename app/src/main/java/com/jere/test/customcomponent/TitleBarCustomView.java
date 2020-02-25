@@ -26,14 +26,22 @@ public class TitleBarCustomView extends ConstraintLayout implements View.OnClick
 
         ImageView backIv = findViewById(R.id.back_iv);
         TextView titleTv = findViewById(R.id.title_tv);
+        ConstraintLayout titleCl = findViewById(R.id.title_cl);
         backIv.setOnClickListener(this);
 
-        int[] sets = {R.attr.titleText};
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, sets);
-        String titleString = typedArray.getString(0);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TitleBarCustomView);
+        String titleString = typedArray.getString(R.styleable.TitleBarCustomView_titleText);
         titleTv.setText(titleString);
-        typedArray.recycle();
+        int textColor = typedArray.getResourceId(R.styleable.TitleBarCustomView_titleTextColor, 0xffffff);
+        titleTv.setTextColor(getResources().getColor(textColor));
+        float textSize = typedArray.getDimension(R.styleable.TitleBarCustomView_titleTextSize, 25);
+        titleTv.setTextSize(textSize);
+        int backIconId = typedArray.getResourceId(R.styleable.TitleBarCustomView_titleBackIcon, R.drawable.back_icon);
+        backIv.setImageResource(backIconId);
+        int titleBackgroundColor = typedArray.getResourceId(R.styleable.TitleBarCustomView_titleBackgroundColor, 0xffffff);
+        titleCl.setBackgroundColor(getResources().getColor(titleBackgroundColor));
 
+        typedArray.recycle();
     }
 
     @Override
