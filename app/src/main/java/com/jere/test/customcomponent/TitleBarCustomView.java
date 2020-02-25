@@ -38,7 +38,7 @@ public class TitleBarCustomView extends ConstraintLayout implements View.OnClick
         titleTv.setTextSize(textSize);
         int backIconId = typedArray.getResourceId(R.styleable.TitleBarCustomView_titleBackIcon, R.drawable.back_icon);
         backIv.setImageResource(backIconId);
-        int titleBackgroundColor = typedArray.getResourceId(R.styleable.TitleBarCustomView_titleBackgroundColor, 0xffffff);
+        int titleBackgroundColor = typedArray.getResourceId(R.styleable.TitleBarCustomView_titleBackgroundColor, R.color.black);
         titleCl.setBackgroundColor(getResources().getColor(titleBackgroundColor));
 
         typedArray.recycle();
