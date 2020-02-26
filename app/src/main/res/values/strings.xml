@@ -54,4 +54,7 @@
     <string name="personal_info_my_qrcode">我的二维码</string>
     <string name="personal_info_more">更多</string>
     <string name="personal_info_my_address">我的地址</string>
+    <string name="more_info_gender">性别</string>
+    <string name="more_info_district">地区</string>
+    <string name="more_info_personal_signature">个性签名</string>
 </resources>

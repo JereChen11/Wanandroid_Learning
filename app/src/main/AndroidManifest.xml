@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".account.SetNameActivity"></activity>
+        <activity android:name=".account.MoreInfoActivity"></activity>
+        <activity android:name=".account.SetNameActivity" />
         <activity android:name=".account.PersonalInformationActivity" />
         <activity android:name=".AboutMeActivity" />
         <activity android:name=".automaticchart.AutomaticChartActivity" />

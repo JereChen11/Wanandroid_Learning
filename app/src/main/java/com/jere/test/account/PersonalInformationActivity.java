@@ -54,7 +54,8 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
                 //todo
                 break;
             case R.id.personal_info_more_item:
-                //todo
+                Intent moreInfoIntent = new Intent(this, MoreInfoActivity.class);
+                startActivity(moreInfoIntent);
                 break;
             case R.id.personal_info_my_address_item:
                 //todo
