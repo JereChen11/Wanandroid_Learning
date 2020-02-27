@@ -48,7 +48,8 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
                 //todo
                 break;
             case R.id.personal_info_email_item:
-                //todo
+                Intent setEmailIntent = new Intent(this, SetEmailActivity.class);
+                startActivity(setEmailIntent);
                 break;
             case R.id.personal_info_qrcode_item:
                 //todo

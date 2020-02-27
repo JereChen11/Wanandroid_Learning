@@ -47,6 +47,7 @@
     <!--  About me  -->
     <string name="about_me_introduction">My name is Jere, I from China, I\'m an Android soft engineer!</string>
 
+    <!--    about personal info-->
     <string name="personal_information">个人信息</string>
     <string name="personal_info_name">名字</string>
     <string name="personal_info_avatar">头像</string>
@@ -57,4 +58,10 @@
     <string name="more_info_gender">性别</string>
     <string name="more_info_district">地区</string>
     <string name="more_info_personal_signature">个性签名</string>
+
+    <string name="set_name_cn">设置名字</string>
+    <string name="set_email_cn">设置邮箱</string>
+
+    <string name="cancel_cn">取消</string>
+    <string name="complete_cn">完成</string>
 </resources>
