@@ -47,6 +47,12 @@
     <!--  About me  -->
     <string name="about_me_introduction">My name is Jere, I from China, I\'m an Android soft engineer!</string>
 
+    <!-- about My account info -->
+    <string name="photo_album_cn">相册</string>
+    <string name="expression_cn">表情</string>
+    <string name="collection_folder">收藏夹</string>
+    <string name="settings_cn">设置</string>
+
     <!--    about personal info-->
     <string name="personal_information">个人信息</string>
     <string name="personal_info_name">名字</string>
