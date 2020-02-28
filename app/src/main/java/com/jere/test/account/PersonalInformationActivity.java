@@ -53,7 +53,8 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
                 startActivity(setEmailIntent);
                 break;
             case R.id.personal_info_qrcode_item:
-                //todo
+                Intent qrCodeIntent = new Intent(this, MyQrCodeActivity.class);
+                startActivity(qrCodeIntent);
                 break;
             case R.id.personal_info_more_item:
                 Intent moreInfoIntent = new Intent(this, MoreInfoActivity.class);

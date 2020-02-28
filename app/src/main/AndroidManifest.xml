@@ -13,11 +13,12 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/application_icon_iron_man"
+        android:roundIcon="@drawable/application_icon_iron_man"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".account.moreinfo.SetGenderActivity"></activity>
+        <activity android:name=".account.MyQrCodeActivity"></activity>
+        <activity android:name=".account.moreinfo.SetGenderActivity" />
         <activity android:name=".account.SetEmailActivity" />
         <activity android:name=".account.moreinfo.MoreInfoActivity" />
         <activity android:name=".account.SetNameActivity" />
