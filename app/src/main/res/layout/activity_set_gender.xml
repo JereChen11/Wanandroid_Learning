@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_smoke"
+    tools:context=".account.moreinfo.SetGenderActivity">
+
+    <com.jere.test.customcomponent.SetPersonalInfoTitleBarCustomView
+        android:id="@+id/set_gender_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleContentText="设置性别"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/select_gender_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/set_gender_title_bar" />
+
+</android.support.constraint.ConstraintLayout>

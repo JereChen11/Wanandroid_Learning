@@ -1,5 +1,6 @@
-package com.jere.test.account;
+package com.jere.test.account.moreinfo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -30,6 +31,8 @@ public class MoreInfoActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.more_info_gender_item:
                 //todo set gender
+                Intent setGenderIntent = new Intent(this, SetGenderActivity.class);
+                startActivity(setGenderIntent);
                 break;
             case R.id.more_info_district_item:
                 //todo set district

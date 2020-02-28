@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_gray"
-    tools:context=".account.MoreInfoActivity">
+    tools:context=".account.moreinfo.MoreInfoActivity">
 
     <com.jere.test.customcomponent.TitleBarCustomView
         android:id="@+id/more_info_title_bar"

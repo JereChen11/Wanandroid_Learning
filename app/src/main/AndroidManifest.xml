@@ -17,8 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".account.SetEmailActivity"></activity>
-        <activity android:name=".account.MoreInfoActivity" />
+        <activity android:name=".account.moreinfo.SetGenderActivity"></activity>
+        <activity android:name=".account.SetEmailActivity" />
+        <activity android:name=".account.moreinfo.MoreInfoActivity" />
         <activity android:name=".account.SetNameActivity" />
         <activity android:name=".account.PersonalInformationActivity" />
         <activity android:name=".AboutMeActivity" />

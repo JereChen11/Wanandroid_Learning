@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.jere.test.R;
+import com.jere.test.account.moreinfo.MoreInfoActivity;
 import com.jere.test.customcomponent.PersonalInfoItemCustomView;
 
 /**
