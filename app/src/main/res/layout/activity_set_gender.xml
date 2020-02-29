@@ -11,13 +11,16 @@
         android:id="@+id/set_gender_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titleContentText="设置性别"
+        app:titleContentText="@string/set_gender_cn"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/select_gender_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:spinnerMode="dropdown"
+        android:background="@color/dark_gray"
         app:layout_constraintTop_toBottomOf="@id/set_gender_title_bar" />
 
 </android.support.constraint.ConstraintLayout>

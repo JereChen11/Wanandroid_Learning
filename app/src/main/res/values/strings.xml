@@ -67,6 +67,7 @@
 
     <string name="set_name_cn">设置名字</string>
     <string name="set_email_cn">设置邮箱</string>
+    <string name="set_gender_cn">设置性别</string>
 
     <string name="cancel_cn">取消</string>
     <string name="complete_cn">完成</string>

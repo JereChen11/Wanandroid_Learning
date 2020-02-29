@@ -113,12 +113,12 @@ public class SetGenderActivity extends AppCompatActivity {
 
         @Override
         public int getItemViewType(int position) {
-            return 0;
+            return position;
         }
 
         @Override
         public int getViewTypeCount() {
-            return 0;
+            return 1;
         }
 
         @Override
