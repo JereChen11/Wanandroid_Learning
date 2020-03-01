@@ -29,6 +29,7 @@ import com.jere.test.R;
 import com.jere.test.account.MyAccountFragment;
 import com.jere.test.article.ArticleListFragment;
 import com.jere.test.automaticchart.AutomaticChartActivity;
+import com.jere.test.customcomponent.BottomBarItemCustomView;
 
 /**
  * @author jere
@@ -36,7 +37,7 @@ import com.jere.test.automaticchart.AutomaticChartActivity;
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener,
         ArticleListFragment.OnFragmentInteractionListener,
         Page2Fragment.OnFragmentInteractionListener,
-        HomeFragment.OnFragmentInteractionListener{
+        HomeFragment.OnFragmentInteractionListener {
 
     private NavigationView navigationView;
     private DrawerLayout drawer;
@@ -47,13 +48,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     // index to identify current nav menu item
     public static int navItemIndex = 0;
+    private static final int HOME_INDEX = 0;
+    private static final int LEARNING_INDEX = 1;
+    private static final int INTEREST_INDEX = 2;
+    private static final int ENTERTAINMENT_INDEX = 3;
+    private static final int MY_INDEX = 4;
 
     // tags used to attach the fragments
     private static final String TAG_HOME = "home";
-    private static final String TAG_PHOTOS = "photos";
-    private static final String TAG_MOVIES = "movies";
-    private static final String TAG_NOTIFICATIONS = "notifications";
-    private static final String TAG_SETTINGS = "settings";
+    private static final String TAG_LEARNING = "learning";
+    private static final String TAG_INTEREST = "interest";
+    private static final String TAG_ENTERTAINMENT = "entertainment";
+    private static final String TAG_MY = "my";
     public static String CURRENT_TAG = TAG_HOME;
 
     // toolbar titles respected to selected nav menu item
@@ -112,42 +118,41 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initComponents() {
-        ImageView homePageIv = findViewById(R.id.btn_home_page);
-        ImageView page1Iv = findViewById(R.id.btn_fragment_1);
-        ImageView page2Iv = findViewById(R.id.btn_fragment_2);
-        ImageView myAccountIv = findViewById(R.id.my_account_iv);
-        homePageIv.setOnClickListener(this);
-        page1Iv.setOnClickListener(this);
-        page2Iv.setOnClickListener(this);
-        myAccountIv.setOnClickListener(this);
+        BottomBarItemCustomView homePageItem = findViewById(R.id.bottom_bar_home_page_item);
+        BottomBarItemCustomView learningItem = findViewById(R.id.bottom_bar_learning_item);
+        BottomBarItemCustomView interestItem = findViewById(R.id.bottom_bar_interest_item);
+        BottomBarItemCustomView entertainment = findViewById(R.id.bottom_bar_entertainment_item);
+        BottomBarItemCustomView myAccountItem = findViewById(R.id.bottom_bar_my_account_item);
+        homePageItem.setOnClickListener(this);
+        learningItem.setOnClickListener(this);
+        interestItem.setOnClickListener(this);
+        entertainment.setOnClickListener(this);
+        myAccountItem.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_home_page:
-//                Intent homeIntent = new Intent(this, HomeActivity.class);
-//                startActivity(homeIntent);
+            case R.id.bottom_bar_home_page_item:
                 HomeFragment homeFragment = HomeFragment.newInstance("Home Fragment", "jere test home");
-                replaceFragment(homeFragment);
+                replaceFragmentAddToBackStack(homeFragment);
                 break;
-            case R.id.btn_fragment_1:
+            case R.id.bottom_bar_learning_item:
                 ArticleListFragment page1Fragment = ArticleListFragment.newInstance("page 1 Fragment", "jere test 1");
                 replaceFragment(page1Fragment);
                 break;
-            case R.id.btn_fragment_2:
+            case R.id.bottom_bar_interest_item:
                 Page2Fragment page2Fragment = Page2Fragment.newInstance("page 2 Fragment", "jere test 2");
                 replaceFragment(page2Fragment);
                 break;
-            case R.id.my_account_iv:
+            case R.id.avatar_iv:
+            case R.id.bottom_bar_my_account_item:
                 MyAccountFragment myAccountFragment = MyAccountFragment.newInstance();
                 replaceFragment(myAccountFragment);
+                drawer.closeDrawers();
                 break;
-            case R.id.play_iv:
+            case R.id.bottom_bar_entertainment_item:
                 //todo play activity or fragment
-                break;
-            case R.id.avatar_iv:
-                dispatchTakePictureIntent();
                 break;
             default:
                 break;
@@ -159,12 +164,22 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void replaceFragment(Fragment replaceFragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+    private void replaceFragmentAddToBackStack(Fragment replaceFragment) {
+        FragmentTransaction fragmentTransaction = getFragmentTransaction();
         fragmentTransaction.replace(R.id.frame, replaceFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    private void replaceFragment(Fragment replaceFragment) {
+        FragmentTransaction fragmentTransaction = getFragmentTransaction();
+        fragmentTransaction.replace(R.id.frame, replaceFragment);
+        fragmentTransaction.commit();
+    }
+
+    private FragmentTransaction getFragmentTransaction() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        return fragmentManager.beginTransaction();
     }
 
 
@@ -180,7 +195,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 .into(navHeaderBgIv);
 
         // Loading profile image
-        Glide.with(this).load(R.drawable.robot_avatar_icon)
+        Glide.with(this).load(R.drawable.default_portrait)
                 .crossFade()
                 .thumbnail(0.5f)
                 .bitmapTransform(new CircleTransform(this))
@@ -218,8 +233,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
         fragmentTransaction.commitAllowingStateLoss();
 
-//        showOrHideFloatingActionBtn();
-
         //Closing drawer on item click
         drawer.closeDrawers();
 
@@ -229,28 +242,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private Fragment getHomeFragment() {
         switch (navItemIndex) {
-            case 0:
-                // home
-//                HomeFragment homeFragment = new HomeFragment();
-                ArticleListFragment articleListFragment = new ArticleListFragment();
-                return articleListFragment;
-            case 1:
-                // photos
-//                PhotosFragment photosFragment = new PhotosFragment();
-//                return photosFragment;
-            case 2:
-                // movies fragment
+            case HOME_INDEX:
+                return new HomeFragment();
+            case LEARNING_INDEX:
+                return new ArticleListFragment();
+            case INTEREST_INDEX:
 //                MoviesFragment moviesFragment = new MoviesFragment();
 //                return moviesFragment;
-            case 3:
-                // notifications fragment
+            case ENTERTAINMENT_INDEX:
 //                NotificationsFragment notificationsFragment = new NotificationsFragment();
 //                return notificationsFragment;
-
-            case 4:
-                // settings fragment
-//                SettingsFragment settingsFragment = new SettingsFragment();
-//                return settingsFragment;
+            case MY_INDEX:
+                return new MyAccountFragment();
             default:
                 return new ArticleListFragment();
         }
@@ -275,21 +278,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         navItemIndex = 0;
                         CURRENT_TAG = TAG_HOME;
                         break;
-                    case R.id.nav_photos:
+                    case R.id.nav_learning:
                         navItemIndex = 1;
-                        CURRENT_TAG = TAG_PHOTOS;
+                        CURRENT_TAG = TAG_LEARNING;
                         break;
-                    case R.id.nav_movies:
+                    case R.id.nav_interest:
                         navItemIndex = 2;
-                        CURRENT_TAG = TAG_MOVIES;
+                        CURRENT_TAG = TAG_INTEREST;
                         break;
-                    case R.id.nav_notifications:
+                    case R.id.nav_entertainment:
                         navItemIndex = 3;
-                        CURRENT_TAG = TAG_NOTIFICATIONS;
+                        CURRENT_TAG = TAG_ENTERTAINMENT;
                         break;
-                    case R.id.nav_settings:
+                    case R.id.nav_my:
                         navItemIndex = 4;
-                        CURRENT_TAG = TAG_SETTINGS;
+                        CURRENT_TAG = TAG_MY;
                         break;
                     case R.id.nav_about_us:
                         startActivity(new Intent(HomeActivity.this, AboutMeActivity.class));

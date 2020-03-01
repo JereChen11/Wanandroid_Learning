@@ -6,21 +6,21 @@
             android:icon="@drawable/home_icon"
             android:title="@string/nav_home" />
         <item
-            android:id="@+id/nav_photos"
+            android:id="@+id/nav_learning"
             android:icon="@drawable/learning_icon"
             android:title="@string/nav_learning" />
         <item
-            android:id="@+id/nav_movies"
+            android:id="@+id/nav_interest"
             android:icon="@drawable/interest_icon"
             android:title="@string/nav_interest" />
 
         <item
-            android:id="@+id/nav_notifications"
+            android:id="@+id/nav_entertainment"
             android:icon="@drawable/play_icon"
-            android:title="@string/nav_play" />
+            android:title="@string/nav_entertainment" />
 
         <item
-            android:id="@+id/nav_settings"
+            android:id="@+id/nav_my"
             android:icon="@drawable/my_account_icon"
             android:title="@string/nav_settings" />
     </group>

@@ -24,9 +24,14 @@
     <declare-styleable name="SetPersonalInfoTitleBarCustomView">
         <attr name="titleContentText" format="string" />
     </declare-styleable>
-    
+
     <declare-styleable name="MyAccountInfoItemCustomView">
         <attr name="categoryItemText" format="string" />
         <attr name="iconResource" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="BottomBarItemCustomView">
+        <attr name="bottomBarIconResource" format="reference" />
+        <attr name="bottomBarContentText" format="string" />
     </declare-styleable>
 </resources>

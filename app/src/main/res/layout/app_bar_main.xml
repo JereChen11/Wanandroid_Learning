@@ -39,47 +39,51 @@
     <LinearLayout
         android:id="@+id/home_bottom_bar_include"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/white"
         android:gravity="center"
         android:orientation="horizontal"
-        android:weightSum="4"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <ImageView
-            android:id="@+id/btn_home_page"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/home_icon" />
+        <com.jere.test.customcomponent.BottomBarItemCustomView
+            android:id="@+id/bottom_bar_home_page_item"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:bottomBarIconResource="@drawable/home_icon"
+            app:bottomBarContentText="@string/home_page_cn" />
 
-        <ImageView
-            android:id="@+id/btn_fragment_1"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+        <com.jere.test.customcomponent.BottomBarItemCustomView
+            android:id="@+id/bottom_bar_learning_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:src="@drawable/learning_icon" />
+            app:bottomBarIconResource="@drawable/learning_icon"
+            app:bottomBarContentText="@string/learning_cn" />
 
-        <ImageView
-            android:id="@+id/btn_fragment_2"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+        <com.jere.test.customcomponent.BottomBarItemCustomView
+            android:id="@+id/bottom_bar_interest_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:src="@drawable/interest_icon" />
+            app:bottomBarIconResource="@drawable/interest_icon"
+            app:bottomBarContentText="@string/interest_cn" />
 
-        <ImageView
-            android:id="@+id/play_iv"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+        <com.jere.test.customcomponent.BottomBarItemCustomView
+            android:id="@+id/bottom_bar_entertainment_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:src="@drawable/play_icon" />
+            app:bottomBarIconResource="@drawable/play_icon"
+            app:bottomBarContentText="@string/entertainment_cn" />
 
-        <ImageView
-            android:id="@+id/my_account_iv"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+        <com.jere.test.customcomponent.BottomBarItemCustomView
+            android:id="@+id/bottom_bar_my_account_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:src="@drawable/my_account_icon" />
+            app:bottomBarIconResource="@drawable/my_account_icon"
+            app:bottomBarContentText="@string/my_info_cn" />
 
     </LinearLayout>
 
