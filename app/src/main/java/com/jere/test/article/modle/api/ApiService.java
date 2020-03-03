@@ -1,4 +1,4 @@
-package com.jere.test.article.api;
+package com.jere.test.article.modle.api;
 
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -16,4 +16,7 @@ public interface ApiService {
 
     @PUT("/mock/36/reagent/material/detection")
     Call<ResponseBody> updateReagentMaterialAmount(@Body RequestBody requestBody);
+
+    @GET("/project/tree/json")
+    Call<ResponseBody> getProjectTreeItems();
 }

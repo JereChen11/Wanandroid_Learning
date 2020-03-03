@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable name="article" type="com.jere.test.article.roomdatabase.Article" />
+        <variable name="article" type="com.jere.test.article.modle.roomdatabase.Article" />
         <variable name="testStringVariable" type="String" />
     </data>
 
@@ -10,7 +10,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".article.ArticleDetailActivity">
+        tools:context=".article.view.ArticleDetailActivity">
 
         <TextView
             android:layout_width="match_parent"

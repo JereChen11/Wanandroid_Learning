@@ -25,8 +25,7 @@
         <activity android:name=".account.PersonalInformationActivity" />
         <activity android:name=".AboutMeActivity" />
         <activity android:name=".automaticchart.AutomaticChartActivity" />
-        <activity android:name=".article.ArticleDetailActivity" />
-        <activity android:name=".article.ArticleActivity" />
+        <activity android:name=".article.view.ArticleDetailActivity" />
         <activity android:name=".tutorial.TutorialActivity" />
         <activity
             android:name=".home.HomeActivity"

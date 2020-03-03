@@ -1,0 +1,59 @@
+package com.jere.test.article.view;
+
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.jere.test.R;
+import com.jere.test.article.modle.beanfiles.ProjectTreeItem;
+
+import java.util.ArrayList;
+
+/**
+ * @author jere
+ */
+public class ProjectTreeItemAdapter extends RecyclerView.Adapter<ProjectTreeItemAdapter.MyViewHolder> {
+    private ArrayList<ProjectTreeItem.ProjectItem> projectItems;
+
+    ProjectTreeItemAdapter(ArrayList<ProjectTreeItem.ProjectItem> arrayList) {
+        this.projectItems = arrayList;
+    }
+
+    @NonNull
+    @Override
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.recycley_list_item_view_project_item, viewGroup, false);
+        return new MyViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
+        if (projectItems.size() > 0) {
+            ProjectTreeItem.ProjectItem projectItem = projectItems.get(i);
+            if (projectItem.getName() != null) {
+                myViewHolder.projectItemNameTv.setText(projectItem.getName());
+            }
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        if (projectItems != null) {
+            return projectItems.size();
+        }
+        return 0;
+    }
+
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        private TextView projectItemNameTv;
+
+        MyViewHolder(@NonNull View itemView) {
+            super(itemView);
+            projectItemNameTv = itemView.findViewById(R.id.project_item_name_tv);
+        }
+    }
+}

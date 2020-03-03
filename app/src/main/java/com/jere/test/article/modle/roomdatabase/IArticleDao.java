@@ -1,4 +1,4 @@
-package com.jere.test.article.roomdatabase;
+package com.jere.test.article.modle.roomdatabase;
 
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;

@@ -1,5 +1,9 @@
-package com.jere.test.article;
+package com.jere.test.article.view;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,7 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jere.test.R;
-import com.jere.test.article.modle.ArticleBean;
+import com.jere.test.article.modle.beanfiles.ProjectTreeItem;
+import com.jere.test.article.viewmodel.ProjectTreeItemViewModel;
 import com.jere.test.home.HomeActivity;
 import com.jere.test.util.RecyclerItemClickListener;
 
@@ -28,6 +33,7 @@ import java.util.ArrayList;
  * to handle interaction events.
  * Use the {@link ArticleListFragment#newInstance} factory method to
  * create an instance of this fragment.
+ *
  * @author jere
  */
 public class ArticleListFragment extends Fragment {
@@ -41,6 +47,12 @@ public class ArticleListFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+
+    private ProjectTreeItemAdapter mProjectTreeItemAdapter;
+    private ArrayList<ProjectTreeItem.ProjectItem> mProjectItems;
+    private RecyclerView mRecyclerView;
+
 
     public ArticleListFragment() {
         // Required empty public constructor
@@ -83,36 +95,49 @@ public class ArticleListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ArticleBean articleBean = new ArticleBean();
-        articleBean.setAuthor("jere");
-        articleBean.setBackground(R.drawable.ic_launcher_background);
-        articleBean.setPublishDate("2019/12/23");
-        articleBean.setTitle("Android学习笔记");
-        articleBean.setContent("Fragment是Activity的一部分，对于Activity能构建自己的UI到相对应的Activity。可以认为Fragment是Activity的子类。");
-        ArrayList<ArticleBean> articleBeans = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            articleBeans.add(articleBean);
-        }
-        MyAdapter adapter = new MyAdapter(articleBeans);
-        RecyclerView recyclerView = view.findViewById(R.id.article_recycle_view);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(adapter);
 
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Intent intent = new Intent(getActivity(), ArticleDetailActivity.class);
-                startActivity(intent);
-            }
+        ProjectTreeItemViewModel mProjectTreeItemVm = ViewModelProviders.of(this, new ViewModelFactory())
+                .get(ProjectTreeItemViewModel.class);
+        mProjectTreeItemVm.getProjectTreeItemsLd().observe(this, projectItemsObserver);
+        mProjectTreeItemVm.setProjectTreeItemsLd();
 
-            @Override
-            public void onLongItemClick(View view, int position) {
-                Intent intent = new Intent(getActivity(), HomeActivity.class);
-                startActivity(intent);
-            }
-        }));
+        mProjectTreeItemAdapter = new ProjectTreeItemAdapter(mProjectItems);
+        mRecyclerView = view.findViewById(R.id.project_tree_items_recycler_view);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mProjectTreeItemAdapter);
+
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),
+                mRecyclerView,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        mProjectItems.get(position);
+
+                        Intent intent = new Intent(getActivity(), ArticleDetailActivity.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+                        Intent intent = new Intent(getActivity(), HomeActivity.class);
+                        startActivity(intent);
+                    }
+                }));
     }
+
+    private Observer<ArrayList<ProjectTreeItem.ProjectItem>> projectItemsObserver = new Observer<ArrayList<ProjectTreeItem.ProjectItem>>() {
+
+        @Override
+        public void onChanged(@Nullable ArrayList<ProjectTreeItem.ProjectItem> projectItems) {
+            if (projectItems != null) {
+                mProjectItems = projectItems;
+                mProjectTreeItemAdapter = new ProjectTreeItemAdapter(mProjectItems);
+                mRecyclerView.setAdapter(mProjectTreeItemAdapter);
+                mProjectTreeItemAdapter.notifyDataSetChanged();
+            }
+        }
+    };
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -136,6 +161,19 @@ public class ArticleListFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+
+    class ViewModelFactory implements ViewModelProvider.Factory {
+
+        @Override
+        @NonNull
+        public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+            if (modelClass.isAssignableFrom(ProjectTreeItemViewModel.class)) {
+                return (T) new ProjectTreeItemViewModel();
+            }
+            throw new IllegalArgumentException("Unknown ViewModel class");
+        }
     }
 
     /**

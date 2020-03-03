@@ -27,7 +27,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.jere.test.AboutMeActivity;
 import com.jere.test.R;
 import com.jere.test.account.MyAccountFragment;
-import com.jere.test.article.ArticleListFragment;
+import com.jere.test.article.view.ArticleListFragment;
 import com.jere.test.automaticchart.AutomaticChartActivity;
 import com.jere.test.customcomponent.BottomBarItemCustomView;
 

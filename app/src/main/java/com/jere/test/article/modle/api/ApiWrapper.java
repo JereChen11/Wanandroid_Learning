@@ -1,4 +1,4 @@
-package com.jere.test.article.api;
+package com.jere.test.article.modle.api;
 
 import java.util.concurrent.TimeUnit;
 
