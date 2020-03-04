@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_smoke">
+
+    <ImageView
+        android:id="@+id/project_item_list_envelop_iv"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:background="@color/orange"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/project_item_list_title_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="lkjljlkjljlkjljlkjljlkjljlkjljlkjljlkjlj"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/project_item_list_envelop_iv"
+        app:layout_constraintTop_toTopOf="@id/project_item_list_envelop_iv" />
+
+    <TextView
+        android:id="@+id/project_item_list_describe_content_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:text="conljljljljljlkjljlkjljlkjljlkjljlkjljlkjljlkjljlkjljlkjkjljlkjljlkjljlkjljlkjljlkjljlkjkjljlkjljlkjljlkjljlkjljlkjljlkjkjljlkjljlkjljlkjlj"
+        android:textColor="@color/gray"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/project_item_list_title_tv"
+        app:layout_constraintTop_toBottomOf="@id/project_item_list_title_tv" />
+
+    <TextView
+        android:id="@+id/project_item_list_share_date_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="2020 3/4 13:00"
+        android:textColor="@color/orange_red"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/project_item_list_envelop_iv"
+        app:layout_constraintStart_toStartOf="@id/project_item_list_title_tv" />
+
+    <TextView
+        android:id="@+id/project_item_list_author_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="jere"
+        android:textColor="@color/blue_violet"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/project_item_list_envelop_iv"
+        app:layout_constraintStart_toEndOf="@id/project_item_list_share_date_tv" />
+
+</android.support.constraint.ConstraintLayout>

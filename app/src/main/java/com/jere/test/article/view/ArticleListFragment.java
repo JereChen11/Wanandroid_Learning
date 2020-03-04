@@ -41,6 +41,7 @@ public class ArticleListFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static final String PROJECT_ITEM_ID_KEY = "PROJECT_ITEM_ID";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -112,14 +113,16 @@ public class ArticleListFragment extends Fragment {
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        mProjectItems.get(position);
+                        ProjectTreeItem.ProjectItem projectItem = mProjectItems.get(position);
 
-                        Intent intent = new Intent(getActivity(), ArticleDetailActivity.class);
+                        Intent intent = new Intent(getActivity(), ProjectItemListActivity.class);
+                        intent.putExtra(PROJECT_ITEM_ID_KEY, projectItem.getId());
                         startActivity(intent);
                     }
 
                     @Override
                     public void onLongItemClick(View view, int position) {
+                        //todo need to handle onLongItemClick event.
                         Intent intent = new Intent(getActivity(), HomeActivity.class);
                         startActivity(intent);
                     }

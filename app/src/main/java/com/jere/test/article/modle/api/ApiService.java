@@ -6,6 +6,8 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * @author jere
@@ -19,4 +21,8 @@ public interface ApiService {
 
     @GET("/project/tree/json")
     Call<ResponseBody> getProjectTreeItems();
+
+    @GET("/project/list/{pageNumber}/json?")
+    Call<ResponseBody> getProjectItemList(@Path("pageNumber") int pageNumber,
+                                          @Query("cid") int cid);
 }
