@@ -22,17 +22,20 @@ public class ProjectItemListViewModel extends ViewModel {
         return projectItemListLd;
     }
 
-    public void setProjectItemListLd(int pageNumber, int projectItemId) {
-        ProjectTreeRepository.newInstance().getProjectItemList(pageNumber, projectItemId, new ProjectTreeRepository.GetProjectItemListListener() {
-            @Override
-            public void successful(ProjectItemList projectItemList) {
-                projectItemListLd.postValue(projectItemList);
-            }
+    public void setProjectItemListLd(int pageNumber, final int projectItemId) {
+        ProjectTreeRepository.newInstance().getProjectItemList(pageNumber,
+                projectItemId,
+                new ProjectTreeRepository.GetWebDataListener() {
+                    @Override
+                    public void getDataSuccess(Object object) {
+                        ProjectItemList projectItemList = (ProjectItemList) object;
+                        projectItemListLd.postValue(projectItemList);
+                    }
 
-            @Override
-            public void failed(String errorMsg) {
-                Log.e(TAG, "failed: " + errorMsg);
-            }
-        });
+                    @Override
+                    public void getDataFailed(String failedMsg) {
+                        Log.e(TAG, "getDataFailed: " + failedMsg);
+                    }
+                });
     }
 }

@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.jere.test.R;
 import com.jere.test.article.modle.beanfiles.ProjectItemList;
 import com.jere.test.article.viewmodel.ProjectItemListViewModel;
+import com.jere.test.util.RecyclerItemClickListener;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -30,12 +32,15 @@ import java.util.ArrayList;
  */
 public class ProjectItemListActivity extends AppCompatActivity {
     private static final String TAG = "ProjectItemListActivity";
+    public static final String ARTICLE_DETAIL_WEB_LINK_KEY = "ARTICLE_DETAIL_WEB_LINK";
     private RecyclerView mRecyclerView;
+    private ProjectItemList mProjectItemList;
     private Observer<ProjectItemList> observer = new Observer<ProjectItemList>() {
         @Override
         public void onChanged(@Nullable ProjectItemList projectItemList) {
             if (projectItemList != null) {
                 Log.e(TAG, "onChanged: " + projectItemList.getData().getDatas().get(0).getTitle());
+                mProjectItemList = projectItemList;
                 MyAdapter adapter = new MyAdapter(ProjectItemListActivity.this, projectItemList);
                 mRecyclerView.setAdapter(adapter);
             }
@@ -61,9 +66,28 @@ public class ProjectItemListActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         ProjectItemList projectItemList = projectItemListVm.getProjectItemListLd().getValue();
         if (projectItemList != null) {
+            mProjectItemList = projectItemList;
             MyAdapter adapter = new MyAdapter(this, projectItemList);
             mRecyclerView.setAdapter(adapter);
         }
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this,
+                mRecyclerView,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        ProjectItemList.DataBean.DatasBean data = mProjectItemList.getData().getDatas().get(position);
+                        String link = data.getLink();
+
+                        Intent articleDetailWebViewIntent = new Intent(ProjectItemListActivity.this, ArticleDetailWebViewActivity.class);
+                        articleDetailWebViewIntent.putExtra(ARTICLE_DETAIL_WEB_LINK_KEY, link);
+                        startActivity(articleDetailWebViewIntent);
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+
+                    }
+                }));
 
 
     }

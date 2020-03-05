@@ -4,8 +4,8 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.util.Log;
 
-import com.jere.test.article.modle.beanfiles.ProjectTreeItem;
 import com.jere.test.article.modle.ProjectTreeRepository;
+import com.jere.test.article.modle.beanfiles.ProjectTreeItem;
 
 import java.util.ArrayList;
 
@@ -26,9 +26,10 @@ public class ProjectTreeItemViewModel extends ViewModel {
      */
     public void setProjectTreeItemsLd() {
         ProjectTreeRepository projectTreeRepository = ProjectTreeRepository.newInstance();
-        projectTreeRepository.getProjectTreeItem(new ProjectTreeRepository.GetProjectItemsListener() {
+        projectTreeRepository.getProjectTreeItem(new ProjectTreeRepository.GetWebDataListener() {
             @Override
-            public void getDataSuccessful(ProjectTreeItem projectTreeItem) {
+            public void getDataSuccess(Object object) {
+                ProjectTreeItem projectTreeItem = (ProjectTreeItem) object;
                 projectTreeItemsLd.setValue(projectTreeItem.getData());
             }
 

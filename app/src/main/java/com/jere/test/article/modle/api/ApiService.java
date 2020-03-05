@@ -25,4 +25,11 @@ public interface ApiService {
     @GET("/project/list/{pageNumber}/json?")
     Call<ResponseBody> getProjectItemList(@Path("pageNumber") int pageNumber,
                                           @Query("cid") int cid);
+
+    @GET("/wxarticle/chapters/json")
+    Call<ResponseBody> getWeChatOfficialAccountBloggerList();
+
+    @GET("/wxarticle/list/{authorId}/{pageNumber}/json")
+    Call<ResponseBody> getWeChatArticleList(@Path("authorId") int authorId,
+                                            @Path("pageNumber") int pageNumber);
 }

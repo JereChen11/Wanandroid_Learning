@@ -3,17 +3,13 @@ package com.jere.test.article.modle;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.jere.test.article.modle.api.AbstractRetrofitCallback;
 import com.jere.test.article.modle.api.ApiService;
 import com.jere.test.article.modle.api.ApiWrapper;
 import com.jere.test.article.modle.beanfiles.ProjectItemList;
 import com.jere.test.article.modle.beanfiles.ProjectTreeItem;
-
-import java.io.IOException;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.jere.test.article.modle.beanfiles.wechatofficialaccount.WeChatArticleList;
+import com.jere.test.article.modle.beanfiles.wechatofficialaccount.WeChatOfficialAccountBloggerList;
 
 /**
  * @author jere
@@ -38,71 +34,88 @@ public class ProjectTreeRepository {
         return instance;
     }
 
-    public void getProjectTreeItem(final GetProjectItemsListener listener) {
+    public void getProjectTreeItem(final GetWebDataListener listener) {
         ApiService apiService = ApiWrapper.getRetrofitInstance().create(ApiService.class);
-        apiService.getProjectTreeItems().enqueue(new Callback<ResponseBody>() {
+        apiService.getProjectTreeItems().enqueue(new AbstractRetrofitCallback() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 200) {
-                    try {
-                        String responseBody = response.body().string();
-                        Gson gson = new Gson();
-                        ProjectTreeItem projectTreeItem = gson.fromJson(responseBody, ProjectTreeItem.class);
-                        Log.e(TAG, "onResponse: projectItems size = " + projectTreeItem.getData().size());
-                        listener.getDataSuccessful(projectTreeItem);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    listener.getDataFailed("response.code() = " + response.code());
-                }
+            public void getSuccessful(String responseBody) {
+                Gson gson = new Gson();
+                ProjectTreeItem projectTreeItem = gson.fromJson(responseBody, ProjectTreeItem.class);
+                Log.e(TAG, "onResponse: projectItems size = " + projectTreeItem.getData().size());
+                listener.getDataSuccess(projectTreeItem);
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                listener.getDataFailed(t.getMessage());
+            public void getFailed(String failedMsg) {
+                listener.getDataFailed(failedMsg);
             }
         });
     }
 
-    public void getProjectItemList(int pageNumber, int cid, final GetProjectItemListListener listener) {
+    public void getProjectItemList(int pageNumber, int cid, final GetWebDataListener listener) {
         ApiService apiService = ApiWrapper.getRetrofitInstance().create(ApiService.class);
-        apiService.getProjectItemList(pageNumber, cid).enqueue(new Callback<ResponseBody>() {
+        apiService.getProjectItemList(pageNumber, cid).enqueue(new AbstractRetrofitCallback() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 200) {
-                    try {
-                        String responseBody = response.body().string();
-                        Gson gson = new Gson();
-                        ProjectItemList projectItemList = gson.fromJson(responseBody, ProjectItemList.class);
-                        listener.successful(projectItemList);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        listener.failed(e.getMessage());
-                    }
-                } else {
-                    listener.failed("response.code() = " + response.code());
-                }
+            public void getSuccessful(String responseBody) {
+                Gson gson = new Gson();
+                ProjectItemList projectItemList = gson.fromJson(responseBody, ProjectItemList.class);
+                listener.getDataSuccess(projectItemList);
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                listener.failed(t.getMessage());
+            public void getFailed(String failedMsg) {
+                listener.getDataFailed(failedMsg);
+            }
+        });
+    }
+
+    public void getWeChatOfficialAccountBloggerList(final GetWebDataListener listener) {
+        ApiService apiService = ApiWrapper.getRetrofitInstance().create(ApiService.class);
+        apiService.getWeChatOfficialAccountBloggerList().enqueue(new AbstractRetrofitCallback() {
+            @Override
+            public void getSuccessful(String responseBody) {
+                Gson gson = new Gson();
+                WeChatOfficialAccountBloggerList bloggerList = gson.fromJson(responseBody, WeChatOfficialAccountBloggerList.class);
+                listener.getDataSuccess(bloggerList);
+            }
+
+            @Override
+            public void getFailed(String failedMsg) {
+                listener.getDataFailed(failedMsg);
             }
         });
     }
 
 
-    public interface GetProjectItemsListener {
-        void getDataSuccessful(ProjectTreeItem projectTreeItem);
+    public void getWeChatArticleList(int authorId, int pageNumber, final GetWebDataListener listener) {
+        ApiService apiService = ApiWrapper.getRetrofitInstance().create(ApiService.class);
+        apiService.getWeChatArticleList(authorId, pageNumber).enqueue(new AbstractRetrofitCallback() {
+            @Override
+            public void getSuccessful(String responseBody) {
+                Gson gson = new Gson();
+                WeChatArticleList weChatArticleList = gson.fromJson(responseBody, WeChatArticleList.class);
+                listener.getDataSuccess(weChatArticleList);
+            }
 
+            @Override
+            public void getFailed(String failedMsg) {
+                listener.getDataFailed(failedMsg);
+            }
+        });
+    }
+
+    public interface GetWebDataListener {
+        /**
+         * get data from CMS successful
+         * @param object 反序列化得到的对象 gson.fromJson()
+         */
+        void getDataSuccess(Object object);
+
+        /**
+         * get data from CMS failed
+         * @param failedMsg String type error message
+         */
         void getDataFailed(String failedMsg);
-    }
-
-    public interface GetProjectItemListListener {
-        void successful(ProjectItemList projectItemList);
-
-        void failed(String errorMsg);
     }
 
 }
