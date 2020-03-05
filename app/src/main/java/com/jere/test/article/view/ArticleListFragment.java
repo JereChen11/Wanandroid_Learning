@@ -19,7 +19,9 @@ import android.view.ViewGroup;
 
 import com.jere.test.R;
 import com.jere.test.article.modle.beanfiles.ProjectTreeItem;
+import com.jere.test.article.modle.beanfiles.wechatofficialaccount.WeChatArticleBloggerList;
 import com.jere.test.article.viewmodel.ProjectTreeItemViewModel;
+import com.jere.test.article.viewmodel.WeChatArticleBloggerListViewModel;
 import com.jere.test.home.HomeActivity;
 import com.jere.test.util.RecyclerItemClickListener;
 
@@ -52,7 +54,8 @@ public class ArticleListFragment extends Fragment {
 
     private ProjectTreeItemAdapter mProjectTreeItemAdapter;
     private ArrayList<ProjectTreeItem.ProjectItem> mProjectItems;
-    private RecyclerView mRecyclerView;
+    private RecyclerView mProjectTreeItemRecyclerView;
+    private RecyclerView mWeChatBloggerListRecyclerView;
 
 
     public ArticleListFragment() {
@@ -97,19 +100,19 @@ public class ArticleListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ProjectTreeItemViewModel mProjectTreeItemVm = ViewModelProviders.of(this, new ViewModelFactory())
+        ProjectTreeItemViewModel projectTreeItemVm = ViewModelProviders.of(this, new ViewModelFactory())
                 .get(ProjectTreeItemViewModel.class);
-        mProjectTreeItemVm.getProjectTreeItemsLd().observe(this, projectItemsObserver);
-        mProjectTreeItemVm.setProjectTreeItemsLd();
+        projectTreeItemVm.getProjectTreeItemsLd().observe(this, projectItemsObserver);
+        projectTreeItemVm.setProjectTreeItemsLd();
 
         mProjectTreeItemAdapter = new ProjectTreeItemAdapter(mProjectItems);
-        mRecyclerView = view.findViewById(R.id.project_tree_items_recycler_view);
+        mProjectTreeItemRecyclerView = view.findViewById(R.id.project_tree_items_recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mProjectTreeItemAdapter);
+        mProjectTreeItemRecyclerView.setLayoutManager(mLayoutManager);
+        mProjectTreeItemRecyclerView.setAdapter(mProjectTreeItemAdapter);
 
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),
-                mRecyclerView,
+        mProjectTreeItemRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),
+                mProjectTreeItemRecyclerView,
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
@@ -127,6 +130,24 @@ public class ArticleListFragment extends Fragment {
                         startActivity(intent);
                     }
                 }));
+
+
+        WeChatArticleBloggerListViewModel weChatArticleBloggerListVm = ViewModelProviders
+                .of(this, new WeChatArticleBloggerListViewModelFactory())
+                .get(WeChatArticleBloggerListViewModel.class);
+        weChatArticleBloggerListVm.getWeChatArticleBloggerListLd().observe(this, weChatArticleBloggerListObserver);
+        weChatArticleBloggerListVm.setWeChatArticleBloggerListLd();
+
+        mWeChatBloggerListRecyclerView = view.findViewById(R.id.wechat_official_account_blogger_list);
+        RecyclerView.LayoutManager weChatBloggerRecycleViewManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        mWeChatBloggerListRecyclerView.setLayoutManager(weChatBloggerRecycleViewManager);
+        WeChatArticleBloggerList weChatArticleBloggerList = weChatArticleBloggerListVm.getWeChatArticleBloggerListLd().getValue();
+        if (weChatArticleBloggerList != null) {
+            WeChatArticleBloggerListAdapter weChatArticleBloggerListAdapter =
+                    new WeChatArticleBloggerListAdapter(weChatArticleBloggerList);
+            mWeChatBloggerListRecyclerView.setAdapter(weChatArticleBloggerListAdapter);
+        }
+
     }
 
     private Observer<ArrayList<ProjectTreeItem.ProjectItem>> projectItemsObserver = new Observer<ArrayList<ProjectTreeItem.ProjectItem>>() {
@@ -136,8 +157,19 @@ public class ArticleListFragment extends Fragment {
             if (projectItems != null) {
                 mProjectItems = projectItems;
                 mProjectTreeItemAdapter = new ProjectTreeItemAdapter(mProjectItems);
-                mRecyclerView.setAdapter(mProjectTreeItemAdapter);
+                mProjectTreeItemRecyclerView.setAdapter(mProjectTreeItemAdapter);
                 mProjectTreeItemAdapter.notifyDataSetChanged();
+            }
+        }
+    };
+
+    private Observer<WeChatArticleBloggerList> weChatArticleBloggerListObserver = new Observer<WeChatArticleBloggerList>() {
+        @Override
+        public void onChanged(@Nullable WeChatArticleBloggerList weChatArticleBloggerList) {
+            if (weChatArticleBloggerList != null) {
+                WeChatArticleBloggerListAdapter weChatArticleBloggerListAdapter =
+                        new WeChatArticleBloggerListAdapter(weChatArticleBloggerList);
+                mWeChatBloggerListRecyclerView.setAdapter(weChatArticleBloggerListAdapter);
             }
         }
     };
@@ -174,6 +206,18 @@ public class ArticleListFragment extends Fragment {
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
             if (modelClass.isAssignableFrom(ProjectTreeItemViewModel.class)) {
                 return (T) new ProjectTreeItemViewModel();
+            }
+            throw new IllegalArgumentException("Unknown ViewModel class");
+        }
+    }
+
+    class WeChatArticleBloggerListViewModelFactory implements ViewModelProvider.Factory {
+
+        @NonNull
+        @Override
+        public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+            if (modelClass.isAssignableFrom(WeChatArticleBloggerListViewModel.class)) {
+                return (T) new WeChatArticleBloggerListViewModel();
             }
             throw new IllegalArgumentException("Unknown ViewModel class");
         }

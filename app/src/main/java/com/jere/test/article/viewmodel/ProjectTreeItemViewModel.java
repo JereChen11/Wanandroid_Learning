@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel;
 import android.util.Log;
 
 import com.jere.test.article.modle.ProjectTreeRepository;
+import com.jere.test.article.modle.api.GetWebDataListener;
 import com.jere.test.article.modle.beanfiles.ProjectTreeItem;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class ProjectTreeItemViewModel extends ViewModel {
      */
     public void setProjectTreeItemsLd() {
         ProjectTreeRepository projectTreeRepository = ProjectTreeRepository.newInstance();
-        projectTreeRepository.getProjectTreeItem(new ProjectTreeRepository.GetWebDataListener() {
+        projectTreeRepository.getProjectTreeItem(new GetWebDataListener() {
             @Override
             public void getDataSuccess(Object object) {
                 ProjectTreeItem projectTreeItem = (ProjectTreeItem) object;
