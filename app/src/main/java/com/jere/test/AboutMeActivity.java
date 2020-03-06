@@ -3,16 +3,24 @@ package com.jere.test;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.jere.test.article.modle.api.AbstractRetrofitCallback;
+import com.jere.test.article.modle.api.ApiService;
+import com.jere.test.article.modle.api.ApiWrapper;
+
+import java.util.HashMap;
+
 /**
  * @author jere
  */
 public class AboutMeActivity extends AppCompatActivity {
+    private static final String TAG = "AboutMeActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +41,21 @@ public class AboutMeActivity extends AppCompatActivity {
 
         ConstraintLayout csl = findViewById(R.id.about_me_csl);
 
+        HashMap<String, String> map = new HashMap<>();
+        map.put("username", "Jere_Chen");
+        map.put("password", "zxc123");
+        ApiService apiService = ApiWrapper.getRetrofitInstance().create(ApiService.class);
+        apiService.login(map).enqueue(new AbstractRetrofitCallback() {
+            @Override
+            public void getSuccessful(String responseBody) {
+                Log.e(TAG, "getSuccessful: " + responseBody);
+            }
+
+            @Override
+            public void getFailed(String failedMsg) {
+                Log.e(TAG, "getFailed: " + failedMsg);
+            }
+        });
 
 
 

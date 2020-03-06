@@ -30,6 +30,7 @@ import com.jere.test.account.MyAccountFragment;
 import com.jere.test.article.view.ArticleListFragment;
 import com.jere.test.automaticchart.AutomaticChartActivity;
 import com.jere.test.customcomponent.BottomBarItemCustomView;
+import com.jere.test.login.view.RegisterLoginActivity;
 
 /**
  * @author jere
@@ -299,7 +300,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         drawer.closeDrawers();
                         return true;
                     case R.id.nav_privacy_policy:
-                        startActivity(new Intent(HomeActivity.this, AutomaticChartActivity.class));
+                        startActivity(new Intent(HomeActivity.this, RegisterLoginActivity.class));
                         drawer.closeDrawers();
                         return true;
                     default:

@@ -17,6 +17,7 @@
         android:roundIcon="@drawable/application_icon_iron_man"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".login.view.RegisterLoginActivity"></activity>
         <activity android:name=".article.view.ArticleDetailWebViewActivity" />
         <activity android:name=".article.view.ProjectItemListActivity" />
         <activity android:name=".account.MyQrCodeActivity" />
