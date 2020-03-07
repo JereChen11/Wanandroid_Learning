@@ -75,7 +75,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
 
-        startTutorialActivity();
+//        startTutorialActivity();
 
         initComponents();
 
@@ -142,7 +142,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bottom_bar_home_page_item:
-                HomeFragment homeFragment = HomeFragment.newInstance("Home Fragment", "jere test home");
+                HomeFragment homeFragment = HomeFragment.newInstance();
                 replaceFragmentAddToBackStack(homeFragment);
                 break;
             case R.id.bottom_bar_learning_item:
