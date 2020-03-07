@@ -7,10 +7,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="To"
+        android:text="@string/app_content_explain"
         android:textSize="30sp"
         android:textColor="@color/white"
         android:background="@color/colorPrimary"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

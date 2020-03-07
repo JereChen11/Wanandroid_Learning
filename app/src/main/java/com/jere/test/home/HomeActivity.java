@@ -30,7 +30,7 @@ import com.jere.test.account.MyAccountFragment;
 import com.jere.test.article.view.ArticleListFragment;
 import com.jere.test.automaticchart.AutomaticChartActivity;
 import com.jere.test.customcomponent.BottomBarItemCustomView;
-import com.jere.test.login.view.RegisterLoginActivity;
+import com.jere.test.tutorial.TutorialActivity;
 
 /**
  * @author jere
@@ -75,6 +75,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
 
+        startTutorialActivity();
+
         initComponents();
 
         toolbar = findViewById(R.id.toolbar);
@@ -116,6 +118,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             CURRENT_TAG = TAG_HOME;
             loadHomeFragment();
         }
+    }
+
+    private void startTutorialActivity() {
+        Intent tutorialIntent = new Intent(this, TutorialActivity.class);
+        startActivity(tutorialIntent);
     }
 
     private void initComponents() {
@@ -299,8 +306,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         startActivity(new Intent(HomeActivity.this, AboutMeActivity.class));
                         drawer.closeDrawers();
                         return true;
-                    case R.id.nav_privacy_policy:
-                        startActivity(new Intent(HomeActivity.this, RegisterLoginActivity.class));
+                    case R.id.nav_tutorial:
+                        startActivity(new Intent(HomeActivity.this, TutorialActivity.class));
                         drawer.closeDrawers();
                         return true;
                     default:

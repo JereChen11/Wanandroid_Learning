@@ -10,18 +10,18 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/tutorial_vp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
-    <TextView
+    <Button
         android:id="@+id/finish_tutorial_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:text=" Finish Tutorial "
-        android:textColor="#FFFFFF"
+        android:layout_marginBottom="50dp"
+        android:text="@string/finish_tutorial"
+        android:textAllCaps="false"
+        android:textColor="@color/gray"
         android:textSize="20sp"
         android:visibility="gone"
-        android:layout_marginBottom="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

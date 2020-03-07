@@ -7,8 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.jere.test.home.HomeActivity;
 import com.jere.test.R;
+import com.jere.test.login.view.RegisterLoginActivity;
 
 /**
  * @author jere
@@ -56,8 +56,9 @@ public class TutorialActivity extends AppCompatActivity {
         finishTutorialTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent homeIntent = new Intent(TutorialActivity.this, HomeActivity.class);
-                startActivity(homeIntent);
+                Intent registerOrLoginIntent = new Intent(TutorialActivity.this, RegisterLoginActivity.class);
+                startActivity(registerOrLoginIntent);
+                finish();
             }
         });
 
@@ -67,10 +68,12 @@ public class TutorialActivity extends AppCompatActivity {
         View leftNavigationPoint = findViewById(R.id.navigation_point_left);
         View centerNavigationPoint = findViewById(R.id.navigation_point_center);
         View rightNavigationPoint = findViewById(R.id.navigation_point_right);
-        navigationPoints = new View[] {leftNavigationPoint, centerNavigationPoint, rightNavigationPoint};
+        navigationPoints = new View[]{leftNavigationPoint, centerNavigationPoint, rightNavigationPoint};
         viewPager = findViewById(R.id.tutorial_vp);
         finishTutorialTv = findViewById(R.id.finish_tutorial_tv);
     }
 
-
+    @Override
+    public void onBackPressed() {
+    }
 }

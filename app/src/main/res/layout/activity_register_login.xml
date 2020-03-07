@@ -1,42 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white_smoke"
-    tools:context=".login.view.RegisterLoginActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <EditText
-        android:id="@+id/user_name_et"
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="titleText"
+            type="String" />
+
+        <variable
+            name="switchPatternText"
+            type="String" />
+
+        <variable
+            name="isLoginPattern"
+            type="Boolean" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:hint="UserName"
-        android:textColor="@color/black"
-        android:textColorHint="@color/gray"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:background="@color/dark_gray"
+        tools:context=".login.view.RegisterLoginActivity">
 
-    <EditText
-        android:id="@+id/password_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:hint="Password"
-        android:textColor="@color/black"
-        android:textColorHint="@color/gray"
-        app:layout_constraintTop_toBottomOf="@id/user_name_et" />
+        <TextView
+            android:id="@+id/register_login_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{titleText}"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/login_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Login"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_et" />
+        <EditText
+            android:id="@+id/user_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:hint="UserName"
+            android:imeOptions="actionNext"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/password_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Password"
+            android:imeOptions="actionDone"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            app:layout_constraintTop_toBottomOf="@id/user_name_et" />
+
+        <EditText
+            android:id="@+id/repassword_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="rePassword"
+            android:imeOptions="actionDone"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:visibility="@{isLoginPattern ? View.GONE : View.VISIBLE}"
+            app:layout_constraintTop_toBottomOf="@id/password_et" />
+
+        <TextView
+            android:id="@+id/switch_to_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/dark_gray"
+            android:text="@{switchPatternText}"
+            android:textAllCaps="false"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/repassword_et" />
+
+        <Button
+            android:id="@+id/confirm_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@{titleText}"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/repassword_et" />
 
 
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>

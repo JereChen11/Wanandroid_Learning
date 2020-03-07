@@ -9,36 +9,46 @@ import com.jere.test.login.RegisterLoginRepository;
  * @author jere
  */
 public class RegisterLoginViewModel extends ViewModel {
-    private MutableLiveData<Boolean> isLoginLd;
-    private MutableLiveData<Boolean> isRegisterLd;
+    private MutableLiveData<Boolean> isLoginPatternLd;
+    private MutableLiveData<Boolean> isLoginSuccessfulLd;
+    private MutableLiveData<Boolean> isRegisterSuccessfulLd;
 
     public RegisterLoginViewModel() {
-        this.isLoginLd = new MutableLiveData<>();
-        this.isRegisterLd = new MutableLiveData<>();
+        this.isLoginPatternLd = new MutableLiveData<>();
+        this.isLoginSuccessfulLd = new MutableLiveData<>();
+        this.isRegisterSuccessfulLd = new MutableLiveData<>();
     }
 
-    public MutableLiveData<Boolean> getIsLoginLd() {
-        return isLoginLd;
+    public MutableLiveData<Boolean> getIsLoginPatternLd() {
+        return isLoginPatternLd;
+    }
+
+    public void setIsLoginPatternLd(Boolean isLoginPattern) {
+        this.isLoginPatternLd.postValue(isLoginPattern);
+    }
+
+    public MutableLiveData<Boolean> getIsLoginSuccessfulLd() {
+        return isLoginSuccessfulLd;
     }
 
     public void login(String userName, String password) {
         RegisterLoginRepository.getInstance().login(userName, password, new RegisterLoginRepository.LoginListener() {
             @Override
             public void isLogin(boolean isLogin) {
-                setIsLoginLd(isLogin);
+                setIsLoginSuccessfulLd(isLogin);
             }
         });
     }
 
-    public void setIsLoginLd(Boolean isLogin) {
-        this.isLoginLd.postValue(isLogin);
+    public void setIsLoginSuccessfulLd(Boolean isLogin) {
+        this.isLoginSuccessfulLd.postValue(isLogin);
     }
 
-    public MutableLiveData<Boolean> getIsRegisterLd() {
-        return isRegisterLd;
+    public MutableLiveData<Boolean> getIsRegisterSuccessfulLd() {
+        return isRegisterSuccessfulLd;
     }
 
-    public void setIsRegisterLd(Boolean isRegister) {
-        this.isRegisterLd.postValue(isRegister);
+    public void setIsRegisterSuccessfulLd(Boolean isRegister) {
+        this.isRegisterSuccessfulLd.postValue(isRegister);
     }
 }

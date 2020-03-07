@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">JereTestApp</string>
     <string name="hi">Hi</string>
-    <string name="welcome_to">Welcome To</string>
-    <string name="jere_test_app">Jere Test App</string>
     <string name="home_page">Home</string>
     <string name="page_1">Page 1</string>
     <string name="page_2">Page 2</string>
@@ -42,10 +40,25 @@
     <string name="action_clear_all">Clear All</string>
     <string name="action_logout">Logout</string>
     <string name="action_mark_all_read">Mark All as Read</string>
-    <string name="privacy_policy">Privacy Policy</string>
+    <string name="tutorial">Tutorial</string>
 
     <!--  About me  -->
     <string name="about_me_introduction">My name is Jere, I from China, I\'m an Android soft engineer!</string>
+
+    <!-- Tutorial -->
+    <string name="welcome_content">Welcome to JereTestApp</string>
+    <string name="app_content_explain">关于本APP：我会添加任何自己想添加的功能</string>
+    <string name="api_content_explain">关于调用的API说明：现在本应用调用的API全都来自Wanandroid的开放API，感谢泓洋大佬</string>
+    <string name="finish_tutorial">Finish</string>
+
+    <!-- Register Login Page-->
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="repassword">rePassword</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="switch_to_login">switch to login</string>
+    <string name="switch_to_register">switch to register</string>
 
     <string name="home_page_cn">主页</string>
     <string name="learning_cn">学习</string>

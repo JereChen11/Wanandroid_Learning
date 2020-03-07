@@ -31,8 +31,8 @@
                 android:id="@+id/nav_about_us"
                 android:title="@string/nav_about_me" />
             <item
-                android:id="@+id/nav_privacy_policy"
-                android:title="@string/privacy_policy" />
+                android:id="@+id/nav_tutorial"
+                android:title="@string/tutorial" />
         </menu>
     </item>
 </menu>
