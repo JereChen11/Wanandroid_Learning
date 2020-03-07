@@ -1,8 +1,6 @@
 package com.jere.test;
 
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,6 +13,9 @@ import com.jere.test.article.modle.api.ApiService;
 import com.jere.test.article.modle.api.ApiWrapper;
 
 import java.util.HashMap;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 /**
  * @author jere

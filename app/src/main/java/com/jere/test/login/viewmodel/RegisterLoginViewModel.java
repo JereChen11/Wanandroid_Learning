@@ -1,7 +1,7 @@
 package com.jere.test.login.viewmodel;
 
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.jere.test.login.RegisterLoginRepository;
 

@@ -2,7 +2,7 @@ package com.jere.test.util;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.google.zxing.BarcodeFormat;

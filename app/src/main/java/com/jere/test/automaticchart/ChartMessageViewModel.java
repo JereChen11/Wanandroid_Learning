@@ -1,7 +1,7 @@
 package com.jere.test.automaticchart;
 
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 /**
  * @author jere

@@ -1,12 +1,13 @@
 package com.jere.test.article.view;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.webkit.WebView;
 
 import com.jere.test.R;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * @author jere

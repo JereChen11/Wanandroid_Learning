@@ -7,11 +7,11 @@
     tools:context=".article.view.ArticleListFragment"
     android:background="@color/white_smoke">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/wechat_official_account_blogger_list"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -19,7 +19,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/project_tree_items_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -28,6 +28,6 @@
             app:layout_constraintTop_toBottomOf="@id/wechat_official_account_blogger_list"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

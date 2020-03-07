@@ -1,14 +1,6 @@
 package com.jere.test.login.view;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
-import android.arch.lifecycle.ViewModelProviders;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
@@ -16,6 +8,15 @@ import android.widget.Toast;
 import com.jere.test.R;
 import com.jere.test.databinding.ActivityRegisterLoginBinding;
 import com.jere.test.login.viewmodel.RegisterLoginViewModel;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 /**
  * @author jere
@@ -36,7 +37,7 @@ public class RegisterLoginActivity extends AppCompatActivity {
     }
 
     private void initDataBinding() {
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_register_login);
+        mBinding = DataBindingUtil.setContentView(RegisterLoginActivity.this, R.layout.activity_register_login);
     }
 
     private void initViewModel() {

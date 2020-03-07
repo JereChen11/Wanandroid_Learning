@@ -1,8 +1,6 @@
 package com.jere.test.article;
 
-import android.databinding.BaseObservable;
-
-import com.jere.test.BR;
+import androidx.databinding.BaseObservable;
 
 public class ObservableArticle extends BaseObservable {
     private String author;
