@@ -31,24 +31,36 @@ public class RegisterLoginViewModel extends ViewModel {
         return isLoginSuccessfulLd;
     }
 
+    private void setIsLoginSuccessfulLd(Boolean isLogin) {
+        this.isLoginSuccessfulLd.postValue(isLogin);
+    }
+
     public void login(String userName, String password) {
         RegisterLoginRepository.getInstance().login(userName, password, new RegisterLoginRepository.LoginListener() {
             @Override
-            public void isLogin(boolean isLogin) {
+            public void login(boolean isLogin) {
                 setIsLoginSuccessfulLd(isLogin);
             }
         });
-    }
-
-    public void setIsLoginSuccessfulLd(Boolean isLogin) {
-        this.isLoginSuccessfulLd.postValue(isLogin);
     }
 
     public MutableLiveData<Boolean> getIsRegisterSuccessfulLd() {
         return isRegisterSuccessfulLd;
     }
 
-    public void setIsRegisterSuccessfulLd(Boolean isRegister) {
+    private void setIsRegisterSuccessfulLd(Boolean isRegister) {
         this.isRegisterSuccessfulLd.postValue(isRegister);
+    }
+
+    public void register(String userName, String password, String rePassword) {
+        RegisterLoginRepository.getInstance().register(userName,
+                password,
+                rePassword,
+                new RegisterLoginRepository.RegisterListener() {
+                    @Override
+                    public void register(boolean isRegisterSuccessful) {
+                        setIsRegisterSuccessfulLd(isRegisterSuccessful);
+                    }
+                });
     }
 }

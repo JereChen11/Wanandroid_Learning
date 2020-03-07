@@ -29,9 +29,9 @@ public class RegisterLoginRepository {
         return instance;
     }
 
-    public void register(String userName, String password, String rePassword) {
+    public void register(String userName, String password, String rePassword, final RegisterListener listener) {
         if (TextUtils.isEmpty(userName) || TextUtils.isEmpty(password) || TextUtils.isEmpty(rePassword)) {
-            //todo show Toast to reminder user.
+            listener.register(false);
         }
         HashMap<String, String> map = new HashMap<>();
         map.put("username", userName);
@@ -42,18 +42,20 @@ public class RegisterLoginRepository {
             @Override
             public void getSuccessful(String responseBody) {
                 Log.e(TAG, "getSuccessful: " + responseBody);
+                listener.register(true);
             }
 
             @Override
             public void getFailed(String failedMsg) {
                 Log.e(TAG, "getFailed: " + failedMsg);
+                listener.register(false);
             }
         });
     }
 
     public void login(String userName, String password, final LoginListener listener) {
         if (TextUtils.isEmpty(userName) || TextUtils.isEmpty(password)) {
-            //todo show Toast to reminder user.
+            listener.login(false);
         }
         HashMap<String, String> map = new HashMap<>();
         map.put("username", userName);
@@ -66,22 +68,34 @@ public class RegisterLoginRepository {
                 Gson gson = new Gson();
                 LoginInfo loginInfo = gson.fromJson(responseBody, LoginInfo.class);
                 if (loginInfo.getErrorCode() == 0) {
-                    listener.isLogin(true);
+                    listener.login(true);
                 } else {
-                    listener.isLogin(false);
+                    listener.login(false);
                 }
             }
 
             @Override
             public void getFailed(String failedMsg) {
                 Log.e(TAG, "getFailed: " + failedMsg);
-                listener.isLogin(false);
+                listener.login(false);
             }
         });
     }
 
     public interface LoginListener {
-        void isLogin(boolean isLogin);
+        /**
+         * 监听是否登入成功
+         * @param isLoginSuccessful 登入成功，返回true；反之，返回false
+         */
+        void login(boolean isLoginSuccessful);
+    }
+
+    public interface RegisterListener {
+        /**
+         * 监听是否注册成功
+         * @param isRegisterSuccessful 注册成功，返回true；反之，返回false
+         */
+        void register(boolean isRegisterSuccessful);
     }
 
 }

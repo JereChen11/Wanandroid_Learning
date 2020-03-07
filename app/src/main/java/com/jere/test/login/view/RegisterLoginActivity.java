@@ -22,47 +22,65 @@ import com.jere.test.login.viewmodel.RegisterLoginViewModel;
  */
 public class RegisterLoginActivity extends AppCompatActivity {
     private ActivityRegisterLoginBinding mBinding;
+    private RegisterLoginViewModel mRegisterLoginVm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_login);
 
+        initDataBinding();
+        initViewModel();
+        switchRegisterOrLoginPattern();
+        registerOrLogin();
+    }
+
+    private void initDataBinding() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_register_login);
-        mBinding.setIsLoginPattern(true);
-        mBinding.setSwitchPatternText(getResources().getString(R.string.switch_to_register));
-        mBinding.setTitleText(getResources().getString(R.string.login));
+    }
 
-        final RegisterLoginViewModel registerLoginVm = ViewModelProviders
-                .of(this, new RegisterLoginViewModelFactory())
+    private void initViewModel() {
+        mRegisterLoginVm = ViewModelProviders.of(this, new RegisterLoginViewModelFactory())
                 .get(RegisterLoginViewModel.class);
-        registerLoginVm.getIsLoginSuccessfulLd().observe(this, isLoginObserver);
-        registerLoginVm.getIsRegisterSuccessfulLd().observe(this, isRegisterObserver);
-        registerLoginVm.getIsLoginPatternLd().observe(this, isLoginPatternObserver);
-        registerLoginVm.setIsLoginPatternLd(true);
+        mRegisterLoginVm.getIsLoginSuccessfulLd().observe(this, isLoginObserver);
+        mRegisterLoginVm.getIsRegisterSuccessfulLd().observe(this, isRegisterObserver);
+        mRegisterLoginVm.getIsLoginPatternLd().observe(this, isLoginPatternObserver);
+        mRegisterLoginVm.setIsLoginPatternLd(true);
+    }
 
+    private void switchRegisterOrLoginPattern() {
+        mBinding.switchToRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mRegisterLoginVm.getIsLoginPatternLd().getValue() == null) {
+                    mRegisterLoginVm.setIsLoginPatternLd(true);
+                }
+                if (mRegisterLoginVm.getIsLoginPatternLd().getValue()) {
+                    mRegisterLoginVm.setIsLoginPatternLd(false);
+                } else {
+                    mRegisterLoginVm.setIsLoginPatternLd(true);
+                }
+            }
+        });
+    }
 
+    private void registerOrLogin() {
         mBinding.confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String usernameString = mBinding.userNameEt.getText().toString();
                 String passwordString = mBinding.passwordEt.getText().toString();
-                if (!TextUtils.isEmpty(usernameString) && !TextUtils.isEmpty(passwordString)) {
-                    registerLoginVm.login(usernameString, passwordString);
-                }
-                finish();
-            }
-        });
-        mBinding.switchToRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (registerLoginVm.getIsLoginPatternLd().getValue() == null) {
-                    registerLoginVm.setIsLoginPatternLd(true);
-                }
-                if (registerLoginVm.getIsLoginPatternLd().getValue()) {
-                    registerLoginVm.setIsLoginPatternLd(false);
+                String rePasswordString = mBinding.repasswordEt.getText().toString();
+                if (TextUtils.isEmpty(usernameString) || TextUtils.isEmpty(passwordString)) {
+                    Toast.makeText(RegisterLoginActivity.this,
+                            "Pls input right content!",
+                            Toast.LENGTH_SHORT).show();
                 } else {
-                    registerLoginVm.setIsLoginPatternLd(true);
+                    if (mRegisterLoginVm.getIsLoginPatternLd().getValue()) {
+                        mRegisterLoginVm.login(usernameString, passwordString);
+                    } else {
+                        mRegisterLoginVm.register(usernameString, passwordString, rePasswordString);
+                    }
                 }
             }
         });
@@ -88,8 +106,8 @@ public class RegisterLoginActivity extends AppCompatActivity {
         public void onChanged(@Nullable Boolean aBoolean) {
             if (aBoolean != null && aBoolean) {
                 Toast.makeText(RegisterLoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                finish();
             } else {
-                //todo not login
                 Toast.makeText(RegisterLoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
             }
         }
@@ -98,7 +116,12 @@ public class RegisterLoginActivity extends AppCompatActivity {
     private Observer<Boolean> isRegisterObserver = new Observer<Boolean>() {
         @Override
         public void onChanged(@Nullable Boolean aBoolean) {
-
+            if (aBoolean != null && aBoolean) {
+                Toast.makeText(RegisterLoginActivity.this, "Register Successful", Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(RegisterLoginActivity.this, "用户名已被注册，注意密码必须大于6位", Toast.LENGTH_SHORT).show();
+            }
         }
     };
 

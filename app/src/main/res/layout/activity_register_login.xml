@@ -36,52 +36,56 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/user_name_et"
+            android:id="@+id/userNameEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
-            android:hint="UserName"
+            android:hint="@string/username"
             android:imeOptions="actionNext"
+            android:inputType="text"
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/password_et"
+            android:id="@+id/passwordEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:hint="Password"
+            android:hint="@string/password"
             android:imeOptions="actionDone"
+            android:inputType="textPassword"
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
-            app:layout_constraintTop_toBottomOf="@id/user_name_et" />
+            app:layout_constraintTop_toBottomOf="@id/userNameEt" />
 
         <EditText
-            android:id="@+id/repassword_et"
+            android:id="@+id/repasswordEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:hint="rePassword"
+            android:hint="@string/repassword"
             android:imeOptions="actionDone"
+            android:inputType="textPassword"
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
             android:visibility="@{isLoginPattern ? View.GONE : View.VISIBLE}"
-            app:layout_constraintTop_toBottomOf="@id/password_et" />
+            app:layout_constraintTop_toBottomOf="@id/passwordEt" />
 
         <TextView
-            android:id="@+id/switch_to_register"
+            android:id="@+id/switchToRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/dark_gray"
             android:text="@{switchPatternText}"
             android:textAllCaps="false"
             android:textSize="15sp"
+            android:layout_marginEnd="5dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/repassword_et" />
+            app:layout_constraintTop_toBottomOf="@id/repasswordEt" />
 
         <Button
-            android:id="@+id/confirm_btn"
+            android:id="@+id/confirmBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -89,7 +93,7 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/repassword_et" />
+            app:layout_constraintTop_toBottomOf="@id/repasswordEt" />
 
 
     </android.support.constraint.ConstraintLayout>
