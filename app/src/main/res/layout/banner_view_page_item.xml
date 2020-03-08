@@ -8,7 +8,6 @@
         android:id="@+id/banner_item_iv"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:src="@drawable/default_portrait"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
