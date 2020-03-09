@@ -10,9 +10,7 @@ import android.view.ViewGroup;
 
 import com.jere.test.R;
 import com.jere.test.article.modle.beanfiles.ProjectTreeItem;
-import com.jere.test.article.modle.beanfiles.wechatofficialaccount.WeChatArticleBloggerList;
 import com.jere.test.article.viewmodel.ProjectTreeItemViewModel;
-import com.jere.test.article.viewmodel.WeChatArticleBloggerListViewModel;
 import com.jere.test.home.view.HomeActivity;
 import com.jere.test.util.RecyclerItemClickListener;
 
@@ -26,7 +24,6 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -63,7 +60,7 @@ public class CompleteProjectArticleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_page1, container, false);
+        return inflater.inflate(R.layout.fragment_complete_project, container, false);
     }
 
     @Override
@@ -101,23 +98,6 @@ public class CompleteProjectArticleFragment extends Fragment {
                     }
                 }));
 
-
-        WeChatArticleBloggerListViewModel weChatArticleBloggerListVm = ViewModelProviders
-                .of(this, new WeChatArticleBloggerListViewModelFactory())
-                .get(WeChatArticleBloggerListViewModel.class);
-        weChatArticleBloggerListVm.getWeChatArticleBloggerListLd().observe(getViewLifecycleOwner(), weChatArticleBloggerListObserver);
-        weChatArticleBloggerListVm.setWeChatArticleBloggerListLd();
-
-        mWeChatBloggerListRecyclerView = view.findViewById(R.id.wechat_official_account_blogger_list);
-        RecyclerView.LayoutManager weChatBloggerRecycleViewManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        mWeChatBloggerListRecyclerView.setLayoutManager(weChatBloggerRecycleViewManager);
-        WeChatArticleBloggerList weChatArticleBloggerList = weChatArticleBloggerListVm.getWeChatArticleBloggerListLd().getValue();
-        if (weChatArticleBloggerList != null) {
-            WeChatArticleBloggerListAdapter weChatArticleBloggerListAdapter =
-                    new WeChatArticleBloggerListAdapter(weChatArticleBloggerList);
-            mWeChatBloggerListRecyclerView.setAdapter(weChatArticleBloggerListAdapter);
-        }
-
     }
 
     private Observer<ArrayList<ProjectTreeItem.ProjectItem>> projectItemsObserver = new Observer<ArrayList<ProjectTreeItem.ProjectItem>>() {
@@ -129,17 +109,6 @@ public class CompleteProjectArticleFragment extends Fragment {
                 mProjectTreeItemAdapter = new ProjectTreeItemAdapter(mProjectItems);
                 mProjectTreeItemRecyclerView.setAdapter(mProjectTreeItemAdapter);
                 mProjectTreeItemAdapter.notifyDataSetChanged();
-            }
-        }
-    };
-
-    private Observer<WeChatArticleBloggerList> weChatArticleBloggerListObserver = new Observer<WeChatArticleBloggerList>() {
-        @Override
-        public void onChanged(@Nullable WeChatArticleBloggerList weChatArticleBloggerList) {
-            if (weChatArticleBloggerList != null) {
-                WeChatArticleBloggerListAdapter weChatArticleBloggerListAdapter =
-                        new WeChatArticleBloggerListAdapter(weChatArticleBloggerList);
-                mWeChatBloggerListRecyclerView.setAdapter(weChatArticleBloggerListAdapter);
             }
         }
     };
@@ -176,18 +145,6 @@ public class CompleteProjectArticleFragment extends Fragment {
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
             if (modelClass.isAssignableFrom(ProjectTreeItemViewModel.class)) {
                 return (T) new ProjectTreeItemViewModel();
-            }
-            throw new IllegalArgumentException("Unknown ViewModel class");
-        }
-    }
-
-    class WeChatArticleBloggerListViewModelFactory implements ViewModelProvider.Factory {
-
-        @NonNull
-        @Override
-        public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            if (modelClass.isAssignableFrom(WeChatArticleBloggerListViewModel.class)) {
-                return (T) new WeChatArticleBloggerListViewModel();
             }
             throw new IllegalArgumentException("Unknown ViewModel class");
         }

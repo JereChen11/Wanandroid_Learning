@@ -1,5 +1,6 @@
 package com.jere.test.article.modle.beanfiles.wechatofficialaccount;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ public class WeChatArticleBloggerList {
 
     private int errorCode;
     private String errorMsg;
-    private List<DataBean> data;
+    private ArrayList<DataBean> data;
 
     public int getErrorCode() {
         return errorCode;
@@ -32,11 +33,11 @@ public class WeChatArticleBloggerList {
         this.errorMsg = errorMsg;
     }
 
-    public List<DataBean> getData() {
+    public ArrayList<DataBean> getData() {
         return data;
     }
 
-    public void setData(List<DataBean> data) {
+    public void setData(ArrayList<DataBean> data) {
         this.data = data;
     }
 
