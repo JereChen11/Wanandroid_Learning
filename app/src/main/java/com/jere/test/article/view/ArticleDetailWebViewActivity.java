@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class ArticleDetailWebViewActivity extends AppCompatActivity {
     private static final String TAG = "ArticleDetailWebViewAct";
+    public static final String ARTICLE_DETAIL_WEB_LINK_KEY = "ARTICLE_DETAIL_WEB_LINK";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class ArticleDetailWebViewActivity extends AppCompatActivity {
         Log.e(TAG, "onCreate: ");
 
         Bundle bundle = getIntent().getExtras();
-        String link = bundle.getString(ProjectItemListActivity.ARTICLE_DETAIL_WEB_LINK_KEY);
+        String link = bundle.getString(ARTICLE_DETAIL_WEB_LINK_KEY);
 
         WebView webView = findViewById(R.id.article_detail_web_view);
         webView.loadUrl(link);

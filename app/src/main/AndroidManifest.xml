@@ -30,7 +30,7 @@
         <activity android:name=".automaticchart.AutomaticChartActivity" />
         <activity android:name=".tutorial.TutorialActivity" />
         <activity
-            android:name=".home.HomeActivity"
+            android:name=".home.view.HomeActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

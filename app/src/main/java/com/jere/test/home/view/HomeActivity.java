@@ -1,4 +1,4 @@
-package com.jere.test.home;
+package com.jere.test.home.view;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -23,13 +23,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.jere.test.AboutMeActivity;
 import com.jere.test.R;
 import com.jere.test.account.MyAccountFragment;
 import com.jere.test.article.view.ArticleListFragment;
 import com.jere.test.automaticchart.AutomaticChartActivity;
 import com.jere.test.customcomponent.BottomBarItemCustomView;
+import com.jere.test.home.Page2Fragment;
 import com.jere.test.tutorial.TutorialActivity;
 
 /**

@@ -33,7 +33,7 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class ProjectItemListActivity extends AppCompatActivity {
     private static final String TAG = "ProjectItemListActivity";
-    public static final String ARTICLE_DETAIL_WEB_LINK_KEY = "ARTICLE_DETAIL_WEB_LINK";
+
     private RecyclerView mRecyclerView;
     private ProjectItemList mProjectItemList;
     private Observer<ProjectItemList> observer = new Observer<ProjectItemList>() {
@@ -80,7 +80,7 @@ public class ProjectItemListActivity extends AppCompatActivity {
                         String link = data.getLink();
 
                         Intent articleDetailWebViewIntent = new Intent(ProjectItemListActivity.this, ArticleDetailWebViewActivity.class);
-                        articleDetailWebViewIntent.putExtra(ARTICLE_DETAIL_WEB_LINK_KEY, link);
+                        articleDetailWebViewIntent.putExtra(ArticleDetailWebViewActivity.ARTICLE_DETAIL_WEB_LINK_KEY, link);
                         startActivity(articleDetailWebViewIntent);
                     }
 

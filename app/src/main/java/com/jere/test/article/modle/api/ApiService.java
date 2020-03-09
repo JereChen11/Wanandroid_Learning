@@ -43,4 +43,7 @@ public interface ApiService {
     @POST("/user/login")
     Call<ResponseBody> login(@QueryMap Map<String, String> loginInfoMap);
 
+    @GET("/banner/json")
+    Call<ResponseBody> getHomeBannerList();
+
 }

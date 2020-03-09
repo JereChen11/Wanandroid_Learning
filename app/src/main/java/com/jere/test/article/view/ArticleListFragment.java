@@ -13,7 +13,7 @@ import com.jere.test.article.modle.beanfiles.ProjectTreeItem;
 import com.jere.test.article.modle.beanfiles.wechatofficialaccount.WeChatArticleBloggerList;
 import com.jere.test.article.viewmodel.ProjectTreeItemViewModel;
 import com.jere.test.article.viewmodel.WeChatArticleBloggerListViewModel;
-import com.jere.test.home.HomeActivity;
+import com.jere.test.home.view.HomeActivity;
 import com.jere.test.util.RecyclerItemClickListener;
 
 import java.util.ArrayList;
