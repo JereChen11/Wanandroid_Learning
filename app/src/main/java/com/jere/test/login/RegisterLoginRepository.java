@@ -16,7 +16,7 @@ import java.util.HashMap;
  */
 public class RegisterLoginRepository {
     private static final String TAG = "RegisterLoginRepository";
-    private static RegisterLoginRepository instance;
+    private volatile static RegisterLoginRepository instance;
 
     public static RegisterLoginRepository getInstance() {
         if (instance == null) {

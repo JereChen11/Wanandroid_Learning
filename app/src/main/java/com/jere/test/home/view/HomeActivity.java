@@ -26,18 +26,18 @@ import com.bumptech.glide.Glide;
 import com.jere.test.AboutMeActivity;
 import com.jere.test.R;
 import com.jere.test.account.MyAccountFragment;
-import com.jere.test.article.view.ArticleListFragment;
+import com.jere.test.article.view.CompleteProjectArticleFragment;
 import com.jere.test.automaticchart.AutomaticChartActivity;
 import com.jere.test.customcomponent.BottomBarItemCustomView;
-import com.jere.test.home.Page2Fragment;
+import com.jere.test.article.view.WeChatBlogArticleFragment;
 import com.jere.test.tutorial.TutorialActivity;
 
 /**
  * @author jere
  */
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener,
-        ArticleListFragment.OnFragmentInteractionListener,
-        Page2Fragment.OnFragmentInteractionListener,
+        CompleteProjectArticleFragment.OnFragmentInteractionListener,
+        WeChatBlogArticleFragment.OnFragmentInteractionListener,
         HomeFragment.OnFragmentInteractionListener {
 
     private NavigationView navigationView;
@@ -50,16 +50,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     // index to identify current nav menu item
     public static int navItemIndex = 0;
     private static final int HOME_INDEX = 0;
-    private static final int LEARNING_INDEX = 1;
-    private static final int INTEREST_INDEX = 2;
-    private static final int ENTERTAINMENT_INDEX = 3;
+    private static final int COMPLETE_PROJECT_INDEX = 1;
+    private static final int WECHAT_BLOG_INDEX = 2;
+    private static final int KNOWLEDGE_SYSTEM_INDEX = 3;
     private static final int MY_INDEX = 4;
 
     // tags used to attach the fragments
     private static final String TAG_HOME = "home";
-    private static final String TAG_LEARNING = "learning";
-    private static final String TAG_INTEREST = "interest";
-    private static final String TAG_ENTERTAINMENT = "entertainment";
+    private static final String TAG_COMPLETE_PROJECT = "completeProject";
+    private static final String TAG_WECHAT_BLOG = "weChatBlog";
+    private static final String TAG_KNOWLEDGE_SYSTEM = "knowledgeSystem";
     private static final String TAG_MY = "my";
     public static String CURRENT_TAG = TAG_HOME;
 
@@ -127,14 +127,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initComponents() {
         BottomBarItemCustomView homePageItem = findViewById(R.id.bottom_bar_home_page_item);
-        BottomBarItemCustomView learningItem = findViewById(R.id.bottom_bar_learning_item);
-        BottomBarItemCustomView interestItem = findViewById(R.id.bottom_bar_interest_item);
-        BottomBarItemCustomView entertainment = findViewById(R.id.bottom_bar_entertainment_item);
+        BottomBarItemCustomView completeProjectItem = findViewById(R.id.bottom_bar_complete_project_item);
+        BottomBarItemCustomView weChatSystemBlogItem = findViewById(R.id.bottom_bar_wechat_blog_item);
+        BottomBarItemCustomView knowledgeSystemItem = findViewById(R.id.bottom_bar_knowledge_system_item);
         BottomBarItemCustomView myAccountItem = findViewById(R.id.bottom_bar_my_account_item);
         homePageItem.setOnClickListener(this);
-        learningItem.setOnClickListener(this);
-        interestItem.setOnClickListener(this);
-        entertainment.setOnClickListener(this);
+        completeProjectItem.setOnClickListener(this);
+        weChatSystemBlogItem.setOnClickListener(this);
+        knowledgeSystemItem.setOnClickListener(this);
         myAccountItem.setOnClickListener(this);
     }
 
@@ -145,12 +145,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 HomeFragment homeFragment = HomeFragment.newInstance();
                 replaceFragmentAddToBackStack(homeFragment);
                 break;
-            case R.id.bottom_bar_learning_item:
-                ArticleListFragment page1Fragment = ArticleListFragment.newInstance("page 1 Fragment", "jere test 1");
+            case R.id.bottom_bar_complete_project_item:
+                CompleteProjectArticleFragment page1Fragment = CompleteProjectArticleFragment.newInstance();
                 replaceFragment(page1Fragment);
                 break;
-            case R.id.bottom_bar_interest_item:
-                Page2Fragment page2Fragment = Page2Fragment.newInstance("page 2 Fragment", "jere test 2");
+            case R.id.bottom_bar_wechat_blog_item:
+                WeChatBlogArticleFragment page2Fragment = WeChatBlogArticleFragment.newInstance();
                 replaceFragment(page2Fragment);
                 break;
             case R.id.avatar_iv:
@@ -159,7 +159,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 replaceFragment(myAccountFragment);
                 drawer.closeDrawers();
                 break;
-            case R.id.bottom_bar_entertainment_item:
+            case R.id.bottom_bar_knowledge_system_item:
                 //todo play activity or fragment
                 break;
             default:
@@ -247,18 +247,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         switch (navItemIndex) {
             case HOME_INDEX:
                 return new HomeFragment();
-            case LEARNING_INDEX:
-                return new ArticleListFragment();
-            case INTEREST_INDEX:
-//                MoviesFragment moviesFragment = new MoviesFragment();
-//                return moviesFragment;
-            case ENTERTAINMENT_INDEX:
+            case COMPLETE_PROJECT_INDEX:
+                return new CompleteProjectArticleFragment();
+            case WECHAT_BLOG_INDEX:
+                return new WeChatBlogArticleFragment();
+            case KNOWLEDGE_SYSTEM_INDEX:
 //                NotificationsFragment notificationsFragment = new NotificationsFragment();
 //                return notificationsFragment;
             case MY_INDEX:
                 return new MyAccountFragment();
             default:
-                return new ArticleListFragment();
+                return new CompleteProjectArticleFragment();
         }
     }
 
@@ -281,17 +280,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         navItemIndex = 0;
                         CURRENT_TAG = TAG_HOME;
                         break;
-                    case R.id.nav_learning:
+                    case R.id.nav_complete_project:
                         navItemIndex = 1;
-                        CURRENT_TAG = TAG_LEARNING;
+                        CURRENT_TAG = TAG_COMPLETE_PROJECT;
                         break;
-                    case R.id.nav_interest:
+                    case R.id.nav_wechat_blog:
                         navItemIndex = 2;
-                        CURRENT_TAG = TAG_INTEREST;
+                        CURRENT_TAG = TAG_WECHAT_BLOG;
                         break;
-                    case R.id.nav_entertainment:
+                    case R.id.nav_knowledge_system:
                         navItemIndex = 3;
-                        CURRENT_TAG = TAG_ENTERTAINMENT;
+                        CURRENT_TAG = TAG_KNOWLEDGE_SYSTEM;
                         break;
                     case R.id.nav_my:
                         navItemIndex = 4;

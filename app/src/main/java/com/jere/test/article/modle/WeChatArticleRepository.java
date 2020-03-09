@@ -13,7 +13,7 @@ import com.jere.test.article.modle.beanfiles.wechatofficialaccount.WeChatArticle
  */
 public class WeChatArticleRepository {
     private static final String TAG = "WeChatArticleRepository";
-    private static WeChatArticleRepository instance;
+    private volatile static WeChatArticleRepository instance;
 
     public static WeChatArticleRepository newInstance() {
         if (instance == null) {

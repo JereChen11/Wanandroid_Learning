@@ -54,28 +54,28 @@
             app:bottomBarContentText="@string/home_page_cn" />
 
         <com.jere.test.customcomponent.BottomBarItemCustomView
-            android:id="@+id/bottom_bar_learning_item"
+            android:id="@+id/bottom_bar_complete_project_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             app:bottomBarIconResource="@drawable/learning_icon"
-            app:bottomBarContentText="@string/learning_cn" />
+            app:bottomBarContentText="@string/complete_project_cn" />
 
         <com.jere.test.customcomponent.BottomBarItemCustomView
-            android:id="@+id/bottom_bar_interest_item"
+            android:id="@+id/bottom_bar_wechat_blog_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             app:bottomBarIconResource="@drawable/interest_icon"
-            app:bottomBarContentText="@string/interest_cn" />
+            app:bottomBarContentText="@string/wechat_blog_cn" />
 
         <com.jere.test.customcomponent.BottomBarItemCustomView
-            android:id="@+id/bottom_bar_entertainment_item"
+            android:id="@+id/bottom_bar_knowledge_system_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             app:bottomBarIconResource="@drawable/play_icon"
-            app:bottomBarContentText="@string/entertainment_cn" />
+            app:bottomBarContentText="@string/knowledge_system_cn" />
 
         <com.jere.test.customcomponent.BottomBarItemCustomView
             android:id="@+id/bottom_bar_my_account_item"

@@ -18,32 +18,18 @@
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
 
-    <!-- Navigation Drawer menu labels -->
-    <string name="nav_home">Home</string>
-    <string name="nav_learning">Learning</string>
-    <string name="nav_interest">Interest</string>
-    <string name="nav_entertainment">Entertainment</string>
-    <string name="nav_settings">My</string>
-    <string name="nav_about_me">About Me</string>
-
     <!-- Toolbar titles when notifications menu item is selected -->
     <string-array name="nav_item_activity_titles">
-        <item>Home</item>
-        <item>Learning</item>
-        <item>Interest</item>
-        <item>Entertainment</item>
-        <item>My</item>
+        <item>主页</item>
+        <item>完整项目</item>
+        <item>微信公众号</item>
+        <item>知识体系</item>
+        <item>我的</item>
     </string-array>
 
-    <string name="activity_title_about_me">About Me</string>
-    <string name="activity_title_privacy_policy">Privacy Policy</string>
     <string name="action_clear_all">Clear All</string>
     <string name="action_logout">Logout</string>
     <string name="action_mark_all_read">Mark All as Read</string>
-    <string name="tutorial">Tutorial</string>
-
-    <!--  About me  -->
-    <string name="about_me_introduction">My name is Jere, I from China, I\'m an Android soft engineer!</string>
 
     <!-- Tutorial -->
     <string name="welcome_content">Welcome to JereTestApp</string>
@@ -61,10 +47,13 @@
     <string name="switch_to_register">switch to register</string>
 
     <string name="home_page_cn">主页</string>
-    <string name="learning_cn">学习</string>
-    <string name="interest_cn">兴趣</string>
-    <string name="entertainment_cn">娱乐</string>
+    <string name="complete_project_cn">完整项目</string>
+    <string name="wechat_blog_cn">微信公众号</string>
+    <string name="knowledge_system_cn">知识体系</string>
     <string name="my_info_cn">我的</string>
+    <string name="other_cn">其它</string>
+    <string name="about_me_cn">关于我</string>
+    <string name="tutorial_cn">教程</string>
 
     <!-- about My account info -->
     <string name="photo_album_cn">相册</string>

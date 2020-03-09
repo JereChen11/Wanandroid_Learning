@@ -25,30 +25,17 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ArticleListFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ArticleListFragment#newInstance} factory method to
- * create an instance of this fragment.
- *
  * @author jere
  */
-public class ArticleListFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    public static final String PROJECT_ITEM_ID_KEY = "PROJECT_ITEM_ID";
+public class CompleteProjectArticleFragment extends Fragment {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    public static final String PROJECT_ITEM_ID_KEY = "PROJECT_ITEM_ID";
 
     private OnFragmentInteractionListener mListener;
 
@@ -59,35 +46,17 @@ public class ArticleListFragment extends Fragment {
     private RecyclerView mWeChatBloggerListRecyclerView;
 
 
-    public ArticleListFragment() {
+    public CompleteProjectArticleFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ArticleListFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ArticleListFragment newInstance(String param1, String param2) {
-        ArticleListFragment fragment = new ArticleListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public static CompleteProjectArticleFragment newInstance() {
+        return new CompleteProjectArticleFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -103,13 +72,13 @@ public class ArticleListFragment extends Fragment {
 
         ProjectTreeItemViewModel projectTreeItemVm = ViewModelProviders.of(this, new ViewModelFactory())
                 .get(ProjectTreeItemViewModel.class);
-        projectTreeItemVm.getProjectTreeItemsLd().observe(this, projectItemsObserver);
+        projectTreeItemVm.getProjectTreeItemsLd().observe(getViewLifecycleOwner(), projectItemsObserver);
         projectTreeItemVm.setProjectTreeItemsLd();
 
         mProjectTreeItemAdapter = new ProjectTreeItemAdapter(mProjectItems);
         mProjectTreeItemRecyclerView = view.findViewById(R.id.project_tree_items_recycler_view);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        mProjectTreeItemRecyclerView.setLayoutManager(mLayoutManager);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+        mProjectTreeItemRecyclerView.setLayoutManager(layoutManager);
         mProjectTreeItemRecyclerView.setAdapter(mProjectTreeItemAdapter);
 
         mProjectTreeItemRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),
@@ -136,7 +105,7 @@ public class ArticleListFragment extends Fragment {
         WeChatArticleBloggerListViewModel weChatArticleBloggerListVm = ViewModelProviders
                 .of(this, new WeChatArticleBloggerListViewModelFactory())
                 .get(WeChatArticleBloggerListViewModel.class);
-        weChatArticleBloggerListVm.getWeChatArticleBloggerListLd().observe(this, weChatArticleBloggerListObserver);
+        weChatArticleBloggerListVm.getWeChatArticleBloggerListLd().observe(getViewLifecycleOwner(), weChatArticleBloggerListObserver);
         weChatArticleBloggerListVm.setWeChatArticleBloggerListLd();
 
         mWeChatBloggerListRecyclerView = view.findViewById(R.id.wechat_official_account_blogger_list);

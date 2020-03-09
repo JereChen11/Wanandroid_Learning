@@ -16,7 +16,7 @@ import com.jere.test.article.modle.beanfiles.ProjectTreeItem;
 public class ProjectTreeRepository {
 
     private static final String TAG = "ProjectTreeRepository";
-    private static ProjectTreeRepository instance;
+    private volatile static ProjectTreeRepository instance;
 
     ProjectTreeRepository() {
 

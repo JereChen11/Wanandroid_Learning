@@ -12,7 +12,10 @@ import com.jere.test.home.model.beanfiles.HomeBannerListBean;
  * @author jere
  */
 public class HomeRepository {
-    private static HomeRepository instance;
+    /**
+     * 为了防止出现DCL失效问题，所以用 volatile 关键字来修饰 instance。
+     */
+    private volatile static HomeRepository instance;
 
     public static HomeRepository newInstance() {
         if (instance == null) {

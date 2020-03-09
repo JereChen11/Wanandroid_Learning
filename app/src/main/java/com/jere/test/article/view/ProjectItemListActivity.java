@@ -53,7 +53,7 @@ public class ProjectItemListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_item_list);
 
-        int clickItemProjectId = getIntent().getIntExtra(ArticleListFragment.PROJECT_ITEM_ID_KEY, -1);
+        int clickItemProjectId = getIntent().getIntExtra(CompleteProjectArticleFragment.PROJECT_ITEM_ID_KEY, -1);
 
         ProjectItemListViewModel projectItemListVm = ViewModelProviders.of(this, new ViewModelFactory()).get(ProjectItemListViewModel.class);
         if (clickItemProjectId > -1) {
