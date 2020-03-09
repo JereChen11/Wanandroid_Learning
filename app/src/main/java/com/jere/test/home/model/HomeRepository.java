@@ -5,6 +5,7 @@ import com.jere.test.article.modle.api.AbstractRetrofitCallback;
 import com.jere.test.article.modle.api.ApiService;
 import com.jere.test.article.modle.api.ApiWrapper;
 import com.jere.test.article.modle.api.GetWebDataListener;
+import com.jere.test.home.model.beanfiles.HomeArticleListBean;
 import com.jere.test.home.model.beanfiles.HomeBannerListBean;
 
 /**
@@ -32,6 +33,23 @@ public class HomeRepository {
                 Gson gson = new Gson();
                 HomeBannerListBean homeBannerListBean = gson.fromJson(responseBody, HomeBannerListBean.class);
                 listener.getDataSuccess(homeBannerListBean);
+            }
+
+            @Override
+            public void getFailed(String failedMsg) {
+                listener.getDataFailed(failedMsg);
+            }
+        });
+    }
+
+    public void getHomeArticleList(int pageNumber, final GetWebDataListener listener) {
+        ApiService apiService = ApiWrapper.getRetrofitInstance().create(ApiService.class);
+        apiService.getHomeArticleList(pageNumber).enqueue(new AbstractRetrofitCallback() {
+            @Override
+            public void getSuccessful(String responseBody) {
+                Gson gson = new Gson();
+                HomeArticleListBean homeArticleListBean = gson.fromJson(responseBody, HomeArticleListBean.class);
+                listener.getDataSuccess(homeArticleListBean);
             }
 
             @Override

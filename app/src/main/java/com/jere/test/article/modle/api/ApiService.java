@@ -17,8 +17,12 @@ import retrofit2.http.QueryMap;
  * @author jere
  */
 public interface ApiService {
-    @GET("/article/list/0/json")
-    Call<ResponseBody> getHomeArticleList();
+
+    @GET("/banner/json")
+    Call<ResponseBody> getHomeBannerList();
+
+    @GET("/article/list/{pageNumber}/json")
+    Call<ResponseBody> getHomeArticleList(@Path("pageNumber") int pageNumber);
 
     @PUT("/mock/36/reagent/material/detection")
     Call<ResponseBody> updateReagentMaterialAmount(@Body RequestBody requestBody);
@@ -42,8 +46,5 @@ public interface ApiService {
 
     @POST("/user/login")
     Call<ResponseBody> login(@QueryMap Map<String, String> loginInfoMap);
-
-    @GET("/banner/json")
-    Call<ResponseBody> getHomeBannerList();
 
 }
