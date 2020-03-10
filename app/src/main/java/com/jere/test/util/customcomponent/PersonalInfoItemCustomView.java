@@ -1,4 +1,4 @@
-package com.jere.test.customcomponent;
+package com.jere.test.util.customcomponent;
 
 import android.content.Context;
 import android.content.res.TypedArray;

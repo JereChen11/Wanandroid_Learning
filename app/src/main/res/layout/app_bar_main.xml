@@ -23,18 +23,10 @@
         android:id="@+id/frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     </FrameLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/chat_floating_action_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="@color/colorPrimary"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
 
     <LinearLayout
         android:id="@+id/home_bottom_bar_include"
@@ -46,44 +38,44 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <com.jere.test.customcomponent.BottomBarItemCustomView
+        <com.jere.test.util.customcomponent.BottomBarItemCustomView
             android:id="@+id/bottom_bar_home_page_item"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:bottomBarIconResource="@drawable/home_icon"
-            app:bottomBarContentText="@string/home_page_cn" />
+            app:bottomBarContentText="@string/home_page_cn"
+            app:bottomBarIconResource="@drawable/home_icon" />
 
-        <com.jere.test.customcomponent.BottomBarItemCustomView
+        <com.jere.test.util.customcomponent.BottomBarItemCustomView
             android:id="@+id/bottom_bar_complete_project_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            app:bottomBarIconResource="@drawable/learning_icon"
-            app:bottomBarContentText="@string/complete_project_cn" />
+            app:bottomBarContentText="@string/complete_project_cn"
+            app:bottomBarIconResource="@drawable/learning_icon" />
 
-        <com.jere.test.customcomponent.BottomBarItemCustomView
+        <com.jere.test.util.customcomponent.BottomBarItemCustomView
             android:id="@+id/bottom_bar_wechat_blog_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            app:bottomBarIconResource="@drawable/interest_icon"
-            app:bottomBarContentText="@string/wechat_blog_cn" />
+            app:bottomBarContentText="@string/wechat_blog_cn"
+            app:bottomBarIconResource="@drawable/interest_icon" />
 
-        <com.jere.test.customcomponent.BottomBarItemCustomView
+        <com.jere.test.util.customcomponent.BottomBarItemCustomView
             android:id="@+id/bottom_bar_knowledge_system_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            app:bottomBarIconResource="@drawable/play_icon"
-            app:bottomBarContentText="@string/knowledge_system_cn" />
+            app:bottomBarContentText="@string/knowledge_system_cn"
+            app:bottomBarIconResource="@drawable/play_icon" />
 
-        <com.jere.test.customcomponent.BottomBarItemCustomView
+        <com.jere.test.util.customcomponent.BottomBarItemCustomView
             android:id="@+id/bottom_bar_my_account_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            app:bottomBarIconResource="@drawable/my_account_icon"
-            app:bottomBarContentText="@string/my_info_cn" />
+            app:bottomBarContentText="@string/my_info_cn"
+            app:bottomBarIconResource="@drawable/my_account_icon" />
 
     </LinearLayout>
 

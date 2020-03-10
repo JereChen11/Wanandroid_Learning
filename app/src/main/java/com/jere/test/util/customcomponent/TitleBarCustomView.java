@@ -1,4 +1,4 @@
-package com.jere.test.customcomponent;
+package com.jere.test.util.customcomponent;
 
 import android.app.Activity;
 import android.content.Context;

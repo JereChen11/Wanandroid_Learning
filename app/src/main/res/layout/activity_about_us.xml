@@ -4,25 +4,12 @@
     android:id="@+id/about_me_csl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white_smoke"
     tools:context=".AboutMeActivity">
 
     <WebView
         android:id="@+id/about_me_webview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"/>
-
-    <Button
-        android:id="@+id/test_touch_event_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="testTouchEventBtn"
-        android:textSize="25sp"
-        android:textAllCaps="false"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -46,7 +46,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/orange_red"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@id/project_item_list_envelop_iv"
         app:layout_constraintStart_toStartOf="@id/project_item_list_title_tv" />
 
@@ -58,15 +58,16 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/blue_violet"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@id/project_item_list_envelop_iv"
-        app:layout_constraintStart_toEndOf="@id/project_item_list_share_date_tv" />
+        app:layout_constraintStart_toEndOf="@id/project_item_list_share_date_tv"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/gray"
         android:layout_marginTop="5dp"
+        android:background="@color/gray"
         app:layout_constraintTop_toBottomOf="@id/project_item_list_envelop_iv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

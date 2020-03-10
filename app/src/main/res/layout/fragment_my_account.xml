@@ -74,7 +74,7 @@
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/my_info_cl">
 
-        <com.jere.test.customcomponent.MyAccountInfoItemCustomView
+        <com.jere.test.util.customcomponent.MyAccountInfoItemCustomView
             android:id="@+id/my_account_photo_album_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
             app:iconResource="@drawable/picture_icon"
             app:layout_constraintTop_toBottomOf="@id/my_info_cl" />
 
-        <com.jere.test.customcomponent.MyAccountInfoItemCustomView
+        <com.jere.test.util.customcomponent.MyAccountInfoItemCustomView
             android:id="@+id/my_account_expression_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
             app:iconResource="@drawable/expression_icons"
             app:layout_constraintTop_toBottomOf="@id/my_info_cl" />
 
-        <com.jere.test.customcomponent.MyAccountInfoItemCustomView
+        <com.jere.test.util.customcomponent.MyAccountInfoItemCustomView
             android:id="@+id/my_account_collection_folder_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
 
     </LinearLayout>
 
-    <com.jere.test.customcomponent.MyAccountInfoItemCustomView
+    <com.jere.test.util.customcomponent.MyAccountInfoItemCustomView
         android:id="@+id/my_account_settings_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

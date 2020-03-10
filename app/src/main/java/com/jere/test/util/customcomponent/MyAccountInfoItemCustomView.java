@@ -1,13 +1,14 @@
-package com.jere.test.customcomponent;
+package com.jere.test.util.customcomponent;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jere.test.R;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 /**
  * @author jere

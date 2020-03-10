@@ -7,7 +7,7 @@
     android:background="@color/white_smoke"
     tools:context=".account.MyQrCodeActivity">
 
-    <com.jere.test.customcomponent.TitleBarCustomView
+    <com.jere.test.util.customcomponent.TitleBarCustomView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"

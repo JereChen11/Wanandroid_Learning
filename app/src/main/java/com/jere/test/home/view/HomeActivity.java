@@ -1,10 +1,8 @@
 package com.jere.test.home.view;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,17 +11,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.jere.test.AboutMeActivity;
 import com.jere.test.R;
 import com.jere.test.account.MyAccountFragment;
-import com.jere.test.article.view.CompleteProjectArticleFragment;
-import com.jere.test.article.view.knowledgesystem.KnowledgeSystemFragment;
 import com.jere.test.article.view.WeChatBlogArticleFragment;
-import com.jere.test.automaticchart.AutomaticChartActivity;
-import com.jere.test.customcomponent.BottomBarItemCustomView;
+import com.jere.test.article.view.completeproject.CompleteProjectArticleFragment;
+import com.jere.test.article.view.knowledgesystem.KnowledgeSystemFragment;
 import com.jere.test.tutorial.TutorialActivity;
+import com.jere.test.util.customcomponent.BottomBarItemCustomView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,7 +44,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView navHeaderBgIv, avatarIv;
     private TextView nameTv, emailTv;
     private Toolbar toolbar;
-    private FloatingActionButton chatFloatingActionBtn;
 
     // index to identify current nav menu item
     public static int navItemIndex = 0;
@@ -87,9 +82,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-        //hide chat floating action button
-        chatFloatingActionBtn = findViewById(R.id.chat_floating_action_btn);
-        chatFloatingActionBtn.hide();
 
         // Navigation view header
         View navHeader = navigationView.getHeaderView(0);
@@ -101,14 +93,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         // load toolbar titles from string resources
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
-
-        chatFloatingActionBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent chartMsgIntent = new Intent(HomeActivity.this, AutomaticChartActivity.class);
-                startActivity(chartMsgIntent);
-            }
-        });
 
         // load nav menu header data
         loadNavHeaderView();
@@ -145,30 +129,36 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bottom_bar_home_page_item:
+                navItemIndex = 0;
                 HomeFragment homeFragment = HomeFragment.newInstance();
                 replaceFragmentAddToBackStack(homeFragment);
                 break;
             case R.id.bottom_bar_complete_project_item:
+                navItemIndex = 1;
                 CompleteProjectArticleFragment page1Fragment = CompleteProjectArticleFragment.newInstance();
                 replaceFragment(page1Fragment);
                 break;
             case R.id.bottom_bar_wechat_blog_item:
+                navItemIndex = 2;
                 WeChatBlogArticleFragment page2Fragment = WeChatBlogArticleFragment.newInstance();
                 replaceFragment(page2Fragment);
                 break;
             case R.id.avatar_iv:
             case R.id.bottom_bar_my_account_item:
+                navItemIndex = 4;
                 MyAccountFragment myAccountFragment = MyAccountFragment.newInstance();
                 replaceFragment(myAccountFragment);
                 drawer.closeDrawers();
                 break;
             case R.id.bottom_bar_knowledge_system_item:
+                navItemIndex = 3;
                 KnowledgeSystemFragment knowledgeSystemFragment = KnowledgeSystemFragment.newInstance();
                 replaceFragment(knowledgeSystemFragment);
                 break;
             default:
                 break;
         }
+        setToolbarTitle();
     }
 
     @Override
@@ -414,30 +404,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void showOrHideFloatingActionBtn() {
-        if (navItemIndex == 0) {
-            chatFloatingActionBtn.show();
-        } else {
-            chatFloatingActionBtn.hide();
-        }
-    }
-
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            avatarIv.setImageBitmap(imageBitmap);
-        }
     }
 
 }

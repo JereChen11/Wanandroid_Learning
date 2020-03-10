@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import com.jere.test.R;
-import com.jere.test.customcomponent.PersonalInfoItemCustomView;
+import com.jere.test.util.customcomponent.PersonalInfoItemCustomView;
 
 /**
  * @author jere

@@ -1,4 +1,4 @@
-package com.jere.test.article.view;
+package com.jere.test.article.view.completeproject;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.jere.test.R;
 import com.jere.test.article.modle.beanfiles.ProjectTreeItem;
+import com.jere.test.article.view.ProjectItemListActivity;
 import com.jere.test.article.viewmodel.ProjectTreeItemViewModel;
 import com.jere.test.home.view.HomeActivity;
 import com.jere.test.util.RecyclerItemClickListener;

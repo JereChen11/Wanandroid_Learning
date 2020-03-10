@@ -7,7 +7,7 @@
     android:background="@color/white_smoke"
     tools:context=".account.SetEmailActivity">
 
-    <com.jere.test.customcomponent.SetPersonalInfoTitleBarCustomView
+    <com.jere.test.util.customcomponent.SetPersonalInfoTitleBarCustomView
         android:id="@+id/set_email_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

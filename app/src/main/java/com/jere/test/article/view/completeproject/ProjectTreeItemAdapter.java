@@ -1,4 +1,4 @@
-package com.jere.test.article.view;
+package com.jere.test.article.view.completeproject;
 
 import android.view.LayoutInflater;
 import android.view.View;

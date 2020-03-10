@@ -1,20 +1,6 @@
 <resources>
-    <string name="app_name">JereTestApp</string>
-    <string name="hi">Hi</string>
-    <string name="home_page">Home</string>
-    <string name="page_1">Page 1</string>
-    <string name="page_2">Page 2</string>
-    <string name="page_3">Page 3</string>
-    <string name="fragment_1">Fragment 1</string>
-    <string name="fragment_2">Fragment 2</string>
-    <string name="fragment_3">Fragment 3</string>
+    <string name="app_name">Wanandroid_Learning</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
 
