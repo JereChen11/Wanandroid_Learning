@@ -360,7 +360,7 @@ public class HomeFragment extends Fragment {
         @Override
         public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.recycler_list_item_view_home_article_list, parent, false);
+                    .inflate(R.layout.recycler_item_view_article_list_item, parent, false);
             return new MyViewHolder(view);
         }
 
@@ -392,9 +392,9 @@ public class HomeFragment extends Fragment {
 
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
-                titleTv = itemView.findViewById(R.id.homeArticleListItemTitleTv);
-                authorTv = itemView.findViewById(R.id.homeArticleListItemAuthorTv);
-                sharedDateTv = itemView.findViewById(R.id.homeArticleListItemSharedDateTv);
+                titleTv = itemView.findViewById(R.id.articleListItemTitleTv);
+                authorTv = itemView.findViewById(R.id.articleListItemAuthorTv);
+                sharedDateTv = itemView.findViewById(R.id.articleListItemSharedDateTv);
             }
         }
     }
