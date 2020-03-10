@@ -5,16 +5,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,14 +13,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.jere.test.AboutMeActivity;
 import com.jere.test.R;
 import com.jere.test.account.MyAccountFragment;
 import com.jere.test.article.view.CompleteProjectArticleFragment;
+import com.jere.test.article.view.knowledgesystem.KnowledgeSystemFragment;
+import com.jere.test.article.view.WeChatBlogArticleFragment;
 import com.jere.test.automaticchart.AutomaticChartActivity;
 import com.jere.test.customcomponent.BottomBarItemCustomView;
-import com.jere.test.article.view.WeChatBlogArticleFragment;
 import com.jere.test.tutorial.TutorialActivity;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 /**
  * @author jere
@@ -38,7 +40,8 @@ import com.jere.test.tutorial.TutorialActivity;
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener,
         CompleteProjectArticleFragment.OnFragmentInteractionListener,
         WeChatBlogArticleFragment.OnFragmentInteractionListener,
-        HomeFragment.OnFragmentInteractionListener {
+        HomeFragment.OnFragmentInteractionListener,
+        KnowledgeSystemFragment.OnFragmentInteractionListener {
 
     private NavigationView navigationView;
     private DrawerLayout drawer;
@@ -160,7 +163,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 drawer.closeDrawers();
                 break;
             case R.id.bottom_bar_knowledge_system_item:
-                //todo play activity or fragment
+                KnowledgeSystemFragment knowledgeSystemFragment = KnowledgeSystemFragment.newInstance();
+                replaceFragment(knowledgeSystemFragment);
                 break;
             default:
                 break;
@@ -252,8 +256,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case WECHAT_BLOG_INDEX:
                 return new WeChatBlogArticleFragment();
             case KNOWLEDGE_SYSTEM_INDEX:
-//                NotificationsFragment notificationsFragment = new NotificationsFragment();
-//                return notificationsFragment;
+                return new KnowledgeSystemFragment();
             case MY_INDEX:
                 return new MyAccountFragment();
             default:

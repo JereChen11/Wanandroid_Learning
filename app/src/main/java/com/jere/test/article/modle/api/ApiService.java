@@ -47,4 +47,10 @@ public interface ApiService {
     @POST("/user/login")
     Call<ResponseBody> login(@QueryMap Map<String, String> loginInfoMap);
 
+    @GET("/tree/json")
+    Call<ResponseBody> getKnowledgeSystem();
+
+    @GET("/article/list/0/json")
+    Call<ResponseBody> getKnowledgeSystemArticleList(@Query("cid") int cid);
+
 }
