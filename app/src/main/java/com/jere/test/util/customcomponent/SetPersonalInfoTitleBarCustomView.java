@@ -24,7 +24,7 @@ public class SetPersonalInfoTitleBarCustomView extends ConstraintLayout implemen
     private void init(Context context, AttributeSet attrs) {
         inflate(context, R.layout.set_personal_info_title_bar_custom_view, this);
 
-        TextView cancelTv = findViewById(R.id.cancel_tv);
+        TextView cancelTv = findViewById(R.id.cancelTv);
         TextView titleContentTv = findViewById(R.id.title_content_tv);
         Button completeBtn = findViewById(R.id.complete_btn);
         cancelTv.setOnClickListener(this);
@@ -41,7 +41,7 @@ public class SetPersonalInfoTitleBarCustomView extends ConstraintLayout implemen
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.cancel_tv:
+            case R.id.cancelTv:
                 ((Activity) getContext()).onBackPressed();
                 break;
             case R.id.complete_btn:

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.jere.test.R;
 import com.jere.test.article.view.ArticleDetailWebViewActivity;
+import com.jere.test.databinding.FragmentHomeBinding;
 import com.jere.test.home.model.beanfiles.HomeArticleListBean;
 import com.jere.test.home.model.beanfiles.HomeBannerListBean;
 import com.jere.test.home.viewmodel.HomeViewModel;
@@ -52,9 +53,9 @@ public class HomeFragment extends Fragment {
     private ArrayList<HomeBannerListBean.DataBean> mBannerDataList = new ArrayList<>();
     private BannerHandler mBannerHandler;
     private ScheduledExecutorService mBannerScheduledExecutorService;
-    private RecyclerView mHomeArticleListRecyclerView;
     private HomeArticleListViewAdapter mArticleListViewAdapter;
     private ArrayList<HomeArticleListBean.DataBean.DatasBean> mHomeArticleListData = new ArrayList<>();
+    private FragmentHomeBinding mBinding;
 
     private Observer<HomeBannerListBean> bannerListDataObserver = new Observer<HomeBannerListBean>() {
         @Override
@@ -82,7 +83,7 @@ public class HomeFragment extends Fragment {
             if (homeArticleListBean != null) {
                 mHomeArticleListData = homeArticleListBean.getData().getDatas();
                 mArticleListViewAdapter = new HomeArticleListViewAdapter(mHomeArticleListData);
-                mHomeArticleListRecyclerView.setAdapter(mArticleListViewAdapter);
+                mBinding.homeArticleListRecycleView.setAdapter(mArticleListViewAdapter);
             }
         }
     };
@@ -103,8 +104,9 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+
+        mBinding = FragmentHomeBinding.inflate(inflater, container, false);
+        return mBinding.getRoot();
     }
 
     @Override
@@ -117,20 +119,20 @@ public class HomeFragment extends Fragment {
         homeVm.getHomeArticleListBeanLd().observe(getViewLifecycleOwner(), articleListBeanObserver);
         homeVm.setHomeArticleListBeanLd();
 
-        initBannerVew(view);
+        initBannerVew();
         mBannerHandler = new BannerHandler(this);
         startAutoLoopBanner();
 
-        initArticleListView(view);
+        initArticleListView();
     }
 
-    private void initBannerVew(View view) {
-        mBannerVp2 = view.findViewById(R.id.home_banner_vp2);
-        View firstIndicateView = view.findViewById(R.id.firstIndicateView);
-        View secondIndicateView = view.findViewById(R.id.secondIndicateView);
-        View thirdIndicateView = view.findViewById(R.id.thirdIndicateView);
-        View fourthIndicateView = view.findViewById(R.id.fourthIndicateView);
-        indicateViews = new View[]{firstIndicateView, secondIndicateView, thirdIndicateView, fourthIndicateView};
+    private void initBannerVew() {
+        mBannerVp2 = mBinding.homeBannerVp2;
+        indicateViews = new View[]{
+                mBinding.firstIndicateView,
+                mBinding.secondIndicateView,
+                mBinding.thirdIndicateView,
+                mBinding.fourthIndicateView};
         mBannerVpAdapter = new MyBannerVpAdapter(this, mBannerDataList);
         mBannerVp2.setAdapter(mBannerVpAdapter);
         mBannerVp2.setCurrentItem(1);
@@ -184,13 +186,11 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private void initArticleListView(View view) {
-        mHomeArticleListRecyclerView = view.findViewById(R.id.homeArticleListRecycleView);
+    private void initArticleListView() {
         mArticleListViewAdapter = new HomeArticleListViewAdapter(mHomeArticleListData);
-        mHomeArticleListRecyclerView.setAdapter(mArticleListViewAdapter);
-
-        mHomeArticleListRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),
-                mHomeArticleListRecyclerView,
+        mBinding.homeArticleListRecycleView.setAdapter(mArticleListViewAdapter);
+        mBinding.homeArticleListRecycleView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),
+                mBinding.homeArticleListRecycleView,
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {

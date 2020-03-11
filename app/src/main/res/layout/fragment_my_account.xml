@@ -1,112 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/dark_gray">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/my_info_cl"
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:background="@color/white"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:background="@color/dark_gray">
 
-        <ImageView
-            android:id="@+id/portrait_iv"
-            android:layout_width="80dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="20dp"
-            android:src="@drawable/default_portrait"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/myInfoCl"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/my_account_name_tv"
-            android:layout_width="0dp"
+            <ImageView
+                android:id="@+id/portraitIv"
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/default_portrait"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/myAccountNameTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="50dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Jere Chen"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/portraitIv"
+                app:layout_constraintTop_toTopOf="@id/portraitIv" />
+
+            <TextView
+                android:id="@+id/myAccountEmailTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="50dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="jerechen11@gmail.com"
+                android:textColor="@color/gray"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/myAccountNameTv"
+                app:layout_constraintTop_toBottomOf="@id/myAccountNameTv" />
+
+            <ImageView
+                android:id="@+id/turnRightArrow"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/turn_right_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/accountInfoItemsLl"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="50dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="Jere Chen"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/portrait_iv"
-            app:layout_constraintTop_toTopOf="@id/portrait_iv" />
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/myInfoCl">
 
-        <TextView
-            android:id="@+id/my_account_email_tv"
-            android:layout_width="0dp"
+            <com.jere.test.util.customcomponent.MyAccountInfoItemCustomView
+                android:id="@+id/myAccountPhotoAlbumItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:categoryItemText="@string/photo_album_cn"
+                app:iconResource="@drawable/picture_icon"
+                app:layout_constraintTop_toBottomOf="@id/myInfoCl" />
+
+            <com.jere.test.util.customcomponent.MyAccountInfoItemCustomView
+                android:id="@+id/myAccountExpressionItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:categoryItemText="@string/expression_cn"
+                app:iconResource="@drawable/expression_icons"
+                app:layout_constraintTop_toBottomOf="@id/myInfoCl" />
+
+            <com.jere.test.util.customcomponent.MyAccountInfoItemCustomView
+                android:id="@+id/myAccountCollectionFolderItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:categoryItemText="@string/collection_folder"
+                app:iconResource="@drawable/collection_folder_icon"
+                app:layout_constraintTop_toBottomOf="@id/myInfoCl" />
+
+        </LinearLayout>
+
+        <com.jere.test.util.customcomponent.MyAccountInfoItemCustomView
+            android:id="@+id/myAccountSettingsItem"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="50dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="jerechen11@gmail.com"
-            android:textColor="@color/gray"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/my_account_name_tv"
-            app:layout_constraintTop_toBottomOf="@id/my_account_name_tv" />
-
-        <ImageView
-            android:id="@+id/turn_right_arrow"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="5dp"
-            android:src="@drawable/turn_right_arrow"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginTop="20dp"
+            app:categoryItemText="@string/settings_cn"
+            app:iconResource="@drawable/settings_icon"
+            app:layout_constraintTop_toBottomOf="@id/accountInfoItemsLl" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:id="@+id/account_info_items_ll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/my_info_cl">
-
-        <com.jere.test.util.customcomponent.MyAccountInfoItemCustomView
-            android:id="@+id/my_account_photo_album_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:categoryItemText="@string/photo_album_cn"
-            app:iconResource="@drawable/picture_icon"
-            app:layout_constraintTop_toBottomOf="@id/my_info_cl" />
-
-        <com.jere.test.util.customcomponent.MyAccountInfoItemCustomView
-            android:id="@+id/my_account_expression_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:categoryItemText="@string/expression_cn"
-            app:iconResource="@drawable/expression_icons"
-            app:layout_constraintTop_toBottomOf="@id/my_info_cl" />
-
-        <com.jere.test.util.customcomponent.MyAccountInfoItemCustomView
-            android:id="@+id/my_account_collection_folder_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:categoryItemText="@string/collection_folder"
-            app:iconResource="@drawable/collection_folder_icon"
-            app:layout_constraintTop_toBottomOf="@id/my_info_cl" />
-
-    </LinearLayout>
-
-    <com.jere.test.util.customcomponent.MyAccountInfoItemCustomView
-        android:id="@+id/my_account_settings_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:categoryItemText="@string/settings_cn"
-        app:iconResource="@drawable/settings_icon"
-        app:layout_constraintTop_toBottomOf="@id/account_info_items_ll" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

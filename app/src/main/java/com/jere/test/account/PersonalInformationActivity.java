@@ -2,65 +2,64 @@ package com.jere.test.account;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import com.jere.test.R;
 import com.jere.test.account.moreinfo.MoreInfoActivity;
-import com.jere.test.util.customcomponent.PersonalInfoItemCustomView;
+import com.jere.test.databinding.ActivityPersonalInfomationBinding;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 /**
  * @author jere
  */
 public class PersonalInformationActivity extends AppCompatActivity implements View.OnClickListener {
+    private ActivityPersonalInfomationBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_infomation);
 
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_personal_infomation);
+
         initClickEvent();
     }
 
     private void initClickEvent() {
-        PersonalInfoItemCustomView nameItem = findViewById(R.id.personal_info_name_item);
-        PersonalInfoItemCustomView avatarItem = findViewById(R.id.personal_info_avatar_item);
-        PersonalInfoItemCustomView emailItem = findViewById(R.id.personal_info_email_item);
-        PersonalInfoItemCustomView myQrCodeItem = findViewById(R.id.personal_info_qrcode_item);
-        PersonalInfoItemCustomView moreItem = findViewById(R.id.personal_info_more_item);
-        PersonalInfoItemCustomView myAddressItem = findViewById(R.id.personal_info_my_address_item);
-        nameItem.setOnClickListener(this);
-        avatarItem.setOnClickListener(this);
-        emailItem.setOnClickListener(this);
-        myQrCodeItem.setOnClickListener(this);
-        moreItem.setOnClickListener(this);
-        myAddressItem.setOnClickListener(this);
+        mBinding.personalInfoNameItem.setOnClickListener(this);
+        mBinding.personalInfoAvatarItem.setOnClickListener(this);
+        mBinding.personalInfoEmailItem.setOnClickListener(this);
+        mBinding.personalInfoQrCodeItem.setOnClickListener(this);
+        mBinding.personalInfoMoreItem.setOnClickListener(this);
+        mBinding.personalInfoMyAddressItem.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.personal_info_name_item:
+            case R.id.personalInfoNameItem:
                 Intent setNameIntent = new Intent(this, SetNameActivity.class);
                 startActivity(setNameIntent);
                 //todo
                 break;
-            case R.id.personal_info_avatar_item:
+            case R.id.personalInfoAvatarItem:
                 //todo
                 break;
-            case R.id.personal_info_email_item:
+            case R.id.personalInfoEmailItem:
                 Intent setEmailIntent = new Intent(this, SetEmailActivity.class);
                 startActivity(setEmailIntent);
                 break;
-            case R.id.personal_info_qrcode_item:
+            case R.id.personalInfoQrCodeItem:
                 Intent qrCodeIntent = new Intent(this, MyQrCodeActivity.class);
                 startActivity(qrCodeIntent);
                 break;
-            case R.id.personal_info_more_item:
+            case R.id.personalInfoMoreItem:
                 Intent moreInfoIntent = new Intent(this, MoreInfoActivity.class);
                 startActivity(moreInfoIntent);
                 break;
-            case R.id.personal_info_my_address_item:
+            case R.id.personalInfoMyAddressItem:
                 //todo
                 break;
             default:

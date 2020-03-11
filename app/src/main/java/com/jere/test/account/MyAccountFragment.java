@@ -3,27 +3,27 @@ package com.jere.test.account;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.jere.test.R;
+import com.jere.test.databinding.FragmentMyAccountBinding;
+
+import androidx.fragment.app.Fragment;
 
 /**
  * @author jere
  */
 public class MyAccountFragment extends Fragment implements View.OnClickListener {
+    private FragmentMyAccountBinding mBinding;
 
     public MyAccountFragment() {
 
     }
 
     public static MyAccountFragment newInstance() {
-        MyAccountFragment fragment = new MyAccountFragment();
-        //todo fragment.setArguments(new Bundle());
-        return fragment;
+        return new MyAccountFragment();
     }
 
     @Override
@@ -35,15 +35,15 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_my_account, container, false);
+        mBinding = FragmentMyAccountBinding.inflate(inflater, container, false);
+        return mBinding.getRoot();
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ImageView turnRightArrow = view.findViewById(R.id.turn_right_arrow);
-        turnRightArrow.setOnClickListener(this);
+        mBinding.turnRightArrow.setOnClickListener(this);
     }
 
     @Override
@@ -60,11 +60,11 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.turn_right_arrow:
+            case R.id.turnRightArrow:
                 Intent turnRightArrow = new Intent(getContext(), PersonalInformationActivity.class);
                 startActivity(turnRightArrow);
                 break;
-                //todo more case situation
+            //todo more case situation
             default:
                 break;
         }

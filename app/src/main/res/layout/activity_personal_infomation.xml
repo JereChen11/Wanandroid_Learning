@@ -1,74 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/dark_gray"
-    tools:context=".account.PersonalInformationActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.jere.test.util.customcomponent.TitleBarCustomView
-        android:id="@+id/personal_info_title_bar"
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleBackIcon="@drawable/back_icon"
-        app:titleBackgroundColor="@color/dark_gray"
-        app:titleText="@string/personal_information"
-        app:titleTextColor="@color/black"
-        app:titleTextSize="15sp" />
+        android:layout_height="match_parent"
+        android:background="@color/dark_gray"
+        tools:context=".account.PersonalInformationActivity">
 
-    <LinearLayout
-        android:id="@+id/basic_info_ll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/personal_info_title_bar">
-
-        <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
-            android:id="@+id/personal_info_name_item"
+        <com.jere.test.util.customcomponent.TitleBarCustomView
+            android:id="@+id/personalInfoTitleBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:categoryText="@string/personal_info_name"
-            app:contentText="Jere" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleBackIcon="@drawable/back_icon"
+            app:titleBackgroundColor="@color/dark_gray"
+            app:titleText="@string/personal_information"
+            app:titleTextColor="@color/black"
+            app:titleTextSize="15sp" />
 
-        <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
-            android:id="@+id/personal_info_avatar_item"
+        <LinearLayout
+            android:id="@+id/basicInfoLl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:categoryText="@string/personal_info_avatar"
-            app:isDisplayImage="true" />
+            android:background="@color/white"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/personalInfoTitleBar">
+
+            <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
+                android:id="@+id/personalInfoNameItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:categoryText="@string/personal_info_name"
+                app:contentText="Jere" />
+
+            <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
+                android:id="@+id/personalInfoAvatarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:categoryText="@string/personal_info_avatar"
+                app:isDisplayImage="true" />
+
+            <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
+                android:id="@+id/personalInfoEmailItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:categoryText="@string/personal_info_email"
+                app:contentText="jerechen11@gmail.com" />
+
+            <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
+                android:id="@+id/personalInfoQrCodeItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:categoryText="@string/personal_info_my_qrcode"
+                app:imageResource="@drawable/qrcode_icon"
+                app:isDisplayImage="true" />
+
+            <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
+                android:id="@+id/personalInfoMoreItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:categoryText="@string/personal_info_more" />
+
+        </LinearLayout>
 
         <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
-            android:id="@+id/personal_info_email_item"
+            android:id="@+id/personalInfoMyAddressItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:categoryText="@string/personal_info_email"
-            app:contentText="jerechen11@gmail.com" />
+            android:layout_marginTop="10dp"
+            app:categoryText="@string/personal_info_my_address"
+            app:layout_constraintTop_toBottomOf="@id/basicInfoLl" />
 
-        <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
-            android:id="@+id/personal_info_qrcode_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:categoryText="@string/personal_info_my_qrcode"
-            app:imageResource="@drawable/qrcode_icon"
-            app:isDisplayImage="true" />
-
-        <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
-            android:id="@+id/personal_info_more_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:categoryText="@string/personal_info_more" />
-
-    </LinearLayout>
-
-    <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
-        android:id="@+id/personal_info_my_address_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:categoryText="@string/personal_info_my_address"
-        app:layout_constraintTop_toBottomOf="@id/basic_info_ll" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

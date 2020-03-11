@@ -3,18 +3,20 @@ package com.jere.test.account.moreinfo;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jere.test.R;
+import com.jere.test.databinding.ActivitySetGenderBinding;
 
 import java.util.ArrayList;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 /**
  * @author jere
@@ -24,16 +26,16 @@ public class SetGenderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_set_gender);
+
+        ActivitySetGenderBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_set_gender);
 
         ArrayList<String> genderList = new ArrayList<>();
         genderList.add("男");
         genderList.add("女");
 
-        Spinner selectGenderSpinner = findViewById(R.id.select_gender_spinner);
         MySpinnerAdapter mySpinnerAdapter = new MySpinnerAdapter(this, genderList);
-        selectGenderSpinner.setAdapter(mySpinnerAdapter);
-        selectGenderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.selectGenderSpinner.setAdapter(mySpinnerAdapter);
+        binding.selectGenderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String gender = (String) parent.getItemAtPosition(position);

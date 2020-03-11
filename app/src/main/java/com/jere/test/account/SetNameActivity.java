@@ -1,46 +1,44 @@
 package com.jere.test.account;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jere.test.R;
+import com.jere.test.databinding.ActivitySetNameBinding;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 /**
  * @author jere
  */
 public class SetNameActivity extends AppCompatActivity implements View.OnClickListener {
-    private EditText setNameEt;
+    private ActivitySetNameBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_set_name);
+//        setContentView(R.layout.activity_set_name);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_set_name);
 
-        TextView cancelTv = findViewById(R.id.cancel_tv);
-        cancelTv.setOnClickListener(this);
-        Button finishBtn = findViewById(R.id.finish_btn);
-        finishBtn.setOnClickListener(this);
-        setNameEt = findViewById(R.id.set_name_et);
+        mBinding.cancelTv.setOnClickListener(this);
+        mBinding.finishBtn.setOnClickListener(this);
     }
 
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.cancel_tv:
+            case R.id.cancelTv:
                 finish();
                 break;
-            case R.id.finish_btn:
+            case R.id.finishBtn:
                 //todo save the updating about set name
-                if (!TextUtils.isEmpty(setNameEt.getText())) {
+                if (!TextUtils.isEmpty(mBinding.setNameEt.getText())) {
                     Toast.makeText(SetNameActivity.this,
-                            "set name: " + setNameEt.getText(),
+                            "set name: " + mBinding.setNameEt.getText(),
                             Toast.LENGTH_SHORT).show();
                 }
                 break;

@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white_smoke"
-    tools:context=".account.moreinfo.SetGenderActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.jere.test.util.customcomponent.SetPersonalInfoTitleBarCustomView
-        android:id="@+id/set_gender_title_bar"
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:titleContentText="@string/set_gender_cn"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:background="@color/white_smoke"
+        tools:context=".account.moreinfo.SetGenderActivity">
 
-    <Spinner
-        android:id="@+id/select_gender_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:spinnerMode="dropdown"
-        android:background="@color/dark_gray"
-        app:layout_constraintTop_toBottomOf="@id/set_gender_title_bar" />
+        <com.jere.test.util.customcomponent.SetPersonalInfoTitleBarCustomView
+            android:id="@+id/setGenderTitleBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleContentText="@string/set_gender_cn" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Spinner
+            android:id="@+id/selectGenderSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/dark_gray"
+            android:spinnerMode="dropdown"
+            app:layout_constraintTop_toBottomOf="@id/setGenderTitleBar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

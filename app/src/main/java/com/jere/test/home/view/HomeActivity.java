@@ -18,14 +18,13 @@ import com.jere.test.account.MyAccountFragment;
 import com.jere.test.article.view.WeChatBlogArticleFragment;
 import com.jere.test.article.view.completeproject.CompleteProjectArticleFragment;
 import com.jere.test.article.view.knowledgesystem.KnowledgeSystemFragment;
+import com.jere.test.databinding.ActivityHomeBinding;
 import com.jere.test.tutorial.TutorialActivity;
-import com.jere.test.util.customcomponent.BottomBarItemCustomView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -40,10 +39,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         KnowledgeSystemFragment.OnFragmentInteractionListener {
 
     private NavigationView navigationView;
-    private DrawerLayout drawer;
     private ImageView navHeaderBgIv, avatarIv;
     private TextView nameTv, emailTv;
-    private Toolbar toolbar;
+//    private Toolbar toolbar;
 
     // index to identify current nav menu item
     public static int navItemIndex = 0;
@@ -67,28 +65,29 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     // flag to load home fragment when user presses back key
     private boolean shouldLoadHomeFragOnBackPress = true;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private ActivityHomeBinding mBinding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_navigation);
+
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+
 
 //        startTutorialActivity();
 
         initComponents();
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(mBinding.homePageContent.toolbar);
 
-        drawer = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
+        navigationView = mBinding.navigationView;
 
         // Navigation view header
         View navHeader = navigationView.getHeaderView(0);
-        nameTv = navHeader.findViewById(R.id.name_tv);
-        emailTv = navHeader.findViewById(R.id.email_tv);
-        navHeaderBgIv = navHeader.findViewById(R.id.img_header_bg);
-        avatarIv = navHeader.findViewById(R.id.avatar_iv);
+        nameTv = navHeader.findViewById(R.id.nameTv);
+        emailTv = navHeader.findViewById(R.id.emailTv);
+        navHeaderBgIv = navHeader.findViewById(R.id.headerBackgroundIv);
+        avatarIv = navHeader.findViewById(R.id.avatarIv);
         avatarIv.setOnClickListener(this);
 
         // load toolbar titles from string resources
@@ -113,44 +112,39 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initComponents() {
-        BottomBarItemCustomView homePageItem = findViewById(R.id.bottom_bar_home_page_item);
-        BottomBarItemCustomView completeProjectItem = findViewById(R.id.bottom_bar_complete_project_item);
-        BottomBarItemCustomView weChatSystemBlogItem = findViewById(R.id.bottom_bar_wechat_blog_item);
-        BottomBarItemCustomView knowledgeSystemItem = findViewById(R.id.bottom_bar_knowledge_system_item);
-        BottomBarItemCustomView myAccountItem = findViewById(R.id.bottom_bar_my_account_item);
-        homePageItem.setOnClickListener(this);
-        completeProjectItem.setOnClickListener(this);
-        weChatSystemBlogItem.setOnClickListener(this);
-        knowledgeSystemItem.setOnClickListener(this);
-        myAccountItem.setOnClickListener(this);
+        mBinding.homePageContent.bottomBarCompleteProjectItem.setOnClickListener(this);
+        mBinding.homePageContent.bottomBarCompleteProjectItem.setOnClickListener(this);
+        mBinding.homePageContent.bottomBarWeChatBlogItem.setOnClickListener(this);
+        mBinding.homePageContent.bottomBarKnowledgeSystemItem.setOnClickListener(this);
+        mBinding.homePageContent.bottomBarMyAccountItem.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.bottom_bar_home_page_item:
+            case R.id.bottomBarHomePageItem:
                 navItemIndex = 0;
                 HomeFragment homeFragment = HomeFragment.newInstance();
                 replaceFragmentAddToBackStack(homeFragment);
                 break;
-            case R.id.bottom_bar_complete_project_item:
+            case R.id.bottomBarCompleteProjectItem:
                 navItemIndex = 1;
                 CompleteProjectArticleFragment page1Fragment = CompleteProjectArticleFragment.newInstance();
                 replaceFragment(page1Fragment);
                 break;
-            case R.id.bottom_bar_wechat_blog_item:
+            case R.id.bottomBarWeChatBlogItem:
                 navItemIndex = 2;
                 WeChatBlogArticleFragment page2Fragment = WeChatBlogArticleFragment.newInstance();
                 replaceFragment(page2Fragment);
                 break;
-            case R.id.avatar_iv:
-            case R.id.bottom_bar_my_account_item:
+            case R.id.avatarIv:
+            case R.id.bottomBarMyAccountItem:
                 navItemIndex = 4;
                 MyAccountFragment myAccountFragment = MyAccountFragment.newInstance();
                 replaceFragment(myAccountFragment);
-                drawer.closeDrawers();
+                mBinding.drawerLayout.closeDrawers();
                 break;
-            case R.id.bottom_bar_knowledge_system_item:
+            case R.id.bottomBarKnowledgeSystemItem:
                 navItemIndex = 3;
                 KnowledgeSystemFragment knowledgeSystemFragment = KnowledgeSystemFragment.newInstance();
                 replaceFragment(knowledgeSystemFragment);
@@ -189,7 +183,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         // name, website
         nameTv.setText("Jere Chen");
         emailTv.setText("jerechen11@gmail.com");
-
         // loading header background image
         Glide.with(this).load(R.color.gray)
                 .into(navHeaderBgIv);
@@ -217,7 +210,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         // if user select the current notifications menu again, don't do anything
         // just close the notifications drawer
         if (getSupportFragmentManager().findFragmentByTag(CURRENT_TAG) != null) {
-            drawer.closeDrawers();
+            mBinding.drawerLayout.closeDrawers();
 
 //            showOrHideFloatingActionBtn();
             return;
@@ -231,7 +224,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         fragmentTransaction.commitAllowingStateLoss();
 
         //Closing drawer on item click
-        drawer.closeDrawers();
+        mBinding.drawerLayout.closeDrawers();
 
         // refresh toolbar menu
         invalidateOptionsMenu();
@@ -291,11 +284,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         break;
                     case R.id.nav_about_us:
                         startActivity(new Intent(HomeActivity.this, AboutMeActivity.class));
-                        drawer.closeDrawers();
+                        mBinding.drawerLayout.closeDrawers();
                         return true;
                     case R.id.nav_tutorial:
                         startActivity(new Intent(HomeActivity.this, TutorialActivity.class));
-                        drawer.closeDrawers();
+                        mBinding.drawerLayout.closeDrawers();
                         return true;
                     default:
                         navItemIndex = 0;
@@ -317,8 +310,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         });
 
 
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer) {
-
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,
+                mBinding.drawerLayout,
+                mBinding.homePageContent.toolbar,
+                R.string.openDrawer,
+                R.string.closeDrawer) {
             @Override
             public void onDrawerClosed(View drawerView) {
                 // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
@@ -333,7 +329,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         };
 
         //Setting the actionbarToggle to drawer layout
-        drawer.setDrawerListener(actionBarDrawerToggle);
+        mBinding.drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
         //calling sync state is necessary or else your hamburger icon wont show up
         actionBarDrawerToggle.syncState();
@@ -341,8 +337,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawers();
+        if (mBinding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mBinding.drawerLayout.closeDrawers();
             return;
         }
 

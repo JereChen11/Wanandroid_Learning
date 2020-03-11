@@ -1,51 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/dark_gray"
-    tools:context=".account.moreinfo.MoreInfoActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.jere.test.util.customcomponent.TitleBarCustomView
-        android:id="@+id/more_info_title_bar"
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleBackIcon="@drawable/back_icon"
-        app:titleBackgroundColor="@color/dark_gray"
-        app:titleText="@string/personal_info_more"
-        app:titleTextColor="@color/black"
-        app:titleTextSize="15sp" />
+        android:layout_height="match_parent"
+        android:background="@color/dark_gray"
+        tools:context=".account.moreinfo.MoreInfoActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/more_info_title_bar">
-
-        <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
-            android:id="@+id/more_info_gender_item"
+        <com.jere.test.util.customcomponent.TitleBarCustomView
+            android:id="@+id/moreInfoTitleBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:categoryText="@string/more_info_gender"
-            app:contentText="男" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleBackIcon="@drawable/back_icon"
+            app:titleBackgroundColor="@color/dark_gray"
+            app:titleText="@string/personal_info_more"
+            app:titleTextColor="@color/black"
+            app:titleTextSize="15sp" />
 
-        <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
-            android:id="@+id/more_info_district_item"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:categoryText="@string/more_info_district"
-            app:contentText="浙江" />
+            android:background="@color/white"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/moreInfoTitleBar">
 
-        <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
-            android:id="@+id/more_info_personal_signature"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:categoryText="@string/more_info_personal_signature"
-            app:contentText="冲呀" />
+            <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
+                android:id="@+id/moreInfoGenderItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:categoryText="@string/more_info_gender"
+                app:contentText="男" />
 
-    </LinearLayout>
+            <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
+                android:id="@+id/moreInfoDistrictItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:categoryText="@string/more_info_district"
+                app:contentText="浙江" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
+                android:id="@+id/moreInfoPersonalSignature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:categoryText="@string/more_info_personal_signature"
+                app:contentText="冲呀" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

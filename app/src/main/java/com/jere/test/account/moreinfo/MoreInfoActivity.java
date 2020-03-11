@@ -2,11 +2,13 @@ package com.jere.test.account.moreinfo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import com.jere.test.R;
-import com.jere.test.util.customcomponent.PersonalInfoItemCustomView;
+import com.jere.test.databinding.ActivityMoreInfoBinding;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 /**
  * @author jere
@@ -18,26 +20,25 @@ public class MoreInfoActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more_info);
 
-        PersonalInfoItemCustomView gender = findViewById(R.id.more_info_gender_item);
-        PersonalInfoItemCustomView district = findViewById(R.id.more_info_district_item);
-        PersonalInfoItemCustomView personalSignature = findViewById(R.id.more_info_personal_signature);
-        gender.setOnClickListener(this);
-        district.setOnClickListener(this);
-        personalSignature.setOnClickListener(this);
+        ActivityMoreInfoBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_more_info);
+
+        binding.moreInfoGenderItem.setOnClickListener(this);
+        binding.moreInfoDistrictItem.setOnClickListener(this);
+        binding.moreInfoPersonalSignature.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.more_info_gender_item:
+            case R.id.moreInfoGenderItem:
                 //todo set gender
                 Intent setGenderIntent = new Intent(this, SetGenderActivity.class);
                 startActivity(setGenderIntent);
                 break;
-            case R.id.more_info_district_item:
+            case R.id.moreInfoDistrictItem:
                 //todo set district
                 break;
-            case R.id.more_info_personal_signature:
+            case R.id.moreInfoPersonalSignature:
                 //todo set personal signature
                 break;
             default:
