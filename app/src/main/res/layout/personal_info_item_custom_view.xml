@@ -1,67 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/personal_info_item_category_iv"
-        android:layout_width="wrap_content"
+    <data>
+
+        <variable
+            name="categoryText"
+            type="String" />
+
+        <variable
+            name="avatarResource"
+            type="int" />
+
+        <variable
+            name="isShowAvatarIv"
+            type="Boolean" />
+
+        <variable
+            name="contentText"
+            type="String" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@color/white">
 
-    <ImageView
-        android:id="@+id/personal_info_item_turn_right_arrow"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="5dp"
-        android:src="@drawable/turn_right_arrow"
-        app:layout_constraintBottom_toBottomOf="@id/personal_info_item_category_iv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/personal_info_item_category_iv" />
+        <TextView
+            android:id="@+id/personalInfoItemCategoryIv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="@{categoryText}"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/personal_info_item_avatar_iv"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginEnd="20dp"
-        android:src="@drawable/default_portrait"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/personal_info_item_category_iv"
-        app:layout_constraintEnd_toStartOf="@id/personal_info_item_turn_right_arrow"
-        app:layout_constraintTop_toTopOf="@id/personal_info_item_category_iv" />
+        <ImageView
+            android:id="@+id/personalInfoItemTurnRightArrow"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/turn_right_arrow"
+            app:layout_constraintBottom_toBottomOf="@id/personalInfoItemCategoryIv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/personalInfoItemCategoryIv" />
 
-    <TextView
-        android:id="@+id/personal_info_item_content_tv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="50dp"
-        android:ellipsize="end"
-        android:gravity="end"
-        android:maxLines="1"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/personal_info_item_category_iv"
-        app:layout_constraintTop_toTopOf="@id/personal_info_item_category_iv" />
+        <ImageView
+            android:id="@+id/personalInfoItemAvatarIv"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="20dp"
+            android:src="@{avatarResource}"
+            android:visibility="@{isShowAvatarIv}"
+            app:layout_constraintBottom_toBottomOf="@id/personalInfoItemCategoryIv"
+            app:layout_constraintEnd_toStartOf="@id/personalInfoItemTurnRightArrow"
+            app:layout_constraintTop_toTopOf="@id/personalInfoItemCategoryIv" />
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="18dp"
-        android:background="@color/gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/personal_info_item_category_iv" />
+        <TextView
+            android:id="@+id/personalInfoItemContentTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="50dp"
+            android:ellipsize="end"
+            android:gravity="end"
+            android:maxLines="1"
+            android:text="@{contentText}"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/personalInfoItemCategoryIv"
+            app:layout_constraintTop_toTopOf="@id/personalInfoItemCategoryIv" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="18dp"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/personalInfoItemCategoryIv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

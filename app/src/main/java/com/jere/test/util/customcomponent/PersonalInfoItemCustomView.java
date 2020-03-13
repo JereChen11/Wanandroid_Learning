@@ -2,12 +2,14 @@ package com.jere.test.util.customcomponent;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import android.util.AttributeSet;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.view.LayoutInflater;
 
 import com.jere.test.R;
+import com.jere.test.databinding.PersonalInfoItemCustomViewBinding;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.databinding.DataBindingUtil;
 
 /**
  * @author jere
@@ -21,25 +23,19 @@ public class PersonalInfoItemCustomView extends ConstraintLayout {
     }
 
     private void init(Context context, AttributeSet attrs) {
-        inflate(context, R.layout.personal_info_item_custom_view, this);
-
-
-        TextView categoryTv = findViewById(R.id.personal_info_item_category_iv);
-        TextView contentTv = findViewById(R.id.personal_info_item_content_tv);
-        ImageView avatarIv = findViewById(R.id.personal_info_item_avatar_iv);
-
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        PersonalInfoItemCustomViewBinding binding = DataBindingUtil.inflate(inflater,
+                R.layout.personal_info_item_custom_view, this, true);
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.PersonalInfoItemCustomView);
         String categoryTextString = typedArray.getString(R.styleable.PersonalInfoItemCustomView_categoryText);
-        categoryTv.setText(categoryTextString);
+        binding.setCategoryText(categoryTextString);
         String contentTextString = typedArray.getString(R.styleable.PersonalInfoItemCustomView_contentText);
-        contentTv.setText(contentTextString);
+        binding.setContentText(contentTextString);
         boolean isContainAvatar = typedArray.getBoolean(R.styleable.PersonalInfoItemCustomView_isDisplayImage, false);
-        if (isContainAvatar) {
-            avatarIv.setVisibility(VISIBLE);
-        }
+        binding.setIsShowAvatarIv(isContainAvatar);
         int imageResourceId = typedArray.getResourceId(R.styleable.PersonalInfoItemCustomView_imageResource, R.drawable.default_portrait);
-        avatarIv.setImageResource(imageResourceId);
+        binding.setAvatarResource(imageResourceId);
 
         typedArray.recycle();
     }

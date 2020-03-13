@@ -2,12 +2,14 @@ package com.jere.test.util.customcomponent;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import android.util.AttributeSet;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.view.LayoutInflater;
 
 import com.jere.test.R;
+import com.jere.test.databinding.BottomBarItemCustomViewBinding;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.databinding.DataBindingUtil;
 
 /**
  * @author jere
@@ -20,21 +22,19 @@ public class BottomBarItemCustomView extends ConstraintLayout {
     }
 
     private void init(Context context, AttributeSet attrs) {
-        inflate(context, R.layout.bottom_bar_item_custom_view, this);
-
-        ImageView iconIv = findViewById(R.id.bottom_bar_item_icon_iv);
-        TextView contentTv = findViewById(R.id.bottom_bar_item_content_tv);
+        //use dataBinding on custom view.
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        BottomBarItemCustomViewBinding binding = DataBindingUtil.inflate(inflater, R.layout.bottom_bar_item_custom_view, this, true);
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BottomBarItemCustomView);
         int iconResourceId = typedArray.getResourceId(R.styleable.BottomBarItemCustomView_bottomBarIconResource, R.drawable.my_account_icon);
-        iconIv.setImageResource(iconResourceId);
+        binding.setIconResource(iconResourceId);
 
         String contentString = typedArray.getString(R.styleable.BottomBarItemCustomView_bottomBarContentText);
         if (contentString != null) {
-            contentTv.setText(contentString);
+            binding.setContentText(contentString);
         }
 
         typedArray.recycle();
     }
-
 }

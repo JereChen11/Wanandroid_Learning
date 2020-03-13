@@ -18,10 +18,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:titleBackIcon="@drawable/back_icon"
-            app:titleBackgroundColor="@color/dark_gray"
             app:titleText="@string/personal_information"
-            app:titleTextColor="@color/black"
-            app:titleTextSize="15sp" />
+            app:titleTextSize="25sp" />
 
         <LinearLayout
             android:id="@+id/basicInfoLl"

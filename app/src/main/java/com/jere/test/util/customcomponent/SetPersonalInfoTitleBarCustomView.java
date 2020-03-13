@@ -3,18 +3,20 @@ package com.jere.test.util.customcomponent;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.jere.test.R;
+import com.jere.test.databinding.SetPersonalInfoTitleBarCustomViewBinding;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.databinding.DataBindingUtil;
 
 /**
  * @author jere
  */
-public class SetPersonalInfoTitleBarCustomView extends ConstraintLayout implements View.OnClickListener {
+public class SetPersonalInfoTitleBarCustomView extends ConstraintLayout {
 
     public SetPersonalInfoTitleBarCustomView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -22,33 +24,21 @@ public class SetPersonalInfoTitleBarCustomView extends ConstraintLayout implemen
     }
 
     private void init(Context context, AttributeSet attrs) {
-        inflate(context, R.layout.set_personal_info_title_bar_custom_view, this);
-
-        TextView cancelTv = findViewById(R.id.cancelTv);
-        TextView titleContentTv = findViewById(R.id.title_content_tv);
-        Button completeBtn = findViewById(R.id.complete_btn);
-        cancelTv.setOnClickListener(this);
-        completeBtn.setOnClickListener(this);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        SetPersonalInfoTitleBarCustomViewBinding binding = DataBindingUtil.inflate(inflater,
+                R.layout.set_personal_info_title_bar_custom_view, this, true);
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SetPersonalInfoTitleBarCustomView);
         String titleContentString = typedArray.getString(R.styleable.SetPersonalInfoTitleBarCustomView_titleContentText);
-        titleContentTv.setText(titleContentString);
-
+        binding.setTitleContentTv(titleContentString);
+        binding.setBackEventHandler(new BackEventHandler());
 
         typedArray.recycle();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.cancelTv:
-                ((Activity) getContext()).onBackPressed();
-                break;
-            case R.id.complete_btn:
-                ((Activity) getContext()).finish();
-                break;
-            default:
-                break;
+    public class BackEventHandler {
+        public void onClick(View view) {
+            ((Activity) view.getContext()).onBackPressed();
         }
     }
 }
