@@ -9,10 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jere.test.R;
-import com.jere.test.article.modle.beanfiles.ProjectTreeItem;
+import com.jere.test.article.modle.beanfiles.completeproject.ProjectTreeItem;
 import com.jere.test.article.view.ProjectItemListActivity;
-import com.jere.test.article.viewmodel.ProjectTreeItemViewModel;
-import com.jere.test.home.view.HomeActivity;
+import com.jere.test.article.viewmodel.completeproject.ProjectTreeItemViewModel;
+import com.jere.test.home.HomeActivity;
 import com.jere.test.util.RecyclerItemClickListener;
 
 import java.util.ArrayList;

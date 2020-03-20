@@ -1,12 +1,12 @@
-package com.jere.test.home.model;
+package com.jere.test.article.modle;
 
 import com.google.gson.Gson;
 import com.jere.test.article.modle.api.AbstractRetrofitCallback;
 import com.jere.test.article.modle.api.ApiService;
 import com.jere.test.article.modle.api.ApiWrapper;
 import com.jere.test.article.modle.api.GetWebDataListener;
-import com.jere.test.home.model.beanfiles.HomeArticleListBean;
-import com.jere.test.home.model.beanfiles.HomeBannerListBean;
+import com.jere.test.article.modle.beanfiles.homearticle.HomeArticleListBean;
+import com.jere.test.article.modle.beanfiles.homearticle.HomeBannerListBean;
 
 /**
  * @author jere

@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.jere.test.R;
-import com.jere.test.article.modle.beanfiles.wechatofficialaccount.WeChatArticleBloggerList;
-import com.jere.test.article.modle.beanfiles.wechatofficialaccount.WeChatArticleList;
-import com.jere.test.article.viewmodel.WeChatBlogArticleViewModel;
+import com.jere.test.article.modle.beanfiles.wechat.WeChatArticleBloggerList;
+import com.jere.test.article.modle.beanfiles.wechat.WeChatArticleList;
+import com.jere.test.article.viewmodel.wechat.WeChatBlogArticleViewModel;
 import com.jere.test.util.RecyclerItemClickListener;
 
 import java.util.ArrayList;

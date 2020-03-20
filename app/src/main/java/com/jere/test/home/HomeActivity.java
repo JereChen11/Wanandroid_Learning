@@ -1,4 +1,4 @@
-package com.jere.test.home.view;
+package com.jere.test.home;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -12,11 +12,12 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
-import com.jere.test.AboutMeActivity;
 import com.jere.test.R;
+import com.jere.test.aboutme.AboutMeActivity;
 import com.jere.test.account.MyAccountFragment;
 import com.jere.test.article.view.WeChatBlogArticleFragment;
 import com.jere.test.article.view.completeproject.CompleteProjectArticleFragment;
+import com.jere.test.article.view.homearticle.HomeFragment;
 import com.jere.test.article.view.knowledgesystem.KnowledgeSystemFragment;
 import com.jere.test.databinding.ActivityHomeBinding;
 import com.jere.test.tutorial.TutorialActivity;
@@ -112,7 +113,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initComponents() {
-        mBinding.homePageContent.bottomBarCompleteProjectItem.setOnClickListener(this);
+        mBinding.homePageContent.bottomBarHomePageItem.setOnClickListener(this);
         mBinding.homePageContent.bottomBarCompleteProjectItem.setOnClickListener(this);
         mBinding.homePageContent.bottomBarWeChatBlogItem.setOnClickListener(this);
         mBinding.homePageContent.bottomBarKnowledgeSystemItem.setOnClickListener(this);
@@ -125,17 +126,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bottomBarHomePageItem:
                 navItemIndex = 0;
                 HomeFragment homeFragment = HomeFragment.newInstance();
-                replaceFragmentAddToBackStack(homeFragment);
+                replaceFragment(homeFragment);
                 break;
             case R.id.bottomBarCompleteProjectItem:
                 navItemIndex = 1;
-                CompleteProjectArticleFragment page1Fragment = CompleteProjectArticleFragment.newInstance();
-                replaceFragment(page1Fragment);
+                CompleteProjectArticleFragment completeProjectArticleFragment = CompleteProjectArticleFragment.newInstance();
+                replaceFragment(completeProjectArticleFragment);
                 break;
             case R.id.bottomBarWeChatBlogItem:
                 navItemIndex = 2;
-                WeChatBlogArticleFragment page2Fragment = WeChatBlogArticleFragment.newInstance();
-                replaceFragment(page2Fragment);
+                WeChatBlogArticleFragment weChatBlogArticleFragment = WeChatBlogArticleFragment.newInstance();
+                replaceFragment(weChatBlogArticleFragment);
                 break;
             case R.id.avatarIv:
             case R.id.bottomBarMyAccountItem:
@@ -158,13 +159,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onFragmentInteraction(Uri uri) {
 
-    }
-
-    private void replaceFragmentAddToBackStack(Fragment replaceFragment) {
-        FragmentTransaction fragmentTransaction = getFragmentTransaction();
-        fragmentTransaction.replace(R.id.frame, replaceFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
     }
 
     private void replaceFragment(Fragment replaceFragment) {
@@ -243,7 +237,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case MY_INDEX:
                 return new MyAccountFragment();
             default:
-                return new CompleteProjectArticleFragment();
+                return new HomeFragment();
         }
     }
 

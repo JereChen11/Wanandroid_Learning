@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.jere.test.R;
 import com.jere.test.article.modle.beanfiles.knowledgesystem.KnowledgeSystemArticleListBean;
 import com.jere.test.article.view.ArticleDetailWebViewActivity;
-import com.jere.test.article.viewmodel.KnowledgeSystemViewModel;
+import com.jere.test.article.viewmodel.knowledgesystem.KnowledgeSystemViewModel;
 import com.jere.test.util.RecyclerItemClickListener;
 
 import java.util.ArrayList;

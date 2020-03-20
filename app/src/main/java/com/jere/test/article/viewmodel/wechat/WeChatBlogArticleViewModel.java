@@ -1,11 +1,11 @@
-package com.jere.test.article.viewmodel;
+package com.jere.test.article.viewmodel.wechat;
 
 import android.util.Log;
 
 import com.jere.test.article.modle.WeChatArticleRepository;
 import com.jere.test.article.modle.api.GetWebDataListener;
-import com.jere.test.article.modle.beanfiles.wechatofficialaccount.WeChatArticleBloggerList;
-import com.jere.test.article.modle.beanfiles.wechatofficialaccount.WeChatArticleList;
+import com.jere.test.article.modle.beanfiles.wechat.WeChatArticleBloggerList;
+import com.jere.test.article.modle.beanfiles.wechat.WeChatArticleList;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

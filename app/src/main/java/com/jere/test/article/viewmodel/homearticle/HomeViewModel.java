@@ -1,11 +1,11 @@
-package com.jere.test.home.viewmodel;
+package com.jere.test.article.viewmodel.homearticle;
 
 import android.util.Log;
 
 import com.jere.test.article.modle.api.GetWebDataListener;
-import com.jere.test.home.model.HomeRepository;
-import com.jere.test.home.model.beanfiles.HomeArticleListBean;
-import com.jere.test.home.model.beanfiles.HomeBannerListBean;
+import com.jere.test.article.modle.HomeRepository;
+import com.jere.test.article.modle.beanfiles.homearticle.HomeArticleListBean;
+import com.jere.test.article.modle.beanfiles.homearticle.HomeBannerListBean;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

@@ -11,9 +11,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jere.test.R;
-import com.jere.test.article.modle.beanfiles.ProjectItemList;
+import com.jere.test.article.modle.beanfiles.completeproject.ProjectItemList;
 import com.jere.test.article.view.completeproject.CompleteProjectArticleFragment;
-import com.jere.test.article.viewmodel.ProjectItemListViewModel;
+import com.jere.test.article.viewmodel.completeproject.ProjectItemListViewModel;
 import com.jere.test.util.RecyclerItemClickListener;
 
 import java.lang.ref.WeakReference;

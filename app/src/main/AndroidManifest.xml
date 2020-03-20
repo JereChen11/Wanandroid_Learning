@@ -27,10 +27,10 @@
         <activity android:name=".account.moreinfo.MoreInfoActivity" />
         <activity android:name=".account.SetNameActivity" />
         <activity android:name=".account.PersonalInformationActivity" />
-        <activity android:name=".AboutMeActivity" />
+        <activity android:name=".aboutme.AboutMeActivity" />
         <activity android:name=".tutorial.TutorialActivity" />
         <activity
-            android:name=".home.view.HomeActivity"
+            android:name=".home.HomeActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

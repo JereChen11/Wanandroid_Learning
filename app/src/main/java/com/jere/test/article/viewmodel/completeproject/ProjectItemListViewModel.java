@@ -1,4 +1,4 @@
-package com.jere.test.article.viewmodel;
+package com.jere.test.article.viewmodel.completeproject;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -6,7 +6,7 @@ import android.util.Log;
 
 import com.jere.test.article.modle.ProjectTreeRepository;
 import com.jere.test.article.modle.api.GetWebDataListener;
-import com.jere.test.article.modle.beanfiles.ProjectItemList;
+import com.jere.test.article.modle.beanfiles.completeproject.ProjectItemList;
 
 /**
  * @author jere

@@ -1,4 +1,4 @@
-package com.jere.test.article.modle.beanfiles.wechatofficialaccount;
+package com.jere.test.article.modle.beanfiles.wechat;
 
 import java.util.ArrayList;
 import java.util.List;

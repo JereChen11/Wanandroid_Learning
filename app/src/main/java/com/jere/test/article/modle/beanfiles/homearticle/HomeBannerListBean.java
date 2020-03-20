@@ -1,4 +1,4 @@
-package com.jere.test.home.model.beanfiles;
+package com.jere.test.article.modle.beanfiles.homearticle;
 
 import java.util.List;
 

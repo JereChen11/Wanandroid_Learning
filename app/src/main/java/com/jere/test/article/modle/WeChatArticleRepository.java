@@ -5,8 +5,8 @@ import com.jere.test.article.modle.api.AbstractRetrofitCallback;
 import com.jere.test.article.modle.api.ApiService;
 import com.jere.test.article.modle.api.ApiWrapper;
 import com.jere.test.article.modle.api.GetWebDataListener;
-import com.jere.test.article.modle.beanfiles.wechatofficialaccount.WeChatArticleBloggerList;
-import com.jere.test.article.modle.beanfiles.wechatofficialaccount.WeChatArticleList;
+import com.jere.test.article.modle.beanfiles.wechat.WeChatArticleBloggerList;
+import com.jere.test.article.modle.beanfiles.wechat.WeChatArticleList;
 
 /**
  * @author jere

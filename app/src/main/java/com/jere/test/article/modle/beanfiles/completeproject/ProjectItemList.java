@@ -1,4 +1,4 @@
-package com.jere.test.article.modle.beanfiles;
+package com.jere.test.article.modle.beanfiles.completeproject;
 
 import java.util.ArrayList;
 import java.util.List;

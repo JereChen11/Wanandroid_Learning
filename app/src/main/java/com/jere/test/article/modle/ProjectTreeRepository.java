@@ -7,8 +7,8 @@ import com.jere.test.article.modle.api.AbstractRetrofitCallback;
 import com.jere.test.article.modle.api.ApiService;
 import com.jere.test.article.modle.api.ApiWrapper;
 import com.jere.test.article.modle.api.GetWebDataListener;
-import com.jere.test.article.modle.beanfiles.ProjectItemList;
-import com.jere.test.article.modle.beanfiles.ProjectTreeItem;
+import com.jere.test.article.modle.beanfiles.completeproject.ProjectItemList;
+import com.jere.test.article.modle.beanfiles.completeproject.ProjectTreeItem;
 
 /**
  * @author jere

@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.jere.test.R;
-import com.jere.test.article.modle.beanfiles.ProjectTreeItem;
+import com.jere.test.article.modle.beanfiles.completeproject.ProjectTreeItem;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.jere.test.home.view;
+package com.jere.test.article.view.homearticle;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,9 +18,9 @@ import com.bumptech.glide.Glide;
 import com.jere.test.R;
 import com.jere.test.article.view.ArticleDetailWebViewActivity;
 import com.jere.test.databinding.FragmentHomeBinding;
-import com.jere.test.home.model.beanfiles.HomeArticleListBean;
-import com.jere.test.home.model.beanfiles.HomeBannerListBean;
-import com.jere.test.home.viewmodel.HomeViewModel;
+import com.jere.test.article.modle.beanfiles.homearticle.HomeArticleListBean;
+import com.jere.test.article.modle.beanfiles.homearticle.HomeBannerListBean;
+import com.jere.test.article.viewmodel.homearticle.HomeViewModel;
 import com.jere.test.util.RecyclerItemClickListener;
 
 import java.lang.ref.WeakReference;

@@ -1,7 +1,9 @@
-package com.jere.test;
+package com.jere.test.aboutme;
 
 import android.os.Bundle;
 import android.webkit.WebView;
+
+import com.jere.test.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 

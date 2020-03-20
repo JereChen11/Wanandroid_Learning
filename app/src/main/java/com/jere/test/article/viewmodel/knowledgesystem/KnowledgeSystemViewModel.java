@@ -1,4 +1,4 @@
-package com.jere.test.article.viewmodel;
+package com.jere.test.article.viewmodel.knowledgesystem;
 
 import android.util.Log;
 

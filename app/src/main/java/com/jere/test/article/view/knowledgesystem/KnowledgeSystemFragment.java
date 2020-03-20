@@ -11,7 +11,7 @@ import android.widget.ExpandableListView;
 
 import com.jere.test.R;
 import com.jere.test.article.modle.beanfiles.knowledgesystem.KnowledgeSystemCategoryBean;
-import com.jere.test.article.viewmodel.KnowledgeSystemViewModel;
+import com.jere.test.article.viewmodel.knowledgesystem.KnowledgeSystemViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
