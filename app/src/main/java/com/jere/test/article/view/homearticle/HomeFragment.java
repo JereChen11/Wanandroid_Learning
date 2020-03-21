@@ -16,11 +16,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jere.test.R;
-import com.jere.test.article.view.ArticleDetailWebViewActivity;
-import com.jere.test.databinding.FragmentHomeBinding;
 import com.jere.test.article.modle.beanfiles.homearticle.HomeArticleListBean;
 import com.jere.test.article.modle.beanfiles.homearticle.HomeBannerListBean;
+import com.jere.test.article.view.ArticleDetailWebViewActivity;
 import com.jere.test.article.viewmodel.homearticle.HomeViewModel;
+import com.jere.test.databinding.FragmentHomeBinding;
 import com.jere.test.util.RecyclerItemClickListener;
 
 import java.lang.ref.WeakReference;
@@ -63,17 +63,16 @@ public class HomeFragment extends Fragment {
             if (homeBannerListBean != null) {
                 List<HomeBannerListBean.DataBean> bannerListDatas = homeBannerListBean.getData();
                 mBannerDataList = new ArrayList<>();
-                HomeBannerListBean.DataBean dataBean = new HomeBannerListBean.DataBean();
+                HomeBannerListBean.DataBean fakeDataBean = new HomeBannerListBean.DataBean();
                 //为了实现Banner循环轮播，需要额外多两张图片，分别放置列表首尾。
-                mBannerDataList.add(dataBean);
+                mBannerDataList.add(fakeDataBean);
                 mBannerDataList.addAll(bannerListDatas);
-                mBannerDataList.add(dataBean);
+                mBannerDataList.add(fakeDataBean);
                 mBannerVpAdapter = new MyBannerVpAdapter(HomeFragment.this, mBannerDataList);
                 mBannerVpAdapter.notifyDataSetChanged();
                 mBannerVp2.setAdapter(mBannerVpAdapter);
+                mBannerVp2.setCurrentItem(1);
             }
-
-
         }
     };
 
@@ -146,7 +145,7 @@ public class HomeFragment extends Fragment {
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 //hard code, Banner只有4张图
-                if (position == 5) {
+                if (position == mBannerDataList.size() - 1) {
                     mBannerVp2.setCurrentItem(1);
                     position = 1;
                 } else if (position == 0) {
@@ -182,7 +181,7 @@ public class HomeFragment extends Fragment {
                 msg.what = 1;
                 mBannerHandler.sendMessage(msg);
             }
-        }, 10, 3, TimeUnit.SECONDS);
+        }, 2, 3, TimeUnit.SECONDS);
     }
 
 
@@ -215,19 +214,10 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        Log.e(TAG, "onResume: mBannerScheduledExecutorService.isShutdown() = " + mBannerScheduledExecutorService.isShutdown());
-        if (mBannerScheduledExecutorService.isShutdown()) {
-            startAutoLoopBanner();
-        }
-    }
-
-    @Override
     public void onStop() {
         super.onStop();
         Log.e(TAG, "onStop: mBannerScheduledExecutorService.isShutdown() = " + mBannerScheduledExecutorService.isShutdown());
-        if (mBannerScheduledExecutorService != null) {
+        if (!mBannerScheduledExecutorService.isShutdown()) {
             mBannerScheduledExecutorService.shutdown();
         }
     }
