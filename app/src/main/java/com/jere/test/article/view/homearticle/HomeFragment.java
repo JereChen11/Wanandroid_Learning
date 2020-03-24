@@ -114,7 +114,8 @@ public class HomeFragment extends Fragment {
         Log.e(TAG, "onViewCreated: ");
         HomeViewModel homeVm = ViewModelProviders.of(this, new ViewModelFactory()).get(HomeViewModel.class);
         homeVm.getHomeBannerListLd().observe(getViewLifecycleOwner(), bannerListDataObserver);
-        homeVm.setHomeBannerListLd();
+//        homeVm.setHomeBannerListLd();
+        homeVm.setRxJava2HomeBannerListLd();
         homeVm.getHomeArticleListBeanLd().observe(getViewLifecycleOwner(), articleListBeanObserver);
         homeVm.setHomeArticleListBeanLd();
 

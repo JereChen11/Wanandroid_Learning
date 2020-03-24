@@ -1,14 +1,14 @@
 package com.jere.test.article.modle.api;
 
+import com.jere.test.article.modle.beanfiles.homearticle.HomeBannerListBean;
+
 import java.util.Map;
 
-import okhttp3.RequestBody;
+import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -21,11 +21,15 @@ public interface ApiService {
     @GET("/banner/json")
     Call<ResponseBody> getHomeBannerList();
 
+    /**
+     * just for test Retrofit + RxJava2
+     * @return io.reactivex.Observable
+     */
+    @GET("/banner/json")
+    Observable<HomeBannerListBean> getRxJavaHomeBannerList();
+
     @GET("/article/list/{pageNumber}/json")
     Call<ResponseBody> getHomeArticleList(@Path("pageNumber") int pageNumber);
-
-    @PUT("/mock/36/reagent/material/detection")
-    Call<ResponseBody> updateReagentMaterialAmount(@Body RequestBody requestBody);
 
     @GET("/project/tree/json")
     Call<ResponseBody> getProjectTreeItems();

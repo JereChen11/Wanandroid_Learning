@@ -42,6 +42,21 @@ public class HomeViewModel extends ViewModel {
         });
     }
 
+    public void setRxJava2HomeBannerListLd() {
+        HomeRepository.newInstance().getRxJava2HomeBannerList(new GetWebDataListener() {
+            @Override
+            public void getDataSuccess(Object object) {
+                HomeBannerListBean homeBannerListBean = (HomeBannerListBean) object;
+                homeBannerListLd.postValue(homeBannerListBean);
+            }
+
+            @Override
+            public void getDataFailed(String failedMsg) {
+                Log.e(TAG, "RxJava2 getDataFailed: " + failedMsg);
+            }
+        });
+    }
+
     public MutableLiveData<HomeArticleListBean> getHomeArticleListBeanLd() {
         return homeArticleListBeanLd;
     }
