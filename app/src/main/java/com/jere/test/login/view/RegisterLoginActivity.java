@@ -9,14 +9,11 @@ import com.jere.test.R;
 import com.jere.test.databinding.ActivityRegisterLoginBinding;
 import com.jere.test.login.viewmodel.RegisterLoginViewModel;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 /**
  * @author jere
@@ -41,8 +38,7 @@ public class RegisterLoginActivity extends AppCompatActivity {
     }
 
     private void initViewModel() {
-        mRegisterLoginVm = ViewModelProviders.of(this, new RegisterLoginViewModelFactory())
-                .get(RegisterLoginViewModel.class);
+        mRegisterLoginVm = new ViewModelProvider(this).get(RegisterLoginViewModel.class);
         mRegisterLoginVm.getIsLoginSuccessfulLd().observe(this, isLoginObserver);
         mRegisterLoginVm.getIsRegisterSuccessfulLd().observe(this, isRegisterObserver);
         mRegisterLoginVm.getIsLoginPatternLd().observe(this, isLoginPatternObserver);
@@ -125,19 +121,6 @@ public class RegisterLoginActivity extends AppCompatActivity {
             }
         }
     };
-
-
-    class RegisterLoginViewModelFactory implements ViewModelProvider.Factory {
-
-        @Override
-        @NonNull
-        public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            if (modelClass.isAssignableFrom(RegisterLoginViewModel.class)) {
-                return (T) new RegisterLoginViewModel();
-            }
-            throw new IllegalArgumentException("Unknown ViewModel class");
-        }
-    }
 
     @Override
     public void onBackPressed() {

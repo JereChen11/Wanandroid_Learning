@@ -21,9 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,7 +39,6 @@ public class CompleteProjectArticleFragment extends Fragment {
     private ProjectTreeItemAdapter mProjectTreeItemAdapter;
     private ArrayList<ProjectTreeItem.ProjectItem> mProjectItems;
     private RecyclerView mProjectTreeItemRecyclerView;
-    private RecyclerView mWeChatBloggerListRecyclerView;
 
 
     public CompleteProjectArticleFragment() {
@@ -68,8 +65,7 @@ public class CompleteProjectArticleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ProjectTreeItemViewModel projectTreeItemVm = ViewModelProviders.of(this, new ViewModelFactory())
-                .get(ProjectTreeItemViewModel.class);
+        ProjectTreeItemViewModel projectTreeItemVm = new ViewModelProvider(this).get(ProjectTreeItemViewModel.class);
         projectTreeItemVm.getProjectTreeItemsLd().observe(getViewLifecycleOwner(), projectItemsObserver);
         projectTreeItemVm.setProjectTreeItemsLd();
 
@@ -136,19 +132,6 @@ public class CompleteProjectArticleFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-
-    class ViewModelFactory implements ViewModelProvider.Factory {
-
-        @Override
-        @NonNull
-        public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            if (modelClass.isAssignableFrom(ProjectTreeItemViewModel.class)) {
-                return (T) new ProjectTreeItemViewModel();
-            }
-            throw new IllegalArgumentException("Unknown ViewModel class");
-        }
     }
 
     /**

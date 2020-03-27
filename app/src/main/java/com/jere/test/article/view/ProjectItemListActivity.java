@@ -23,9 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,7 +54,7 @@ public class ProjectItemListActivity extends AppCompatActivity {
 
         int clickItemProjectId = getIntent().getIntExtra(CompleteProjectArticleFragment.PROJECT_ITEM_ID_KEY, -1);
 
-        ProjectItemListViewModel projectItemListVm = ViewModelProviders.of(this, new ViewModelFactory()).get(ProjectItemListViewModel.class);
+        ProjectItemListViewModel projectItemListVm = new ViewModelProvider(this).get(ProjectItemListViewModel.class);
         if (clickItemProjectId > -1) {
             projectItemListVm.setProjectItemListLd(0, clickItemProjectId);
         }
@@ -147,18 +145,6 @@ public class ProjectItemListActivity extends AppCompatActivity {
                 shareDateTv = itemView.findViewById(R.id.project_item_list_share_date_tv);
                 authorTv = itemView.findViewById(R.id.project_item_list_author_tv);
             }
-        }
-    }
-
-    class ViewModelFactory implements ViewModelProvider.Factory {
-
-        @Override
-        @NonNull
-        public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            if (modelClass.isAssignableFrom(ProjectItemListViewModel.class)) {
-                return (T) new ProjectItemListViewModel();
-            }
-            throw new IllegalArgumentException("Unknown ViewModel class");
         }
     }
 }

@@ -23,9 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -36,7 +34,6 @@ import androidx.viewpager2.widget.ViewPager2;
 public class WeChatBlogArticleFragment extends Fragment {
     private ViewPager2 mWeChatBloggerListVp2;
     private ArrayList<WeChatArticleBloggerList.DataBean> mWeChatBloggerList = new ArrayList<>();
-    private WeChatBloggerListVpAdapter mWeChatBloggerListVpAdapter;
     private WeChatBlogArticleViewModel mWeChatBlogArticleVm;
     private RecyclerView mWeChatArticleListRecyclerView;
     private ArrayList<WeChatArticleList.DataBean.DatasBean> mWeChatArticleListData = new ArrayList<>();
@@ -88,9 +85,7 @@ public class WeChatBlogArticleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mWeChatBlogArticleVm = ViewModelProviders
-                .of(this, new WeChatBlogArticleViewModelFactory())
-                .get(WeChatBlogArticleViewModel.class);
+        mWeChatBlogArticleVm = new ViewModelProvider(this).get(WeChatBlogArticleViewModel.class);
         mWeChatBlogArticleVm.getWeChatArticleBloggerListLd().observe(getViewLifecycleOwner(), weChatArticleBloggerListObserver);
         mWeChatBlogArticleVm.setWeChatArticleBloggerListLd();
         mWeChatBlogArticleVm.getWeChatArticleListLd().observe(getViewLifecycleOwner(), weChatArticleListObserver);
@@ -98,8 +93,8 @@ public class WeChatBlogArticleFragment extends Fragment {
         mWeChatBloggerListVp2 = view.findViewById(R.id.weChatBlogArticleVp2);
         mWeChatBloggerListVp2.setLayoutParams(new ConstraintLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        mWeChatBloggerListVpAdapter = new WeChatBloggerListVpAdapter(mWeChatBloggerList);
-        mWeChatBloggerListVp2.setAdapter(mWeChatBloggerListVpAdapter);
+        WeChatBloggerListVpAdapter weChatBloggerListVpAdapter = new WeChatBloggerListVpAdapter(mWeChatBloggerList);
+        mWeChatBloggerListVp2.setAdapter(weChatBloggerListVpAdapter);
         mWeChatBloggerListVp2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -214,18 +209,6 @@ public class WeChatBlogArticleFragment extends Fragment {
                 super(itemView);
                 nameTv = itemView.findViewById(R.id.weChatBloggerListNameTv);
             }
-        }
-    }
-
-    class WeChatBlogArticleViewModelFactory implements ViewModelProvider.Factory {
-
-        @NonNull
-        @Override
-        public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            if (modelClass.isAssignableFrom(WeChatBlogArticleViewModel.class)) {
-                return (T) new WeChatBlogArticleViewModel();
-            }
-            throw new IllegalArgumentException("Unknown ViewModel class");
         }
     }
 

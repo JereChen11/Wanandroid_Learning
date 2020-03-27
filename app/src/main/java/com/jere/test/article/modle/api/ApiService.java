@@ -18,6 +18,10 @@ import retrofit2.http.QueryMap;
  */
 public interface ApiService {
 
+    /**
+     * 获取主页Banner
+     * @return
+     */
     @GET("/banner/json")
     Call<ResponseBody> getHomeBannerList();
 
@@ -28,32 +32,76 @@ public interface ApiService {
     @GET("/banner/json")
     Observable<HomeBannerListBean> getRxJavaHomeBannerList();
 
+    /**
+     * 获取主页文章列表
+     * @param pageNumber
+     * @return
+     */
     @GET("/article/list/{pageNumber}/json")
     Call<ResponseBody> getHomeArticleList(@Path("pageNumber") int pageNumber);
 
+    /**
+     * 获取项目分类
+     * @return
+     */
     @GET("/project/tree/json")
     Call<ResponseBody> getProjectTreeItems();
 
+    /**
+     * 根据项目ID，获取项目列表
+     * @param pageNumber
+     * @param cid
+     * @return
+     */
     @GET("/project/list/{pageNumber}/json?")
     Call<ResponseBody> getProjectItemList(@Path("pageNumber") int pageNumber,
                                           @Query("cid") int cid);
 
+    /**
+     * 获取微信公众号博主信息
+     * @return
+     */
     @GET("/wxarticle/chapters/json")
     Call<ResponseBody> getWeChatOfficialAccountBloggerList();
 
+    /**
+     * 获取微信公众号文章列表
+     * @param authorId
+     * @param pageNumber
+     * @return
+     */
     @GET("/wxarticle/list/{authorId}/{pageNumber}/json")
     Call<ResponseBody> getWeChatArticleList(@Path("authorId") int authorId,
                                             @Path("pageNumber") int pageNumber);
 
+    /**
+     * 注册
+     * @param registerInfoMap
+     * @return
+     */
     @POST("/user/register")
     Call<ResponseBody> register(@QueryMap Map<String, String> registerInfoMap);
 
+    /**
+     * 登入
+     * @param loginInfoMap
+     * @return
+     */
     @POST("/user/login")
     Call<ResponseBody> login(@QueryMap Map<String, String> loginInfoMap);
 
+    /**
+     * 获取知识体系
+     * @return
+     */
     @GET("/tree/json")
     Call<ResponseBody> getKnowledgeSystem();
 
+    /**
+     * 获取知识体系文章列表
+     * @param cid
+     * @return
+     */
     @GET("/article/list/0/json")
     Call<ResponseBody> getKnowledgeSystemArticleList(@Query("cid") int cid);
 

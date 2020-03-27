@@ -17,9 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 /**
  * @author jere
@@ -66,8 +64,7 @@ public class KnowledgeSystemFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        KnowledgeSystemViewModel knowledgeSystemVm = ViewModelProviders
-                .of(this, new ViewModelFactory()).get(KnowledgeSystemViewModel.class);
+        KnowledgeSystemViewModel knowledgeSystemVm = new ViewModelProvider(this).get(KnowledgeSystemViewModel.class);
         knowledgeSystemVm.getKnowledgeSystemCategoryBeanLd().observe(getViewLifecycleOwner(), knowledgeSystemCategoryBeanObserver);
         knowledgeSystemVm.setKnowledgeSystemCategoryBeanLd();
 
@@ -134,17 +131,5 @@ public class KnowledgeSystemFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
-
-    class ViewModelFactory implements ViewModelProvider.Factory {
-
-        @Override
-        @NonNull
-        public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            if (modelClass.isAssignableFrom(KnowledgeSystemViewModel.class)) {
-                return (T) new KnowledgeSystemViewModel();
-            }
-            throw new IllegalArgumentException("Unknown ViewModel class");
-        }
     }
 }

@@ -45,7 +45,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     implementation 'com.google.android.material:material:1.1.0'
 
-    implementation 'androidx.room:room-rxjava2:2.2.4'
+    implementation 'androidx.room:room-rxjava2:2.2.5'
 
     implementation 'com.google.zxing:core:3.3.0'
     implementation "androidx.viewpager2:viewpager2:1.0.0"

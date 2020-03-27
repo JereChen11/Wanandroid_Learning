@@ -19,9 +19,7 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -54,8 +52,7 @@ public class KnowledgeSystemArticleListActivity extends AppCompatActivity {
         TextView titleTv = findViewById(R.id.knowledgeSystemArticleListTitleTv);
         titleTv.setText(childItemName);
 
-        KnowledgeSystemViewModel knowledgeSystemVm = ViewModelProviders
-                .of(this, new ViewModelFactory()).get(KnowledgeSystemViewModel.class);
+        KnowledgeSystemViewModel knowledgeSystemVm = new ViewModelProvider(this).get(KnowledgeSystemViewModel.class);
         knowledgeSystemVm.getKnowledgeSystemArticleListBeanLd().observe(this, observer);
         knowledgeSystemVm.setKnowledgeSystemArticleListBeanLd(childItemId);
 
@@ -77,18 +74,6 @@ public class KnowledgeSystemArticleListActivity extends AppCompatActivity {
 
                     }
                 }));
-    }
-
-    class ViewModelFactory implements ViewModelProvider.Factory {
-
-        @NonNull
-        @Override
-        public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            if (modelClass.isAssignableFrom(KnowledgeSystemViewModel.class)) {
-                return (T) new KnowledgeSystemViewModel();
-            }
-            throw new IllegalArgumentException("Unknown ViewModel class");
-        }
     }
 
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {

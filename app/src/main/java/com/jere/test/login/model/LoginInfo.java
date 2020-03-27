@@ -2,6 +2,9 @@ package com.jere.test.login.model;
 
 import java.util.List;
 
+/**
+ * @author jere
+ */
 public class LoginInfo {
     /**
      * data : {"admin":false,"chapterTops":[],"collectIds":[],"email":"","icon":"","id":47014,"nickname":"Jere_Chen","password":"","publicName":"Jere_Chen","token":"","type":0,"username":"Jere_Chen"}

@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModel;
  * @author jere
  */
 public class ProjectTreeItemViewModel extends ViewModel {
-    private static final String TAG = "ProjectTreeItemViewModel";
+    private static final String TAG = "ProjectTreeItemVm";
     private MutableLiveData<ArrayList<ProjectTreeItem.ProjectItem>> projectTreeItemsLd;
 
 

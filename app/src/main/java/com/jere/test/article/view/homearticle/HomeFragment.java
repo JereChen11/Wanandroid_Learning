@@ -34,9 +34,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -112,7 +110,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.e(TAG, "onViewCreated: ");
-        HomeViewModel homeVm = ViewModelProviders.of(this, new ViewModelFactory()).get(HomeViewModel.class);
+        HomeViewModel homeVm = new ViewModelProvider(this).get(HomeViewModel.class);
         homeVm.getHomeBannerListLd().observe(getViewLifecycleOwner(), bannerListDataObserver);
 //        homeVm.setHomeBannerListLd();
         homeVm.setRxJava2HomeBannerListLd();
@@ -325,18 +323,6 @@ public class HomeFragment extends Fragment {
                 super(itemView);
                 bannerItemIv = itemView.findViewById(R.id.banner_item_iv);
             }
-        }
-    }
-
-    class ViewModelFactory implements ViewModelProvider.Factory {
-
-        @Override
-        @NonNull
-        public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            if (modelClass.isAssignableFrom(HomeViewModel.class)) {
-                return (T) new HomeViewModel();
-            }
-            throw new IllegalArgumentException("Unknown ViewModel class");
         }
     }
 

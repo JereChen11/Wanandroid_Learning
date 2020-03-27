@@ -1,18 +1,19 @@
 package com.jere.test.article.viewmodel.completeproject;
 
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 import android.util.Log;
 
 import com.jere.test.article.modle.ProjectTreeRepository;
 import com.jere.test.article.modle.api.GetWebDataListener;
 import com.jere.test.article.modle.beanfiles.completeproject.ProjectItemList;
 
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+
 /**
  * @author jere
  */
 public class ProjectItemListViewModel extends ViewModel {
-    private static final String TAG = "ProjectItemListViewModel";
+    private static final String TAG = "ProjectItemListVm";
     private MutableLiveData<ProjectItemList> projectItemListLd;
 
     public ProjectItemListViewModel() {

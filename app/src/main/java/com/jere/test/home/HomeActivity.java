@@ -42,7 +42,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private NavigationView navigationView;
     private ImageView navHeaderBgIv, avatarIv;
     private TextView nameTv, emailTv;
-//    private Toolbar toolbar;
 
     // index to identify current nav menu item
     public static int navItemIndex = 0;
@@ -323,7 +322,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         };
 
         //Setting the actionbarToggle to drawer layout
-        mBinding.drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        mBinding.drawerLayout.addDrawerListener(actionBarDrawerToggle);
 
         //calling sync state is necessary or else your hamburger icon wont show up
         actionBarDrawerToggle.syncState();

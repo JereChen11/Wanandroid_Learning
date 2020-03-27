@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModel;
  * @author jere
  */
 public class WeChatBlogArticleViewModel extends ViewModel {
-    private static final String TAG = "WeChatBlogArticleViewModel";
+    private static final String TAG = "WeChatBlogArticleVm";
     private MutableLiveData<WeChatArticleBloggerList> weChatArticleBloggerListLd;
     private MutableLiveData<WeChatArticleList> weChatArticleListLd;
 

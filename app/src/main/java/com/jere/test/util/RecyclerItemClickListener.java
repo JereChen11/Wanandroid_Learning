@@ -15,8 +15,10 @@ public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListen
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener {
+        //点击
         void onItemClick(View view, int position);
 
+        //长按
         void onLongItemClick(View view, int position);
     }
 
