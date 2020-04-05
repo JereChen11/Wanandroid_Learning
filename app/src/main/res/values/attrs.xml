@@ -26,4 +26,8 @@
         <attr name="bottomBarIconResource" format="reference" />
         <attr name="bottomBarContentText" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="CustomCollectView">
+        <attr name="isCollect" format="boolean" />
+    </declare-styleable>
 </resources>
