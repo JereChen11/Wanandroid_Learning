@@ -67,4 +67,13 @@ public class CustomCollectView extends View {
             canvas.drawPath(path, paint);
         }
     }
+
+    public boolean isCollect() {
+        return mIsCollect;
+    }
+
+    public void setIsCollect(boolean mIsCollect) {
+        this.mIsCollect = mIsCollect;
+        invalidate();
+    }
 }

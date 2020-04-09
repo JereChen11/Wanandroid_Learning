@@ -1,6 +1,7 @@
 package com.jere.test.util;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * @author jere
  */
 public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListener {
+    private static final String TAG = "RecyclerItemClickListen";
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener {
@@ -47,7 +49,7 @@ public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListen
     @Override
     public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
         View childView = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
-        if (childView != null && mListener != null && mGestureDetector.onTouchEvent(motionEvent)) {
+        if (childView != null && motionEvent.getX() < 700 && mListener != null && mGestureDetector.onTouchEvent(motionEvent)) {
             mListener.onItemClick(childView, recyclerView.getChildAdapterPosition(childView));
             return true;
         }
@@ -56,7 +58,7 @@ public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListen
 
     @Override
     public void onTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
-
+        Log.e(TAG, "onTouchEvent: " + motionEvent.getX() + " ; " + motionEvent.getY());
     }
 
     @Override

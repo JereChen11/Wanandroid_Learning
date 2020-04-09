@@ -22,6 +22,7 @@ import com.jere.test.article.view.ArticleDetailWebViewActivity;
 import com.jere.test.article.viewmodel.homearticle.HomeViewModel;
 import com.jere.test.databinding.FragmentHomeBinding;
 import com.jere.test.util.RecyclerItemClickListener;
+import com.jere.test.util.customcomponent.CustomCollectView;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -342,7 +343,7 @@ public class HomeFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
             HomeArticleListBean.DataBean.DatasBean data = homeArticleListData.get(position);
             holder.titleTv.setText(data.getTitle());
             String author;
@@ -355,6 +356,18 @@ public class HomeFragment extends Fragment {
             }
             holder.authorTv.setText(author);
             holder.sharedDateTv.setText(data.getNiceShareDate());
+
+            holder.collectView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (holder.collectView.isCollect()) {
+                        holder.collectView.setIsCollect(false);
+
+                    } else {
+                        holder.collectView.setIsCollect(true);
+                    }
+                }
+            });
         }
 
         @Override
@@ -366,13 +379,18 @@ public class HomeFragment extends Fragment {
             private TextView titleTv;
             private TextView authorTv;
             private TextView sharedDateTv;
+            private CustomCollectView collectView;
 
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
                 titleTv = itemView.findViewById(R.id.articleListItemTitleTv);
                 authorTv = itemView.findViewById(R.id.articleListItemAuthorTv);
                 sharedDateTv = itemView.findViewById(R.id.articleListItemSharedDateTv);
+                collectView = itemView.findViewById(R.id.collectIconView);
+                getAdapterPosition();
             }
         }
+
+
     }
 }
