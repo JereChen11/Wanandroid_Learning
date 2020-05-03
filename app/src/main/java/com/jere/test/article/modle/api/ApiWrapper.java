@@ -1,5 +1,7 @@
 package com.jere.test.article.modle.api;
 
+import com.jere.test.util.Settings;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -15,14 +17,23 @@ public class ApiWrapper {
     private static final String BASE_URL = "https://www.wanandroid.com";
 
     public static Retrofit getRetrofitInstance() {
-        if (retrofit == null) {
-
-            // customize retrofit network timeouts, default timeouts is ten seconds.
-            OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                    .connectTimeout(1, TimeUnit.MINUTES)
-                    .readTimeout(30, TimeUnit.SECONDS)
-                    .writeTimeout(15, TimeUnit.SECONDS)
-                    .build();
+//        if (retrofit == null) {
+            OkHttpClient okHttpClient;
+            if (!Settings.getInstance().getIsLogin()) {
+                okHttpClient = new OkHttpClient.Builder()
+                        .connectTimeout(1, TimeUnit.MINUTES)
+                        .readTimeout(30, TimeUnit.SECONDS)
+                        .writeTimeout(15, TimeUnit.SECONDS)
+                        .addInterceptor(new ReceivedCookiesInterceptor())
+                        .build();
+            } else {
+                okHttpClient = new OkHttpClient.Builder()
+                        .connectTimeout(1, TimeUnit.MINUTES)
+                        .readTimeout(30, TimeUnit.SECONDS)
+                        .writeTimeout(15, TimeUnit.SECONDS)
+                        .addInterceptor(new AddCookiesInterceptor())
+                        .build();
+            }
 
             retrofit = new retrofit2.Retrofit.Builder()
                     .baseUrl(BASE_URL)
@@ -30,7 +41,7 @@ public class ApiWrapper {
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-        }
+//        }
         return retrofit;
     }
 }

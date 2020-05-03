@@ -9,15 +9,18 @@ import android.widget.TextView;
 import com.jere.test.R;
 import com.jere.test.article.modle.beanfiles.homearticle.HomeArticleListBean;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * @author jere
+ */
 public class ArticleListViewAdapter extends RecyclerView.Adapter<ArticleListViewAdapter.MyViewHolder> {
-    private List<HomeArticleListBean.DataBean.DatasBean> homeArticleListData;
+    private ArrayList<HomeArticleListBean.DataBean.DatasBean> homeArticleListData;
 
-    ArticleListViewAdapter(List<HomeArticleListBean.DataBean.DatasBean> homeArticleListData) {
+    public ArticleListViewAdapter(ArrayList<HomeArticleListBean.DataBean.DatasBean> homeArticleListData) {
         this.homeArticleListData = homeArticleListData;
     }
 

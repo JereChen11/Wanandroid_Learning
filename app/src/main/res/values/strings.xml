@@ -46,6 +46,8 @@
     <string name="expression_cn">表情</string>
     <string name="collection_folder">收藏夹</string>
     <string name="settings_cn">设置</string>
+    <string name="login_cn">登入</string>
+    <string name="logout_cn">登出</string>
 
     <!--    about personal info-->
     <string name="personal_information">个人信息</string>

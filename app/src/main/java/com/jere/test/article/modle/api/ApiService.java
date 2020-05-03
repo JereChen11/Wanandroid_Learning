@@ -105,4 +105,11 @@ public interface ApiService {
     @GET("/article/list/0/json")
     Call<ResponseBody> getKnowledgeSystemArticleList(@Query("cid") int cid);
 
+    /**
+     * 获取收藏的文章列表
+     * @return
+     */
+    @GET("/lg/collect/list/0/json")
+    Call<ResponseBody> getCollectionArticleList();
+
 }

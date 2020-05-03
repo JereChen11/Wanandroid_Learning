@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.jere.test.R;
 import com.jere.test.databinding.ActivityRegisterLoginBinding;
 import com.jere.test.login.viewmodel.RegisterLoginViewModel;
+import com.jere.test.util.Settings;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -104,6 +105,8 @@ public class RegisterLoginActivity extends AppCompatActivity {
             if (aBoolean != null && aBoolean) {
                 Toast.makeText(RegisterLoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                 finish();
+                Settings.getInstance().setIsLogin(true);
+                Settings.getInstance().setUserName(mBinding.userNameEt.getText().toString());
             } else {
                 Toast.makeText(RegisterLoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
             }
@@ -115,6 +118,8 @@ public class RegisterLoginActivity extends AppCompatActivity {
         public void onChanged(@Nullable Boolean aBoolean) {
             if (aBoolean != null && aBoolean) {
                 Toast.makeText(RegisterLoginActivity.this, "Register Successful", Toast.LENGTH_SHORT).show();
+                Settings.getInstance().setIsLogin(true);
+                Settings.getInstance().setUserName(mBinding.userNameEt.getText().toString());
                 finish();
             } else {
                 Toast.makeText(RegisterLoginActivity.this, "用户名已被注册，注意密码必须大于6位", Toast.LENGTH_SHORT).show();

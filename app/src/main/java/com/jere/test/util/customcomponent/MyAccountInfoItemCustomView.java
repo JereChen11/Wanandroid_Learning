@@ -15,6 +15,8 @@ import androidx.databinding.DataBindingUtil;
  * @author jere
  */
 public class MyAccountInfoItemCustomView extends ConstraintLayout {
+    private String categoryTextString;
+    private MyAccountInfoItemCustomViewBinding binding;
 
     public MyAccountInfoItemCustomView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -23,16 +25,26 @@ public class MyAccountInfoItemCustomView extends ConstraintLayout {
 
     private void init(Context context, AttributeSet attrs) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        MyAccountInfoItemCustomViewBinding binding = DataBindingUtil.inflate(inflater,
+        binding = DataBindingUtil.inflate(inflater,
                 R.layout.my_account_info_item_custom_view, this, true);
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MyAccountInfoItemCustomView);
-        String categoryTextString = typedArray.getString(R.styleable.MyAccountInfoItemCustomView_categoryItemText);
+        categoryTextString = typedArray.getString(R.styleable.MyAccountInfoItemCustomView_categoryItemText);
         binding.setCategoryContentText(categoryTextString);
 
         int iconResourceId = typedArray.getResourceId(R.styleable.MyAccountInfoItemCustomView_iconResource, R.drawable.my_account_icon);
         binding.setCategoryIconResource(iconResourceId);
 
         typedArray.recycle();
+    }
+
+    public String getCategoryTextString() {
+        return categoryTextString;
+    }
+
+    public void setCategoryTextString(String categoryTextString) {
+        this.categoryTextString = categoryTextString;
+        binding.setCategoryContentText(categoryTextString);
+        invalidate();
     }
 }
