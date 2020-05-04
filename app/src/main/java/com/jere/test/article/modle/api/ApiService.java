@@ -112,4 +112,20 @@ public interface ApiService {
     @GET("/lg/collect/list/0/json")
     Call<ResponseBody> getCollectionArticleList();
 
+    /**
+     * 收藏文章
+     * @param id
+     * @return
+     */
+    @POST("/lg/collect/{id}/json")
+    Call<ResponseBody> collectArticle(@Path("id") int id);
+
+    /**
+     * 取消文章收藏
+     * @param id
+     * @return
+     */
+    @POST("/lg/uncollect_originId/{id}/json")
+    Call<ResponseBody> unCollectArticle(@Path("id") int id);
+
 }

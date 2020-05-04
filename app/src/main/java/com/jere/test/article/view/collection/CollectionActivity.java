@@ -60,6 +60,9 @@ public class CollectionActivity extends AppCompatActivity {
         public void onChanged(ArticleListBean articleListBean) {
             if (articleListBean != null) {
                 mCollectionArticleListData = articleListBean.getData().getDatas();
+                for (ArticleListBean.DataBean.DatasBean data: mCollectionArticleListData) {
+                    data.setCollect(true);
+                }
                 mAdapter = new ArticleListViewAdapter(mCollectionArticleListData);
                 mBinding.collectionFolderRcy.setAdapter(mAdapter);
             }

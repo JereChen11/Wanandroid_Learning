@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.jere.test.R;
+import com.jere.test.article.modle.CollectRepository;
 import com.jere.test.article.modle.beanfiles.homearticle.ArticleListBean;
 import com.jere.test.util.customcomponent.CustomCollectView;
 
@@ -35,7 +36,7 @@ public class ArticleListViewAdapter extends RecyclerView.Adapter<ArticleListView
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
-        ArticleListBean.DataBean.DatasBean data = homeArticleListData.get(position);
+        final ArticleListBean.DataBean.DatasBean data = homeArticleListData.get(position);
         holder.titleTv.setText(data.getTitle());
         String author;
         if (!TextUtils.isEmpty(data.getAuthor())) {
@@ -48,13 +49,32 @@ public class ArticleListViewAdapter extends RecyclerView.Adapter<ArticleListView
         holder.authorTv.setText(author);
         holder.sharedDateTv.setText(data.getNiceShareDate());
 
+        holder.collectView.setIsCollect(data.isCollect());
         holder.collectView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (holder.collectView.isCollect()) {
-                    holder.collectView.setIsCollect(false);
+                int articleId;
+                if (data.getOriginId() != 0) {
+                    articleId = data.getOriginId();
                 } else {
-                    holder.collectView.setIsCollect(true);
+                    articleId = data.getId();
+                }
+                if (holder.collectView.isCollect()) {
+                    CollectRepository.newInstance().unCollectArticle(articleId, new CollectRepository.CollectOrUnCollectListener() {
+                        @Override
+                        public void isSuccessful(boolean isSuccess) {
+                            if (isSuccess) {
+                                holder.collectView.setIsCollect(false);
+                            }
+                        }
+                    });
+                } else {
+                    CollectRepository.newInstance().collectArticle(articleId, new CollectRepository.CollectOrUnCollectListener() {
+                        @Override
+                        public void isSuccessful(boolean isSuccess) {
+                            holder.collectView.setIsCollect(true);
+                        }
+                    });
                 }
             }
         });

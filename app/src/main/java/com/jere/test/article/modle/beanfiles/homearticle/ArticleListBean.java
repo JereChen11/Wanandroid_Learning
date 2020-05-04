@@ -168,6 +168,7 @@ public class ArticleListBean {
             private String niceDate;
             private String niceShareDate;
             private String origin;
+            private int originId;
             private String prefix;
             private String projectLink;
             private long publishTime;
@@ -317,6 +318,14 @@ public class ArticleListBean {
 
             public void setOrigin(String origin) {
                 this.origin = origin;
+            }
+
+            public int getOriginId() {
+                return originId;
+            }
+
+            public void setOriginId(int originId) {
+                this.originId = originId;
             }
 
             public String getPrefix() {
