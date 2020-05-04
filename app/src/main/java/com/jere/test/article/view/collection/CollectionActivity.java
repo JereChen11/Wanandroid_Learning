@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.jere.test.R;
-import com.jere.test.article.modle.beanfiles.homearticle.HomeArticleListBean;
+import com.jere.test.article.modle.beanfiles.homearticle.ArticleListBean;
 import com.jere.test.article.view.ArticleDetailWebViewActivity;
 import com.jere.test.article.view.ArticleListViewAdapter;
 import com.jere.test.article.viewmodel.collection.CollectionViewModel;
@@ -24,7 +24,7 @@ import androidx.lifecycle.ViewModelProvider;
  */
 public class CollectionActivity extends AppCompatActivity {
     private ActivityCollectionBinding mBinding;
-    private ArrayList<HomeArticleListBean.DataBean.DatasBean> mCollectionArticleListData;
+    private ArrayList<ArticleListBean.DataBean.DatasBean> mCollectionArticleListData;
     private ArticleListViewAdapter mAdapter;
 
     @Override
@@ -55,11 +55,11 @@ public class CollectionActivity extends AppCompatActivity {
                 }));
     }
 
-    private Observer<HomeArticleListBean> articleListBeanObserver = new Observer<HomeArticleListBean>() {
+    private Observer<ArticleListBean> articleListBeanObserver = new Observer<ArticleListBean>() {
         @Override
-        public void onChanged(HomeArticleListBean homeArticleListBean) {
-            if (homeArticleListBean != null) {
-                mCollectionArticleListData = homeArticleListBean.getData().getDatas();
+        public void onChanged(ArticleListBean articleListBean) {
+            if (articleListBean != null) {
+                mCollectionArticleListData = articleListBean.getData().getDatas();
                 mAdapter = new ArticleListViewAdapter(mCollectionArticleListData);
                 mBinding.collectionFolderRcy.setAdapter(mAdapter);
             }

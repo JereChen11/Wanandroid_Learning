@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.jere.test.R;
+import com.jere.test.article.modle.beanfiles.homearticle.ArticleListBean;
 import com.jere.test.article.modle.beanfiles.wechat.WeChatArticleBloggerList;
-import com.jere.test.article.modle.beanfiles.wechat.WeChatArticleList;
 import com.jere.test.article.viewmodel.wechat.WeChatBlogArticleViewModel;
 import com.jere.test.util.RecyclerItemClickListener;
 
@@ -36,7 +36,7 @@ public class WeChatBlogArticleFragment extends Fragment {
     private ArrayList<WeChatArticleBloggerList.DataBean> mWeChatBloggerList = new ArrayList<>();
     private WeChatBlogArticleViewModel mWeChatBlogArticleVm;
     private RecyclerView mWeChatArticleListRecyclerView;
-    private ArrayList<WeChatArticleList.DataBean.DatasBean> mWeChatArticleListData = new ArrayList<>();
+    private ArrayList<ArticleListBean.DataBean.DatasBean> mWeChatArticleListData = new ArrayList<>();
 
 
     private OnFragmentInteractionListener mListener;
@@ -50,13 +50,13 @@ public class WeChatBlogArticleFragment extends Fragment {
             }
         }
     };
-    private Observer<WeChatArticleList> weChatArticleListObserver = new Observer<WeChatArticleList>() {
+    private Observer<ArticleListBean> weChatArticleListObserver = new Observer<ArticleListBean>() {
         @Override
-        public void onChanged(WeChatArticleList weChatArticleList) {
-            if (weChatArticleList != null) {
-                mWeChatArticleListData = weChatArticleList.getData().getDatas();
-                WeChatArticleListAdapter weChatArticleListAdapter = new WeChatArticleListAdapter(mWeChatArticleListData);
-                mWeChatArticleListRecyclerView.setAdapter(weChatArticleListAdapter);
+        public void onChanged(ArticleListBean articleListBean) {
+            if (articleListBean != null) {
+                mWeChatArticleListData = articleListBean.getData().getDatas();
+                ArticleListViewAdapter articleListViewAdapter = new ArticleListViewAdapter(mWeChatArticleListData);
+                mWeChatArticleListRecyclerView.setAdapter(articleListViewAdapter);
             }
         }
     };
@@ -115,8 +115,6 @@ public class WeChatBlogArticleFragment extends Fragment {
         });
 
         mWeChatArticleListRecyclerView = view.findViewById(R.id.weChatArticleListRecyclerView);
-        WeChatArticleListAdapter weChatArticleListAdapter = new WeChatArticleListAdapter(mWeChatArticleListData);
-        mWeChatArticleListRecyclerView.setAdapter(weChatArticleListAdapter);
         mWeChatArticleListRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),
                 mWeChatArticleListRecyclerView,
                 new RecyclerItemClickListener.OnItemClickListener() {
@@ -174,7 +172,7 @@ public class WeChatBlogArticleFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    class WeChatBloggerListVpAdapter extends RecyclerView.Adapter<WeChatBloggerListVpAdapter.MyViewHolder> {
+    static class WeChatBloggerListVpAdapter extends RecyclerView.Adapter<WeChatBloggerListVpAdapter.MyViewHolder> {
         private ArrayList<WeChatArticleBloggerList.DataBean> weChatBloggerList;
 
         WeChatBloggerListVpAdapter(ArrayList<WeChatArticleBloggerList.DataBean> weChatBloggerList) {
@@ -208,50 +206,6 @@ public class WeChatBlogArticleFragment extends Fragment {
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
                 nameTv = itemView.findViewById(R.id.weChatBloggerListNameTv);
-            }
-        }
-    }
-
-    class WeChatArticleListAdapter extends RecyclerView.Adapter<WeChatArticleListAdapter.MyViewHolder> {
-        private ArrayList<WeChatArticleList.DataBean.DatasBean> dataList;
-
-        WeChatArticleListAdapter(ArrayList<WeChatArticleList.DataBean.DatasBean> list) {
-            this.dataList = list;
-        }
-
-
-        @NonNull
-        @Override
-        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.recycler_item_view_article_list_item, parent, false);
-            return new MyViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-            WeChatArticleList.DataBean.DatasBean data = dataList.get(position);
-            holder.titleTv.setText(data.getTitle());
-            holder.authorTv.setText(data.getAuthor());
-            holder.sharedDateTv.setText(data.getNiceShareDate());
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return dataList.size();
-        }
-
-        class MyViewHolder extends RecyclerView.ViewHolder {
-            private TextView titleTv;
-            private TextView authorTv;
-            private TextView sharedDateTv;
-
-            public MyViewHolder(@NonNull View itemView) {
-                super(itemView);
-                titleTv = itemView.findViewById(R.id.articleListItemTitleTv);
-                authorTv = itemView.findViewById(R.id.articleListItemAuthorTv);
-                sharedDateTv = itemView.findViewById(R.id.articleListItemSharedDateTv);
             }
         }
     }

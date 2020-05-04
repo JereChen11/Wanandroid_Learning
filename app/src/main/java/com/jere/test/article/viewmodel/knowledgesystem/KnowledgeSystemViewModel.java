@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.jere.test.article.modle.KnowledgeSystemRepository;
 import com.jere.test.article.modle.api.GetWebDataListener;
-import com.jere.test.article.modle.beanfiles.knowledgesystem.KnowledgeSystemArticleListBean;
+import com.jere.test.article.modle.beanfiles.homearticle.ArticleListBean;
 import com.jere.test.article.modle.beanfiles.knowledgesystem.KnowledgeSystemCategoryBean;
 
 import androidx.lifecycle.MutableLiveData;
@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModel;
 public class KnowledgeSystemViewModel extends ViewModel {
     private static final String TAG = "KnowledgeSystemViewMode";
     private MutableLiveData<KnowledgeSystemCategoryBean> knowledgeSystemCategoryBeanLd;
-    private MutableLiveData<KnowledgeSystemArticleListBean> knowledgeSystemArticleListBeanLd;
+    private MutableLiveData<ArticleListBean> knowledgeSystemArticleListBeanLd;
 
     public KnowledgeSystemViewModel() {
         this.knowledgeSystemCategoryBeanLd = new MutableLiveData<>();
@@ -42,7 +42,7 @@ public class KnowledgeSystemViewModel extends ViewModel {
         });
     }
 
-    public MutableLiveData<KnowledgeSystemArticleListBean> getKnowledgeSystemArticleListBeanLd() {
+    public MutableLiveData<ArticleListBean> getKnowledgeSystemArticleListBeanLd() {
         return knowledgeSystemArticleListBeanLd;
     }
 
@@ -50,8 +50,8 @@ public class KnowledgeSystemViewModel extends ViewModel {
         KnowledgeSystemRepository.getInstance().getKnowledgeSystemArticleList(cid, new GetWebDataListener() {
             @Override
             public void getDataSuccess(Object object) {
-                KnowledgeSystemArticleListBean knowledgeSystemArticleListBean = (KnowledgeSystemArticleListBean) object;
-                knowledgeSystemArticleListBeanLd.postValue(knowledgeSystemArticleListBean);
+                ArticleListBean articleListBean = (ArticleListBean) object;
+                knowledgeSystemArticleListBeanLd.postValue(articleListBean);
             }
 
             @Override

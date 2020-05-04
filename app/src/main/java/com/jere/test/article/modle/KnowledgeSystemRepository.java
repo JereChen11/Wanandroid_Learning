@@ -5,7 +5,7 @@ import com.jere.test.article.modle.api.AbstractRetrofitCallback;
 import com.jere.test.article.modle.api.ApiService;
 import com.jere.test.article.modle.api.ApiWrapper;
 import com.jere.test.article.modle.api.GetWebDataListener;
-import com.jere.test.article.modle.beanfiles.knowledgesystem.KnowledgeSystemArticleListBean;
+import com.jere.test.article.modle.beanfiles.homearticle.ArticleListBean;
 import com.jere.test.article.modle.beanfiles.knowledgesystem.KnowledgeSystemCategoryBean;
 
 /**
@@ -47,9 +47,8 @@ public class KnowledgeSystemRepository {
             @Override
             public void getSuccessful(String responseBody) {
                 Gson gson = new Gson();
-                KnowledgeSystemArticleListBean knowledgeSystemArticleListBean =
-                        gson.fromJson(responseBody, KnowledgeSystemArticleListBean.class);
-                listener.getDataSuccess(knowledgeSystemArticleListBean);
+                ArticleListBean articleListBean = gson.fromJson(responseBody, ArticleListBean.class);
+                listener.getDataSuccess(articleListBean);
             }
 
             @Override

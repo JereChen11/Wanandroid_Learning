@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.jere.test.article.modle.api.GetWebDataListener;
 import com.jere.test.article.modle.HomeRepository;
-import com.jere.test.article.modle.beanfiles.homearticle.HomeArticleListBean;
+import com.jere.test.article.modle.beanfiles.homearticle.ArticleListBean;
 import com.jere.test.article.modle.beanfiles.homearticle.HomeBannerListBean;
 
 import androidx.lifecycle.MutableLiveData;
@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModel;
 public class HomeViewModel extends ViewModel {
     private static final String TAG = "HomeViewModel";
     private MutableLiveData<HomeBannerListBean> homeBannerListLd;
-    private MutableLiveData<HomeArticleListBean> homeArticleListBeanLd;
+    private MutableLiveData<ArticleListBean> homeArticleListBeanLd;
 
     public HomeViewModel() {
         this.homeBannerListLd = new MutableLiveData<>();
@@ -57,7 +57,7 @@ public class HomeViewModel extends ViewModel {
         });
     }
 
-    public MutableLiveData<HomeArticleListBean> getHomeArticleListBeanLd() {
+    public MutableLiveData<ArticleListBean> getHomeArticleListBeanLd() {
         return homeArticleListBeanLd;
     }
 
@@ -65,7 +65,7 @@ public class HomeViewModel extends ViewModel {
         HomeRepository.newInstance().getHomeArticleList(0, new GetWebDataListener() {
             @Override
             public void getDataSuccess(Object object) {
-                HomeArticleListBean homeArticleListBean = (HomeArticleListBean) object;
+                ArticleListBean homeArticleListBean = (ArticleListBean) object;
                 homeArticleListBeanLd.postValue(homeArticleListBean);
             }
 

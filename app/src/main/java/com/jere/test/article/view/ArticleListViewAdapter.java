@@ -7,7 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.jere.test.R;
-import com.jere.test.article.modle.beanfiles.homearticle.HomeArticleListBean;
+import com.jere.test.article.modle.beanfiles.homearticle.ArticleListBean;
+import com.jere.test.util.customcomponent.CustomCollectView;
 
 import java.util.ArrayList;
 
@@ -18,9 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
  * @author jere
  */
 public class ArticleListViewAdapter extends RecyclerView.Adapter<ArticleListViewAdapter.MyViewHolder> {
-    private ArrayList<HomeArticleListBean.DataBean.DatasBean> homeArticleListData;
+    private ArrayList<ArticleListBean.DataBean.DatasBean> homeArticleListData;
 
-    public ArticleListViewAdapter(ArrayList<HomeArticleListBean.DataBean.DatasBean> homeArticleListData) {
+    public ArticleListViewAdapter(ArrayList<ArticleListBean.DataBean.DatasBean> homeArticleListData) {
         this.homeArticleListData = homeArticleListData;
     }
 
@@ -33,8 +34,8 @@ public class ArticleListViewAdapter extends RecyclerView.Adapter<ArticleListView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        HomeArticleListBean.DataBean.DatasBean data = homeArticleListData.get(position);
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
+        ArticleListBean.DataBean.DatasBean data = homeArticleListData.get(position);
         holder.titleTv.setText(data.getTitle());
         String author;
         if (!TextUtils.isEmpty(data.getAuthor())) {
@@ -46,6 +47,17 @@ public class ArticleListViewAdapter extends RecyclerView.Adapter<ArticleListView
         }
         holder.authorTv.setText(author);
         holder.sharedDateTv.setText(data.getNiceShareDate());
+
+        holder.collectView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.collectView.isCollect()) {
+                    holder.collectView.setIsCollect(false);
+                } else {
+                    holder.collectView.setIsCollect(true);
+                }
+            }
+        });
     }
 
     @Override
@@ -53,16 +65,19 @@ public class ArticleListViewAdapter extends RecyclerView.Adapter<ArticleListView
         return homeArticleListData.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    static class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView titleTv;
         private TextView authorTv;
         private TextView sharedDateTv;
+        private CustomCollectView collectView;
 
-        public MyViewHolder(@NonNull View itemView) {
+        MyViewHolder(@NonNull View itemView) {
             super(itemView);
             titleTv = itemView.findViewById(R.id.articleListItemTitleTv);
             authorTv = itemView.findViewById(R.id.articleListItemAuthorTv);
             sharedDateTv = itemView.findViewById(R.id.articleListItemSharedDateTv);
+            collectView = itemView.findViewById(R.id.collectIconView);
+            getAdapterPosition();
         }
     }
 }

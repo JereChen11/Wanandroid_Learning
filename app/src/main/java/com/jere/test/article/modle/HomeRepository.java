@@ -7,7 +7,7 @@ import com.jere.test.article.modle.api.AbstractRetrofitCallback;
 import com.jere.test.article.modle.api.ApiService;
 import com.jere.test.article.modle.api.ApiWrapper;
 import com.jere.test.article.modle.api.GetWebDataListener;
-import com.jere.test.article.modle.beanfiles.homearticle.HomeArticleListBean;
+import com.jere.test.article.modle.beanfiles.homearticle.ArticleListBean;
 import com.jere.test.article.modle.beanfiles.homearticle.HomeBannerListBean;
 
 import io.reactivex.Observer;
@@ -60,8 +60,8 @@ public class HomeRepository {
             @Override
             public void getSuccessful(String responseBody) {
                 Gson gson = new Gson();
-                HomeArticleListBean homeArticleListBean = gson.fromJson(responseBody, HomeArticleListBean.class);
-                listener.getDataSuccess(homeArticleListBean);
+                ArticleListBean articleListBean = gson.fromJson(responseBody, ArticleListBean.class);
+                listener.getDataSuccess(articleListBean);
             }
 
             @Override

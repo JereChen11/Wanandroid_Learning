@@ -12,17 +12,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jere.test.R;
-import com.jere.test.article.modle.beanfiles.homearticle.HomeArticleListBean;
+import com.jere.test.article.modle.beanfiles.homearticle.ArticleListBean;
 import com.jere.test.article.modle.beanfiles.homearticle.HomeBannerListBean;
 import com.jere.test.article.view.ArticleDetailWebViewActivity;
+import com.jere.test.article.view.ArticleListViewAdapter;
 import com.jere.test.article.viewmodel.homearticle.HomeViewModel;
 import com.jere.test.databinding.FragmentHomeBinding;
 import com.jere.test.util.RecyclerItemClickListener;
-import com.jere.test.util.customcomponent.CustomCollectView;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -52,8 +51,7 @@ public class HomeFragment extends Fragment {
     private ArrayList<HomeBannerListBean.DataBean> mBannerDataList = new ArrayList<>();
     private BannerHandler mBannerHandler;
     private ScheduledExecutorService mBannerScheduledExecutorService;
-    private HomeArticleListViewAdapter mArticleListViewAdapter;
-    private ArrayList<HomeArticleListBean.DataBean.DatasBean> mHomeArticleListData = new ArrayList<>();
+    private ArrayList<ArticleListBean.DataBean.DatasBean> mHomeArticleListData = new ArrayList<>();
     private FragmentHomeBinding mBinding;
 
     private Observer<HomeBannerListBean> bannerListDataObserver = new Observer<HomeBannerListBean>() {
@@ -75,13 +73,13 @@ public class HomeFragment extends Fragment {
         }
     };
 
-    private Observer<HomeArticleListBean> articleListBeanObserver = new Observer<HomeArticleListBean>() {
+    private Observer<ArticleListBean> articleListBeanObserver = new Observer<ArticleListBean>() {
         @Override
-        public void onChanged(HomeArticleListBean homeArticleListBean) {
-            if (homeArticleListBean != null) {
-                mHomeArticleListData = homeArticleListBean.getData().getDatas();
-                mArticleListViewAdapter = new HomeArticleListViewAdapter(mHomeArticleListData);
-                mBinding.homeArticleListRecycleView.setAdapter(mArticleListViewAdapter);
+        public void onChanged(ArticleListBean articleListBean) {
+            if (articleListBean != null) {
+                mHomeArticleListData = articleListBean.getData().getDatas();
+                ArticleListViewAdapter adapter = new ArticleListViewAdapter(mHomeArticleListData);
+                mBinding.homeArticleListRecycleView.setAdapter(adapter);
             }
         }
     };
@@ -186,8 +184,6 @@ public class HomeFragment extends Fragment {
 
 
     private void initArticleListView() {
-        mArticleListViewAdapter = new HomeArticleListViewAdapter(mHomeArticleListData);
-        mBinding.homeArticleListRecycleView.setAdapter(mArticleListViewAdapter);
         mBinding.homeArticleListRecycleView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),
                 mBinding.homeArticleListRecycleView,
                 new RecyclerItemClickListener.OnItemClickListener() {
@@ -325,72 +321,5 @@ public class HomeFragment extends Fragment {
                 bannerItemIv = itemView.findViewById(R.id.banner_item_iv);
             }
         }
-    }
-
-    class HomeArticleListViewAdapter extends RecyclerView.Adapter<HomeArticleListViewAdapter.MyViewHolder> {
-        private List<HomeArticleListBean.DataBean.DatasBean> homeArticleListData;
-
-        HomeArticleListViewAdapter(List<HomeArticleListBean.DataBean.DatasBean> homeArticleListData) {
-            this.homeArticleListData = homeArticleListData;
-        }
-
-        @NonNull
-        @Override
-        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.recycler_item_view_article_list_item, parent, false);
-            return new MyViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
-            HomeArticleListBean.DataBean.DatasBean data = homeArticleListData.get(position);
-            holder.titleTv.setText(data.getTitle());
-            String author;
-            if (!TextUtils.isEmpty(data.getAuthor())) {
-                author = data.getAuthor();
-            } else if (TextUtils.isEmpty(data.getShareUser())) {
-                author = data.getShareUser();
-            } else {
-                author = "Robot";
-            }
-            holder.authorTv.setText(author);
-            holder.sharedDateTv.setText(data.getNiceShareDate());
-
-            holder.collectView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (holder.collectView.isCollect()) {
-                        holder.collectView.setIsCollect(false);
-
-                    } else {
-                        holder.collectView.setIsCollect(true);
-                    }
-                }
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return homeArticleListData.size();
-        }
-
-        class MyViewHolder extends RecyclerView.ViewHolder {
-            private TextView titleTv;
-            private TextView authorTv;
-            private TextView sharedDateTv;
-            private CustomCollectView collectView;
-
-            public MyViewHolder(@NonNull View itemView) {
-                super(itemView);
-                titleTv = itemView.findViewById(R.id.articleListItemTitleTv);
-                authorTv = itemView.findViewById(R.id.articleListItemAuthorTv);
-                sharedDateTv = itemView.findViewById(R.id.articleListItemSharedDateTv);
-                collectView = itemView.findViewById(R.id.collectIconView);
-                getAdapterPosition();
-            }
-        }
-
-
     }
 }

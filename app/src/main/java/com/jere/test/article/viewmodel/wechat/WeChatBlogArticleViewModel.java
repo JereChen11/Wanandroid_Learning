@@ -4,8 +4,8 @@ import android.util.Log;
 
 import com.jere.test.article.modle.WeChatArticleRepository;
 import com.jere.test.article.modle.api.GetWebDataListener;
+import com.jere.test.article.modle.beanfiles.homearticle.ArticleListBean;
 import com.jere.test.article.modle.beanfiles.wechat.WeChatArticleBloggerList;
-import com.jere.test.article.modle.beanfiles.wechat.WeChatArticleList;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModel;
 public class WeChatBlogArticleViewModel extends ViewModel {
     private static final String TAG = "WeChatBlogArticleVm";
     private MutableLiveData<WeChatArticleBloggerList> weChatArticleBloggerListLd;
-    private MutableLiveData<WeChatArticleList> weChatArticleListLd;
+    private MutableLiveData<ArticleListBean> weChatArticleListLd;
 
     public WeChatBlogArticleViewModel() {
         weChatArticleBloggerListLd = new MutableLiveData<>();
@@ -42,7 +42,7 @@ public class WeChatBlogArticleViewModel extends ViewModel {
         });
     }
 
-    public MutableLiveData<WeChatArticleList> getWeChatArticleListLd() {
+    public MutableLiveData<ArticleListBean> getWeChatArticleListLd() {
         return weChatArticleListLd;
     }
 
@@ -50,8 +50,8 @@ public class WeChatBlogArticleViewModel extends ViewModel {
         WeChatArticleRepository.newInstance().getWeChatArticleList(authorId, pageNumber, new GetWebDataListener() {
             @Override
             public void getDataSuccess(Object object) {
-                WeChatArticleList weChatArticleList = (WeChatArticleList) object;
-                weChatArticleListLd.postValue(weChatArticleList);
+                ArticleListBean articleListBean = (ArticleListBean) object;
+                weChatArticleListLd.postValue(articleListBean);
             }
 
             @Override

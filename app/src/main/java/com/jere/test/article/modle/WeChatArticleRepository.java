@@ -5,8 +5,8 @@ import com.jere.test.article.modle.api.AbstractRetrofitCallback;
 import com.jere.test.article.modle.api.ApiService;
 import com.jere.test.article.modle.api.ApiWrapper;
 import com.jere.test.article.modle.api.GetWebDataListener;
+import com.jere.test.article.modle.beanfiles.homearticle.ArticleListBean;
 import com.jere.test.article.modle.beanfiles.wechat.WeChatArticleBloggerList;
-import com.jere.test.article.modle.beanfiles.wechat.WeChatArticleList;
 
 /**
  * @author jere
@@ -50,8 +50,8 @@ public class WeChatArticleRepository {
             @Override
             public void getSuccessful(String responseBody) {
                 Gson gson = new Gson();
-                WeChatArticleList weChatArticleList = gson.fromJson(responseBody, WeChatArticleList.class);
-                listener.getDataSuccess(weChatArticleList);
+                ArticleListBean articleListBean = gson.fromJson(responseBody, ArticleListBean.class);
+                listener.getDataSuccess(articleListBean);
             }
 
             @Override
