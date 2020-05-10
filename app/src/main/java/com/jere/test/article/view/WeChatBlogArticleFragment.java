@@ -14,7 +14,6 @@ import com.jere.test.R;
 import com.jere.test.article.modle.beanfiles.homearticle.ArticleListBean;
 import com.jere.test.article.modle.beanfiles.wechat.WeChatArticleBloggerList;
 import com.jere.test.article.viewmodel.wechat.WeChatBlogArticleViewModel;
-import com.jere.test.util.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 
@@ -55,8 +54,24 @@ public class WeChatBlogArticleFragment extends Fragment {
         public void onChanged(ArticleListBean articleListBean) {
             if (articleListBean != null) {
                 mWeChatArticleListData = articleListBean.getData().getDatas();
-                ArticleListViewAdapter articleListViewAdapter = new ArticleListViewAdapter(mWeChatArticleListData);
-                mWeChatArticleListRecyclerView.setAdapter(articleListViewAdapter);
+
+                ArticleListViewAdapter adapter = new ArticleListViewAdapter(mWeChatArticleListData,
+                        new ArticleListViewAdapter.AdapterItemClickListener() {
+                            @Override
+                            public void onPositionClicked(View v, int position) {
+                                String link = mWeChatArticleListData.get(position).getLink();
+                                Intent intent = new Intent(getActivity(), ArticleDetailWebViewActivity.class);
+                                intent.putExtra(ArticleDetailWebViewActivity.ARTICLE_DETAIL_WEB_LINK_KEY, link);
+                                startActivity(intent);
+                            }
+
+                            @Override
+                            public void onLongClicked(View v, int position) {
+
+                            }
+                        });
+                mWeChatArticleListRecyclerView.setAdapter(adapter);
+
             }
         }
     };
@@ -115,22 +130,6 @@ public class WeChatBlogArticleFragment extends Fragment {
         });
 
         mWeChatArticleListRecyclerView = view.findViewById(R.id.weChatArticleListRecyclerView);
-        mWeChatArticleListRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),
-                mWeChatArticleListRecyclerView,
-                new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        String link = mWeChatArticleListData.get(position).getLink();
-                        Intent intent = new Intent(getActivity(), ArticleDetailWebViewActivity.class);
-                        intent.putExtra(ArticleDetailWebViewActivity.ARTICLE_DETAIL_WEB_LINK_KEY, link);
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onLongItemClick(View view, int position) {
-
-                    }
-                }));
 
     }
 

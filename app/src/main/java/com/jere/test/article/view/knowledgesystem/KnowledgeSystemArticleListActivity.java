@@ -10,7 +10,6 @@ import com.jere.test.article.modle.beanfiles.homearticle.ArticleListBean;
 import com.jere.test.article.view.ArticleDetailWebViewActivity;
 import com.jere.test.article.view.ArticleListViewAdapter;
 import com.jere.test.article.viewmodel.knowledgesystem.KnowledgeSystemViewModel;
-import com.jere.test.util.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 
@@ -31,7 +30,24 @@ public class KnowledgeSystemArticleListActivity extends AppCompatActivity {
         public void onChanged(ArticleListBean articleListBean) {
             if (articleListBean != null) {
                 mKnowledgeSystemArticleList = articleListBean.getData().getDatas();
-                ArticleListViewAdapter adapter = new ArticleListViewAdapter(mKnowledgeSystemArticleList);
+//                ArticleListViewAdapter adapter = new ArticleListViewAdapter(mKnowledgeSystemArticleList);
+//                mKnowledgeSystemArticleRcy.setAdapter(adapter);
+
+                ArticleListViewAdapter adapter = new ArticleListViewAdapter(mKnowledgeSystemArticleList,
+                        new ArticleListViewAdapter.AdapterItemClickListener() {
+                            @Override
+                            public void onPositionClicked(View v, int position) {
+                                String link = mKnowledgeSystemArticleList.get(position).getLink();
+                                Intent intent = new Intent(KnowledgeSystemArticleListActivity.this, ArticleDetailWebViewActivity.class);
+                                intent.putExtra(ArticleDetailWebViewActivity.ARTICLE_DETAIL_WEB_LINK_KEY, link);
+                                startActivity(intent);
+                            }
+
+                            @Override
+                            public void onLongClicked(View v, int position) {
+
+                            }
+                        });
                 mKnowledgeSystemArticleRcy.setAdapter(adapter);
             }
         }
@@ -54,23 +70,23 @@ public class KnowledgeSystemArticleListActivity extends AppCompatActivity {
         knowledgeSystemVm.setKnowledgeSystemArticleListBeanLd(childItemId);
 
         mKnowledgeSystemArticleRcy = findViewById(R.id.knowledgeSystemArticleRecyclerView);
-        mKnowledgeSystemArticleRcy.addOnItemTouchListener(new RecyclerItemClickListener(this,
-                mKnowledgeSystemArticleRcy,
-                new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        ArticleListBean.DataBean.DatasBean data = mKnowledgeSystemArticleList.get(position);
-                        String link = data.getLink();
-                        Intent intent = new Intent(KnowledgeSystemArticleListActivity.this, ArticleDetailWebViewActivity.class);
-                        intent.putExtra(ArticleDetailWebViewActivity.ARTICLE_DETAIL_WEB_LINK_KEY, link);
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onLongItemClick(View view, int position) {
-
-                    }
-                }));
+//        mKnowledgeSystemArticleRcy.addOnItemTouchListener(new RecyclerItemClickListener(this,
+//                mKnowledgeSystemArticleRcy,
+//                new RecyclerItemClickListener.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(View view, int position) {
+//                        ArticleListBean.DataBean.DatasBean data = mKnowledgeSystemArticleList.get(position);
+//                        String link = data.getLink();
+//                        Intent intent = new Intent(KnowledgeSystemArticleListActivity.this, ArticleDetailWebViewActivity.class);
+//                        intent.putExtra(ArticleDetailWebViewActivity.ARTICLE_DETAIL_WEB_LINK_KEY, link);
+//                        startActivity(intent);
+//                    }
+//
+//                    @Override
+//                    public void onLongItemClick(View view, int position) {
+//
+//                    }
+//                }));
     }
 
 }

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.jere.test.R;
@@ -78,7 +79,22 @@ public class HomeFragment extends Fragment {
         public void onChanged(ArticleListBean articleListBean) {
             if (articleListBean != null) {
                 mHomeArticleListData = articleListBean.getData().getDatas();
-                ArticleListViewAdapter adapter = new ArticleListViewAdapter(mHomeArticleListData);
+
+                ArticleListViewAdapter adapter = new ArticleListViewAdapter(mHomeArticleListData,
+                        new ArticleListViewAdapter.AdapterItemClickListener() {
+                            @Override
+                            public void onPositionClicked(View v, int position) {
+                                String link = mHomeArticleListData.get(position).getLink();
+                                Intent intent = new Intent(getActivity(), ArticleDetailWebViewActivity.class);
+                                intent.putExtra(ArticleDetailWebViewActivity.ARTICLE_DETAIL_WEB_LINK_KEY, link);
+                                startActivity(intent);
+                            }
+
+                            @Override
+                            public void onLongClicked(View v, int position) {
+                                Toast.makeText(getContext(), "long clcik position : " + position, Toast.LENGTH_SHORT).show();
+                            }
+                        });
                 mBinding.homeArticleListRecycleView.setAdapter(adapter);
             }
         }
@@ -120,7 +136,7 @@ public class HomeFragment extends Fragment {
         mBannerHandler = new BannerHandler(this);
         startAutoLoopBanner();
 
-        initArticleListView();
+//        initArticleListView();
     }
 
     private void initBannerVew() {
