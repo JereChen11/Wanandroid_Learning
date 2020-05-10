@@ -1,8 +1,6 @@
-package com.jere.test.article.view;
+package com.jere.test.article.view.wechat;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -13,7 +11,10 @@ import android.widget.TextView;
 import com.jere.test.R;
 import com.jere.test.article.modle.beanfiles.homearticle.ArticleListBean;
 import com.jere.test.article.modle.beanfiles.wechat.WeChatArticleBloggerList;
+import com.jere.test.article.view.ArticleDetailWebViewActivity;
+import com.jere.test.article.view.ArticleListViewAdapter;
 import com.jere.test.article.viewmodel.wechat.WeChatBlogArticleViewModel;
+import com.jere.test.databinding.FragmentWechatBlogArticleBinding;
 
 import java.util.ArrayList;
 
@@ -31,21 +32,18 @@ import androidx.viewpager2.widget.ViewPager2;
  * @author jere
  */
 public class WeChatBlogArticleFragment extends Fragment {
-    private ViewPager2 mWeChatBloggerListVp2;
     private ArrayList<WeChatArticleBloggerList.DataBean> mWeChatBloggerList = new ArrayList<>();
     private WeChatBlogArticleViewModel mWeChatBlogArticleVm;
-    private RecyclerView mWeChatArticleListRecyclerView;
     private ArrayList<ArticleListBean.DataBean.DatasBean> mWeChatArticleListData = new ArrayList<>();
+    private FragmentWechatBlogArticleBinding mBinding;
 
-
-    private OnFragmentInteractionListener mListener;
     private Observer<WeChatArticleBloggerList> weChatArticleBloggerListObserver = new Observer<WeChatArticleBloggerList>() {
         @Override
         public void onChanged(@Nullable WeChatArticleBloggerList weChatArticleBloggerList) {
             if (weChatArticleBloggerList != null) {
                 mWeChatBloggerList = weChatArticleBloggerList.getData();
                 WeChatBloggerListVpAdapter adapter = new WeChatBloggerListVpAdapter(mWeChatBloggerList);
-                mWeChatBloggerListVp2.setAdapter(adapter);
+                mBinding.weChatBlogArticleVp2.setAdapter(adapter);
             }
         }
     };
@@ -70,8 +68,7 @@ public class WeChatBlogArticleFragment extends Fragment {
 
                             }
                         });
-                mWeChatArticleListRecyclerView.setAdapter(adapter);
-
+                mBinding.weChatArticleListRecyclerView.setAdapter(adapter);
             }
         }
     };
@@ -80,20 +77,12 @@ public class WeChatBlogArticleFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static WeChatBlogArticleFragment newInstance() {
-        return new WeChatBlogArticleFragment();
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_wechat_blog_article, container, false);
+        mBinding = FragmentWechatBlogArticleBinding.inflate(inflater, container, false);
+        return mBinding.getRoot();
     }
 
     @Override
@@ -105,12 +94,11 @@ public class WeChatBlogArticleFragment extends Fragment {
         mWeChatBlogArticleVm.setWeChatArticleBloggerListLd();
         mWeChatBlogArticleVm.getWeChatArticleListLd().observe(getViewLifecycleOwner(), weChatArticleListObserver);
 
-        mWeChatBloggerListVp2 = view.findViewById(R.id.weChatBlogArticleVp2);
-        mWeChatBloggerListVp2.setLayoutParams(new ConstraintLayout.LayoutParams(
+        mBinding.weChatBlogArticleVp2.setLayoutParams(new ConstraintLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         WeChatBloggerListVpAdapter weChatBloggerListVpAdapter = new WeChatBloggerListVpAdapter(mWeChatBloggerList);
-        mWeChatBloggerListVp2.setAdapter(weChatBloggerListVpAdapter);
-        mWeChatBloggerListVp2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+        mBinding.weChatBlogArticleVp2.setAdapter(weChatBloggerListVpAdapter);
+        mBinding.weChatBlogArticleVp2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
@@ -129,46 +117,6 @@ public class WeChatBlogArticleFragment extends Fragment {
             }
         });
 
-        mWeChatArticleListRecyclerView = view.findViewById(R.id.weChatArticleListRecyclerView);
-
-    }
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 
     static class WeChatBloggerListVpAdapter extends RecyclerView.Adapter<WeChatBloggerListVpAdapter.MyViewHolder> {
@@ -180,14 +128,14 @@ public class WeChatBlogArticleFragment extends Fragment {
 
         @NonNull
         @Override
-        public WeChatBloggerListVpAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.view_page_item_view_wechat_blogger_list, parent, false);
-            return new WeChatBloggerListVpAdapter.MyViewHolder(view);
+            return new MyViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull WeChatBloggerListVpAdapter.MyViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             WeChatArticleBloggerList.DataBean data = weChatBloggerList.get(position);
             if (!TextUtils.isEmpty(data.getName())) {
                 holder.nameTv.setText(data.getName());
@@ -199,10 +147,10 @@ public class WeChatBlogArticleFragment extends Fragment {
             return weChatBloggerList.size();
         }
 
-        class MyViewHolder extends RecyclerView.ViewHolder {
+        static class MyViewHolder extends RecyclerView.ViewHolder {
             private TextView nameTv;
 
-            public MyViewHolder(@NonNull View itemView) {
+            MyViewHolder(@NonNull View itemView) {
                 super(itemView);
                 nameTv = itemView.findViewById(R.id.weChatBloggerListNameTv);
             }

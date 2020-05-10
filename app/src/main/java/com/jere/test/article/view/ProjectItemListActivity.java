@@ -14,6 +14,7 @@ import com.jere.test.R;
 import com.jere.test.article.modle.beanfiles.completeproject.ProjectItemList;
 import com.jere.test.article.view.completeproject.CompleteProjectArticleFragment;
 import com.jere.test.article.viewmodel.completeproject.ProjectItemListViewModel;
+import com.jere.test.databinding.ActivityProjectItemListBinding;
 import com.jere.test.util.RecyclerItemClickListener;
 
 import java.lang.ref.WeakReference;
@@ -22,9 +23,9 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -33,8 +34,9 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ProjectItemListActivity extends AppCompatActivity {
     private static final String TAG = "ProjectItemListActivity";
 
-    private RecyclerView mRecyclerView;
     private ProjectItemList mProjectItemList;
+    private ActivityProjectItemListBinding mBinding;
+
     private Observer<ProjectItemList> observer = new Observer<ProjectItemList>() {
         @Override
         public void onChanged(@Nullable ProjectItemList projectItemList) {
@@ -42,7 +44,7 @@ public class ProjectItemListActivity extends AppCompatActivity {
                 Log.e(TAG, "onChanged: " + projectItemList.getData().getDatas().get(0).getTitle());
                 mProjectItemList = projectItemList;
                 MyAdapter adapter = new MyAdapter(ProjectItemListActivity.this, projectItemList);
-                mRecyclerView.setAdapter(adapter);
+                mBinding.projectItemListRecyclerView.setAdapter(adapter);
             }
         }
     };
@@ -51,6 +53,7 @@ public class ProjectItemListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_item_list);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_project_item_list);
 
         int clickItemProjectId = getIntent().getIntExtra(CompleteProjectArticleFragment.PROJECT_ITEM_ID_KEY, -1);
 
@@ -60,18 +63,8 @@ public class ProjectItemListActivity extends AppCompatActivity {
         }
         projectItemListVm.getProjectItemListLd().observe(this, observer);
 
-
-        mRecyclerView = findViewById(R.id.project_item_list_recycler_view);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        ProjectItemList projectItemList = projectItemListVm.getProjectItemListLd().getValue();
-        if (projectItemList != null) {
-            mProjectItemList = projectItemList;
-            MyAdapter adapter = new MyAdapter(this, projectItemList);
-            mRecyclerView.setAdapter(adapter);
-        }
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this,
-                mRecyclerView,
+        mBinding.projectItemListRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this,
+                mBinding.projectItemListRecyclerView,
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
@@ -88,11 +81,9 @@ public class ProjectItemListActivity extends AppCompatActivity {
 
                     }
                 }));
-
-
     }
 
-    class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+    static class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         private ArrayList<ProjectItemList.DataBean.DatasBean> dataList;
         private WeakReference<ProjectItemListActivity> weakReference;
 
@@ -113,7 +104,6 @@ public class ProjectItemListActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
             ProjectItemList.DataBean.DatasBean item = dataList.get(i);
-//            myViewHolder.envelopIv.setImageResource(item.getEnvelopePic());
             if (weakReference != null && weakReference.get() != null && !weakReference.get().isFinishing()) {
                 Glide.with(weakReference.get())
                         .load(item.getEnvelopePic())
@@ -130,14 +120,14 @@ public class ProjectItemListActivity extends AppCompatActivity {
             return dataList.size();
         }
 
-        class MyViewHolder extends RecyclerView.ViewHolder {
+        static class MyViewHolder extends RecyclerView.ViewHolder {
             private ImageView envelopIv;
             private TextView titleTv;
             private TextView describeContentTv;
             private TextView shareDateTv;
             private TextView authorTv;
 
-            public MyViewHolder(@NonNull View itemView) {
+            MyViewHolder(@NonNull View itemView) {
                 super(itemView);
                 envelopIv = itemView.findViewById(R.id.project_item_list_envelop_iv);
                 titleTv = itemView.findViewById(R.id.project_item_list_title_tv);

@@ -1,6 +1,5 @@
 package com.jere.test.account;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,10 +29,6 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
 
     }
 
-    public static MyAccountFragment newInstance() {
-        return new MyAccountFragment();
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,17 +56,6 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
             mBinding.myAccountSettingsItem.setCategoryTextString(getString(R.string.login_cn));
         }
     }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
 
     @Override
     public void onClick(View v) {

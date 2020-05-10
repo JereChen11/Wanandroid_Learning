@@ -1,5 +1,6 @@
 package com.jere.test.article.view.completeproject;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class ProjectTreeItemAdapter extends RecyclerView.Adapter<ProjectTreeItem
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         if (projectItems.size() > 0) {
             ProjectTreeItem.ProjectItem projectItem = projectItems.get(i);
-            if (projectItem.getName() != null) {
+            if (!TextUtils.isEmpty(projectItem.getName())) {
                 myViewHolder.projectItemNameTv.setText(projectItem.getName());
             }
         }
@@ -49,7 +50,7 @@ public class ProjectTreeItemAdapter extends RecyclerView.Adapter<ProjectTreeItem
         return 0;
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    static class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView projectItemNameTv;
 
         MyViewHolder(@NonNull View itemView) {

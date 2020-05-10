@@ -2,7 +2,6 @@ package com.jere.test.article.view.homearticle;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,7 +21,6 @@ import com.jere.test.article.view.ArticleDetailWebViewActivity;
 import com.jere.test.article.view.ArticleListViewAdapter;
 import com.jere.test.article.viewmodel.homearticle.HomeViewModel;
 import com.jere.test.databinding.FragmentHomeBinding;
-import com.jere.test.util.RecyclerItemClickListener;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -45,7 +43,6 @@ import androidx.viewpager2.widget.ViewPager2;
 public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
 
-    private OnFragmentInteractionListener mListener;
     private ViewPager2 mBannerVp2;
     private MyBannerVpAdapter mBannerVpAdapter;
     private View[] indicateViews;
@@ -136,7 +133,6 @@ public class HomeFragment extends Fragment {
         mBannerHandler = new BannerHandler(this);
         startAutoLoopBanner();
 
-//        initArticleListView();
     }
 
     private void initBannerVew() {
@@ -198,33 +194,6 @@ public class HomeFragment extends Fragment {
         }, 2, 3, TimeUnit.SECONDS);
     }
 
-
-    private void initArticleListView() {
-        mBinding.homeArticleListRecycleView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),
-                mBinding.homeArticleListRecycleView,
-                new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        String link = mHomeArticleListData.get(position).getLink();
-                        Intent intent = new Intent(getActivity(), ArticleDetailWebViewActivity.class);
-                        intent.putExtra(ArticleDetailWebViewActivity.ARTICLE_DETAIL_WEB_LINK_KEY, link);
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onLongItemClick(View view, int position) {
-
-                    }
-                }));
-
-    }
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onStop() {
         super.onStop();
@@ -242,23 +211,11 @@ public class HomeFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 
     public static class BannerHandler extends Handler {

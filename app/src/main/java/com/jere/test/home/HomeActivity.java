@@ -1,7 +1,6 @@
 package com.jere.test.home;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +14,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.jere.test.R;
 import com.jere.test.aboutme.AboutMeActivity;
 import com.jere.test.account.MyAccountFragment;
-import com.jere.test.article.view.WeChatBlogArticleFragment;
+import com.jere.test.article.view.wechat.WeChatBlogArticleFragment;
 import com.jere.test.article.view.completeproject.CompleteProjectArticleFragment;
 import com.jere.test.article.view.homearticle.HomeFragment;
 import com.jere.test.article.view.knowledgesystem.KnowledgeSystemFragment;
@@ -33,11 +32,7 @@ import androidx.fragment.app.FragmentTransaction;
 /**
  * @author jere
  */
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener,
-        CompleteProjectArticleFragment.OnFragmentInteractionListener,
-        WeChatBlogArticleFragment.OnFragmentInteractionListener,
-        HomeFragment.OnFragmentInteractionListener,
-        KnowledgeSystemFragment.OnFragmentInteractionListener {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private NavigationView navigationView;
     private ImageView navHeaderBgIv, avatarIv;
@@ -129,25 +124,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bottomBarCompleteProjectItem:
                 navItemIndex = 1;
-                CompleteProjectArticleFragment completeProjectArticleFragment = CompleteProjectArticleFragment.newInstance();
-                replaceFragment(completeProjectArticleFragment);
+                replaceFragment(new CompleteProjectArticleFragment());
                 break;
             case R.id.bottomBarWeChatBlogItem:
                 navItemIndex = 2;
-                WeChatBlogArticleFragment weChatBlogArticleFragment = WeChatBlogArticleFragment.newInstance();
-                replaceFragment(weChatBlogArticleFragment);
+                replaceFragment(new WeChatBlogArticleFragment());
                 break;
             case R.id.avatarIv:
             case R.id.bottomBarMyAccountItem:
                 navItemIndex = 4;
-                MyAccountFragment myAccountFragment = MyAccountFragment.newInstance();
-                replaceFragment(myAccountFragment);
+                replaceFragment(new MyAccountFragment());
                 mBinding.drawerLayout.closeDrawers();
                 break;
             case R.id.bottomBarKnowledgeSystemItem:
                 navItemIndex = 3;
-                KnowledgeSystemFragment knowledgeSystemFragment = KnowledgeSystemFragment.newInstance();
-                replaceFragment(knowledgeSystemFragment);
+                replaceFragment(new KnowledgeSystemFragment());
                 break;
             default:
                 break;
@@ -155,10 +146,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setToolbarTitle();
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 
     private void replaceFragment(Fragment replaceFragment) {
         FragmentTransaction fragmentTransaction = getFragmentTransaction();
