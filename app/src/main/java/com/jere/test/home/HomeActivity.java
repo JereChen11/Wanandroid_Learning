@@ -10,17 +10,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.jere.test.R;
 import com.jere.test.aboutme.AboutMeActivity;
 import com.jere.test.account.MyAccountFragment;
-import com.jere.test.article.view.wechat.WeChatBlogArticleFragment;
 import com.jere.test.article.view.completeproject.CompleteProjectArticleFragment;
 import com.jere.test.article.view.homearticle.HomeFragment;
 import com.jere.test.article.view.knowledgesystem.KnowledgeSystemFragment;
+import com.jere.test.article.view.wechat.WeChatBlogArticleFragment;
 import com.jere.test.databinding.ActivityHomeBinding;
 import com.jere.test.tutorial.TutorialActivity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -107,38 +109,55 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initComponents() {
-        mBinding.homePageContent.bottomBarHomePageItem.setOnClickListener(this);
-        mBinding.homePageContent.bottomBarCompleteProjectItem.setOnClickListener(this);
-        mBinding.homePageContent.bottomBarWeChatBlogItem.setOnClickListener(this);
-        mBinding.homePageContent.bottomBarKnowledgeSystemItem.setOnClickListener(this);
-        mBinding.homePageContent.bottomBarMyAccountItem.setOnClickListener(this);
+        mBinding.homePageContent.homeBottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                boolean result = false;
+                switch (item.getItemId()) {
+                    case R.id.nav_home:
+                        navItemIndex = 0;
+                        replaceFragment(new HomeFragment());
+                        result = true;
+                        break;
+                    case R.id.nav_complete_project:
+                        navItemIndex = 1;
+                        replaceFragment(new CompleteProjectArticleFragment());
+                        result = true;
+                        break;
+                    case R.id.nav_wechat_blog:
+                        navItemIndex = 2;
+                        replaceFragment(new WeChatBlogArticleFragment());
+                        result = true;
+                        break;
+                    case R.id.nav_my:
+                        navItemIndex = 4;
+                        replaceFragment(new MyAccountFragment());
+                        result = true;
+                        break;
+                    case R.id.nav_knowledge_system:
+                        navItemIndex = 3;
+                        replaceFragment(new KnowledgeSystemFragment());
+                        result = true;
+                        break;
+                    default:
+                        break;
+                }
+                setToolbarTitle();
+                selectNavMenu();
+
+                return result;
+            }
+        });
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.bottomBarHomePageItem:
-                navItemIndex = 0;
-                HomeFragment homeFragment = HomeFragment.newInstance();
-                replaceFragment(homeFragment);
-                break;
-            case R.id.bottomBarCompleteProjectItem:
-                navItemIndex = 1;
-                replaceFragment(new CompleteProjectArticleFragment());
-                break;
-            case R.id.bottomBarWeChatBlogItem:
-                navItemIndex = 2;
-                replaceFragment(new WeChatBlogArticleFragment());
-                break;
             case R.id.avatarIv:
-            case R.id.bottomBarMyAccountItem:
                 navItemIndex = 4;
                 replaceFragment(new MyAccountFragment());
                 mBinding.drawerLayout.closeDrawers();
-                break;
-            case R.id.bottomBarKnowledgeSystemItem:
-                navItemIndex = 3;
-                replaceFragment(new KnowledgeSystemFragment());
                 break;
             default:
                 break;
@@ -172,8 +191,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 .thumbnail(0.5f)
                 .into(avatarIv);
 
-        // showing dot next to notifications label
-        navigationView.getMenu().getItem(3).setActionView(R.layout.menu_dot);
     }
 
     /***
@@ -273,6 +290,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     default:
                         navItemIndex = 0;
                         break;
+                }
+                if (menuItem.getItemId() != R.id.nav_about_us && menuItem.getItemId() != R.id.nav_tutorial) {
+                    mBinding.homePageContent.homeBottomNavigationView.setSelectedItemId(menuItem.getItemId());
                 }
 
                 //Checking if the item is in checked state or not, if not make it in checked state
