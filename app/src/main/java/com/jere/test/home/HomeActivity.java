@@ -363,14 +363,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         // Inflate the menu; this adds items to the action bar if it is present.
 
         // show menu only when home fragment is selected
-        if (navItemIndex == 0) {
-            getMenuInflater().inflate(R.menu.main, menu);
-        }
+//        if (navItemIndex == 0) {
+//            getMenuInflater().inflate(R.menu.main, menu);
+//        }
 
         // when fragment is notifications, load the menu created for notifications
-        if (navItemIndex == 3) {
-            getMenuInflater().inflate(R.menu.notifications, menu);
-        }
+//        if (navItemIndex == 3) {
+//            getMenuInflater().inflate(R.menu.notifications, menu);
+//        }
         return true;
     }
 
