@@ -2,13 +2,11 @@ package com.jere.test.article.view.wechat;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.jere.test.R;
+import com.google.android.material.tabs.TabLayout;
 import com.jere.test.article.modle.beanfiles.homearticle.ArticleListBean;
 import com.jere.test.article.modle.beanfiles.wechat.WeChatArticleBloggerList;
 import com.jere.test.article.view.ArticleDetailWebViewActivity;
@@ -20,12 +18,9 @@ import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 
 
 /**
@@ -42,8 +37,9 @@ public class WeChatBlogArticleFragment extends Fragment {
         public void onChanged(@Nullable WeChatArticleBloggerList weChatArticleBloggerList) {
             if (weChatArticleBloggerList != null) {
                 mWeChatBloggerList = weChatArticleBloggerList.getData();
-                WeChatBloggerListVpAdapter adapter = new WeChatBloggerListVpAdapter(mWeChatBloggerList);
-                mBinding.weChatBlogArticleVp2.setAdapter(adapter);
+                for (WeChatArticleBloggerList.DataBean dataBean : mWeChatBloggerList) {
+                    mBinding.weChatBloggerTabLayout.addTab(mBinding.weChatBloggerTabLayout.newTab().setText(dataBean.getName()));
+                }
             }
         }
     };
@@ -94,66 +90,23 @@ public class WeChatBlogArticleFragment extends Fragment {
         mWeChatBlogArticleVm.setWeChatArticleBloggerListLd();
         mWeChatBlogArticleVm.getWeChatArticleListLd().observe(getViewLifecycleOwner(), weChatArticleListObserver);
 
-        mBinding.weChatBlogArticleVp2.setLayoutParams(new ConstraintLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        WeChatBloggerListVpAdapter weChatBloggerListVpAdapter = new WeChatBloggerListVpAdapter(mWeChatBloggerList);
-        mBinding.weChatBlogArticleVp2.setAdapter(weChatBloggerListVpAdapter);
-        mBinding.weChatBlogArticleVp2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+        mBinding.weChatBloggerTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+            public void onTabSelected(TabLayout.Tab tab) {
+                int weChatBloggerId = mWeChatBloggerList.get(tab.getPosition()).getId();
+                mWeChatBlogArticleVm.setWeChatArticleListLd(weChatBloggerId, 0);
             }
 
             @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                WeChatArticleBloggerList.DataBean data = mWeChatBloggerList.get(position);
-                mWeChatBlogArticleVm.setWeChatArticleListLd(data.getId(), 0);
+            public void onTabUnselected(TabLayout.Tab tab) {
+
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {
-                super.onPageScrollStateChanged(state);
+            public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
 
-    }
-
-    static class WeChatBloggerListVpAdapter extends RecyclerView.Adapter<WeChatBloggerListVpAdapter.MyViewHolder> {
-        private ArrayList<WeChatArticleBloggerList.DataBean> weChatBloggerList;
-
-        WeChatBloggerListVpAdapter(ArrayList<WeChatArticleBloggerList.DataBean> weChatBloggerList) {
-            this.weChatBloggerList = weChatBloggerList;
-        }
-
-        @NonNull
-        @Override
-        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.view_page_item_view_wechat_blogger_list, parent, false);
-            return new MyViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-            WeChatArticleBloggerList.DataBean data = weChatBloggerList.get(position);
-            if (!TextUtils.isEmpty(data.getName())) {
-                holder.nameTv.setText(data.getName());
-            }
-        }
-
-        @Override
-        public int getItemCount() {
-            return weChatBloggerList.size();
-        }
-
-        static class MyViewHolder extends RecyclerView.ViewHolder {
-            private TextView nameTv;
-
-            MyViewHolder(@NonNull View itemView) {
-                super(itemView);
-                nameTv = itemView.findViewById(R.id.weChatBloggerListNameTv);
-            }
-        }
     }
 }

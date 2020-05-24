@@ -12,66 +12,43 @@
         android:background="@color/white"
         tools:context=".article.view.wechat.WeChatBlogArticleFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/weChatBloggerListCl"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/turnRightArrow"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="5dp"
-                    android:src="@drawable/turn_right_arrow"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/weChatBlogArticleVp2"
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/weChatBloggerTabLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="60dp"
+                    app:tabBackground="@color/white_smoke"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tabIndicatorColor="@color/red"
+                    app:tabIndicatorFullWidth="false"
+                    app:tabIndicatorHeight="2dp"
+                    app:tabMode="scrollable"
+                    app:tabTextColor="@color/gray"
+                    app:tabSelectedTextColor="@color/black" />
 
-                <ImageView
-                    android:id="@+id/turnLeftArrow"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="5dp"
-                    android:src="@drawable/turn_left_arrow"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/weChatArticleListRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/weChatBloggerTabLayout" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:src="@drawable/triangle_icon"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/weChatBloggerListCl" />
+        </androidx.core.widget.NestedScrollView>
 
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/weChatArticleListRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="10dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/weChatBloggerListCl" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
 
