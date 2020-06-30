@@ -39,6 +39,7 @@
             android:layout_height="50dp"
             app:itemTextColor="@color/black"
             app:itemIconTint="@color/black"
+            app:labelVisibilityMode="labeled"
             android:background="@color/white"
             app:menu="@menu/home_bottom_navigation_view_menu"
             android:layout_gravity="bottom" />

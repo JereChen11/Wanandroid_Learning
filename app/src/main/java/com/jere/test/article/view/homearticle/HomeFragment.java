@@ -58,11 +58,7 @@ public class HomeFragment extends Fragment {
             if (homeBannerListBean != null) {
                 List<HomeBannerListBean.DataBean> bannerListDatas = homeBannerListBean.getData();
                 mBannerDataList = new ArrayList<>();
-                HomeBannerListBean.DataBean fakeDataBean = new HomeBannerListBean.DataBean();
-                //为了实现Banner循环轮播，需要额外多两张图片，分别放置列表首尾。
-                mBannerDataList.add(fakeDataBean);
                 mBannerDataList.addAll(bannerListDatas);
-                mBannerDataList.add(fakeDataBean);
                 mBannerVpAdapter = new MyBannerVpAdapter(HomeFragment.this, mBannerDataList);
                 mBannerVpAdapter.notifyDataSetChanged();
                 mBannerVp2.setAdapter(mBannerVpAdapter);
@@ -151,18 +147,17 @@ public class HomeFragment extends Fragment {
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 //hard code, Banner只有4张图
-                if (position == mBannerDataList.size() - 1) {
-                    mBannerVp2.setCurrentItem(1);
-                    position = 1;
+                if (position == 5) {
+                    mBannerVp2.setCurrentItem(1, false);
                 } else if (position == 0) {
-                    mBannerVp2.setCurrentItem(4);
-                    position = 4;
+                    mBannerVp2.setCurrentItem(4, false);
                 }
-                for (int i = 1; i < 5; i++) {
+                position = toRealPosition(position, 4);
+                for (int i = 0; i < 4; i++) {
                     if (position == i) {
-                        indicateViews[i - 1].setBackgroundResource(R.drawable.banner_navigation_point_highlight_shape);
+                        indicateViews[i].setBackgroundResource(R.drawable.banner_navigation_point_highlight_shape);
                     } else {
-                        indicateViews[i - 1].setBackgroundResource(R.drawable.banner_navigation_point_gray_shape);
+                        indicateViews[i].setBackgroundResource(R.drawable.banner_navigation_point_gray_shape);
                     }
                 }
 
@@ -238,6 +233,17 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    public int toRealPosition(int position, int realCount) {
+        int realPosition = 0;
+        if (realCount > 1) {
+            realPosition = (position - 1) % realCount;
+        }
+        if (realPosition < 0) {
+            realPosition += realCount;
+        }
+        return realPosition;
+    }
+
     class MyBannerVpAdapter extends RecyclerView.Adapter<MyBannerVpAdapter.MyViewHolder> {
         private ArrayList<HomeBannerListBean.DataBean> bannerDataList;
         private WeakReference<HomeFragment> weakReference;
@@ -256,7 +262,7 @@ public class HomeFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-            HomeBannerListBean.DataBean itemData = bannerDataList.get(position);
+            HomeBannerListBean.DataBean itemData = bannerDataList.get(toRealPosition(position, getRealCount()));
             String imageUrl = itemData.getImagePath();
             final HomeFragment homeFragment = weakReference.get();
             if (!TextUtils.isEmpty(imageUrl) && homeFragment != null
@@ -279,6 +285,14 @@ public class HomeFragment extends Fragment {
 
         @Override
         public int getItemCount() {
+            if (bannerDataList.size() > 0) {
+                //为了实现Banner循环轮播，需要额外多两张图片，分别放置列表首尾。
+                return bannerDataList.size() + 2;
+            }
+            return bannerDataList.size();
+        }
+
+        public int getRealCount() {
             return bannerDataList.size();
         }
 
