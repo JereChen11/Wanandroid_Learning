@@ -13,6 +13,7 @@
         tools:context=".article.view.wechat.WeChatBlogArticleFragment">
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/weChatNsv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">

@@ -2,7 +2,6 @@ package com.jere.test.article.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,16 +33,16 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ProjectItemListActivity extends AppCompatActivity {
     private static final String TAG = "ProjectItemListActivity";
 
-    private ProjectItemList mProjectItemList;
+    private ArrayList<ProjectItemList.DataBean.DatasBean> mProjectItemDataList = new ArrayList<>();
     private ActivityProjectItemListBinding mBinding;
+    private int pageNumber = 0;
 
     private Observer<ProjectItemList> observer = new Observer<ProjectItemList>() {
         @Override
         public void onChanged(@Nullable ProjectItemList projectItemList) {
             if (projectItemList != null) {
-                Log.e(TAG, "onChanged: " + projectItemList.getData().getDatas().get(0).getTitle());
-                mProjectItemList = projectItemList;
-                MyAdapter adapter = new MyAdapter(ProjectItemListActivity.this, projectItemList);
+                mProjectItemDataList.addAll(projectItemList.getData().getDatas());
+                MyAdapter adapter = new MyAdapter(ProjectItemListActivity.this, mProjectItemDataList);
                 mBinding.projectItemListRecyclerView.setAdapter(adapter);
             }
         }
@@ -55,9 +54,9 @@ public class ProjectItemListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_project_item_list);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_project_item_list);
 
-        int clickItemProjectId = getIntent().getIntExtra(CompleteProjectArticleFragment.PROJECT_ITEM_ID_KEY, -1);
+        final int clickItemProjectId = getIntent().getIntExtra(CompleteProjectArticleFragment.PROJECT_ITEM_ID_KEY, -1);
 
-        ProjectItemListViewModel projectItemListVm = new ViewModelProvider(this).get(ProjectItemListViewModel.class);
+        final ProjectItemListViewModel projectItemListVm = new ViewModelProvider(this).get(ProjectItemListViewModel.class);
         if (clickItemProjectId > -1) {
             projectItemListVm.setProjectItemListLd(0, clickItemProjectId);
         }
@@ -68,7 +67,7 @@ public class ProjectItemListActivity extends AppCompatActivity {
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        ProjectItemList.DataBean.DatasBean data = mProjectItemList.getData().getDatas().get(position);
+                        ProjectItemList.DataBean.DatasBean data = mProjectItemDataList.get(position);
                         String link = data.getLink();
 
                         Intent articleDetailWebViewIntent = new Intent(ProjectItemListActivity.this, ArticleDetailWebViewActivity.class);
@@ -81,15 +80,26 @@ public class ProjectItemListActivity extends AppCompatActivity {
 
                     }
                 }));
+
+        mBinding.projectItemListRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    pageNumber++;
+                    projectItemListVm.setProjectItemListLd(pageNumber, clickItemProjectId);
+                }
+            }
+        });
     }
 
     static class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         private ArrayList<ProjectItemList.DataBean.DatasBean> dataList;
         private WeakReference<ProjectItemListActivity> weakReference;
 
-        MyAdapter(ProjectItemListActivity activity, ProjectItemList projectItemList) {
+        MyAdapter(ProjectItemListActivity activity, ArrayList<ProjectItemList.DataBean.DatasBean> projectItemList) {
             weakReference = new WeakReference<>(activity);
-            this.dataList = projectItemList.getData().getDatas();
+            this.dataList = projectItemList;
         }
 
 

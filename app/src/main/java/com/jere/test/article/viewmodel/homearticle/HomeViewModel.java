@@ -61,8 +61,8 @@ public class HomeViewModel extends ViewModel {
         return homeArticleListBeanLd;
     }
 
-    public void setHomeArticleListBeanLd() {
-        HomeRepository.newInstance().getHomeArticleList(0, new GetWebDataListener() {
+    public void setHomeArticleListBeanLd(int pageNumber) {
+        HomeRepository.newInstance().getHomeArticleList(pageNumber, new GetWebDataListener() {
             @Override
             public void getDataSuccess(Object object) {
                 ArticleListBean homeArticleListBean = (ArticleListBean) object;

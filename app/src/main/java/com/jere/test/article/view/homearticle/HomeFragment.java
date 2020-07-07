@@ -31,6 +31,7 @@ import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -50,7 +51,9 @@ public class HomeFragment extends Fragment {
     private BannerHandler mBannerHandler;
     private ScheduledExecutorService mBannerScheduledExecutorService;
     private ArrayList<ArticleListBean.DataBean.DatasBean> mHomeArticleListData = new ArrayList<>();
+    private ArticleListViewAdapter articleListViewAdapter;
     private FragmentHomeBinding mBinding;
+    private int homeArticlePage = 0;
 
     private Observer<HomeBannerListBean> bannerListDataObserver = new Observer<HomeBannerListBean>() {
         @Override
@@ -71,24 +74,8 @@ public class HomeFragment extends Fragment {
         @Override
         public void onChanged(ArticleListBean articleListBean) {
             if (articleListBean != null) {
-                mHomeArticleListData = articleListBean.getData().getDatas();
-
-                ArticleListViewAdapter adapter = new ArticleListViewAdapter(mHomeArticleListData,
-                        new ArticleListViewAdapter.AdapterItemClickListener() {
-                            @Override
-                            public void onPositionClicked(View v, int position) {
-                                String link = mHomeArticleListData.get(position).getLink();
-                                Intent intent = new Intent(getActivity(), ArticleDetailWebViewActivity.class);
-                                intent.putExtra(ArticleDetailWebViewActivity.ARTICLE_DETAIL_WEB_LINK_KEY, link);
-                                startActivity(intent);
-                            }
-
-                            @Override
-                            public void onLongClicked(View v, int position) {
-                                Toast.makeText(getContext(), "long clcik position : " + position, Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                mBinding.homeArticleListRecycleView.setAdapter(adapter);
+                mHomeArticleListData.addAll(articleListBean.getData().getDatas());
+                articleListViewAdapter.setData(mHomeArticleListData);
             }
         }
     };
@@ -113,13 +100,43 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.e(TAG, "onViewCreated: ");
-        HomeViewModel homeVm = new ViewModelProvider(this).get(HomeViewModel.class);
+
+        articleListViewAdapter = new ArticleListViewAdapter(mHomeArticleListData, new ArticleListViewAdapter.AdapterItemClickListener() {
+            @Override
+            public void onPositionClicked(View v, int position) {
+                String link = mHomeArticleListData.get(position).getLink();
+                Intent intent = new Intent(getActivity(), ArticleDetailWebViewActivity.class);
+                intent.putExtra(ArticleDetailWebViewActivity.ARTICLE_DETAIL_WEB_LINK_KEY, link);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongClicked(View v, int position) {
+                Toast.makeText(getContext(), "long clcik position : " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+        mBinding.homeArticleListRecycleView.setAdapter(articleListViewAdapter);
+
+
+        final HomeViewModel homeVm = new ViewModelProvider(this).get(HomeViewModel.class);
         homeVm.getHomeBannerListLd().observe(getViewLifecycleOwner(), bannerListDataObserver);
 //        homeVm.setHomeBannerListLd();
         homeVm.setRxJava2HomeBannerListLd();
         homeVm.getHomeArticleListBeanLd().observe(getViewLifecycleOwner(), articleListBeanObserver);
-        homeVm.setHomeArticleListBeanLd();
+        homeVm.setHomeArticleListBeanLd(homeArticlePage);
+
+        mBinding.homeArticleListRecycleView.setNestedScrollingEnabled(false);
+        mBinding.homeNsv.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (!v.canScrollVertically(1)) {
+                    Log.e(TAG, "onScrollChange: homeNsv");
+                    homeArticlePage++;
+                    homeVm.setHomeArticleListBeanLd(homeArticlePage);
+                }
+            }
+        });
+
 
         initBannerVew();
         mBannerHandler = new BannerHandler(this);

@@ -40,6 +40,11 @@ public class ArticleListViewAdapter extends RecyclerView.Adapter<ArticleListView
         this.itemClickListener = listener;
     }
 
+    public void setData(ArrayList<ArticleListBean.DataBean.DatasBean> homeArticleListData) {
+        this.homeArticleListData = homeArticleListData;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
