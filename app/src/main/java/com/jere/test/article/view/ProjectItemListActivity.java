@@ -35,6 +35,7 @@ public class ProjectItemListActivity extends AppCompatActivity {
 
     private ArrayList<ProjectItemList.DataBean.DatasBean> mProjectItemDataList = new ArrayList<>();
     private ActivityProjectItemListBinding mBinding;
+    private MyAdapter adapter;
     private int pageNumber = 0;
 
     private Observer<ProjectItemList> observer = new Observer<ProjectItemList>() {
@@ -42,8 +43,7 @@ public class ProjectItemListActivity extends AppCompatActivity {
         public void onChanged(@Nullable ProjectItemList projectItemList) {
             if (projectItemList != null) {
                 mProjectItemDataList.addAll(projectItemList.getData().getDatas());
-                MyAdapter adapter = new MyAdapter(ProjectItemListActivity.this, mProjectItemDataList);
-                mBinding.projectItemListRecyclerView.setAdapter(adapter);
+                adapter.setData(mProjectItemDataList);
             }
         }
     };
@@ -51,19 +51,21 @@ public class ProjectItemListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_project_item_list);
+//        setContentView(R.layout.activity_project_item_list);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_project_item_list);
 
         final int clickItemProjectId = getIntent().getIntExtra(CompleteProjectArticleFragment.PROJECT_ITEM_ID_KEY, -1);
 
         final ProjectItemListViewModel projectItemListVm = new ViewModelProvider(this).get(ProjectItemListViewModel.class);
         if (clickItemProjectId > -1) {
-            projectItemListVm.setProjectItemListLd(0, clickItemProjectId);
+            projectItemListVm.setProjectItemListLd(pageNumber, clickItemProjectId);
         }
+        adapter = new MyAdapter(ProjectItemListActivity.this, mProjectItemDataList);
+        mBinding.projectItemListRcv.setAdapter(adapter);
         projectItemListVm.getProjectItemListLd().observe(this, observer);
 
-        mBinding.projectItemListRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this,
-                mBinding.projectItemListRecyclerView,
+        mBinding.projectItemListRcv.addOnItemTouchListener(new RecyclerItemClickListener(this,
+                mBinding.projectItemListRcv,
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
@@ -81,7 +83,7 @@ public class ProjectItemListActivity extends AppCompatActivity {
                     }
                 }));
 
-        mBinding.projectItemListRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mBinding.projectItemListRcv.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -102,6 +104,10 @@ public class ProjectItemListActivity extends AppCompatActivity {
             this.dataList = projectItemList;
         }
 
+        public void setData(ArrayList<ProjectItemList.DataBean.DatasBean> projectItemList) {
+            this.dataList = projectItemList;
+            notifyDataSetChanged();
+        }
 
         @NonNull
         @Override

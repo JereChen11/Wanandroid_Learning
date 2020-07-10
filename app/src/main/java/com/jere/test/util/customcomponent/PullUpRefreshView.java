@@ -1,0 +1,36 @@
+package com.jere.test.util.customcomponent;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ProgressBar;
+
+import com.jere.test.R;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+/**
+ * @author jere
+ */
+public class PullUpRefreshView extends ConstraintLayout {
+
+    public PullUpRefreshView(Context context) {
+        this(context, null);
+    }
+
+    public PullUpRefreshView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public PullUpRefreshView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view  = inflater.inflate(R.layout.custom_view_pull_up_refresh_view, this, true);
+
+        ProgressBar progressBar = view.findViewById(R.id.progressBar);
+    }
+
+
+}

@@ -30,7 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CompleteProjectArticleFragment extends Fragment {
     public static final String PROJECT_ITEM_ID_KEY = "PROJECT_ITEM_ID";
     private ProjectTreeItemAdapter mProjectTreeItemAdapter;
-    private ArrayList<ProjectTreeItem.ProjectItem> mProjectItems;
+    private ArrayList<ProjectTreeItem.ProjectItem> mProjectItems = new ArrayList<>();
     private RecyclerView mProjectTreeItemRecyclerView;
 
     public CompleteProjectArticleFragment() {
@@ -57,7 +57,7 @@ public class CompleteProjectArticleFragment extends Fragment {
         projectTreeItemVm.setProjectTreeItemsLd();
 
         mProjectTreeItemAdapter = new ProjectTreeItemAdapter(mProjectItems);
-        mProjectTreeItemRecyclerView = view.findViewById(R.id.project_tree_items_recycler_view);
+        mProjectTreeItemRecyclerView = view.findViewById(R.id.projectTreeItemsRcv);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         mProjectTreeItemRecyclerView.setLayoutManager(layoutManager);
         mProjectTreeItemRecyclerView.setAdapter(mProjectTreeItemAdapter);
@@ -89,10 +89,8 @@ public class CompleteProjectArticleFragment extends Fragment {
         @Override
         public void onChanged(@Nullable ArrayList<ProjectTreeItem.ProjectItem> projectItems) {
             if (projectItems != null) {
-                mProjectItems = projectItems;
-                mProjectTreeItemAdapter = new ProjectTreeItemAdapter(mProjectItems);
-                mProjectTreeItemRecyclerView.setAdapter(mProjectTreeItemAdapter);
-                mProjectTreeItemAdapter.notifyDataSetChanged();
+                mProjectItems.addAll(projectItems);
+                mProjectTreeItemAdapter.setData(mProjectItems);
             }
         }
     };

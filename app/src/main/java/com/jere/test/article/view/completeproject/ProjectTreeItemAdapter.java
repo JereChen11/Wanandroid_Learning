@@ -24,6 +24,11 @@ public class ProjectTreeItemAdapter extends RecyclerView.Adapter<ProjectTreeItem
         this.projectItems = arrayList;
     }
 
+    public void setData(ArrayList<ProjectTreeItem.ProjectItem> arrayList) {
+        this.projectItems = arrayList;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
