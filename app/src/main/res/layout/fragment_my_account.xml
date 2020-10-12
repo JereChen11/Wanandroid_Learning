@@ -7,14 +7,12 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/dark_gray">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/myInfoCl"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:background="@color/white"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
@@ -38,7 +36,7 @@
                 android:maxLines="1"
                 android:text="Jere Chen"
                 android:textColor="@color/black"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/portraitIv"
@@ -54,7 +52,7 @@
                 android:maxLines="1"
                 android:text="jerechen11@gmail.com"
                 android:textColor="@color/gray"
-                android:textSize="20sp"
+                android:textSize="17sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/myAccountNameTv"
                 app:layout_constraintTop_toBottomOf="@id/myAccountNameTv" />
@@ -64,7 +62,7 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginEnd="5dp"
-                android:src="@drawable/turn_right_arrow"
+                android:src="@drawable/vector_drawable_right_arrow"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -78,22 +76,6 @@
             android:layout_marginTop="10dp"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/myInfoCl">
-
-            <com.jere.test.util.customcomponent.MyAccountInfoItemCustomView
-                android:id="@+id/myAccountPhotoAlbumItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:categoryItemText="@string/photo_album_cn"
-                app:iconResource="@drawable/picture_icon"
-                app:layout_constraintTop_toBottomOf="@id/myInfoCl" />
-
-            <com.jere.test.util.customcomponent.MyAccountInfoItemCustomView
-                android:id="@+id/myAccountExpressionItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:categoryItemText="@string/expression_cn"
-                app:iconResource="@drawable/expression_icons"
-                app:layout_constraintTop_toBottomOf="@id/myInfoCl" />
 
             <com.jere.test.util.customcomponent.MyAccountInfoItemCustomView
                 android:id="@+id/myAccountCollectionFolderItem"

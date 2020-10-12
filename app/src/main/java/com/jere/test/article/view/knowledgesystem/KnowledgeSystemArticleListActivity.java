@@ -57,10 +57,13 @@ public class KnowledgeSystemArticleListActivity extends AppCompatActivity {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_knowledge_system_article_list);
 
         Bundle bundle = getIntent().getExtras();
-        int childItemId = bundle.getInt("childItemId");
-        String childItemName = bundle.getString("childItemName");
+        if (bundle == null) {
+            return;
+        }
+        int childItemId = bundle.getInt(KnowledgeSystemFragment.CHILD_ITEM_ID_KEY);
+        String childItemName = bundle.getString(KnowledgeSystemFragment.CHILD_ITEM_NAME_KEY);
 
-        mBinding.knowledgeSystemArticleListTitleTv.setText(childItemName);
+        mBinding.knowledgeSystemTitleBar.setTitle(childItemName);
 
         KnowledgeSystemViewModel knowledgeSystemVm = new ViewModelProvider(this).get(KnowledgeSystemViewModel.class);
         knowledgeSystemVm.getKnowledgeSystemArticleListBeanLd().observe(this, observer);

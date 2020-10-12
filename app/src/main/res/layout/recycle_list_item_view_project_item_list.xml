@@ -3,10 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white_smoke">
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
+    android:background="@drawable/article_container_shape"
+    android:padding="10dp">
 
     <ImageView
-        android:id="@+id/project_item_list_envelop_iv"
+        android:id="@+id/projectItemListEnvelopIv"
         android:layout_width="150dp"
         android:layout_height="200dp"
         android:layout_marginTop="10dp"
@@ -14,60 +18,54 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/project_item_list_title_tv"
+        android:id="@+id/projectItemListTitleTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:ellipsize="end"
-        android:maxLines="1"
+        android:maxLines="2"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/project_item_list_envelop_iv"
-        app:layout_constraintTop_toTopOf="@id/project_item_list_envelop_iv" />
+        app:layout_constraintStart_toEndOf="@id/projectItemListEnvelopIv"
+        app:layout_constraintTop_toTopOf="@id/projectItemListEnvelopIv" />
 
     <TextView
-        android:id="@+id/project_item_list_describe_content_tv"
+        android:id="@+id/projectItemListDescribeContentTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ellipsize="end"
         android:maxLines="3"
         android:textColor="@color/gray"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/project_item_list_title_tv"
-        app:layout_constraintTop_toBottomOf="@id/project_item_list_title_tv" />
+        app:layout_constraintStart_toStartOf="@id/projectItemListTitleTv"
+        app:layout_constraintTop_toBottomOf="@id/projectItemListTitleTv" />
 
     <TextView
-        android:id="@+id/project_item_list_share_date_tv"
+        android:id="@+id/projectItemListShareDateTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textColor="@color/orange_red"
+        android:textColor="@color/gray"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@id/project_item_list_envelop_iv"
-        app:layout_constraintStart_toStartOf="@id/project_item_list_title_tv" />
+        app:layout_constraintBottom_toBottomOf="@id/projectItemListEnvelopIv"
+        app:layout_constraintStart_toStartOf="@id/projectItemListTitleTv" />
 
     <TextView
-        android:id="@+id/project_item_list_author_tv"
+        android:id="@+id/projectItemListAuthorTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textColor="@color/blue_violet"
+        android:textColor="@color/gray"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@id/project_item_list_envelop_iv"
-        app:layout_constraintStart_toEndOf="@id/project_item_list_share_date_tv"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="5dp"
-        android:background="@color/gray"
-        app:layout_constraintTop_toBottomOf="@id/project_item_list_envelop_iv" />
+        app:layout_constraintBottom_toBottomOf="@id/projectItemListEnvelopIv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/projectItemListShareDateTv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

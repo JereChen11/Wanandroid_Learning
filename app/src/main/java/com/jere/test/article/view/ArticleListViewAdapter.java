@@ -58,12 +58,12 @@ public class ArticleListViewAdapter extends RecyclerView.Adapter<ArticleListView
         final ArticleListBean.DataBean.DatasBean data = homeArticleListData.get(position);
         holder.titleTv.setText(data.getTitle());
         String author;
-        if (!TextUtils.isEmpty(data.getAuthor())) {
-            author = data.getAuthor();
-        } else if (TextUtils.isEmpty(data.getShareUser())) {
+        if (!TextUtils.isEmpty(data.getShareUser())) {
             author = data.getShareUser();
+        } else if (TextUtils.isEmpty(data.getAuthor())) {
+            author = data.getAuthor();
         } else {
-            author = "Robot";
+            author = "UnKnow";
         }
         holder.authorTv.setText(author);
         holder.sharedDateTv.setText(data.getNiceShareDate());

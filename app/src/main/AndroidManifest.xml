@@ -13,11 +13,11 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@drawable/application_icon_iron_man"
+        android:icon="@drawable/wanand_java_logo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/application_icon_iron_man"
+        android:roundIcon="@drawable/wanand_java_logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
+        android:theme="@style/AppTheme">
         <activity android:name=".article.view.collection.CollectionActivity" />
         <activity android:name=".article.view.knowledgesystem.KnowledgeSystemArticleListActivity" />
         <activity android:name=".login.view.RegisterLoginActivity" />

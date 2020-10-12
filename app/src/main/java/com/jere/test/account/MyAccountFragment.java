@@ -2,7 +2,6 @@ package com.jere.test.account;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,8 +82,6 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
     }
 
     private void refreshCurrentFragment() {
-        //todo refresh Fragment not working
-        Log.e(TAG, "refreshCurrentFragment: ");
         Fragment fragment = new MyAccountFragment();
         final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.detach(fragment);

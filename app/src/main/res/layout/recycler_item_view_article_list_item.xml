@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     android:id="@+id/rcyItemArticleListContainerCl"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white_smoke"
-    android:orientation="vertical">
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/article_container_shape"
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/articleListItemTitleTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="10dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/black"
@@ -26,20 +27,19 @@
         android:id="@+id/articleListItemAuthorTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/gray"
         android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/collectIconView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/articleListItemTitleTv" />
+        app:layout_constraintTop_toTopOf="@id/collectIconView" />
 
     <TextView
         android:id="@+id/articleListItemSharedDateTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="20dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/gray"
@@ -49,19 +49,10 @@
 
     <com.jere.test.util.customcomponent.CustomCollectView
         android:id="@+id/collectIconView"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="10dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         app:isCollect="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="5dp"
-        android:background="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/articleListItemAuthorTv" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/articleListItemTitleTv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

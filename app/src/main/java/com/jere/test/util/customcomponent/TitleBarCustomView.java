@@ -17,33 +17,46 @@ import androidx.databinding.DataBindingUtil;
  * @author jere
  */
 public class TitleBarCustomView extends ConstraintLayout {
+    TitleBarCustomViewBinding mBinding;
+
+    public TitleBarCustomView(Context context) {
+        this(context, null);
+    }
 
     public TitleBarCustomView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
+    }
+
+    public TitleBarCustomView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
 
     private void init(Context context, AttributeSet attrs) {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        TitleBarCustomViewBinding binding = DataBindingUtil.inflate(inflater,
+        mBinding = DataBindingUtil.inflate(inflater,
                 R.layout.title_bar_custom_view, this, true);
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TitleBarCustomView);
 
         String titleString = typedArray.getString(R.styleable.TitleBarCustomView_titleText);
-        binding.setTitleTextContent(titleString);
-        float textSize = typedArray.getDimension(R.styleable.TitleBarCustomView_titleTextSize, 25);
-        binding.setTitleTextSize(textSize);
+        mBinding.setTitleTextContent(titleString);
+        float textSize = typedArray.getDimension(R.styleable.TitleBarCustomView_titleTextSize, 55);
+        mBinding.setTitleTextSize(textSize);
 
-        int backIconId = typedArray.getResourceId(R.styleable.TitleBarCustomView_titleBackIcon, R.drawable.back_icon);
-        binding.setBackIconResource(backIconId);
-        binding.setBackEventHandler(new BackEventHandler());
+        int backIconId = typedArray.getResourceId(R.styleable.TitleBarCustomView_titleBackIcon, R.drawable.vector_drawable_left_arrow);
+        mBinding.setBackIconResource(backIconId);
+        mBinding.setBackEventHandler(new BackEventHandler());
 
         typedArray.recycle();
     }
 
-    public class BackEventHandler {
+    public void setTitle(String newTitle) {
+        mBinding.setTitleTextContent(newTitle);
+    }
+
+    public static class BackEventHandler {
         public void onClick(View view) {
             ((Activity) view.getContext()).onBackPressed();
         }

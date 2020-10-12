@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            app:titleBackIcon="@drawable/back_icon"
+            app:titleBackIcon="@drawable/vector_drawable_left_arrow"
             app:titleText="@string/personal_info_my_qrcode"
             app:titleTextSize="25sp" />
 

@@ -25,6 +25,7 @@ import com.jere.test.tutorial.TutorialActivity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -76,6 +77,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         initComponents();
 
         setSupportActionBar(mBinding.homePageContent.toolbar);
+        mBinding.homePageContent.toolbar.setBackground(null);
+        mBinding.homePageContent.toolbar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
 
         navigationView = mBinding.navigationView;
 
@@ -111,44 +114,44 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private void initComponents() {
         mBinding.homePageContent.homeBottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                boolean result = false;
-                switch (item.getItemId()) {
-                    case R.id.nav_home:
-                        navItemIndex = 0;
-                        replaceFragment(new HomeFragment());
-                        result = true;
-                        break;
-                    case R.id.nav_complete_project:
-                        navItemIndex = 1;
-                        replaceFragment(new CompleteProjectArticleFragment());
-                        result = true;
-                        break;
-                    case R.id.nav_wechat_blog:
-                        navItemIndex = 2;
-                        replaceFragment(new WeChatBlogArticleFragment());
-                        result = true;
-                        break;
-                    case R.id.nav_my:
-                        navItemIndex = 4;
-                        replaceFragment(new MyAccountFragment());
-                        result = true;
-                        break;
-                    case R.id.nav_knowledge_system:
-                        navItemIndex = 3;
-                        replaceFragment(new KnowledgeSystemFragment());
-                        result = true;
-                        break;
-                    default:
-                        break;
-                }
-                setToolbarTitle();
-                selectNavMenu();
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        boolean result = false;
+                        switch (item.getItemId()) {
+                            case R.id.nav_home:
+                                navItemIndex = 0;
+                                replaceFragment(new HomeFragment());
+                                result = true;
+                                break;
+                            case R.id.nav_complete_project:
+                                navItemIndex = 1;
+                                replaceFragment(new CompleteProjectArticleFragment());
+                                result = true;
+                                break;
+                            case R.id.nav_wechat_blog:
+                                navItemIndex = 2;
+                                replaceFragment(new WeChatBlogArticleFragment());
+                                result = true;
+                                break;
+                            case R.id.nav_my:
+                                navItemIndex = 4;
+                                replaceFragment(new MyAccountFragment());
+                                result = true;
+                                break;
+                            case R.id.nav_knowledge_system:
+                                navItemIndex = 3;
+                                replaceFragment(new KnowledgeSystemFragment());
+                                result = true;
+                                break;
+                            default:
+                                break;
+                        }
+                        setToolbarTitle();
+                        selectNavMenu();
 
-                return result;
-            }
-        });
+                        return result;
+                    }
+                });
     }
 
     @Override

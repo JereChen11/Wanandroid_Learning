@@ -19,7 +19,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
+                android:background="@android:color/transparent"
                 app:popupTheme="@style/Widget.AppCompat.PopupMenu.Overflow" />
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -37,12 +37,12 @@
             android:id="@+id/homeBottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            app:itemTextColor="@color/black"
-            app:itemIconTint="@color/black"
-            app:labelVisibilityMode="labeled"
+            android:layout_gravity="bottom"
             android:background="@color/white"
-            app:menu="@menu/home_bottom_navigation_view_menu"
-            android:layout_gravity="bottom" />
+            app:itemIconTint="@color/black"
+            app:itemTextColor="@color/black"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/home_bottom_navigation_view_menu" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

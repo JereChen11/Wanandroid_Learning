@@ -77,9 +77,9 @@ public class KnowledgeSystemListAdapter extends BaseExpandableListAdapter {
             groupTitleTv.setText(groupTitleString);
         }
         if (isExpanded) {
-            indicateArrow.setImageResource(R.drawable.arrow_up);
+            indicateArrow.setImageResource(R.drawable.vector_drawable_arrow_upon);
         } else {
-            indicateArrow.setImageResource(R.drawable.arrow_down);
+            indicateArrow.setImageResource(R.drawable.vector_drawable_arrow_down);
         }
 
         return convertView;

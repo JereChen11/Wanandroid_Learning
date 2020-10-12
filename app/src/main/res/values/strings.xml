@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Wanandroid_Learning</string>
+    <string name="app_name">WanAnd_Java</string>
 
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
@@ -44,7 +44,7 @@
     <!-- about My account info -->
     <string name="photo_album_cn">相册</string>
     <string name="expression_cn">表情</string>
-    <string name="collection_folder">收藏夹</string>
+    <string name="collection_folder">我的收藏</string>
     <string name="settings_cn">设置</string>
     <string name="login_cn">登入</string>
     <string name="logout_cn">登出</string>

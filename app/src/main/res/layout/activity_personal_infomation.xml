@@ -9,7 +9,6 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/dark_gray"
         tools:context=".account.PersonalInformationActivity">
 
         <com.jere.test.util.customcomponent.TitleBarCustomView
@@ -17,15 +16,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            app:titleBackIcon="@drawable/back_icon"
-            app:titleText="@string/personal_information"
-            app:titleTextSize="25sp" />
+            app:titleText="@string/personal_information" />
 
         <LinearLayout
             android:id="@+id/basicInfoLl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/white_smoke"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/personalInfoTitleBar">
 

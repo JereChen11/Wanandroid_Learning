@@ -56,14 +56,14 @@ public class CustomCollectView extends View {
         } else {
             paint.setColor(Color.BLACK);
             paint.setStyle(Paint.Style.STROKE);
-            paint.setStrokeWidth(4);
+            paint.setStrokeWidth(2);
         }
         Path path = new Path();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            path.addArc(width - 20, height - 20, width, height, -225, 225);
-            path.arcTo(width, height - 20, width + 20, height, -180, 225, false);
-            path.lineTo(width, width + 15);
-            path.lineTo(width - 18, height - 4);
+            path.addArc(width - 25, height - 25, width, height, -225, 225);
+            path.arcTo(width, height - 25, width + 25, height, -180, 225, false);
+            path.lineTo(width, width + 20);
+            path.lineTo(width - 22, height - 5);
             canvas.drawPath(path, paint);
         }
     }

@@ -145,11 +145,11 @@ public class ProjectItemListActivity extends AppCompatActivity {
 
             MyViewHolder(@NonNull View itemView) {
                 super(itemView);
-                envelopIv = itemView.findViewById(R.id.project_item_list_envelop_iv);
-                titleTv = itemView.findViewById(R.id.project_item_list_title_tv);
-                describeContentTv = itemView.findViewById(R.id.project_item_list_describe_content_tv);
-                shareDateTv = itemView.findViewById(R.id.project_item_list_share_date_tv);
-                authorTv = itemView.findViewById(R.id.project_item_list_author_tv);
+                envelopIv = itemView.findViewById(R.id.projectItemListEnvelopIv);
+                titleTv = itemView.findViewById(R.id.projectItemListTitleTv);
+                describeContentTv = itemView.findViewById(R.id.projectItemListDescribeContentTv);
+                shareDateTv = itemView.findViewById(R.id.projectItemListShareDateTv);
+                authorTv = itemView.findViewById(R.id.projectItemListAuthorTv);
             }
         }
     }

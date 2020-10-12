@@ -23,6 +23,8 @@ import androidx.lifecycle.ViewModelProvider;
 public class KnowledgeSystemFragment extends Fragment {
     private KnowledgeSystemCategoryBean mKnowledgeSystemCategoryBean;
     private FragmentKnowledgeSystemBinding mBinding;
+    public static final String CHILD_ITEM_ID_KEY = "childItemId";
+    public static final String CHILD_ITEM_NAME_KEY = "childItemName";
 
     private Observer<KnowledgeSystemCategoryBean> knowledgeSystemCategoryBeanObserver = new Observer<KnowledgeSystemCategoryBean>() {
         @Override
@@ -69,8 +71,8 @@ public class KnowledgeSystemFragment extends Fragment {
 
                 Intent intent = new Intent(getActivity(), KnowledgeSystemArticleListActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putInt("childItemId", childItemId);
-                bundle.putString("childItemName", childItemName);
+                bundle.putInt(CHILD_ITEM_ID_KEY, childItemId);
+                bundle.putString(CHILD_ITEM_NAME_KEY, childItemName);
                 intent.putExtras(bundle);
                 startActivity(intent);
 
