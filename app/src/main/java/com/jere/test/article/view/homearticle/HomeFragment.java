@@ -130,7 +130,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 if (!v.canScrollVertically(1)) {
-                    Log.e(TAG, "onScrollChange: homeNsv");
                     homeArticlePage++;
                     homeVm.setHomeArticleListBeanLd(homeArticlePage);
                 }

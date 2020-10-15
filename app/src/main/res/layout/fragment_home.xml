@@ -84,10 +84,10 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@id/homeBannerCl" />
 
-                <com.jere.test.util.customcomponent.PullUpRefreshView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/homeArticleListRecycleView" />
+<!--                <com.jere.test.util.customcomponent.PullUpRefreshView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/homeArticleListRecycleView" />-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

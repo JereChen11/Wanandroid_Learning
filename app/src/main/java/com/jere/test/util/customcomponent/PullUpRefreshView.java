@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.jere.test.R;
 
@@ -14,6 +15,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
  * @author jere
  */
 public class PullUpRefreshView extends ConstraintLayout {
+    private ProgressBar progressBar;
+    private TextView promptTv;
 
     public PullUpRefreshView(Context context) {
         this(context, null);
@@ -27,10 +30,18 @@ public class PullUpRefreshView extends ConstraintLayout {
         super(context, attrs, defStyleAttr);
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view  = inflater.inflate(R.layout.custom_view_pull_up_refresh_view, this, true);
+        View view = inflater.inflate(R.layout.custom_view_pull_up_refresh_view, this, true);
 
-        ProgressBar progressBar = view.findViewById(R.id.progressBar);
+        progressBar = view.findViewById(R.id.progressBar);
+        promptTv = view.findViewById(R.id.promptTv);
     }
 
+    public void setPromptTv(String promptString) {
+        promptTv.setText(promptString);
+    }
+
+    public void setProgressBarStatus(int status) {
+        progressBar.setVisibility(status);
+    }
 
 }
