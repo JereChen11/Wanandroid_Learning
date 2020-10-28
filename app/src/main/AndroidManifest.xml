@@ -22,7 +22,6 @@
         <activity android:name=".article.view.knowledgesystem.KnowledgeSystemArticleListActivity" />
         <activity android:name=".login.view.RegisterLoginActivity" />
         <activity android:name=".article.view.ArticleDetailWebViewActivity" />
-        <activity android:name=".article.view.ProjectItemListActivity" />
         <activity android:name=".account.MyQrCodeActivity" />
         <activity android:name=".account.moreinfo.SetGenderActivity" />
         <activity android:name=".account.SetEmailActivity" />
@@ -30,7 +29,6 @@
         <activity android:name=".account.SetNameActivity" />
         <activity android:name=".account.PersonalInformationActivity" />
         <activity android:name=".aboutme.AboutMeActivity" />
-        <activity android:name=".tutorial.TutorialActivity" />
         <activity
             android:name=".home.HomeActivity"
             android:launchMode="singleTask">

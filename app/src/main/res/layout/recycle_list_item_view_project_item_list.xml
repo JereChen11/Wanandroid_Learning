@@ -11,9 +11,10 @@
 
     <ImageView
         android:id="@+id/projectItemListEnvelopIv"
-        android:layout_width="150dp"
-        android:layout_height="200dp"
+        android:layout_width="100dp"
+        android:layout_height="180dp"
         android:layout_marginTop="10dp"
+        android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,7 +26,7 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/projectItemListEnvelopIv"
@@ -39,7 +40,7 @@
         android:ellipsize="end"
         android:maxLines="3"
         android:textColor="@color/gray"
-        android:textSize="18sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/projectItemListTitleTv"
         app:layout_constraintTop_toBottomOf="@id/projectItemListTitleTv" />

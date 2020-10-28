@@ -15,12 +15,11 @@ import com.google.android.material.navigation.NavigationView;
 import com.jere.test.R;
 import com.jere.test.aboutme.AboutMeActivity;
 import com.jere.test.account.MyAccountFragment;
-import com.jere.test.article.view.completeproject.CompleteProjectArticleFragment;
+import com.jere.test.article.view.project.ProjectArticleFragment;
 import com.jere.test.article.view.homearticle.HomeFragment;
 import com.jere.test.article.view.knowledgesystem.KnowledgeSystemFragment;
 import com.jere.test.article.view.wechat.WeChatBlogArticleFragment;
 import com.jere.test.databinding.ActivityHomeBinding;
-import com.jere.test.tutorial.TutorialActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -106,11 +105,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void startTutorialActivity() {
-        Intent tutorialIntent = new Intent(this, TutorialActivity.class);
-        startActivity(tutorialIntent);
-    }
-
     private void initComponents() {
         mBinding.homePageContent.homeBottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -125,7 +119,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                                 break;
                             case R.id.nav_complete_project:
                                 navItemIndex = 1;
-                                replaceFragment(new CompleteProjectArticleFragment());
+                                replaceFragment(new ProjectArticleFragment());
                                 result = true;
                                 break;
                             case R.id.nav_wechat_blog:
@@ -235,7 +229,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case HOME_INDEX:
                 return new HomeFragment();
             case COMPLETE_PROJECT_INDEX:
-                return new CompleteProjectArticleFragment();
+                return new ProjectArticleFragment();
             case WECHAT_BLOG_INDEX:
                 return new WeChatBlogArticleFragment();
             case KNOWLEDGE_SYSTEM_INDEX:
@@ -286,15 +280,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         startActivity(new Intent(HomeActivity.this, AboutMeActivity.class));
                         mBinding.drawerLayout.closeDrawers();
                         return true;
-                    case R.id.nav_tutorial:
-                        startActivity(new Intent(HomeActivity.this, TutorialActivity.class));
-                        mBinding.drawerLayout.closeDrawers();
-                        return true;
                     default:
                         navItemIndex = 0;
                         break;
                 }
-                if (menuItem.getItemId() != R.id.nav_about_us && menuItem.getItemId() != R.id.nav_tutorial) {
+                if (menuItem.getItemId() != R.id.nav_about_us) {
                     mBinding.homePageContent.homeBottomNavigationView.setSelectedItemId(menuItem.getItemId());
                 }
 

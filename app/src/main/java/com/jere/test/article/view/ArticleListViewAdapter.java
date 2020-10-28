@@ -24,6 +24,8 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ArticleListViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int ARTICLE_TYPE = 0;
     private static final int BOTTOM_PROMPT_TYPE = 1;
+    private ArrayList<ArticleListBean.DataBean.DatasBean> articleListData;
+    private boolean isLoadAllArticleData = false;
 
     public interface AdapterItemClickListener {
         void onPositionClicked(View v, int position);
@@ -33,8 +35,7 @@ public class ArticleListViewAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     public AdapterItemClickListener itemClickListener;
 
-    private ArrayList<ArticleListBean.DataBean.DatasBean> articleListData;
-    private boolean isLoadAllArticleData = false;
+
 
     public ArticleListViewAdapter(ArrayList<ArticleListBean.DataBean.DatasBean> articleListData,
                                   AdapterItemClickListener listener) {
