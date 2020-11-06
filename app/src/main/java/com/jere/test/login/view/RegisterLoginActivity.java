@@ -74,7 +74,8 @@ public class RegisterLoginActivity extends AppCompatActivity {
                             "Pls input right content!",
                             Toast.LENGTH_SHORT).show();
                 } else {
-                    if (mRegisterLoginVm.getIsLoginPatternLd().getValue()) {
+                    if (mRegisterLoginVm.getIsLoginPatternLd().getValue() != null
+                            && mRegisterLoginVm.getIsLoginPatternLd().getValue()) {
                         mRegisterLoginVm.login(usernameString, passwordString);
                     } else {
                         mRegisterLoginVm.register(usernameString, passwordString, rePasswordString);
@@ -89,12 +90,12 @@ public class RegisterLoginActivity extends AppCompatActivity {
         public void onChanged(@Nullable Boolean aBoolean) {
             if (aBoolean != null && aBoolean) {
                 mBinding.setIsLoginPattern(true);
-                mBinding.setTitleText(getResources().getString(R.string.login));
-                mBinding.setSwitchPatternText(getResources().getString(R.string.switch_to_register));
+                mBinding.setTitleText(getResources().getString(R.string.login_cn));
+                mBinding.setSwitchPatternText(getResources().getString(R.string.register_cn));
             } else {
                 mBinding.setIsLoginPattern(false);
-                mBinding.setTitleText(getResources().getString(R.string.register));
-                mBinding.setSwitchPatternText(getResources().getString(R.string.switch_to_login));
+                mBinding.setTitleText(getResources().getString(R.string.register_cn));
+                mBinding.setSwitchPatternText(getResources().getString(R.string.login_cn));
             }
         }
     };

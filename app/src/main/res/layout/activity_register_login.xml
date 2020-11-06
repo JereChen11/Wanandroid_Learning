@@ -22,18 +22,18 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/dark_gray"
         tools:context=".login.view.RegisterLoginActivity">
 
         <TextView
-            android:id="@+id/register_login_title_tv"
+            android:id="@+id/registerLoginTitleTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="60dp"
             android:text="@{titleText}"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,61 +41,65 @@
             android:id="@+id/userNameEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:hint="@string/username"
+            android:layout_margin="20dp"
+            android:hint="@string/username_cn"
             android:imeOptions="actionNext"
             android:inputType="text"
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/registerLoginTitleTv" />
 
         <EditText
             android:id="@+id/passwordEt"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:hint="@string/password"
+            android:hint="@string/password_cn"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
+            app:layout_constraintEnd_toEndOf="@id/userNameEt"
+            app:layout_constraintStart_toStartOf="@id/userNameEt"
             app:layout_constraintTop_toBottomOf="@id/userNameEt" />
 
         <EditText
             android:id="@+id/repasswordEt"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:hint="@string/repassword"
+            android:hint="@string/repassword_cn"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
             android:visibility="@{isLoginPattern ? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="@id/passwordEt"
+            app:layout_constraintStart_toStartOf="@id/passwordEt"
             app:layout_constraintTop_toBottomOf="@id/passwordEt" />
 
         <TextView
             android:id="@+id/switchToRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:background="@color/dark_gray"
+            android:layout_marginEnd="25dp"
             android:text="@{switchPatternText}"
             android:textAllCaps="false"
-            android:textSize="15sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/repasswordEt" />
 
         <Button
             android:id="@+id/confirmBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:background="@drawable/login_button_bg_shape"
             android:text="@{titleText}"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/repasswordEt" />
+            app:layout_constraintEnd_toEndOf="@id/passwordEt"
+            app:layout_constraintStart_toStartOf="@id/passwordEt"
+            app:layout_constraintTop_toBottomOf="@id/switchToRegister" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

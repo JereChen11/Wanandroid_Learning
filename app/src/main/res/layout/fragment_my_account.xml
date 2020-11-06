@@ -13,6 +13,7 @@
             android:id="@+id/myInfoCl"
             android:layout_width="match_parent"
             android:layout_height="180dp"
+            android:background="@color/white_smoke"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
@@ -69,32 +70,23 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
-            android:id="@+id/accountInfoItemsLl"
+        <com.jere.test.util.customcomponent.MyAccountInfoItemCustomView
+            android:id="@+id/myAccountCollectionFolderItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:categoryItemText="@string/collection_folder"
+            app:iconResource="@drawable/collection_folder_icon"
+            app:layout_constraintTop_toBottomOf="@id/myInfoCl" />
+
+        <com.jere.test.util.customcomponent.MyAccountInfoItemCustomView
+            android:id="@+id/myAccountLoginItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/myInfoCl">
-
-            <com.jere.test.util.customcomponent.MyAccountInfoItemCustomView
-                android:id="@+id/myAccountCollectionFolderItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:categoryItemText="@string/collection_folder"
-                app:iconResource="@drawable/collection_folder_icon"
-                app:layout_constraintTop_toBottomOf="@id/myInfoCl" />
-
-        </LinearLayout>
-
-        <com.jere.test.util.customcomponent.MyAccountInfoItemCustomView
-            android:id="@+id/myAccountSettingsItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:categoryItemText="@string/settings_cn"
+            app:categoryItemText="@string/login_cn"
             app:iconResource="@drawable/settings_icon"
-            app:layout_constraintTop_toBottomOf="@id/accountInfoItemsLl" />
+            app:layout_constraintTop_toBottomOf="@id/myAccountCollectionFolderItem" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -46,13 +46,18 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         super.onViewCreated(view, savedInstanceState);
 
         mBinding.turnRightArrow.setOnClickListener(this);
-        mBinding.myAccountSettingsItem.setOnClickListener(this);
+        mBinding.myAccountLoginItem.setOnClickListener(this);
         mBinding.myAccountCollectionFolderItem.setOnClickListener(this);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         if (Settings.getInstance().getIsLogin()) {
-            mBinding.myAccountSettingsItem.setCategoryTextString(getString(R.string.logout_cn));
+            mBinding.myAccountLoginItem.setCategoryTextString(getString(R.string.logout_cn));
         } else {
-            mBinding.myAccountSettingsItem.setCategoryTextString(getString(R.string.login_cn));
+            mBinding.myAccountLoginItem.setCategoryTextString(getString(R.string.login_cn));
         }
     }
 
@@ -63,12 +68,13 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                 Intent turnRightArrow = new Intent(getContext(), PersonalInformationActivity.class);
                 startActivity(turnRightArrow);
                 break;
-            case R.id.myAccountSettingsItem:
+            case R.id.myAccountLoginItem:
                 if (Settings.getInstance().getIsLogin()) {
                     Toast.makeText(getContext(), "logout", Toast.LENGTH_SHORT).show();
                     Settings.getInstance().setIsLogin(false);
                     Settings.getInstance().setUserName("");
-                    refreshCurrentFragment();
+                    mBinding.myAccountLoginItem.setCategoryTextString(getString(R.string.login_cn));
+//                    refreshCurrentFragment();
                 } else {
                     Intent loginActivity = new Intent(getContext(), RegisterLoginActivity.class);
                     startActivity(loginActivity);
