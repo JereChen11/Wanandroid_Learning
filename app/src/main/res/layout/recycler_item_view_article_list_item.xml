@@ -47,7 +47,7 @@
         app:layout_constraintStart_toEndOf="@id/articleListItemAuthorTv"
         app:layout_constraintTop_toTopOf="@id/articleListItemAuthorTv" />
 
-    <com.jere.test.util.customcomponent.CustomCollectView
+    <com.wanandroid.java.util.customcomponent.CustomCollectView
         android:id="@+id/collectIconView"
         android:layout_width="50dp"
         android:layout_height="50dp"

@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         tools:context=".account.PersonalInformationActivity">
 
-        <com.jere.test.util.customcomponent.TitleBarCustomView
+        <com.wanandroid.java.util.customcomponent.TitleBarCustomView
             android:id="@+id/personalInfoTitleBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,44 +26,23 @@
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/personalInfoTitleBar">
 
-            <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
+            <com.wanandroid.java.util.customcomponent.PersonalInfoItemCustomView
                 android:id="@+id/personalInfoNameItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:categoryText="@string/personal_info_name"
                 app:contentText="Jere" />
 
-            <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
+            <com.wanandroid.java.util.customcomponent.PersonalInfoItemCustomView
                 android:id="@+id/personalInfoAvatarItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:categoryText="@string/personal_info_avatar"
                 app:isDisplayImage="true" />
 
-            <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
-                android:id="@+id/personalInfoEmailItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:categoryText="@string/personal_info_email"
-                app:contentText="jerechen11@gmail.com" />
-
-            <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
-                android:id="@+id/personalInfoQrCodeItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:categoryText="@string/personal_info_my_qrcode"
-                app:imageResource="@drawable/qrcode_icon"
-                app:isDisplayImage="true" />
-
-            <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
-                android:id="@+id/personalInfoMoreItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:categoryText="@string/personal_info_more" />
-
         </LinearLayout>
 
-        <com.jere.test.util.customcomponent.PersonalInfoItemCustomView
+        <com.wanandroid.java.util.customcomponent.PersonalInfoItemCustomView
             android:id="@+id/personalInfoMyAddressItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

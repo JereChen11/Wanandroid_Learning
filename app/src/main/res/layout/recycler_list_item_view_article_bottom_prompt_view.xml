@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.jere.test.util.customcomponent.PullUpRefreshView
+    <com.wanandroid.java.util.customcomponent.PullUpRefreshView
         android:id="@+id/articleBottomPullUpRefreshView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -70,22 +70,22 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.jere.test.util.customcomponent.MyAccountInfoItemCustomView
+        <com.wanandroid.java.util.customcomponent.MyAccountInfoItemCustomView
             android:id="@+id/myAccountCollectionFolderItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             app:categoryItemText="@string/collection_folder"
-            app:iconResource="@drawable/collection_folder_icon"
+            app:iconResource="@drawable/vector_drawable_collection"
             app:layout_constraintTop_toBottomOf="@id/myInfoCl" />
 
-        <com.jere.test.util.customcomponent.MyAccountInfoItemCustomView
+        <com.wanandroid.java.util.customcomponent.MyAccountInfoItemCustomView
             android:id="@+id/myAccountLoginItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:categoryItemText="@string/login_cn"
-            app:iconResource="@drawable/settings_icon"
+            app:iconResource="@drawable/vector_drawable_login"
             app:layout_constraintTop_toBottomOf="@id/myAccountCollectionFolderItem" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

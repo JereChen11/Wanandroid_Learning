@@ -4,7 +4,7 @@
     <data>
         <variable
             name="backEventHandler"
-            type="com.jere.test.util.customcomponent.SetPersonalInfoTitleBarCustomView.BackEventHandler" />
+            type="com.wanandroid.java.util.customcomponent.SetPersonalInfoTitleBarCustomView.BackEventHandler" />
 
         <variable
             name="titleContentTv"

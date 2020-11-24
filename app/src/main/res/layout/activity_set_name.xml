@@ -15,17 +15,18 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/setNameTitleViewCl"
             android:layout_width="match_parent"
+            android:background="@color/colorPrimary"
             android:layout_height="50dp"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/cancelTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <Button
+                android:id="@+id/cancelBtn"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
                 android:layout_marginStart="20dp"
-                android:text="取消"
+                android:text="@string/cancel_cn"
                 android:textColor="@color/dim_gray"
-                android:textSize="20sp"
+                android:background="@drawable/shape_button_white_smoke_bg"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -33,9 +34,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="设置名字"
+                android:text="@string/set_nickname_cn"
                 android:textColor="@color/black"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -43,10 +44,11 @@
 
             <Button
                 android:id="@+id/finishBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
                 android:layout_marginEnd="5dp"
-                android:text="完成"
+                android:text="@string/complete_cn"
+                android:background="@drawable/shape_button_white_smoke_bg"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -55,18 +57,20 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="80dp"
             android:background="@color/white"
             app:layout_constraintTop_toBottomOf="@id/setNameTitleViewCl">
 
             <EditText
                 android:id="@+id/setNameEt"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

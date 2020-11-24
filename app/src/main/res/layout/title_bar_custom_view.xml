@@ -9,7 +9,7 @@
 
         <variable
             name="backEventHandler"
-            type="com.jere.test.util.customcomponent.TitleBarCustomView.BackEventHandler" />
+            type="com.wanandroid.java.util.customcomponent.TitleBarCustomView.BackEventHandler" />
 
         <variable
             name="titleTextContent"
@@ -23,7 +23,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/titleCl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimary"
         android:orientation="horizontal">
 
         <ImageView
@@ -46,6 +47,7 @@
             android:text="@{titleTextContent}"
             android:textColor="@color/black"
             android:textSize="@{titleTextSize}"
+            android:layout_margin="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

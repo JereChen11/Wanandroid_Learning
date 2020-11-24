@@ -13,25 +13,6 @@
         <item>我的</item>
     </string-array>
 
-    <string name="action_clear_all">Clear All</string>
-    <string name="action_logout">Logout</string>
-    <string name="action_mark_all_read">Mark All as Read</string>
-
-    <!-- Tutorial -->
-    <string name="welcome_content">Welcome to JereTestApp</string>
-    <string name="app_content_explain">关于本APP：我会添加任何自己想添加的功能</string>
-    <string name="api_content_explain">关于调用的API说明：现在本应用调用的API全都来自Wanandroid的开放API，感谢泓洋大佬</string>
-    <string name="finish_tutorial">Finish</string>
-
-    <!-- Register Login Page-->
-    <string name="username">username</string>
-    <string name="password">password</string>
-    <string name="repassword">rePassword</string>
-    <string name="login">Login</string>
-    <string name="register">Register</string>
-    <string name="switch_to_login">switch to login</string>
-    <string name="switch_to_register">switch to register</string>
-
     <string name="username_cn">用户名</string>
     <string name="password_cn">密码</string>
     <string name="repassword_cn">重复密码</string>
@@ -50,7 +31,6 @@
 
     <!-- about My account info -->
     <string name="photo_album_cn">相册</string>
-    <string name="expression_cn">表情</string>
     <string name="collection_folder">我的收藏</string>
     <string name="settings_cn">设置</string>
 
@@ -58,19 +38,13 @@
     <string name="personal_information">个人信息</string>
     <string name="personal_info_name">名字</string>
     <string name="personal_info_avatar">头像</string>
-    <string name="personal_info_email">邮箱</string>
-    <string name="personal_info_my_qrcode">我的二维码</string>
-    <string name="personal_info_more">更多</string>
     <string name="personal_info_my_address">我的地址</string>
-    <string name="more_info_gender">性别</string>
-    <string name="more_info_district">地区</string>
-    <string name="more_info_personal_signature">个性签名</string>
 
-    <string name="set_name_cn">设置名字</string>
-    <string name="set_email_cn">设置邮箱</string>
-    <string name="set_gender_cn">设置性别</string>
+    <string name="set_nickname_cn">设置昵称</string>
 
     <string name="cancel_cn">取消</string>
     <string name="complete_cn">完成</string>
     <string name="loading_cn">加载中</string>
+
+    <string name="pls_input_right_username_cn">请输入正确的昵称</string>
 </resources>
