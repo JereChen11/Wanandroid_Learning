@@ -1,12 +1,16 @@
 package com.wanandroid.java.account;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.wanandroid.java.R;
 import com.wanandroid.java.article.view.collection.CollectionActivity;
 import com.wanandroid.java.databinding.FragmentMyAccountBinding;
@@ -45,6 +49,9 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mBinding.portraitIv.setOnClickListener(this);
+        mBinding.myAccountNameTv.setOnClickListener(this);
+        mBinding.myAccountEmailTv.setOnClickListener(this);
         mBinding.turnRightArrow.setOnClickListener(this);
         mBinding.myAccountLoginItem.setOnClickListener(this);
         mBinding.myAccountCollectionFolderItem.setOnClickListener(this);
@@ -59,11 +66,25 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         } else {
             mBinding.myAccountLoginItem.setCategoryTextString(getString(R.string.login_cn));
         }
+
+        setUsernameAndAvatar();
+    }
+
+    private void setUsernameAndAvatar() {
+        mBinding.myAccountNameTv.setText(Settings.getInstance().getUserName());
+        if (!TextUtils.isEmpty(Settings.getInstance().getAvatarUrl())) {
+            RequestOptions requestOptions = RequestOptions.circleCropTransform();
+            Glide.with(this).load(Uri.parse(Settings.getInstance().getAvatarUrl()))
+                    .apply(requestOptions).into(mBinding.portraitIv);
+        }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.portraitIv:
+            case R.id.myAccountNameTv:
+            case R.id.myAccountEmailTv:
             case R.id.turnRightArrow:
                 Intent turnRightArrow = new Intent(getContext(), PersonalInformationActivity.class);
                 startActivity(turnRightArrow);

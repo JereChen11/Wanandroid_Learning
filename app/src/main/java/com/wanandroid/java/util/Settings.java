@@ -38,7 +38,7 @@ public class Settings {
     }
 
     public String getUserName() {
-        return mSp.getString(USER_NAME_KEY, "");
+        return mSp.getString(USER_NAME_KEY, "JereChen");
     }
 
     public void setUserName(String nickname) {

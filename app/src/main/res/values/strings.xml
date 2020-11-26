@@ -43,8 +43,12 @@
     <string name="set_nickname_cn">设置昵称</string>
 
     <string name="cancel_cn">取消</string>
+    <string name="confirm_cn">确认</string>
     <string name="complete_cn">完成</string>
     <string name="loading_cn">加载中</string>
 
     <string name="pls_input_right_username_cn">请输入正确的昵称</string>
+
+    <string name="camera_cn">拍照</string>
+    <string name="album_cn">相册</string>
 </resources>
