@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context=".article.view.homearticle.HomeFragment">
+        tools:context=".ui.home.HomeFragment">
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/homeNsv"

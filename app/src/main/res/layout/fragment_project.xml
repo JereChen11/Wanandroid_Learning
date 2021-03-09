@@ -9,7 +9,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".article.view.project.ProjectArticleFragment">
+        tools:context=".ui.project.ProjectArticleFragment">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/projectTabLayout"

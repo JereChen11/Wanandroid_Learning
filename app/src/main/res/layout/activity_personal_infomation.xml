@@ -9,9 +9,9 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".account.PersonalInformationActivity">
+        tools:context=".ui.account.PersonalInformationActivity">
 
-        <com.wanandroid.java.util.customcomponent.TitleBarCustomView
+        <com.wanandroid.java.ui.customview.TitleBarCustomView
             android:id="@+id/personalInfoTitleBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,14 +26,14 @@
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/personalInfoTitleBar">
 
-            <com.wanandroid.java.util.customcomponent.PersonalInfoItemCustomView
+            <com.wanandroid.java.ui.customview.PersonalInfoItemCustomView
                 android:id="@+id/personalInfoNameItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:categoryText="@string/personal_info_name"
                 app:contentText="Jere" />
 
-            <com.wanandroid.java.util.customcomponent.PersonalInfoItemCustomView
+            <com.wanandroid.java.ui.customview.PersonalInfoItemCustomView
                 android:id="@+id/personalInfoAvatarItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
 
         </LinearLayout>
 
-        <com.wanandroid.java.util.customcomponent.PersonalInfoItemCustomView
+        <com.wanandroid.java.ui.customview.PersonalInfoItemCustomView
             android:id="@+id/personalInfoMyAddressItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

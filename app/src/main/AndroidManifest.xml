@@ -18,15 +18,15 @@
         android:roundIcon="@drawable/wanand_java_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.wanandroid.java.article.view.collection.CollectionActivity" />
-        <activity android:name="com.wanandroid.java.article.view.knowledgesystem.KnowledgeSystemArticleListActivity" />
-        <activity android:name="com.wanandroid.java.login.view.RegisterLoginActivity" />
-        <activity android:name="com.wanandroid.java.article.view.ArticleDetailWebViewActivity" />
-        <activity android:name="com.wanandroid.java.account.SetNameActivity" />
-        <activity android:name="com.wanandroid.java.account.PersonalInformationActivity" />
-        <activity android:name="com.wanandroid.java.aboutme.AboutMeActivity" />
+        <activity android:name="com.wanandroid.java.ui.collection.CollectionActivity" />
+        <activity android:name="com.wanandroid.java.ui.knowledgesystem.KnowledgeSystemArticleListActivity" />
+        <activity android:name=".ui.login.RegisterLoginActivity" />
+        <activity android:name="com.wanandroid.java.ui.ArticleDetailWebViewActivity" />
+        <activity android:name=".ui.account.SetNameActivity" />
+        <activity android:name=".ui.account.PersonalInformationActivity" />
+        <activity android:name=".ui.aboutme.AboutMeActivity" />
         <activity
-            android:name="com.wanandroid.java.home.HomeActivity"
+            android:name=".ui.home.HomeActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

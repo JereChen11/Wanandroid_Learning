@@ -9,9 +9,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".article.view.collection.CollectionActivity">
+        tools:context=".ui.collection.CollectionActivity">
 
-        <com.wanandroid.java.util.customcomponent.TitleBarCustomView
+        <com.wanandroid.java.ui.customview.TitleBarCustomView
             android:id="@+id/collectionFolderTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

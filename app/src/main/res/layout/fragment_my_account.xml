@@ -70,7 +70,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.wanandroid.java.util.customcomponent.MyAccountInfoItemCustomView
+        <com.wanandroid.java.ui.customview.MyAccountInfoItemCustomView
             android:id="@+id/myAccountCollectionFolderItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
             app:iconResource="@drawable/vector_drawable_collection"
             app:layout_constraintTop_toBottomOf="@id/myInfoCl" />
 
-        <com.wanandroid.java.util.customcomponent.MyAccountInfoItemCustomView
+        <com.wanandroid.java.ui.customview.MyAccountInfoItemCustomView
             android:id="@+id/myAccountLoginItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

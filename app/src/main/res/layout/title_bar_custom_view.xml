@@ -9,7 +9,7 @@
 
         <variable
             name="backEventHandler"
-            type="com.wanandroid.java.util.customcomponent.TitleBarCustomView.BackEventHandler" />
+            type="com.wanandroid.java.ui.customview.TitleBarCustomView.BackEventHandler" />
 
         <variable
             name="titleTextContent"
