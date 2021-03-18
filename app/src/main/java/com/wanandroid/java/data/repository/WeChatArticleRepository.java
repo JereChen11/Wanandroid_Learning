@@ -1,10 +1,8 @@
 package com.wanandroid.java.data.repository;
 
-import com.google.gson.Gson;
-import com.wanandroid.java.data.api.AbstractRetrofitCallback;
-import com.wanandroid.java.data.api.ApiService;
 import com.wanandroid.java.data.api.ApiWrapper;
 import com.wanandroid.java.data.api.GetWebDataListener;
+import com.wanandroid.java.data.api.MyCallback;
 import com.wanandroid.java.data.bean.ArticleListBean;
 import com.wanandroid.java.data.bean.WeChatArticleBloggerList;
 
@@ -27,13 +25,10 @@ public class WeChatArticleRepository {
     }
 
     public void getWeChatArticleBloggerList(final GetWebDataListener listener) {
-        ApiService apiService = ApiWrapper.getRetrofitInstance().create(ApiService.class);
-        apiService.getWeChatOfficialAccountBloggerList().enqueue(new AbstractRetrofitCallback() {
+        ApiWrapper.getService().getWeChatOfficialAccountBloggerList().enqueue(new MyCallback<WeChatArticleBloggerList>() {
             @Override
-            public void getSuccessful(String responseBody) {
-                Gson gson = new Gson();
-                WeChatArticleBloggerList bloggerList = gson.fromJson(responseBody, WeChatArticleBloggerList.class);
-                listener.getDataSuccess(bloggerList);
+            public void getSuccessful(WeChatArticleBloggerList data) {
+                listener.getDataSuccess(data);
             }
 
             @Override
@@ -45,13 +40,10 @@ public class WeChatArticleRepository {
 
 
     public void getWeChatArticleList(int authorId, int pageNumber, final GetWebDataListener listener) {
-        ApiService apiService = ApiWrapper.getRetrofitInstance().create(ApiService.class);
-        apiService.getWeChatArticleList(authorId, pageNumber).enqueue(new AbstractRetrofitCallback() {
+        ApiWrapper.getService().getWeChatArticleList(authorId, pageNumber).enqueue(new MyCallback<ArticleListBean>() {
             @Override
-            public void getSuccessful(String responseBody) {
-                Gson gson = new Gson();
-                ArticleListBean articleListBean = gson.fromJson(responseBody, ArticleListBean.class);
-                listener.getDataSuccess(articleListBean);
+            public void getSuccessful(ArticleListBean data) {
+                listener.getDataSuccess(data);
             }
 
             @Override
@@ -60,6 +52,5 @@ public class WeChatArticleRepository {
             }
         });
     }
-
 
 }

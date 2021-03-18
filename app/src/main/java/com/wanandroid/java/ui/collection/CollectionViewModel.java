@@ -2,10 +2,8 @@ package com.wanandroid.java.ui.collection;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.wanandroid.java.data.api.AbstractRetrofitCallback;
-import com.wanandroid.java.data.api.ApiService;
 import com.wanandroid.java.data.api.ApiWrapper;
+import com.wanandroid.java.data.api.MyCallback;
 import com.wanandroid.java.data.bean.ArticleListBean;
 
 import androidx.lifecycle.MutableLiveData;
@@ -31,13 +29,10 @@ public class CollectionViewModel extends ViewModel {
     }
 
     public void getCollectionArticleList(int pageNumber) {
-        ApiService apiService = ApiWrapper.getRetrofitInstance().create(ApiService.class);
-        apiService.getCollectionArticleList(pageNumber).enqueue(new AbstractRetrofitCallback() {
+        ApiWrapper.getService().getCollectionArticleList(pageNumber).enqueue(new MyCallback<ArticleListBean>() {
             @Override
-            public void getSuccessful(String responseBody) {
-                Gson gson = new Gson();
-                ArticleListBean articleListBean = gson.fromJson(responseBody, ArticleListBean.class);
-                setCollectionArticleListBeanLd(articleListBean);
+            public void getSuccessful(ArticleListBean data) {
+                setCollectionArticleListBeanLd(data);
             }
 
             @Override

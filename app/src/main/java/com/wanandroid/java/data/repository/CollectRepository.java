@@ -3,6 +3,9 @@ package com.wanandroid.java.data.repository;
 import com.wanandroid.java.data.api.AbstractRetrofitCallback;
 import com.wanandroid.java.data.api.ApiService;
 import com.wanandroid.java.data.api.ApiWrapper;
+import com.wanandroid.java.data.api.MyCallback;
+
+import okhttp3.ResponseBody;
 
 /**
  * @author jere
@@ -23,8 +26,7 @@ public class CollectRepository {
     }
 
     public void collectArticle(int articleId, final CollectOrUnCollectListener listener) {
-        ApiService apiService = ApiWrapper.getRetrofitInstance().create(ApiService.class);
-        apiService.collectArticle(articleId).enqueue(new AbstractRetrofitCallback() {
+        ApiWrapper.getService().collectArticle(articleId).enqueue(new AbstractRetrofitCallback() {
             @Override
             public void getSuccessful(String responseBody) {
                 listener.isSuccessful(true);
@@ -38,8 +40,7 @@ public class CollectRepository {
     }
 
     public void unCollectArticle(int articleId, final CollectOrUnCollectListener listener) {
-        ApiService apiService = ApiWrapper.getRetrofitInstance().create(ApiService.class);
-        apiService.unCollectArticle(articleId).enqueue(new AbstractRetrofitCallback() {
+        ApiWrapper.getService().unCollectArticle(articleId).enqueue(new AbstractRetrofitCallback() {
             @Override
             public void getSuccessful(String responseBody) {
                 listener.isSuccessful(true);

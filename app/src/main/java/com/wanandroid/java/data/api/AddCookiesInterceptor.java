@@ -14,6 +14,7 @@ import okhttp3.Response;
 /**
  * @author jere
  */
+@Deprecated
 public class AddCookiesInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {

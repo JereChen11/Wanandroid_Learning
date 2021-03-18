@@ -1,10 +1,8 @@
 package com.wanandroid.java.data.repository;
 
-import com.google.gson.Gson;
-import com.wanandroid.java.data.api.AbstractRetrofitCallback;
-import com.wanandroid.java.data.api.ApiService;
 import com.wanandroid.java.data.api.ApiWrapper;
 import com.wanandroid.java.data.api.GetWebDataListener;
+import com.wanandroid.java.data.api.MyCallback;
 import com.wanandroid.java.data.bean.ArticleListBean;
 import com.wanandroid.java.data.bean.KnowledgeSystemCategoryBean;
 
@@ -25,13 +23,10 @@ public class KnowledgeSystemRepository {
     }
 
     public void getKnowledgeSystemData(final GetWebDataListener listener) {
-        ApiService apiService = ApiWrapper.getRetrofitInstance().create(ApiService.class);
-        apiService.getKnowledgeSystem().enqueue(new AbstractRetrofitCallback() {
+        ApiWrapper.getService().getKnowledgeSystem().enqueue(new MyCallback<KnowledgeSystemCategoryBean>() {
             @Override
-            public void getSuccessful(String responseBody) {
-                Gson gson = new Gson();
-                KnowledgeSystemCategoryBean knowledgeSystemCategoryBean = gson.fromJson(responseBody, KnowledgeSystemCategoryBean.class);
-                listener.getDataSuccess(knowledgeSystemCategoryBean);
+            public void getSuccessful(KnowledgeSystemCategoryBean data) {
+                listener.getDataSuccess(data);
             }
 
             @Override
@@ -39,16 +34,14 @@ public class KnowledgeSystemRepository {
                 listener.getDataFailed(failedMsg);
             }
         });
+
     }
 
     public void getKnowledgeSystemArticleList(int pageNumber, int cid, final GetWebDataListener listener) {
-        ApiService apiService = ApiWrapper.getRetrofitInstance().create(ApiService.class);
-        apiService.getKnowledgeSystemArticleList(pageNumber, cid).enqueue(new AbstractRetrofitCallback() {
+        ApiWrapper.getService().getKnowledgeSystemArticleList(pageNumber, cid).enqueue(new MyCallback<ArticleListBean>() {
             @Override
-            public void getSuccessful(String responseBody) {
-                Gson gson = new Gson();
-                ArticleListBean articleListBean = gson.fromJson(responseBody, ArticleListBean.class);
-                listener.getDataSuccess(articleListBean);
+            public void getSuccessful(ArticleListBean data) {
+                listener.getDataSuccess(data);
             }
 
             @Override
@@ -56,6 +49,7 @@ public class KnowledgeSystemRepository {
                 listener.getDataFailed(failedMsg);
             }
         });
+
     }
 
 }

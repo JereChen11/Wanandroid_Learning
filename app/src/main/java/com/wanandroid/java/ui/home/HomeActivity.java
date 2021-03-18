@@ -15,7 +15,7 @@ import com.wanandroid.java.R;
 import com.wanandroid.java.ui.aboutme.AboutMeActivity;
 import com.wanandroid.java.ui.account.MyAccountFragment;
 import com.wanandroid.java.ui.knowledgesystem.KnowledgeSystemFragment;
-import com.wanandroid.java.ui.project.ProjectArticleFragment;
+import com.wanandroid.java.ui.project.ProjectTypeFragment;
 import com.wanandroid.java.ui.wechat.WeChatBlogArticleFragment;
 import com.wanandroid.java.databinding.ActivityHomeBinding;
 
@@ -117,7 +117,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                                 break;
                             case R.id.nav_complete_project:
                                 navItemIndex = 1;
-                                replaceFragment(new ProjectArticleFragment());
+                                replaceFragment(new ProjectTypeFragment());
                                 result = true;
                                 break;
                             case R.id.nav_wechat_blog:
@@ -227,7 +227,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case HOME_INDEX:
                 return new HomeFragment();
             case COMPLETE_PROJECT_INDEX:
-                return new ProjectArticleFragment();
+                return new ProjectTypeFragment();
             case WECHAT_BLOG_INDEX:
                 return new WeChatBlogArticleFragment();
             case KNOWLEDGE_SYSTEM_INDEX:

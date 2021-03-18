@@ -1,15 +1,16 @@
 package com.wanandroid.java.ui.login;
 
 import android.text.TextUtils;
-import android.util.Log;
 
-import com.google.gson.Gson;
-import com.wanandroid.java.data.api.AbstractRetrofitCallback;
 import com.wanandroid.java.data.api.ApiService;
 import com.wanandroid.java.data.api.ApiWrapper;
+import com.wanandroid.java.data.api.MyCallback;
 import com.wanandroid.java.data.bean.LoginInfo;
+import com.wanandroid.java.data.bean.local.LoginRegisterResult;
 
 import java.util.HashMap;
+
+import retrofit2.Callback;
 
 /**
  * @author jere
@@ -29,73 +30,52 @@ public class RegisterLoginRepository {
         return instance;
     }
 
-    public void register(String userName, String password, String rePassword, final RegisterListener listener) {
-        if (TextUtils.isEmpty(userName) || TextUtils.isEmpty(password) || TextUtils.isEmpty(rePassword)) {
-            listener.register(false);
-        }
-        HashMap<String, String> map = new HashMap<>();
-        map.put("username", userName);
-        map.put("password", password);
-        map.put("rePassword", rePassword);
-        ApiService apiService = ApiWrapper.getRetrofitInstance().create(ApiService.class);
-        apiService.register(map).enqueue(new AbstractRetrofitCallback() {
+    private Callback<LoginInfo> loginRegisterCallback(LoginRegisterListener listener) {
+        return new MyCallback<LoginInfo>() {
             @Override
-            public void getSuccessful(String responseBody) {
-                Log.e(TAG, "getSuccessful: " + responseBody);
-                listener.register(true);
-            }
-
-            @Override
-            public void getFailed(String failedMsg) {
-                Log.e(TAG, "getFailed: " + failedMsg);
-                listener.register(false);
-            }
-        });
-    }
-
-    public void login(String userName, String password, final LoginListener listener) {
-        if (TextUtils.isEmpty(userName) || TextUtils.isEmpty(password)) {
-            listener.login(false);
-        }
-        HashMap<String, String> map = new HashMap<>();
-        map.put("username", userName);
-        map.put("password", password);
-        ApiService apiService = ApiWrapper.getRetrofitInstance().create(ApiService.class);
-        apiService.login(map).enqueue(new AbstractRetrofitCallback() {
-            @Override
-            public void getSuccessful(String responseBody) {
-                Log.e(TAG, "getSuccessful: " + responseBody);
-                Gson gson = new Gson();
-                LoginInfo loginInfo = gson.fromJson(responseBody, LoginInfo.class);
-                if (loginInfo.getErrorCode() == 0) {
-                    listener.login(true);
+            public void getSuccessful(LoginInfo data) {
+                if (data.getErrorCode() == 0) {
+                    listener.onResult(new LoginRegisterResult(true, "successful"));
                 } else {
-                    listener.login(false);
+                    listener.onResult(new LoginRegisterResult(true, data.getErrorMsg()));
                 }
             }
 
             @Override
             public void getFailed(String failedMsg) {
-                Log.e(TAG, "getFailed: " + failedMsg);
-                listener.login(false);
+                listener.onResult(new LoginRegisterResult(true, failedMsg));
             }
-        });
+        };
     }
 
-    public interface LoginListener {
-        /**
-         * 监听是否登入成功
-         * @param isLoginSuccessful 登入成功，返回true；反之，返回false
-         */
-        void login(boolean isLoginSuccessful);
+    public void register(String userName, String password, String rePassword, LoginRegisterListener listener) {
+        if (TextUtils.isEmpty(userName) || TextUtils.isEmpty(password) || TextUtils.isEmpty(rePassword)) {
+            listener.onResult(new LoginRegisterResult(false, "请输入完整格式"));
+        }
+        HashMap<String, String> map = new HashMap<>();
+        map.put("username", userName);
+        map.put("password", password);
+        map.put("rePassword", rePassword);
+        ApiWrapper.getService().register(map).enqueue(loginRegisterCallback(listener));
     }
 
-    public interface RegisterListener {
+    public void login(String userName, String password, LoginRegisterListener listener) {
+        if (TextUtils.isEmpty(userName) || TextUtils.isEmpty(password)) {
+            listener.onResult(new LoginRegisterResult(false, "请输入完整格式"));
+        }
+        HashMap<String, String> map = new HashMap<>();
+        map.put("username", userName);
+        map.put("password", password);
+        ApiWrapper.getService().login(map).enqueue(loginRegisterCallback(listener));
+    }
+
+    public interface LoginRegisterListener {
         /**
          * 监听是否注册成功
-         * @param isRegisterSuccessful 注册成功，返回true；反之，返回false
+         *
+         * @param result 注册成功，返回true；反之，返回false
          */
-        void register(boolean isRegisterSuccessful);
+        void onResult(LoginRegisterResult result);
     }
 
 }

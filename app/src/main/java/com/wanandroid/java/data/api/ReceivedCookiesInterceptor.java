@@ -14,6 +14,7 @@ import okhttp3.Response;
 /**
  * @author jere
  */
+@Deprecated
 public class ReceivedCookiesInterceptor implements Interceptor {
     private static final String SET_COOKIE_KEY = "Set-Cookie";
 

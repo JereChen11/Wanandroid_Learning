@@ -2,11 +2,9 @@ package com.wanandroid.java.data.repository;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.wanandroid.java.data.api.AbstractRetrofitCallback;
-import com.wanandroid.java.data.api.ApiService;
 import com.wanandroid.java.data.api.ApiWrapper;
 import com.wanandroid.java.data.api.GetWebDataListener;
+import com.wanandroid.java.data.api.MyCallback;
 import com.wanandroid.java.data.bean.ArticleListBean;
 import com.wanandroid.java.data.bean.HomeBannerListBean;
 
@@ -38,13 +36,10 @@ public class HomeRepository {
     }
 
     public void getHomeBannerList(final GetWebDataListener listener) {
-        ApiService apiService = ApiWrapper.getRetrofitInstance().create(ApiService.class);
-        apiService.getHomeBannerList().enqueue(new AbstractRetrofitCallback() {
+        ApiWrapper.getService().getHomeBannerList().enqueue(new MyCallback<HomeBannerListBean>() {
             @Override
-            public void getSuccessful(String responseBody) {
-                Gson gson = new Gson();
-                HomeBannerListBean homeBannerListBean = gson.fromJson(responseBody, HomeBannerListBean.class);
-                listener.getDataSuccess(homeBannerListBean);
+            public void getSuccessful(HomeBannerListBean data) {
+                listener.getDataSuccess(data);
             }
 
             @Override
@@ -55,13 +50,10 @@ public class HomeRepository {
     }
 
     public void getHomeArticleList(int pageNumber, final GetWebDataListener listener) {
-        ApiService apiService = ApiWrapper.getRetrofitInstance().create(ApiService.class);
-        apiService.getHomeArticleList(pageNumber).enqueue(new AbstractRetrofitCallback() {
+        ApiWrapper.getService().getHomeArticleList(pageNumber).enqueue(new MyCallback<ArticleListBean>() {
             @Override
-            public void getSuccessful(String responseBody) {
-                Gson gson = new Gson();
-                ArticleListBean articleListBean = gson.fromJson(responseBody, ArticleListBean.class);
-                listener.getDataSuccess(articleListBean);
+            public void getSuccessful(ArticleListBean data) {
+                listener.getDataSuccess(data);
             }
 
             @Override
@@ -72,8 +64,7 @@ public class HomeRepository {
     }
 
     public void getRxJava2HomeBannerList(final GetWebDataListener listener) {
-        ApiService apiService = ApiWrapper.getRetrofitInstance().create(ApiService.class);
-        apiService.getRxJavaHomeBannerList()
+        ApiWrapper.getService().getRxJavaHomeBannerList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<HomeBannerListBean>() {
