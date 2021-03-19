@@ -19,9 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.wanandroid.java.ui.collection.CollectionActivity" />
-        <activity android:name="com.wanandroid.java.ui.knowledgesystem.KnowledgeSystemArticleListActivity" />
+        <activity android:name="com.wanandroid.java.ui.system.SystemArticleListActivity" />
         <activity android:name=".ui.login.RegisterLoginActivity" />
-        <activity android:name="com.wanandroid.java.ui.ArticleDetailWebViewActivity" />
+        <activity android:name="com.wanandroid.java.ui.web.ArticleDetailWebViewActivity" />
         <activity android:name=".ui.account.SetNameActivity" />
         <activity android:name=".ui.account.PersonalInformationActivity" />
         <activity android:name=".ui.aboutme.AboutMeActivity" />

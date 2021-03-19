@@ -6,7 +6,7 @@ import android.widget.Toast;
 import com.wanandroid.java.R;
 import com.wanandroid.java.data.bean.local.LoginRegisterResult;
 import com.wanandroid.java.databinding.ActivityRegisterLoginBinding;
-import com.wanandroid.java.ui.BaseVmActivity;
+import com.wanandroid.java.ui.base.BaseVmActivity;
 import com.wanandroid.java.util.Settings;
 
 import androidx.lifecycle.Observer;

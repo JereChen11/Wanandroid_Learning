@@ -2,7 +2,7 @@ package com.wanandroid.java.data.api;
 
 import com.wanandroid.java.data.bean.ArticleListBean;
 import com.wanandroid.java.data.bean.HomeBannerListBean;
-import com.wanandroid.java.data.bean.KnowledgeSystemCategoryBean;
+import com.wanandroid.java.data.bean.SystemCategoryBean;
 import com.wanandroid.java.data.bean.LoginInfo;
 import com.wanandroid.java.data.bean.ProjectItemList;
 import com.wanandroid.java.data.bean.ProjectTreeItem;
@@ -13,14 +13,12 @@ import java.util.Map;
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
 
 /**
  * @author jere
@@ -116,7 +114,7 @@ public interface ApiService {
      * @return
      */
     @GET("/tree/json")
-    Call<KnowledgeSystemCategoryBean> getKnowledgeSystem();
+    Call<SystemCategoryBean> getKnowledgeSystem();
 
     /**
      * 获取知识体系文章列表

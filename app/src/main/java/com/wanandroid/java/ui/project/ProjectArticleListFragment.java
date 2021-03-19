@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.wanandroid.java.data.bean.ProjectItemList;
 import com.wanandroid.java.databinding.FragmentProjectArticleListBinding;
-import com.wanandroid.java.ui.ArticleDetailWebViewActivity;
+import com.wanandroid.java.ui.web.ArticleDetailWebViewActivity;
 
 import java.util.ArrayList;
 
@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * @author jere
@@ -27,11 +28,19 @@ public class ProjectArticleListFragment extends Fragment {
 
     private FragmentProjectArticleListBinding binding;
     private ProjectViewModel viewModel;
-    private ProjectItemListAdapter mProjectItemListAdapter;
-    private final ArrayList<ProjectItemList.DataBean.DatasBean> mProjectItems = new ArrayList<>();
-    private int pageNumber = 0;
+    private ProjectItemListAdapter projectItemListAdapter;
+    private final ArrayList<ProjectItemList.DataBean.DatasBean> projectItems = new ArrayList<>();
+    private int projectItemId;
+    private int pageNumber = 1;
     private boolean isLoadAllArticleData = false;
-    private int projectId = 0;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            projectItemId = getArguments().getInt(PROJECT_ID_KEY);
+        }
+    }
 
     @Nullable
     @Override
@@ -44,24 +53,28 @@ public class ProjectArticleListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(this, new ProjectVmFactory()).get(ProjectViewModel.class);
-
-        if (getArguments() != null) {
-            viewModel.setProjectItemListLd(pageNumber, getArguments().getInt(PROJECT_ID_KEY));
-        }
-
+        viewModel.setProjectItemListLd(pageNumber, projectItemId);
         viewModel.getProjectItemListLd().observe(getViewLifecycleOwner(), projectItemsObserver);
 
-        mProjectItemListAdapter = new ProjectItemListAdapter(getContext(), mProjectItems,
-                new ProjectItemListAdapter.AdapterItemClickListener() {
-                    @Override
-                    public void onPositionClicked(View v, int position) {
-                        String link = mProjectItems.get(position).getLink();
-                        Intent intent = new Intent(getActivity(), ArticleDetailWebViewActivity.class);
-                        intent.putExtra(ArticleDetailWebViewActivity.ARTICLE_DETAIL_WEB_LINK_KEY, link);
-                        startActivity(intent);
-                    }
+        projectItemListAdapter = new ProjectItemListAdapter(getContext(), projectItems,
+                (v, position) -> {
+                    String link = projectItems.get(position).getLink();
+                    Intent intent = new Intent(getActivity(), ArticleDetailWebViewActivity.class);
+                    intent.putExtra(ArticleDetailWebViewActivity.ARTICLE_DETAIL_WEB_LINK_KEY, link);
+                    startActivity(intent);
                 });
-        binding.projectArticleListRcy.setAdapter(mProjectItemListAdapter);
+        binding.projectArticleListRcy.setAdapter(projectItemListAdapter);
+        binding.projectArticleListRcy.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (!recyclerView.canScrollVertically(1)
+                        && newState == RecyclerView.SCROLL_STATE_IDLE && !isLoadAllArticleData) {
+                    pageNumber++;
+                    viewModel.setProjectItemListLd(pageNumber, projectItemId);
+                }
+            }
+        });
 
     }
 
@@ -70,10 +83,9 @@ public class ProjectArticleListFragment extends Fragment {
         public void onChanged(ProjectItemList projectItemsData) {
             if (projectItemsData != null) {
                 isLoadAllArticleData = projectItemsData.getData().isOver();
-                mProjectItemListAdapter.setIsLoadAllArticleData(isLoadAllArticleData);
-                mProjectItems.addAll(projectItemsData.getData().getDatas());
-                ArrayList<ProjectItemList.DataBean.DatasBean> newProjectItemList = new ArrayList<>(mProjectItems);
-                mProjectItemListAdapter.setData(newProjectItemList);
+                projectItemListAdapter.setIsLoadAllArticleData(isLoadAllArticleData);
+                projectItems.addAll(projectItemsData.getData().getDatas());
+                projectItemListAdapter.setData(projectItems);
             }
         }
     };

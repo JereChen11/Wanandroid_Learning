@@ -1,4 +1,4 @@
-package com.wanandroid.java.ui;
+package com.wanandroid.java.ui.web;
 
 import android.os.Bundle;
 import android.util.Log;

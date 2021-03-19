@@ -17,8 +17,8 @@ import com.bumptech.glide.Glide;
 import com.wanandroid.java.R;
 import com.wanandroid.java.data.bean.ArticleListBean;
 import com.wanandroid.java.data.bean.HomeBannerListBean;
-import com.wanandroid.java.ui.ArticleDetailWebViewActivity;
-import com.wanandroid.java.ui.ArticleListViewAdapter;
+import com.wanandroid.java.ui.web.ArticleDetailWebViewActivity;
+import com.wanandroid.java.ui.adapter.ArticleListViewAdapter;
 import com.wanandroid.java.databinding.FragmentHomeBinding;
 import com.wanandroid.java.ui.login.RegisterLoginActivity;
 

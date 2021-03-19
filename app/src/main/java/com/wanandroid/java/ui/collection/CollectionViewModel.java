@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModel;
  */
 public class CollectionViewModel extends ViewModel {
     private static final String TAG = "CollectionViewModel";
-    private MutableLiveData<ArticleListBean> collectionArticleListBeanLd;
+    private final MutableLiveData<ArticleListBean> collectionArticleListBeanLd;
 
     public CollectionViewModel() {
         this.collectionArticleListBeanLd = new MutableLiveData<>();

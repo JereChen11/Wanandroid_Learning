@@ -4,28 +4,28 @@ import com.wanandroid.java.data.api.ApiWrapper;
 import com.wanandroid.java.data.api.GetWebDataListener;
 import com.wanandroid.java.data.api.MyCallback;
 import com.wanandroid.java.data.bean.ArticleListBean;
-import com.wanandroid.java.data.bean.KnowledgeSystemCategoryBean;
+import com.wanandroid.java.data.bean.SystemCategoryBean;
 
 /**
  * @author jere
  */
-public class KnowledgeSystemRepository {
+public class SystemRepository {
 
     /**
      * 使用静态内部类来创建单例
      */
     private static class KnowledgeSystemRepositoryHelper {
-        private static final KnowledgeSystemRepository INSTANCE = new KnowledgeSystemRepository();
+        private static final SystemRepository INSTANCE = new SystemRepository();
     }
 
-    public static KnowledgeSystemRepository getInstance() {
+    public static SystemRepository getInstance() {
         return KnowledgeSystemRepositoryHelper.INSTANCE;
     }
 
     public void getKnowledgeSystemData(final GetWebDataListener listener) {
-        ApiWrapper.getService().getKnowledgeSystem().enqueue(new MyCallback<KnowledgeSystemCategoryBean>() {
+        ApiWrapper.getService().getKnowledgeSystem().enqueue(new MyCallback<SystemCategoryBean>() {
             @Override
-            public void getSuccessful(KnowledgeSystemCategoryBean data) {
+            public void getSuccessful(SystemCategoryBean data) {
                 listener.getDataSuccess(data);
             }
 

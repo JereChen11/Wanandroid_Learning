@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:titleText="@string/collection_folder"
-            app:titleTextSize="25sp" />
+            app:titleTextSize="20sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/collectionFolderRcy"

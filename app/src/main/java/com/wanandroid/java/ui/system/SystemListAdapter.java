@@ -1,4 +1,4 @@
-package com.wanandroid.java.ui.knowledgesystem;
+package com.wanandroid.java.ui.system;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wanandroid.java.R;
-import com.wanandroid.java.data.bean.KnowledgeSystemCategoryBean;
+import com.wanandroid.java.data.bean.SystemCategoryBean;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -17,14 +17,14 @@ import java.util.ArrayList;
 /**
  * @author jere
  */
-public class KnowledgeSystemListAdapter extends BaseExpandableListAdapter {
-    private WeakReference<KnowledgeSystemFragment> weakReference;
-    private ArrayList<KnowledgeSystemCategoryBean.DataBean> mGroupDataList;
+public class SystemListAdapter extends BaseExpandableListAdapter {
+    private WeakReference<SystemFragment> weakReference;
+    private ArrayList<SystemCategoryBean.DataBean> mGroupDataList;
 
-    KnowledgeSystemListAdapter(KnowledgeSystemFragment fragment,
-                               KnowledgeSystemCategoryBean knowledgeSystemCategoryBean) {
+    SystemListAdapter(SystemFragment fragment,
+                      SystemCategoryBean systemCategoryBean) {
         this.weakReference = new WeakReference<>(fragment);
-        this.mGroupDataList = knowledgeSystemCategoryBean.getData();
+        this.mGroupDataList = systemCategoryBean.getData();
     }
 
     @Override

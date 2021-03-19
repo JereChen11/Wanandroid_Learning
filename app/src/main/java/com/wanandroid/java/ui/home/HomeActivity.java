@@ -14,9 +14,9 @@ import com.google.android.material.navigation.NavigationView;
 import com.wanandroid.java.R;
 import com.wanandroid.java.ui.aboutme.AboutMeActivity;
 import com.wanandroid.java.ui.account.MyAccountFragment;
-import com.wanandroid.java.ui.knowledgesystem.KnowledgeSystemFragment;
+import com.wanandroid.java.ui.system.SystemFragment;
 import com.wanandroid.java.ui.project.ProjectTypeFragment;
-import com.wanandroid.java.ui.wechat.WeChatBlogArticleFragment;
+import com.wanandroid.java.ui.wechat.WeChatBloggerFragment;
 import com.wanandroid.java.databinding.ActivityHomeBinding;
 
 import androidx.annotation.NonNull;
@@ -122,7 +122,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                                 break;
                             case R.id.nav_wechat_blog:
                                 navItemIndex = 2;
-                                replaceFragment(new WeChatBlogArticleFragment());
+                                replaceFragment(new WeChatBloggerFragment());
                                 result = true;
                                 break;
                             case R.id.nav_my:
@@ -132,7 +132,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                                 break;
                             case R.id.nav_knowledge_system:
                                 navItemIndex = 3;
-                                replaceFragment(new KnowledgeSystemFragment());
+                                replaceFragment(new SystemFragment());
                                 result = true;
                                 break;
                             default:
@@ -229,9 +229,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case COMPLETE_PROJECT_INDEX:
                 return new ProjectTypeFragment();
             case WECHAT_BLOG_INDEX:
-                return new WeChatBlogArticleFragment();
+                return new WeChatBloggerFragment();
             case KNOWLEDGE_SYSTEM_INDEX:
-                return new KnowledgeSystemFragment();
+                return new SystemFragment();
             case MY_INDEX:
                 return new MyAccountFragment();
             default:

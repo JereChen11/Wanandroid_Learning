@@ -42,7 +42,7 @@ public class TitleBarCustomView extends ConstraintLayout {
 
         String titleString = typedArray.getString(R.styleable.TitleBarCustomView_titleText);
         mBinding.setTitleTextContent(titleString);
-        float textSize = typedArray.getDimension(R.styleable.TitleBarCustomView_titleTextSize, 55);
+        float textSize = typedArray.getDimension(R.styleable.TitleBarCustomView_titleTextSize, 40);
         mBinding.setTitleTextSize(textSize);
 
         int backIconId = typedArray.getResourceId(R.styleable.TitleBarCustomView_titleBackIcon, R.drawable.vector_drawable_left_arrow);

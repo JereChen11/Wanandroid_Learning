@@ -1,4 +1,4 @@
-package com.wanandroid.java.ui;
+package com.wanandroid.java.ui.adapter;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;

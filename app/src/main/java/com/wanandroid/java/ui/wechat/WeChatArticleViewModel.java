@@ -13,14 +13,16 @@ import androidx.lifecycle.ViewModel;
 /**
  * @author jere
  */
-public class WeChatBlogArticleViewModel extends ViewModel {
+public class WeChatArticleViewModel extends ViewModel {
     private static final String TAG = "WeChatBlogArticleVm";
     private final MutableLiveData<WeChatArticleBloggerList> weChatArticleBloggerListLd;
     private final MutableLiveData<ArticleListBean> weChatArticleListLd;
+    private final WeChatArticleRepository repository;
 
-    public WeChatBlogArticleViewModel() {
+    public WeChatArticleViewModel(WeChatArticleRepository repository) {
         weChatArticleBloggerListLd = new MutableLiveData<>();
         weChatArticleListLd = new MutableLiveData<>();
+        this.repository = repository;
     }
 
     public MutableLiveData<WeChatArticleBloggerList> getWeChatArticleBloggerListLd() {
@@ -28,7 +30,7 @@ public class WeChatBlogArticleViewModel extends ViewModel {
     }
 
     public void setWeChatArticleBloggerListLd() {
-        WeChatArticleRepository.newInstance().getWeChatArticleBloggerList(new GetWebDataListener() {
+        repository.getWeChatArticleBloggerList(new GetWebDataListener() {
             @Override
             public void getDataSuccess(Object object) {
                 WeChatArticleBloggerList weChatArticleBloggerList = (WeChatArticleBloggerList) object;
@@ -46,8 +48,9 @@ public class WeChatBlogArticleViewModel extends ViewModel {
         return weChatArticleListLd;
     }
 
-    public void setWeChatArticleListLd(int authorId, int pageNumber) {
-        WeChatArticleRepository.newInstance().getWeChatArticleList(authorId, pageNumber, new GetWebDataListener() {
+    public void setWeChatArticleListLd(int pageNumber, int authorId) {
+        Log.e(TAG, "setWeChatArticleListLd: pageNumber = " + pageNumber);
+        repository.getWeChatArticleList(authorId, pageNumber, new GetWebDataListener() {
             @Override
             public void getDataSuccess(Object object) {
                 ArticleListBean articleListBean = (ArticleListBean) object;
