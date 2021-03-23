@@ -6,7 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wanandroid.java.data.bean.ProjectItemList;
+import com.wanandroid.java.data.bean.Article;
+import com.wanandroid.java.data.bean.ArticleData;
 import com.wanandroid.java.databinding.FragmentProjectArticleListBinding;
 import com.wanandroid.java.ui.web.ArticleDetailWebViewActivity;
 
@@ -29,7 +30,7 @@ public class ProjectArticleListFragment extends Fragment {
     private FragmentProjectArticleListBinding binding;
     private ProjectViewModel viewModel;
     private ProjectItemListAdapter projectItemListAdapter;
-    private final ArrayList<ProjectItemList.DataBean.DatasBean> projectItems = new ArrayList<>();
+    private final ArrayList<Article> articleList = new ArrayList<>();
     private int projectItemId;
     private int pageNumber = 1;
     private boolean isLoadAllArticleData = false;
@@ -54,11 +55,11 @@ public class ProjectArticleListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(this, new ProjectVmFactory()).get(ProjectViewModel.class);
         viewModel.setProjectItemListLd(pageNumber, projectItemId);
-        viewModel.getProjectItemListLd().observe(getViewLifecycleOwner(), projectItemsObserver);
+        viewModel.getProjectArticleDataLd().observe(getViewLifecycleOwner(), projectItemsObserver);
 
-        projectItemListAdapter = new ProjectItemListAdapter(getContext(), projectItems,
+        projectItemListAdapter = new ProjectItemListAdapter(getContext(), articleList,
                 (v, position) -> {
-                    String link = projectItems.get(position).getLink();
+                    String link = articleList.get(position).getLink();
                     Intent intent = new Intent(getActivity(), ArticleDetailWebViewActivity.class);
                     intent.putExtra(ArticleDetailWebViewActivity.ARTICLE_DETAIL_WEB_LINK_KEY, link);
                     startActivity(intent);
@@ -78,14 +79,14 @@ public class ProjectArticleListFragment extends Fragment {
 
     }
 
-    private final Observer<ProjectItemList> projectItemsObserver = new Observer<ProjectItemList>() {
+    private final Observer<ArticleData> projectItemsObserver = new Observer<ArticleData>() {
         @Override
-        public void onChanged(ProjectItemList projectItemsData) {
-            if (projectItemsData != null) {
-                isLoadAllArticleData = projectItemsData.getData().isOver();
+        public void onChanged(ArticleData articleData) {
+            if (articleData != null) {
+                isLoadAllArticleData = articleData.isOver();
                 projectItemListAdapter.setIsLoadAllArticleData(isLoadAllArticleData);
-                projectItems.addAll(projectItemsData.getData().getDatas());
-                projectItemListAdapter.setData(projectItems);
+                articleList.addAll(articleData.getArticles());
+                projectItemListAdapter.setData(articleList);
             }
         }
     };

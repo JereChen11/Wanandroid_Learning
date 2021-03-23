@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.wanandroid.java.R;
+import com.wanandroid.java.data.bean.Article;
 import com.wanandroid.java.data.repository.CollectRepository;
-import com.wanandroid.java.data.bean.ArticleListBean;
 import com.wanandroid.java.util.Settings;
 import com.wanandroid.java.ui.customview.CustomCollectView;
 import com.wanandroid.java.ui.customview.PullUpRefreshView;
@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ArticleListViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int ARTICLE_TYPE = 0;
     private static final int BOTTOM_PROMPT_TYPE = 1;
-    private ArrayList<ArticleListBean.DataBean.DatasBean> articleListData;
+    private ArrayList<Article> articleListData;
     private boolean isLoadAllArticleData = false;
 
     public interface AdapterItemClickListener {
@@ -40,13 +40,13 @@ public class ArticleListViewAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 
 
-    public ArticleListViewAdapter(ArrayList<ArticleListBean.DataBean.DatasBean> articleListData,
+    public ArticleListViewAdapter(ArrayList<Article> articleListData,
                                   AdapterItemClickListener listener) {
         this.articleListData = articleListData;
         this.itemClickListener = listener;
     }
 
-    public void setData(ArrayList<ArticleListBean.DataBean.DatasBean> articleListData) {
+    public void setData(ArrayList<Article> articleListData) {
         this.articleListData = articleListData;
         notifyDataSetChanged();
     }
@@ -84,7 +84,7 @@ public class ArticleListViewAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == ARTICLE_TYPE) {
             final ArticleViewHolder articleViewHolder = (ArticleViewHolder) holder;
-            final ArticleListBean.DataBean.DatasBean data = articleListData.get(position);
+            final Article data = articleListData.get(position);
             articleViewHolder.titleTv.setText(data.getTitle());
             String author;
             if (!TextUtils.isEmpty(data.getShareUser())) {

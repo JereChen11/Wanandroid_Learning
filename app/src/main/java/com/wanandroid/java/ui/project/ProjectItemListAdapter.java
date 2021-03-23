@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.wanandroid.java.R;
-import com.wanandroid.java.data.bean.ProjectItemList;
+import com.wanandroid.java.data.bean.Article;
 import com.wanandroid.java.ui.customview.PullUpRefreshView;
 
 import java.lang.ref.WeakReference;
@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ProjectItemListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int ARTICLE_TYPE = 0;
     private static final int BOTTOM_PROMPT_TYPE = 1;
-    private ArrayList<ProjectItemList.DataBean.DatasBean> dataList;
+    private ArrayList<Article> articleData;
     private WeakReference<Context> weakReference;
     private boolean isLoadAllArticleData = false;
 
@@ -35,15 +35,15 @@ public class ProjectItemListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public AdapterItemClickListener itemClickListener;
 
     ProjectItemListAdapter(Context context,
-                           ArrayList<ProjectItemList.DataBean.DatasBean> projectItemList,
+                           ArrayList<Article> articles,
                            AdapterItemClickListener adapterItemClickListener) {
         weakReference = new WeakReference<>(context);
-        this.dataList = projectItemList;
+        this.articleData = articles;
         this.itemClickListener = adapterItemClickListener;
     }
 
-    public void setData(ArrayList<ProjectItemList.DataBean.DatasBean> projectItemList) {
-        this.dataList = projectItemList;
+    public void setData(ArrayList<Article> articles) {
+        this.articleData = articles;
         notifyDataSetChanged();
     }
 
@@ -53,7 +53,7 @@ public class ProjectItemListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     @Override
     public int getItemViewType(int position) {
-        if (position == dataList.size()) {
+        if (position == articleData.size()) {
             return BOTTOM_PROMPT_TYPE;
         }
         return ARTICLE_TYPE;
@@ -79,15 +79,15 @@ public class ProjectItemListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == ARTICLE_TYPE) {
             ProjectArticleViewHolder projectArticleViewHolder = (ProjectArticleViewHolder) holder;
-            ProjectItemList.DataBean.DatasBean item = dataList.get(position);
+            Article article = articleData.get(position);
             if (weakReference != null && weakReference.get() != null) {
                 Glide.with(weakReference.get())
-                        .load(item.getEnvelopePic())
+                        .load(article.getEnvelopePic())
                         .into(projectArticleViewHolder.envelopIv);
-                projectArticleViewHolder.titleTv.setText(item.getTitle());
-                projectArticleViewHolder.describeContentTv.setText(item.getDesc());
-                projectArticleViewHolder.shareDateTv.setText(item.getNiceShareDate());
-                projectArticleViewHolder.authorTv.setText(item.getAuthor());
+                projectArticleViewHolder.titleTv.setText(article.getTitle());
+                projectArticleViewHolder.describeContentTv.setText(article.getDesc());
+                projectArticleViewHolder.shareDateTv.setText(article.getNiceShareDate());
+                projectArticleViewHolder.authorTv.setText(article.getAuthor());
             }
         } else {
             BottomPromptViewHolder bottomPromptViewHolder = (BottomPromptViewHolder) holder;
@@ -103,7 +103,7 @@ public class ProjectItemListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     @Override
     public int getItemCount() {
-        return dataList.size() + 1;
+        return articleData.size() + 1;
     }
 
     static class ProjectArticleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -123,6 +123,12 @@ public class ProjectItemListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             authorTv = itemView.findViewById(R.id.projectItemListAuthorTv);
 
             this.adapterItemClickListener = adapterItemClickListener;
+
+            envelopIv.setOnClickListener(this);
+            titleTv.setOnClickListener(this);
+            describeContentTv.setOnClickListener(this);
+            shareDateTv.setOnClickListener(this);
+            authorTv.setOnClickListener(this);
         }
 
         @Override

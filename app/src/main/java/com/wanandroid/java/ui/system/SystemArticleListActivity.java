@@ -5,12 +5,13 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.wanandroid.java.R;
-import com.wanandroid.java.data.bean.ArticleListBean;
+import com.wanandroid.java.data.bean.Article;
+import com.wanandroid.java.data.bean.ArticleData;
 import com.wanandroid.java.databinding.ActivitySystemArticleListBinding;
-import com.wanandroid.java.ui.web.ArticleDetailWebViewActivity;
 import com.wanandroid.java.ui.adapter.ArticleListViewAdapter;
 import com.wanandroid.java.ui.base.BaseVmActivity;
 import com.wanandroid.java.ui.login.RegisterLoginActivity;
+import com.wanandroid.java.ui.web.ArticleDetailWebViewActivity;
 
 import java.util.ArrayList;
 
@@ -23,19 +24,18 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class SystemArticleListActivity extends BaseVmActivity<SystemViewModel, ActivitySystemArticleListBinding> {
 
-    private final ArrayList<ArticleListBean.DataBean.DatasBean> knowledgeSystemArticles = new ArrayList<>();
-//    private ActivitySystemArticleListBinding mBinding;
+    private final ArrayList<Article> knowledgeSystemArticles = new ArrayList<>();
     private ArticleListViewAdapter articleListViewAdapter;
     private int pageNumber = 0;
     private boolean isLoadAllArticleData = false;
 
-    private final Observer<ArticleListBean> systemArticleDataObserver = new Observer<ArticleListBean>() {
+    private final Observer<ArticleData> systemArticleDataObserver = new Observer<ArticleData>() {
         @Override
-        public void onChanged(ArticleListBean articleListBean) {
-            if (articleListBean != null) {
-                knowledgeSystemArticles.addAll(articleListBean.getData().getDatas());
+        public void onChanged(ArticleData articleData) {
+            if (articleData != null) {
+                knowledgeSystemArticles.addAll(articleData.getArticles());
                 articleListViewAdapter.setData(knowledgeSystemArticles);
-                isLoadAllArticleData = articleListBean.getData().isOver();
+                isLoadAllArticleData = articleData.isOver();
                 articleListViewAdapter.setIsLoadAllArticleData(isLoadAllArticleData);
             }
         }
@@ -62,8 +62,7 @@ public class SystemArticleListActivity extends BaseVmActivity<SystemViewModel, A
 
         dataBinding.systemTitleBar.setTitle(childItemName);
 
-//        SystemViewModel knowledgeSystemVm = new ViewModelProvider(this).get(SystemViewModel.class);
-        viewModel.getSystemArticleListBeanLd().observe(this, systemArticleDataObserver);
+        viewModel.getSystemArticleDataLd().observe(this, systemArticleDataObserver);
         viewModel.setSystemArticleListBeanLd(pageNumber, childItemId);
 
         articleListViewAdapter = new ArticleListViewAdapter(knowledgeSystemArticles,
@@ -99,14 +98,5 @@ public class SystemArticleListActivity extends BaseVmActivity<SystemViewModel, A
             }
         });
     }
-
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-////        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_system_article_list);
-//
-//
-//
-//    }
 
 }

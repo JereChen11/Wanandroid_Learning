@@ -1,13 +1,14 @@
 package com.wanandroid.java.data.api;
 
-import com.wanandroid.java.data.bean.ArticleListBean;
-import com.wanandroid.java.data.bean.HomeBannerListBean;
-import com.wanandroid.java.data.bean.SystemCategoryBean;
-import com.wanandroid.java.data.bean.LoginInfo;
-import com.wanandroid.java.data.bean.ProjectItemList;
-import com.wanandroid.java.data.bean.ProjectTreeItem;
-import com.wanandroid.java.data.bean.WeChatArticleBloggerList;
+import com.wanandroid.java.data.bean.ArticleData;
+import com.wanandroid.java.data.bean.BaseResponse;
+import com.wanandroid.java.data.bean.HomeBanner;
+import com.wanandroid.java.data.bean.ProjectType;
+import com.wanandroid.java.data.bean.SystemCategory;
+import com.wanandroid.java.data.bean.UserInfo;
+import com.wanandroid.java.data.bean.WeChatBlogger;
 
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -31,7 +32,7 @@ public interface ApiService {
      * @return
      */
     @GET("/banner/json")
-    Call<HomeBannerListBean> getHomeBannerList();
+    Call<BaseResponse<List<HomeBanner>>> getHomeBannerList();
 
     /**
      * just for test Retrofit + RxJava2
@@ -39,7 +40,7 @@ public interface ApiService {
      * @return io.reactivex.Observable
      */
     @GET("/banner/json")
-    Observable<HomeBannerListBean> getRxJavaHomeBannerList();
+    Observable<BaseResponse<List<HomeBanner>>> getRxJavaHomeBannerList();
 
     /**
      * 获取主页文章列表
@@ -48,7 +49,7 @@ public interface ApiService {
      * @return
      */
     @GET("/article/list/{pageNumber}/json")
-    Call<ArticleListBean> getHomeArticleList(@Path("pageNumber") int pageNumber);
+    Call<BaseResponse<ArticleData>> getHomeArticleList(@Path("pageNumber") int pageNumber);
 
     /**
      * 获取项目分类
@@ -56,7 +57,7 @@ public interface ApiService {
      * @return
      */
     @GET("/project/tree/json")
-    Call<ProjectTreeItem> getProjectTreeItems();
+    Call<BaseResponse<List<ProjectType>>> getProjectTreeItems();
 
     /**
      * 根据项目ID，获取项目列表
@@ -66,8 +67,8 @@ public interface ApiService {
      * @return
      */
     @GET("/project/list/{pageNumber}/json?")
-    Call<ProjectItemList> getProjectItemList(@Path("pageNumber") int pageNumber,
-                                             @Query("cid") int cid);
+    Call<BaseResponse<ArticleData>> getProjectItemList(@Path("pageNumber") int pageNumber,
+                                                       @Query("cid") int cid);
 
     /**
      * 获取微信公众号博主信息
@@ -75,7 +76,7 @@ public interface ApiService {
      * @return
      */
     @GET("/wxarticle/chapters/json")
-    Call<WeChatArticleBloggerList> getWeChatOfficialAccountBloggerList();
+    Call<BaseResponse<List<WeChatBlogger>>> getWeChatBloggerList();
 
     /**
      * 获取微信公众号文章列表
@@ -85,8 +86,8 @@ public interface ApiService {
      * @return
      */
     @GET("/wxarticle/list/{authorId}/{pageNumber}/json")
-    Call<ArticleListBean> getWeChatArticleList(@Path("authorId") int authorId,
-                                            @Path("pageNumber") int pageNumber);
+    Call<BaseResponse<ArticleData>> getWeChatArticleList(@Path("authorId") int authorId,
+                                                         @Path("pageNumber") int pageNumber);
 
     /**
      * 注册
@@ -96,7 +97,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("/user/register")
-    Call<LoginInfo> register(@FieldMap Map<String, String> registerInfoMap);
+    Call<BaseResponse<UserInfo>> register(@FieldMap Map<String, String> registerInfoMap);
 
     /**
      * 登入
@@ -106,7 +107,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("/user/login")
-    Call<LoginInfo> login(@FieldMap Map<String, String> loginInfoMap);
+    Call<BaseResponse<UserInfo>> login(@FieldMap Map<String, String> loginInfoMap);
 
     /**
      * 获取知识体系
@@ -114,7 +115,7 @@ public interface ApiService {
      * @return
      */
     @GET("/tree/json")
-    Call<SystemCategoryBean> getKnowledgeSystem();
+    Call<BaseResponse<List<SystemCategory>>> getKnowledgeSystemCategory();
 
     /**
      * 获取知识体系文章列表
@@ -123,8 +124,8 @@ public interface ApiService {
      * @return
      */
     @GET("/article/list/{pageNumber}/json")
-    Call<ArticleListBean> getKnowledgeSystemArticleList(@Path("pageNumber") int pageNumber,
-                                                     @Query("cid") int cid);
+    Call<BaseResponse<ArticleData>> getKnowledgeSystemArticleList(@Path("pageNumber") int pageNumber,
+                                                                  @Query("cid") int cid);
 
     /**
      * 获取收藏的文章列表
@@ -132,7 +133,7 @@ public interface ApiService {
      * @return
      */
     @GET("/lg/collect/list/{pageNumber}/json")
-    Call<ArticleListBean>getCollectionArticleList(@Path("pageNumber") int pageNumber);
+    Call<BaseResponse<ArticleData>> getCollectionArticleList(@Path("pageNumber") int pageNumber);
 
     /**
      * 收藏文章

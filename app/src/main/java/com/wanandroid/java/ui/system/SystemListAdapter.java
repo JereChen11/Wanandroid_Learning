@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wanandroid.java.R;
-import com.wanandroid.java.data.bean.SystemCategoryBean;
+import com.wanandroid.java.data.bean.SystemCategory;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -19,12 +19,12 @@ import java.util.ArrayList;
  */
 public class SystemListAdapter extends BaseExpandableListAdapter {
     private WeakReference<SystemFragment> weakReference;
-    private ArrayList<SystemCategoryBean.DataBean> mGroupDataList;
+    private ArrayList<SystemCategory> mGroupDataList;
 
     SystemListAdapter(SystemFragment fragment,
-                      SystemCategoryBean systemCategoryBean) {
+                      ArrayList<SystemCategory> systemCategories) {
         this.weakReference = new WeakReference<>(fragment);
-        this.mGroupDataList = systemCategoryBean.getData();
+        this.mGroupDataList = systemCategories;
     }
 
     @Override

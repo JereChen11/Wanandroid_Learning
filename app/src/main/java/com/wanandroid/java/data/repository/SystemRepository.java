@@ -3,8 +3,11 @@ package com.wanandroid.java.data.repository;
 import com.wanandroid.java.data.api.ApiWrapper;
 import com.wanandroid.java.data.api.GetWebDataListener;
 import com.wanandroid.java.data.api.MyCallback;
-import com.wanandroid.java.data.bean.ArticleListBean;
-import com.wanandroid.java.data.bean.SystemCategoryBean;
+import com.wanandroid.java.data.bean.ArticleData;
+import com.wanandroid.java.data.bean.BaseResponse;
+import com.wanandroid.java.data.bean.SystemCategory;
+
+import java.util.List;
 
 /**
  * @author jere
@@ -23,10 +26,10 @@ public class SystemRepository {
     }
 
     public void getKnowledgeSystemData(final GetWebDataListener listener) {
-        ApiWrapper.getService().getKnowledgeSystem().enqueue(new MyCallback<SystemCategoryBean>() {
+        ApiWrapper.getService().getKnowledgeSystemCategory().enqueue(new MyCallback<BaseResponse<List<SystemCategory>>>() {
             @Override
-            public void getSuccessful(SystemCategoryBean data) {
-                listener.getDataSuccess(data);
+            public void getSuccessful(BaseResponse<List<SystemCategory>> baseResponse) {
+                listener.getDataSuccess(baseResponse.getData());
             }
 
             @Override
@@ -38,10 +41,10 @@ public class SystemRepository {
     }
 
     public void getKnowledgeSystemArticleList(int pageNumber, int cid, final GetWebDataListener listener) {
-        ApiWrapper.getService().getKnowledgeSystemArticleList(pageNumber, cid).enqueue(new MyCallback<ArticleListBean>() {
+        ApiWrapper.getService().getKnowledgeSystemArticleList(pageNumber, cid).enqueue(new MyCallback<BaseResponse<ArticleData>>() {
             @Override
-            public void getSuccessful(ArticleListBean data) {
-                listener.getDataSuccess(data);
+            public void getSuccessful(BaseResponse<ArticleData> baseResponse) {
+                listener.getDataSuccess(baseResponse.getData());
             }
 
             @Override

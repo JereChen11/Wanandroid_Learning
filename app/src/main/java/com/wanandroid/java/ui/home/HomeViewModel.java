@@ -3,9 +3,11 @@ package com.wanandroid.java.ui.home;
 import android.util.Log;
 
 import com.wanandroid.java.data.api.GetWebDataListener;
+import com.wanandroid.java.data.bean.ArticleData;
+import com.wanandroid.java.data.bean.HomeBanner;
 import com.wanandroid.java.data.repository.HomeRepository;
-import com.wanandroid.java.data.bean.ArticleListBean;
-import com.wanandroid.java.data.bean.HomeBannerListBean;
+
+import java.util.List;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -15,15 +17,15 @@ import androidx.lifecycle.ViewModel;
  */
 public class HomeViewModel extends ViewModel {
     private static final String TAG = "HomeViewModel";
-    private MutableLiveData<HomeBannerListBean> homeBannerListLd;
-    private MutableLiveData<ArticleListBean> homeArticleListBeanLd;
+    private final MutableLiveData<List<HomeBanner>> homeBannerListLd;
+    private final MutableLiveData<ArticleData> homeArticleDataLd;
 
     public HomeViewModel() {
         this.homeBannerListLd = new MutableLiveData<>();
-        this.homeArticleListBeanLd = new MutableLiveData<>();
+        this.homeArticleDataLd = new MutableLiveData<>();
     }
 
-    public MutableLiveData<HomeBannerListBean> getHomeBannerListLd() {
+    public MutableLiveData<List<HomeBanner>> getHomeBannerListLd() {
         return homeBannerListLd;
     }
 
@@ -31,8 +33,8 @@ public class HomeViewModel extends ViewModel {
         HomeRepository.newInstance().getHomeBannerList(new GetWebDataListener() {
             @Override
             public void getDataSuccess(Object object) {
-                HomeBannerListBean homeBannerListBean = (HomeBannerListBean) object;
-                homeBannerListLd.postValue(homeBannerListBean);
+                List<HomeBanner> homeBannerList = (List<HomeBanner>) object;
+                homeBannerListLd.postValue(homeBannerList);
             }
 
             @Override
@@ -46,8 +48,7 @@ public class HomeViewModel extends ViewModel {
         HomeRepository.newInstance().getRxJava2HomeBannerList(new GetWebDataListener() {
             @Override
             public void getDataSuccess(Object object) {
-                HomeBannerListBean homeBannerListBean = (HomeBannerListBean) object;
-                homeBannerListLd.postValue(homeBannerListBean);
+                homeBannerListLd.postValue((List<HomeBanner>) object);
             }
 
             @Override
@@ -57,16 +58,16 @@ public class HomeViewModel extends ViewModel {
         });
     }
 
-    public MutableLiveData<ArticleListBean> getHomeArticleListBeanLd() {
-        return homeArticleListBeanLd;
+    public MutableLiveData<ArticleData> getHomeArticleDataLd() {
+        return homeArticleDataLd;
     }
 
-    public void setHomeArticleListBeanLd(int pageNumber) {
+    public void setHomeArticleDataLd(int pageNumber) {
         HomeRepository.newInstance().getHomeArticleList(pageNumber, new GetWebDataListener() {
             @Override
             public void getDataSuccess(Object object) {
-                ArticleListBean homeArticleListBean = (ArticleListBean) object;
-                homeArticleListBeanLd.postValue(homeArticleListBean);
+                ArticleData articleData = (ArticleData) object;
+                homeArticleDataLd.postValue(articleData);
             }
 
             @Override

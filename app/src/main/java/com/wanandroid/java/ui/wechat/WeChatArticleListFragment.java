@@ -6,7 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wanandroid.java.data.bean.ArticleListBean;
+import com.wanandroid.java.data.bean.Article;
+import com.wanandroid.java.data.bean.ArticleData;
 import com.wanandroid.java.databinding.FragmentWeChatArticleListBinding;
 import com.wanandroid.java.ui.web.ArticleDetailWebViewActivity;
 import com.wanandroid.java.ui.adapter.ArticleListViewAdapter;
@@ -33,7 +34,7 @@ public class WeChatArticleListFragment extends Fragment {
     private FragmentWeChatArticleListBinding binding;
     private WeChatArticleViewModel viewModel;
     private ArticleListViewAdapter articleListViewAdapter;
-    private final ArrayList<ArticleListBean.DataBean.DatasBean> weChatArticles = new ArrayList<>();
+    private final ArrayList<Article> weChatArticles = new ArrayList<>();
     private int pageNumber = 1;
     private boolean isLoadAllArticleData = false;
     private int bloggerId;
@@ -71,7 +72,7 @@ public class WeChatArticleListFragment extends Fragment {
 
         viewModel = new ViewModelProvider(this, new WeChatVmFactory()).get(WeChatArticleViewModel.class);
         viewModel.setWeChatArticleListLd(pageNumber, bloggerId);
-        viewModel.getWeChatArticleListLd().observe(getViewLifecycleOwner(), weChatArticleListObserver);
+        viewModel.getWeChatArticleDataLd().observe(getViewLifecycleOwner(), weChatArticleDataObserver);
 
         articleListViewAdapter = new ArticleListViewAdapter(weChatArticles,
                 new ArticleListViewAdapter.AdapterItemClickListener() {
@@ -109,13 +110,13 @@ public class WeChatArticleListFragment extends Fragment {
 
     }
 
-    private final Observer<ArticleListBean> weChatArticleListObserver = new Observer<ArticleListBean>() {
+    private final Observer<ArticleData> weChatArticleDataObserver = new Observer<ArticleData>() {
         @Override
-        public void onChanged(ArticleListBean articleListBean) {
-            if (articleListBean != null) {
-                isLoadAllArticleData = articleListBean.getData().isOver();
+        public void onChanged(ArticleData articleData) {
+            if (articleData != null) {
+                isLoadAllArticleData = articleData.isOver();
                 articleListViewAdapter.setIsLoadAllArticleData(isLoadAllArticleData);
-                weChatArticles.addAll(articleListBean.getData().getDatas());
+                weChatArticles.addAll(articleData.getArticles());
                 articleListViewAdapter.setData(weChatArticles);
             }
         }

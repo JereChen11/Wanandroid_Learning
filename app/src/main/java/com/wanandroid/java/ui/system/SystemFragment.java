@@ -7,10 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
-import com.wanandroid.java.data.bean.SystemCategoryBean;
+import com.wanandroid.java.data.bean.SystemCategory;
 import com.wanandroid.java.databinding.FragmentSystemBinding;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,18 +25,18 @@ import androidx.lifecycle.ViewModelProvider;
  * @author jere
  */
 public class SystemFragment extends Fragment {
-    private SystemCategoryBean mSystemCategoryBean;
+    private final ArrayList<SystemCategory> systemCategoryList = new ArrayList<>();
     private FragmentSystemBinding mBinding;
     public static final String CHILD_ITEM_ID_KEY = "childItemId";
     public static final String CHILD_ITEM_NAME_KEY = "childItemName";
 
-    private final Observer<SystemCategoryBean> systemCategoryBeanObserver = new Observer<SystemCategoryBean>() {
+    private final Observer<List<SystemCategory>> systemCategoryBeanObserver = new Observer<List<SystemCategory>>() {
         @Override
-        public void onChanged(SystemCategoryBean systemCategoryBean) {
-            if (systemCategoryBean != null) {
-                mSystemCategoryBean = systemCategoryBean;
+        public void onChanged(List<SystemCategory> systemCategories) {
+            if (systemCategories != null) {
+                systemCategoryList.addAll(systemCategories);
                 SystemListAdapter systemListAdapter =
-                        new SystemListAdapter(SystemFragment.this, systemCategoryBean);
+                        new SystemListAdapter(SystemFragment.this, systemCategoryList);
                 mBinding.expandableListView.setAdapter(systemListAdapter);
             }
         }
@@ -62,8 +65,7 @@ public class SystemFragment extends Fragment {
         mBinding.expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                SystemCategoryBean.DataBean.ChildrenBean childData = mSystemCategoryBean.getData()
-                        .get(groupPosition)
+                SystemCategory.ChildrenBean childData = systemCategoryList.get(groupPosition)
                         .getChildren()
                         .get(childPosition);
 

@@ -6,12 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.wanandroid.java.data.bean.ProjectTreeItem;
+import com.wanandroid.java.data.bean.ProjectType;
 import com.wanandroid.java.databinding.FragmentProjectBinding;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +26,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
  * @author jere
  */
 public class ProjectTypeFragment extends Fragment {
-    private final ArrayList<ProjectTreeItem.ProjectItem> mProjectTreeItems = new ArrayList<>();
+    private final ArrayList<ProjectType> mProjectTreeItems = new ArrayList<>();
     private FragmentProjectBinding mBinding;
 
     public ProjectTypeFragment() {
@@ -48,7 +49,7 @@ public class ProjectTypeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         ProjectViewModel viewModel = new ViewModelProvider(this, new ProjectVmFactory()).get(ProjectViewModel.class);
-        viewModel.getProjectTreeItemsLd().observe(getViewLifecycleOwner(), projectTreeItemsObserver);
+        viewModel.getProjectTypeDataLd().observe(getViewLifecycleOwner(), projectTreeItemsObserver);
         viewModel.setProjectTreeItemsLd();
 
     }
@@ -59,11 +60,11 @@ public class ProjectTypeFragment extends Fragment {
                 (tab, position) -> tab.setText(mProjectTreeItems.get(position).getName())).attach();
     }
 
-    private final Observer<ArrayList<ProjectTreeItem.ProjectItem>> projectTreeItemsObserver =
-            projectTreeItems -> {
-                if (projectTreeItems != null) {
+    private final Observer<List<ProjectType>> projectTreeItemsObserver =
+            projectTypes -> {
+                if (projectTypes != null) {
                     mProjectTreeItems.clear();
-                    mProjectTreeItems.addAll(projectTreeItems);
+                    mProjectTreeItems.addAll(projectTypes);
 
                     mBinding.projectVp2.setAdapter(new ProjectTypeVp2Adapter(this, mProjectTreeItems));
                     initTabLayoutAndVp2();
@@ -71,11 +72,11 @@ public class ProjectTypeFragment extends Fragment {
             };
 
     static class ProjectTypeVp2Adapter extends FragmentStateAdapter {
-        private final ArrayList<ProjectTreeItem.ProjectItem> projectTreeItems;
+        private final ArrayList<ProjectType> projectTypes;
 
-        public ProjectTypeVp2Adapter(@NonNull Fragment fragment, ArrayList<ProjectTreeItem.ProjectItem> projectTreeItems) {
+        public ProjectTypeVp2Adapter(@NonNull Fragment fragment, ArrayList<ProjectType> projectTypes) {
             super(fragment);
-            this.projectTreeItems = projectTreeItems;
+            this.projectTypes = projectTypes;
         }
 
         @NonNull
@@ -83,14 +84,14 @@ public class ProjectTypeFragment extends Fragment {
         public Fragment createFragment(int position) {
             Fragment fragment = new ProjectArticleListFragment();
             Bundle args = new Bundle();
-            args.putInt(ProjectArticleListFragment.PROJECT_ID_KEY, projectTreeItems.get(position).getId());
+            args.putInt(ProjectArticleListFragment.PROJECT_ID_KEY, projectTypes.get(position).getId());
             fragment.setArguments(args);
             return fragment;
         }
 
         @Override
         public int getItemCount() {
-            return projectTreeItems.size();
+            return projectTypes.size();
         }
     }
 

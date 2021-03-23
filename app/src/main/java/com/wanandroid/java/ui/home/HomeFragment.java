@@ -15,8 +15,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.wanandroid.java.R;
-import com.wanandroid.java.data.bean.ArticleListBean;
-import com.wanandroid.java.data.bean.HomeBannerListBean;
+import com.wanandroid.java.data.bean.Article;
+import com.wanandroid.java.data.bean.ArticleData;
+import com.wanandroid.java.data.bean.HomeBanner;
 import com.wanandroid.java.ui.web.ArticleDetailWebViewActivity;
 import com.wanandroid.java.ui.adapter.ArticleListViewAdapter;
 import com.wanandroid.java.databinding.FragmentHomeBinding;
@@ -47,22 +48,21 @@ public class HomeFragment extends Fragment {
     private ViewPager2 mBannerVp2;
     private MyBannerVpAdapter mBannerVpAdapter;
     private View[] indicateViews;
-    private ArrayList<HomeBannerListBean.DataBean> mBannerDataList = new ArrayList<>();
+    private ArrayList<HomeBanner> homeBannerDataList = new ArrayList<>();
     private BannerHandler mBannerHandler;
     private ScheduledExecutorService mBannerScheduledExecutorService;
-    private ArrayList<ArticleListBean.DataBean.DatasBean> mHomeArticleListData = new ArrayList<>();
+    private final ArrayList<Article> homeArticles = new ArrayList<>();
     private ArticleListViewAdapter articleListViewAdapter;
     private FragmentHomeBinding mBinding;
     private int homeArticlePage = 0;
 
-    private Observer<HomeBannerListBean> bannerListDataObserver = new Observer<HomeBannerListBean>() {
+    private Observer<List<HomeBanner>> bannerListDataObserver = new Observer<List<HomeBanner>>() {
         @Override
-        public void onChanged(HomeBannerListBean homeBannerListBean) {
-            if (homeBannerListBean != null) {
-                List<HomeBannerListBean.DataBean> bannerListDatas = homeBannerListBean.getData();
-                mBannerDataList = new ArrayList<>();
-                mBannerDataList.addAll(bannerListDatas);
-                mBannerVpAdapter = new MyBannerVpAdapter(HomeFragment.this, mBannerDataList);
+        public void onChanged(List<HomeBanner> homeBannerList) {
+            if (homeBannerList != null) {
+                homeBannerDataList = new ArrayList<>();
+                homeBannerDataList.addAll(homeBannerList);
+                mBannerVpAdapter = new MyBannerVpAdapter(HomeFragment.this, homeBannerDataList);
                 mBannerVpAdapter.notifyDataSetChanged();
                 mBannerVp2.setAdapter(mBannerVpAdapter);
                 mBannerVp2.setCurrentItem(1);
@@ -70,12 +70,12 @@ public class HomeFragment extends Fragment {
         }
     };
 
-    private Observer<ArticleListBean> articleListBeanObserver = new Observer<ArticleListBean>() {
+    private final Observer<ArticleData> articleDataObserver = new Observer<ArticleData>() {
         @Override
-        public void onChanged(ArticleListBean articleListBean) {
-            if (articleListBean != null) {
-                mHomeArticleListData.addAll(articleListBean.getData().getDatas());
-                articleListViewAdapter.setData(mHomeArticleListData);
+        public void onChanged(ArticleData articleData) {
+            if (articleData != null) {
+                homeArticles.addAll(articleData.getArticles());
+                articleListViewAdapter.setData(homeArticles);
             }
         }
     };
@@ -101,11 +101,11 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        articleListViewAdapter = new ArticleListViewAdapter(mHomeArticleListData,
+        articleListViewAdapter = new ArticleListViewAdapter(homeArticles,
                 new ArticleListViewAdapter.AdapterItemClickListener() {
                     @Override
                     public void onPositionClicked(View v, int position) {
-                        String link = mHomeArticleListData.get(position).getLink();
+                        String link = homeArticles.get(position).getLink();
                         Intent intent = new Intent(getActivity(), ArticleDetailWebViewActivity.class);
                         intent.putExtra(ArticleDetailWebViewActivity.ARTICLE_DETAIL_WEB_LINK_KEY, link);
                         startActivity(intent);
@@ -128,8 +128,8 @@ public class HomeFragment extends Fragment {
         homeVm.getHomeBannerListLd().observe(getViewLifecycleOwner(), bannerListDataObserver);
 //        homeVm.setHomeBannerListLd();
         homeVm.setRxJava2HomeBannerListLd();
-        homeVm.getHomeArticleListBeanLd().observe(getViewLifecycleOwner(), articleListBeanObserver);
-        homeVm.setHomeArticleListBeanLd(homeArticlePage);
+        homeVm.getHomeArticleDataLd().observe(getViewLifecycleOwner(), articleDataObserver);
+        homeVm.setHomeArticleDataLd(homeArticlePage);
 
         mBinding.homeArticleListRecycleView.setNestedScrollingEnabled(false);
         mBinding.homeNsv.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
@@ -137,7 +137,7 @@ public class HomeFragment extends Fragment {
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 if (!v.canScrollVertically(1)) {
                     homeArticlePage++;
-                    homeVm.setHomeArticleListBeanLd(homeArticlePage);
+                    homeVm.setHomeArticleDataLd(homeArticlePage);
                 }
             }
         });
@@ -156,7 +156,7 @@ public class HomeFragment extends Fragment {
                 mBinding.secondIndicateView,
                 mBinding.thirdIndicateView,
                 mBinding.fourthIndicateView};
-        mBannerVpAdapter = new MyBannerVpAdapter(this, mBannerDataList);
+        mBannerVpAdapter = new MyBannerVpAdapter(this, homeBannerDataList);
         mBannerVp2.setAdapter(mBannerVpAdapter);
         mBannerVp2.setCurrentItem(1);
         mBannerVp2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -267,10 +267,10 @@ public class HomeFragment extends Fragment {
     }
 
     class MyBannerVpAdapter extends RecyclerView.Adapter<MyBannerVpAdapter.MyViewHolder> {
-        private ArrayList<HomeBannerListBean.DataBean> bannerDataList;
-        private WeakReference<HomeFragment> weakReference;
+        private final ArrayList<HomeBanner> bannerDataList;
+        private final WeakReference<HomeFragment> weakReference;
 
-        MyBannerVpAdapter(HomeFragment fragment, ArrayList<HomeBannerListBean.DataBean> dataList) {
+        MyBannerVpAdapter(HomeFragment fragment, ArrayList<HomeBanner> dataList) {
             this.weakReference = new WeakReference<>(fragment);
             this.bannerDataList = dataList;
         }
@@ -284,8 +284,8 @@ public class HomeFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-            HomeBannerListBean.DataBean itemData = bannerDataList.get(toRealPosition(position, getRealCount()));
-            String imageUrl = itemData.getImagePath();
+            HomeBanner homeBanner = bannerDataList.get(toRealPosition(position, getRealCount()));
+            String imageUrl = homeBanner.getImagePath();
             final HomeFragment homeFragment = weakReference.get();
             if (!TextUtils.isEmpty(imageUrl) && homeFragment != null
                     && !homeFragment.isHidden()
@@ -293,15 +293,12 @@ public class HomeFragment extends Fragment {
                 Glide.with(homeFragment).load(imageUrl).into(holder.bannerItemIv);
             }
 
-            final String articleDetailUrl = itemData.getUrl();
-            holder.bannerItemIv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.e(TAG, "onClick: bannerItemIv");
-                    Intent intent = new Intent(homeFragment.getActivity(), ArticleDetailWebViewActivity.class);
-                    intent.putExtra(ArticleDetailWebViewActivity.ARTICLE_DETAIL_WEB_LINK_KEY, articleDetailUrl);
-                    startActivity(intent);
-                }
+            final String articleDetailUrl = homeBanner.getUrl();
+            holder.bannerItemIv.setOnClickListener(v -> {
+                Log.e(TAG, "onClick: bannerItemIv");
+                Intent intent = new Intent(homeFragment.getActivity(), ArticleDetailWebViewActivity.class);
+                intent.putExtra(ArticleDetailWebViewActivity.ARTICLE_DETAIL_WEB_LINK_KEY, articleDetailUrl);
+                startActivity(intent);
             });
         }
 

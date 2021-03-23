@@ -2,10 +2,12 @@ package com.wanandroid.java.ui.wechat;
 
 import android.util.Log;
 
-import com.wanandroid.java.data.repository.WeChatArticleRepository;
 import com.wanandroid.java.data.api.GetWebDataListener;
-import com.wanandroid.java.data.bean.ArticleListBean;
-import com.wanandroid.java.data.bean.WeChatArticleBloggerList;
+import com.wanandroid.java.data.bean.ArticleData;
+import com.wanandroid.java.data.bean.WeChatBlogger;
+import com.wanandroid.java.data.repository.WeChatArticleRepository;
+
+import java.util.List;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -15,26 +17,25 @@ import androidx.lifecycle.ViewModel;
  */
 public class WeChatArticleViewModel extends ViewModel {
     private static final String TAG = "WeChatBlogArticleVm";
-    private final MutableLiveData<WeChatArticleBloggerList> weChatArticleBloggerListLd;
-    private final MutableLiveData<ArticleListBean> weChatArticleListLd;
+    private final MutableLiveData<List<WeChatBlogger>> weChatBloggerListLd;
+    private final MutableLiveData<ArticleData> weChatArticleDataLd;
     private final WeChatArticleRepository repository;
 
     public WeChatArticleViewModel(WeChatArticleRepository repository) {
-        weChatArticleBloggerListLd = new MutableLiveData<>();
-        weChatArticleListLd = new MutableLiveData<>();
+        weChatBloggerListLd = new MutableLiveData<>();
+        weChatArticleDataLd = new MutableLiveData<>();
         this.repository = repository;
     }
 
-    public MutableLiveData<WeChatArticleBloggerList> getWeChatArticleBloggerListLd() {
-        return weChatArticleBloggerListLd;
+    public MutableLiveData<List<WeChatBlogger>> getWeChatBloggerListLd() {
+        return weChatBloggerListLd;
     }
 
-    public void setWeChatArticleBloggerListLd() {
+    public void setWeChatBloggerListLd() {
         repository.getWeChatArticleBloggerList(new GetWebDataListener() {
             @Override
             public void getDataSuccess(Object object) {
-                WeChatArticleBloggerList weChatArticleBloggerList = (WeChatArticleBloggerList) object;
-                weChatArticleBloggerListLd.postValue(weChatArticleBloggerList);
+                weChatBloggerListLd.postValue((List<WeChatBlogger>) object);
             }
 
             @Override
@@ -44,17 +45,15 @@ public class WeChatArticleViewModel extends ViewModel {
         });
     }
 
-    public MutableLiveData<ArticleListBean> getWeChatArticleListLd() {
-        return weChatArticleListLd;
+    public MutableLiveData<ArticleData> getWeChatArticleDataLd() {
+        return weChatArticleDataLd;
     }
 
     public void setWeChatArticleListLd(int pageNumber, int authorId) {
-        Log.e(TAG, "setWeChatArticleListLd: pageNumber = " + pageNumber);
         repository.getWeChatArticleList(authorId, pageNumber, new GetWebDataListener() {
             @Override
             public void getDataSuccess(Object object) {
-                ArticleListBean articleListBean = (ArticleListBean) object;
-                weChatArticleListLd.postValue(articleListBean);
+                weChatArticleDataLd.postValue((ArticleData) object);
             }
 
             @Override

@@ -1,5 +1,9 @@
 package com.wanandroid.java.data.api;
 
+import com.wanandroid.java.data.bean.BaseResponse;
+
+import org.jetbrains.annotations.NotNull;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,18 +29,22 @@ public abstract class MyCallback<T> implements Callback<T> {
 
 
     @Override
-    public void onResponse(Call<T> call, Response<T> response) {
+    public void onResponse(@NotNull Call<T> call, Response<T> response) {
         if (response.code() == 200) {
-            getSuccessful(response.body());
+            BaseResponse<T> baseResponse = (BaseResponse<T>) response.body();
+            if (baseResponse.getErrorCode() == 0) {
+                getSuccessful(response.body());
+            } else {
+                getFailed(baseResponse.getErrorMsg());
+            }
         } else {
-            getFailed("error, response.code() = " + response.code());
+            getFailed(response.code() + " " + response.message());
         }
     }
 
     @Override
-    public void onFailure(Call<T> call, Throwable t) {
+    public void onFailure(@NotNull Call<T> call, Throwable t) {
         getFailed(t.getMessage());
-
     }
 
 }

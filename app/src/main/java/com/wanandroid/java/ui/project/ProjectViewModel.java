@@ -3,11 +3,11 @@ package com.wanandroid.java.ui.project;
 import android.util.Log;
 
 import com.wanandroid.java.data.api.GetWebDataListener;
-import com.wanandroid.java.data.bean.ProjectItemList;
-import com.wanandroid.java.data.bean.ProjectTreeItem;
+import com.wanandroid.java.data.bean.ArticleData;
+import com.wanandroid.java.data.bean.ProjectType;
 import com.wanandroid.java.data.repository.ProjectTreeRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -17,18 +17,18 @@ import androidx.lifecycle.ViewModel;
  */
 public class ProjectViewModel extends ViewModel {
     private static final String TAG = "ProjectViewModel";
-    private final MutableLiveData<ArrayList<ProjectTreeItem.ProjectItem>> projectTreeItemsLd;
-    private final MutableLiveData<ProjectItemList> projectItemListLd;
+    private final MutableLiveData<List<ProjectType>> projectTypeDataLd;
+    private final MutableLiveData<ArticleData> projectArticleDataLd;
     private final ProjectTreeRepository repository;
 
     public ProjectViewModel(ProjectTreeRepository repository) {
         this.repository = repository;
-        this.projectTreeItemsLd = new MutableLiveData<>();
-        this.projectItemListLd = new MutableLiveData<>();
+        this.projectTypeDataLd = new MutableLiveData<>();
+        this.projectArticleDataLd = new MutableLiveData<>();
     }
 
-    public MutableLiveData<ArrayList<ProjectTreeItem.ProjectItem>> getProjectTreeItemsLd() {
-        return projectTreeItemsLd;
+    public MutableLiveData<List<ProjectType>> getProjectTypeDataLd() {
+        return projectTypeDataLd;
     }
 
     /**
@@ -38,8 +38,7 @@ public class ProjectViewModel extends ViewModel {
         repository.getProjectTreeItem(new GetWebDataListener() {
             @Override
             public void getDataSuccess(Object object) {
-                ProjectTreeItem projectTreeItem = (ProjectTreeItem) object;
-                projectTreeItemsLd.setValue(projectTreeItem.getData());
+                projectTypeDataLd.setValue((List<ProjectType>) object);
             }
 
             @Override
@@ -49,8 +48,8 @@ public class ProjectViewModel extends ViewModel {
         });
     }
 
-    public MutableLiveData<ProjectItemList> getProjectItemListLd() {
-        return projectItemListLd;
+    public MutableLiveData<ArticleData> getProjectArticleDataLd() {
+        return projectArticleDataLd;
     }
 
     public void setProjectItemListLd(int pageNumber, final int projectItemId) {
@@ -59,8 +58,7 @@ public class ProjectViewModel extends ViewModel {
                 new GetWebDataListener() {
                     @Override
                     public void getDataSuccess(Object object) {
-                        ProjectItemList projectItemList = (ProjectItemList) object;
-                        projectItemListLd.postValue(projectItemList);
+                        projectArticleDataLd.postValue((ArticleData) object);
                     }
 
                     @Override

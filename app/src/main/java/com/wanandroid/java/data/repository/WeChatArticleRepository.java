@@ -3,8 +3,11 @@ package com.wanandroid.java.data.repository;
 import com.wanandroid.java.data.api.ApiWrapper;
 import com.wanandroid.java.data.api.GetWebDataListener;
 import com.wanandroid.java.data.api.MyCallback;
-import com.wanandroid.java.data.bean.ArticleListBean;
-import com.wanandroid.java.data.bean.WeChatArticleBloggerList;
+import com.wanandroid.java.data.bean.ArticleData;
+import com.wanandroid.java.data.bean.BaseResponse;
+import com.wanandroid.java.data.bean.WeChatBlogger;
+
+import java.util.List;
 
 /**
  * @author jere
@@ -25,10 +28,10 @@ public class WeChatArticleRepository {
     }
 
     public void getWeChatArticleBloggerList(final GetWebDataListener listener) {
-        ApiWrapper.getService().getWeChatOfficialAccountBloggerList().enqueue(new MyCallback<WeChatArticleBloggerList>() {
+        ApiWrapper.getService().getWeChatBloggerList().enqueue(new MyCallback<BaseResponse<List<WeChatBlogger>>>() {
             @Override
-            public void getSuccessful(WeChatArticleBloggerList data) {
-                listener.getDataSuccess(data);
+            public void getSuccessful(BaseResponse<List<WeChatBlogger>> baseResponse) {
+                listener.getDataSuccess(baseResponse.getData());
             }
 
             @Override
@@ -40,10 +43,10 @@ public class WeChatArticleRepository {
 
 
     public void getWeChatArticleList(int authorId, int pageNumber, final GetWebDataListener listener) {
-        ApiWrapper.getService().getWeChatArticleList(authorId, pageNumber).enqueue(new MyCallback<ArticleListBean>() {
+        ApiWrapper.getService().getWeChatArticleList(authorId, pageNumber).enqueue(new MyCallback<BaseResponse<ArticleData>>() {
             @Override
-            public void getSuccessful(ArticleListBean data) {
-                listener.getDataSuccess(data);
+            public void getSuccessful(BaseResponse<ArticleData> baseResponse) {
+                listener.getDataSuccess(baseResponse.getData());
             }
 
             @Override

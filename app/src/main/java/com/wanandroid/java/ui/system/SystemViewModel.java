@@ -2,10 +2,12 @@ package com.wanandroid.java.ui.system;
 
 import android.util.Log;
 
-import com.wanandroid.java.data.repository.SystemRepository;
 import com.wanandroid.java.data.api.GetWebDataListener;
-import com.wanandroid.java.data.bean.ArticleListBean;
-import com.wanandroid.java.data.bean.SystemCategoryBean;
+import com.wanandroid.java.data.bean.ArticleData;
+import com.wanandroid.java.data.bean.SystemCategory;
+import com.wanandroid.java.data.repository.SystemRepository;
+
+import java.util.List;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -15,15 +17,15 @@ import androidx.lifecycle.ViewModel;
  */
 public class SystemViewModel extends ViewModel {
     private static final String TAG = "KnowledgeSystemViewMode";
-    private final MutableLiveData<SystemCategoryBean> systemCategoryBeanLd;
-    private final MutableLiveData<ArticleListBean> systemArticleListBeanLd;
+    private final MutableLiveData<List<SystemCategory>> systemCategoryBeanLd;
+    private final MutableLiveData<ArticleData> systemArticleDataLd;
 
     public SystemViewModel() {
         this.systemCategoryBeanLd = new MutableLiveData<>();
-        this.systemArticleListBeanLd = new MutableLiveData<>();
+        this.systemArticleDataLd = new MutableLiveData<>();
     }
 
-    public MutableLiveData<SystemCategoryBean> getSystemCategoryBeanLd() {
+    public MutableLiveData<List<SystemCategory>> getSystemCategoryBeanLd() {
         return systemCategoryBeanLd;
     }
 
@@ -31,8 +33,7 @@ public class SystemViewModel extends ViewModel {
         SystemRepository.getInstance().getKnowledgeSystemData(new GetWebDataListener() {
             @Override
             public void getDataSuccess(Object object) {
-                SystemCategoryBean systemCategoryBean = (SystemCategoryBean) object;
-                systemCategoryBeanLd.postValue(systemCategoryBean);
+                systemCategoryBeanLd.postValue((List<SystemCategory>) object);
             }
 
             @Override
@@ -42,16 +43,16 @@ public class SystemViewModel extends ViewModel {
         });
     }
 
-    public MutableLiveData<ArticleListBean> getSystemArticleListBeanLd() {
-        return systemArticleListBeanLd;
+    public MutableLiveData<ArticleData> getSystemArticleDataLd() {
+        return systemArticleDataLd;
     }
 
     public void setSystemArticleListBeanLd(int pageNumber, int cid) {
         SystemRepository.getInstance().getKnowledgeSystemArticleList(pageNumber, cid, new GetWebDataListener() {
             @Override
             public void getDataSuccess(Object object) {
-                ArticleListBean articleListBean = (ArticleListBean) object;
-                systemArticleListBeanLd.postValue(articleListBean);
+                ArticleData articleData = (ArticleData) object;
+                systemArticleDataLd.postValue(articleData);
             }
 
             @Override

@@ -4,7 +4,8 @@ import android.util.Log;
 
 import com.wanandroid.java.data.api.ApiWrapper;
 import com.wanandroid.java.data.api.MyCallback;
-import com.wanandroid.java.data.bean.ArticleListBean;
+import com.wanandroid.java.data.bean.ArticleData;
+import com.wanandroid.java.data.bean.BaseResponse;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -14,25 +15,25 @@ import androidx.lifecycle.ViewModel;
  */
 public class CollectionViewModel extends ViewModel {
     private static final String TAG = "CollectionViewModel";
-    private final MutableLiveData<ArticleListBean> collectionArticleListBeanLd;
+    private final MutableLiveData<ArticleData> collectionArticleDataLd;
 
     public CollectionViewModel() {
-        this.collectionArticleListBeanLd = new MutableLiveData<>();
+        this.collectionArticleDataLd = new MutableLiveData<>();
     }
 
-    public MutableLiveData<ArticleListBean> getCollectionArticleListBeanLd() {
-        return collectionArticleListBeanLd;
+    public MutableLiveData<ArticleData> getCollectionArticleDataLd() {
+        return collectionArticleDataLd;
     }
 
-    public void setCollectionArticleListBeanLd(ArticleListBean articleListBean) {
-        this.collectionArticleListBeanLd.postValue(articleListBean);
+    public void setCollectionArticleDataLd(ArticleData articleData) {
+        this.collectionArticleDataLd.postValue(articleData);
     }
 
     public void getCollectionArticleList(int pageNumber) {
-        ApiWrapper.getService().getCollectionArticleList(pageNumber).enqueue(new MyCallback<ArticleListBean>() {
+        ApiWrapper.getService().getCollectionArticleList(pageNumber).enqueue(new MyCallback<BaseResponse<ArticleData>>() {
             @Override
-            public void getSuccessful(ArticleListBean data) {
-                setCollectionArticleListBeanLd(data);
+            public void getSuccessful(BaseResponse<ArticleData> data) {
+                setCollectionArticleDataLd(data.getData());
             }
 
             @Override

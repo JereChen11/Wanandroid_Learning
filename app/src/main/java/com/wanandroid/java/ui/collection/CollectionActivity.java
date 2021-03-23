@@ -4,7 +4,8 @@ import android.content.Intent;
 import android.view.View;
 
 import com.wanandroid.java.R;
-import com.wanandroid.java.data.bean.ArticleListBean;
+import com.wanandroid.java.data.bean.Article;
+import com.wanandroid.java.data.bean.ArticleData;
 import com.wanandroid.java.databinding.ActivityCollectionBinding;
 import com.wanandroid.java.ui.web.ArticleDetailWebViewActivity;
 import com.wanandroid.java.ui.adapter.ArticleListViewAdapter;
@@ -21,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * @author jere
  */
 public class CollectionActivity extends BaseVmActivity<CollectionViewModel, ActivityCollectionBinding> {
-    private final ArrayList<ArticleListBean.DataBean.DatasBean> collectionArticleListData = new ArrayList<>();
+    private final ArrayList<Article> collectionArticleListData = new ArrayList<>();
     private ArticleListViewAdapter articleListViewAdapter;
     private int pageNumber = 0;
     private boolean isLoadAllArticleData = false;
@@ -38,7 +39,7 @@ public class CollectionActivity extends BaseVmActivity<CollectionViewModel, Acti
 
     @Override
     protected void initView() {
-        viewModel.getCollectionArticleListBeanLd().observe(this, articleListBeanObserver);
+        viewModel.getCollectionArticleDataLd().observe(this, articleListDataObserver);
         viewModel.getCollectionArticleList(pageNumber);
 
         dataBinding.collectionFolderRcy.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -76,15 +77,15 @@ public class CollectionActivity extends BaseVmActivity<CollectionViewModel, Acti
         dataBinding.collectionFolderRcy.setAdapter(articleListViewAdapter);
     }
 
-    private final Observer<ArticleListBean> articleListBeanObserver = new Observer<ArticleListBean>() {
+    private final Observer<ArticleData> articleListDataObserver = new Observer<ArticleData>() {
         @Override
-        public void onChanged(ArticleListBean articleListBean) {
-            if (articleListBean != null && articleListBean.getData() != null) {
-                collectionArticleListData.addAll(articleListBean.getData().getDatas());
-                for (ArticleListBean.DataBean.DatasBean data : collectionArticleListData) {
-                    data.setCollect(true);
+        public void onChanged(ArticleData articleData) {
+            if (articleData != null && articleData.getArticles() != null) {
+                collectionArticleListData.addAll(articleData.getArticles());
+                for (Article article : collectionArticleListData) {
+                    article.setCollect(true);
                 }
-                isLoadAllArticleData = articleListBean.getData().isOver();
+                isLoadAllArticleData = articleData.isOver();
                 articleListViewAdapter.setIsLoadAllArticleData(isLoadAllArticleData);
                 articleListViewAdapter.setData(collectionArticleListData);
             }

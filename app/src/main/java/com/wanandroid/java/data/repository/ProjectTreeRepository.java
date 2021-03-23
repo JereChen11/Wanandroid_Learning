@@ -3,8 +3,11 @@ package com.wanandroid.java.data.repository;
 import com.wanandroid.java.data.api.ApiWrapper;
 import com.wanandroid.java.data.api.GetWebDataListener;
 import com.wanandroid.java.data.api.MyCallback;
-import com.wanandroid.java.data.bean.ProjectItemList;
-import com.wanandroid.java.data.bean.ProjectTreeItem;
+import com.wanandroid.java.data.bean.ArticleData;
+import com.wanandroid.java.data.bean.BaseResponse;
+import com.wanandroid.java.data.bean.ProjectType;
+
+import java.util.List;
 
 /**
  * @author jere
@@ -14,10 +17,10 @@ public class ProjectTreeRepository {
     private static final String TAG = "ProjectTreeRepository";
 
     public void getProjectTreeItem(final GetWebDataListener listener) {
-        ApiWrapper.getService().getProjectTreeItems().enqueue(new MyCallback<ProjectTreeItem>() {
+        ApiWrapper.getService().getProjectTreeItems().enqueue(new MyCallback<BaseResponse<List<ProjectType>>>() {
             @Override
-            public void getSuccessful(ProjectTreeItem data) {
-                listener.getDataSuccess(data);
+            public void getSuccessful(BaseResponse<List<ProjectType>> baseResponse) {
+                listener.getDataSuccess(baseResponse.getData());
             }
 
             @Override
@@ -25,13 +28,15 @@ public class ProjectTreeRepository {
                 listener.getDataFailed(failedMsg);
             }
         });
+
     }
 
     public void getProjectItemList(int pageNumber, int cid, final GetWebDataListener listener) {
-        ApiWrapper.getService().getProjectItemList(pageNumber, cid).enqueue(new MyCallback<ProjectItemList>() {
+        ApiWrapper.getService().getProjectItemList(pageNumber, cid).enqueue(new MyCallback<BaseResponse<ArticleData>>() {
             @Override
-            public void getSuccessful(ProjectItemList data) {
-                listener.getDataSuccess(data);
+            public void getSuccessful(BaseResponse<ArticleData> baseResponse) {
+                listener.getDataSuccess(baseResponse.getData());
+
             }
 
             @Override

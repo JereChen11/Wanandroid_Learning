@@ -2,10 +2,10 @@ package com.wanandroid.java.ui.login;
 
 import android.text.TextUtils;
 
-import com.wanandroid.java.data.api.ApiService;
 import com.wanandroid.java.data.api.ApiWrapper;
 import com.wanandroid.java.data.api.MyCallback;
-import com.wanandroid.java.data.bean.LoginInfo;
+import com.wanandroid.java.data.bean.BaseResponse;
+import com.wanandroid.java.data.bean.UserInfo;
 import com.wanandroid.java.data.bean.local.LoginRegisterResult;
 
 import java.util.HashMap;
@@ -30,20 +30,16 @@ public class RegisterLoginRepository {
         return instance;
     }
 
-    private Callback<LoginInfo> loginRegisterCallback(LoginRegisterListener listener) {
-        return new MyCallback<LoginInfo>() {
+    private Callback<BaseResponse<UserInfo>> loginRegisterCallback(LoginRegisterListener listener) {
+        return new MyCallback<BaseResponse<UserInfo>>() {
             @Override
-            public void getSuccessful(LoginInfo data) {
-                if (data.getErrorCode() == 0) {
-                    listener.onResult(new LoginRegisterResult(true, "successful"));
-                } else {
-                    listener.onResult(new LoginRegisterResult(true, data.getErrorMsg()));
-                }
+            public void getSuccessful(BaseResponse<UserInfo> baseResponse) {
+                listener.onResult(new LoginRegisterResult(true, "successful"));
             }
 
             @Override
             public void getFailed(String failedMsg) {
-                listener.onResult(new LoginRegisterResult(true, failedMsg));
+                listener.onResult(new LoginRegisterResult(true, "successful"));
             }
         };
     }
@@ -55,7 +51,7 @@ public class RegisterLoginRepository {
         HashMap<String, String> map = new HashMap<>();
         map.put("username", userName);
         map.put("password", password);
-        map.put("rePassword", rePassword);
+        map.put("repassword", rePassword);
         ApiWrapper.getService().register(map).enqueue(loginRegisterCallback(listener));
     }
 
