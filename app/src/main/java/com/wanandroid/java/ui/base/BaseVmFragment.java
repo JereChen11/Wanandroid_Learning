@@ -2,6 +2,7 @@ package com.wanandroid.java.ui.base;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -12,11 +13,10 @@ import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import kotlin.TypeCastException;
@@ -24,7 +24,7 @@ import kotlin.TypeCastException;
 /**
  * @author jere
  */
-public abstract class BaseVmActivity<VM extends ViewModel, B extends ViewDataBinding> extends AppCompatActivity {
+public abstract class BaseVmFragment<VM extends ViewModel, B extends ViewDataBinding> extends Fragment {
 
     public VM viewModel;
     public B dataBinding;
@@ -33,19 +33,25 @@ public abstract class BaseVmActivity<VM extends ViewModel, B extends ViewDataBin
 
     protected abstract void initView();
 
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(getViewModelClass());
         try {
-            Method method = getDataBindingClass().getDeclaredMethod("inflate", LayoutInflater.class);
-            dataBinding = (B) method.invoke(null, getLayoutInflater());
+            Method method = getDataBindingClass().getDeclaredMethod("inflate",
+                    LayoutInflater.class,
+                    ViewGroup.class,
+                    Boolean.TYPE);
+            dataBinding = (B) method.invoke(null, inflater, container, false);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
-        setContentView(dataBinding.getRoot());
+        return dataBinding.getRoot();
+    }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         initView();
     }
 

@@ -3,14 +3,13 @@ package com.wanandroid.java.ui.collection;
 import android.content.Intent;
 import android.view.View;
 
-import com.wanandroid.java.R;
 import com.wanandroid.java.data.bean.Article;
 import com.wanandroid.java.data.bean.ArticleData;
 import com.wanandroid.java.databinding.ActivityCollectionBinding;
-import com.wanandroid.java.ui.web.ArticleDetailWebViewActivity;
 import com.wanandroid.java.ui.adapter.ArticleListViewAdapter;
 import com.wanandroid.java.ui.base.BaseVmActivity;
 import com.wanandroid.java.ui.login.RegisterLoginActivity;
+import com.wanandroid.java.ui.web.ArticleDetailWebViewActivity;
 
 import java.util.ArrayList;
 
@@ -26,16 +25,6 @@ public class CollectionActivity extends BaseVmActivity<CollectionViewModel, Acti
     private ArticleListViewAdapter articleListViewAdapter;
     private int pageNumber = 0;
     private boolean isLoadAllArticleData = false;
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_collection;
-    }
-
-    @Override
-    protected Class<CollectionViewModel> getViewModelClass() {
-        return CollectionViewModel.class;
-    }
 
     @Override
     protected void initView() {

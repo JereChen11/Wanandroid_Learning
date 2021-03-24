@@ -12,12 +12,12 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.wanandroid.java.R;
-import com.wanandroid.java.ui.aboutme.AboutMeActivity;
-import com.wanandroid.java.ui.account.MyAccountFragment;
-import com.wanandroid.java.ui.system.SystemFragment;
-import com.wanandroid.java.ui.project.ProjectTypeFragment;
-import com.wanandroid.java.ui.wechat.WeChatBloggerFragment;
 import com.wanandroid.java.databinding.ActivityHomeBinding;
+import com.wanandroid.java.ui.account.MyAccountFragment;
+import com.wanandroid.java.ui.project.ProjectTypeFragment;
+import com.wanandroid.java.ui.system.SystemFragment;
+import com.wanandroid.java.ui.web.ArticleDetailWebViewActivity;
+import com.wanandroid.java.ui.wechat.WeChatBloggerFragment;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -275,7 +275,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         CURRENT_TAG = TAG_MY;
                         break;
                     case R.id.nav_about_us:
-                        startActivity(new Intent(HomeActivity.this, AboutMeActivity.class));
+                        String link = "https://blog.csdn.net/jerechen";
+                        Intent intent = new Intent(HomeActivity.this, ArticleDetailWebViewActivity.class);
+                        intent.putExtra(ArticleDetailWebViewActivity.ARTICLE_DETAIL_WEB_LINK_KEY, link);
+                        startActivity(intent);
                         mBinding.drawerLayout.closeDrawers();
                         return true;
                     default:

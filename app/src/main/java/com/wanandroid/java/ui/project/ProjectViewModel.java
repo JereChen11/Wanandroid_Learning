@@ -21,8 +21,8 @@ public class ProjectViewModel extends ViewModel {
     private final MutableLiveData<ArticleData> projectArticleDataLd;
     private final ProjectTreeRepository repository;
 
-    public ProjectViewModel(ProjectTreeRepository repository) {
-        this.repository = repository;
+    public ProjectViewModel() {
+        this.repository = new ProjectTreeRepository();
         this.projectTypeDataLd = new MutableLiveData<>();
         this.projectArticleDataLd = new MutableLiveData<>();
     }

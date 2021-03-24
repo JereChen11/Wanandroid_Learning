@@ -2,31 +2,23 @@ package com.wanandroid.java.ui.system;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
 import com.wanandroid.java.data.bean.SystemCategory;
 import com.wanandroid.java.databinding.FragmentSystemBinding;
-
-import org.jetbrains.annotations.NotNull;
+import com.wanandroid.java.ui.base.BaseVmFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 /**
  * @author jere
  */
-public class SystemFragment extends Fragment {
+public class SystemFragment extends BaseVmFragment<SystemViewModel, FragmentSystemBinding> {
     private final ArrayList<SystemCategory> systemCategoryList = new ArrayList<>();
-    private FragmentSystemBinding mBinding;
     public static final String CHILD_ITEM_ID_KEY = "childItemId";
     public static final String CHILD_ITEM_NAME_KEY = "childItemName";
 
@@ -37,7 +29,7 @@ public class SystemFragment extends Fragment {
                 systemCategoryList.addAll(systemCategories);
                 SystemListAdapter systemListAdapter =
                         new SystemListAdapter(SystemFragment.this, systemCategoryList);
-                mBinding.expandableListView.setAdapter(systemListAdapter);
+                dataBinding.expandableListView.setAdapter(systemListAdapter);
             }
         }
     };
@@ -47,22 +39,11 @@ public class SystemFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        mBinding = FragmentSystemBinding.inflate(inflater, container, false);
-        return mBinding.getRoot();
-    }
+    protected void initView() {
+        viewModel.getSystemCategoryBeanLd().observe(getViewLifecycleOwner(), systemCategoryBeanObserver);
+        viewModel.setSystemCategoryBeanLd();
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        SystemViewModel knowledgeSystemVm = new ViewModelProvider(this).get(SystemViewModel.class);
-        knowledgeSystemVm.getSystemCategoryBeanLd().observe(getViewLifecycleOwner(), systemCategoryBeanObserver);
-        knowledgeSystemVm.setSystemCategoryBeanLd();
-
-        mBinding.expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+        dataBinding.expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 SystemCategory.ChildrenBean childData = systemCategoryList.get(groupPosition)

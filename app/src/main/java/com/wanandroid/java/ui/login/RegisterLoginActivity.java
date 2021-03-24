@@ -7,7 +7,7 @@ import com.wanandroid.java.R;
 import com.wanandroid.java.data.bean.local.LoginRegisterResult;
 import com.wanandroid.java.databinding.ActivityRegisterLoginBinding;
 import com.wanandroid.java.ui.base.BaseVmActivity;
-import com.wanandroid.java.util.Settings;
+import com.wanandroid.java.util.SpSettings;
 
 import androidx.lifecycle.Observer;
 
@@ -15,16 +15,6 @@ import androidx.lifecycle.Observer;
  * @author jere
  */
 public class RegisterLoginActivity extends BaseVmActivity<RegisterLoginViewModel, ActivityRegisterLoginBinding> {
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_register_login;
-    }
-
-    @Override
-    protected Class<RegisterLoginViewModel> getViewModelClass() {
-        return RegisterLoginViewModel.class;
-    }
 
     @Override
     public void initView() {
@@ -85,8 +75,8 @@ public class RegisterLoginActivity extends BaseVmActivity<RegisterLoginViewModel
         if (result.isSuccess()) {
             Toast.makeText(RegisterLoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
             finish();
-            Settings.getInstance().setIsLogin(true);
-            Settings.getInstance().setUserName(dataBinding.userNameEt.getText().toString());
+            SpSettings.getInstance().setIsLogin(true);
+            SpSettings.getInstance().setUserName(dataBinding.userNameEt.getText().toString());
         } else {
             Toast.makeText(RegisterLoginActivity.this, result.getMsg(), Toast.LENGTH_SHORT).show();
         }
@@ -95,8 +85,8 @@ public class RegisterLoginActivity extends BaseVmActivity<RegisterLoginViewModel
     private final Observer<LoginRegisterResult> registerResultObserver = result -> {
         if (result.isSuccess()) {
             showToast("Register Successful");
-            Settings.getInstance().setIsLogin(true);
-            Settings.getInstance().setUserName(dataBinding.userNameEt.getText().toString());
+            SpSettings.getInstance().setIsLogin(true);
+            SpSettings.getInstance().setUserName(dataBinding.userNameEt.getText().toString());
             finish();
         } else {
             showToast(result.getMsg());

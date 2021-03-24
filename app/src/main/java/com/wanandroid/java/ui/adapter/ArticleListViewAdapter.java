@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.wanandroid.java.R;
 import com.wanandroid.java.data.bean.Article;
 import com.wanandroid.java.data.repository.CollectRepository;
-import com.wanandroid.java.util.Settings;
+import com.wanandroid.java.util.SpSettings;
 import com.wanandroid.java.ui.customview.CustomCollectView;
 import com.wanandroid.java.ui.customview.PullUpRefreshView;
 
@@ -119,7 +119,7 @@ public class ArticleListViewAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                             }
                         });
                     } else {
-                        if (Settings.getInstance().getIsLogin()) {
+                        if (SpSettings.getInstance().getIsLogin()) {
                             CollectRepository.newInstance().collectArticle(articleId, new CollectRepository.CollectOrUnCollectListener() {
                                 @Override
                                 public void isSuccessful(boolean isSuccess) {

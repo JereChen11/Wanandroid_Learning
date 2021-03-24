@@ -21,10 +21,10 @@ public class WeChatArticleViewModel extends ViewModel {
     private final MutableLiveData<ArticleData> weChatArticleDataLd;
     private final WeChatArticleRepository repository;
 
-    public WeChatArticleViewModel(WeChatArticleRepository repository) {
+    public WeChatArticleViewModel() {
         weChatBloggerListLd = new MutableLiveData<>();
         weChatArticleDataLd = new MutableLiveData<>();
-        this.repository = repository;
+        this.repository = new WeChatArticleRepository();
     }
 
     public MutableLiveData<List<WeChatBlogger>> getWeChatBloggerListLd() {

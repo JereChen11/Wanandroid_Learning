@@ -2,33 +2,27 @@ package com.wanandroid.java.ui.project;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.wanandroid.java.data.bean.Article;
 import com.wanandroid.java.data.bean.ArticleData;
 import com.wanandroid.java.databinding.FragmentProjectArticleListBinding;
+import com.wanandroid.java.ui.base.BaseVmFragment;
 import com.wanandroid.java.ui.web.ArticleDetailWebViewActivity;
 
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * @author jere
  */
-public class ProjectArticleListFragment extends Fragment {
+public class ProjectArticleListFragment extends BaseVmFragment<ProjectViewModel, FragmentProjectArticleListBinding> {
 
     public static final String PROJECT_ID_KEY = "PROJECT_ID";
 
-    private FragmentProjectArticleListBinding binding;
-    private ProjectViewModel viewModel;
     private ProjectItemListAdapter projectItemListAdapter;
     private final ArrayList<Article> articleList = new ArrayList<>();
     private int projectItemId;
@@ -43,17 +37,8 @@ public class ProjectArticleListFragment extends Fragment {
         }
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentProjectArticleListBinding.inflate(inflater, container, false);
-        return binding.getRoot();
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(this, new ProjectVmFactory()).get(ProjectViewModel.class);
+    protected void initView() {
         viewModel.setProjectItemListLd(pageNumber, projectItemId);
         viewModel.getProjectArticleDataLd().observe(getViewLifecycleOwner(), projectItemsObserver);
 
@@ -64,8 +49,8 @@ public class ProjectArticleListFragment extends Fragment {
                     intent.putExtra(ArticleDetailWebViewActivity.ARTICLE_DETAIL_WEB_LINK_KEY, link);
                     startActivity(intent);
                 });
-        binding.projectArticleListRcy.setAdapter(projectItemListAdapter);
-        binding.projectArticleListRcy.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        dataBinding.projectArticleListRcy.setAdapter(projectItemListAdapter);
+        dataBinding.projectArticleListRcy.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -76,7 +61,6 @@ public class ProjectArticleListFragment extends Fragment {
                 }
             }
         });
-
     }
 
     private final Observer<ArticleData> projectItemsObserver = new Observer<ArticleData>() {

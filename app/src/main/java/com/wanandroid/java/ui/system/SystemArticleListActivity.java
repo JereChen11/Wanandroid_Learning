@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.wanandroid.java.R;
 import com.wanandroid.java.data.bean.Article;
 import com.wanandroid.java.data.bean.ArticleData;
 import com.wanandroid.java.databinding.ActivitySystemArticleListBinding;
@@ -40,16 +39,6 @@ public class SystemArticleListActivity extends BaseVmActivity<SystemViewModel, A
             }
         }
     };
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_system_article_list;
-    }
-
-    @Override
-    protected Class<SystemViewModel> getViewModelClass() {
-        return SystemViewModel.class;
-    }
 
     @Override
     protected void initView() {

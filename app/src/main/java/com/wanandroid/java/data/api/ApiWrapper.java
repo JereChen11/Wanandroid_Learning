@@ -3,6 +3,7 @@ package com.wanandroid.java.data.api;
 import com.wanandroid.java.data.api.cookie.PersistentCookieJar;
 
 import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -12,7 +13,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @author jere
  */
 public class ApiWrapper {
-//    private static Retrofit retrofit;
     public static final String BASE_HOST = "https://www.wanandroid.com";
 
     public static ApiService getService() {
@@ -22,23 +22,12 @@ public class ApiWrapper {
 
     public static class RetrofitHolder {
         public static Retrofit getRetrofitInstance() {
-//        if (retrofit == null) {
-//            OkHttpClient okHttpClient;
-//            if (!Settings.getInstance().getIsLogin()) {
-//                okHttpClient = new OkHttpClient.Builder()
-//                        .connectTimeout(1, TimeUnit.MINUTES)
-//                        .readTimeout(30, TimeUnit.SECONDS)
-//                        .writeTimeout(15, TimeUnit.SECONDS)
-//                        .addInterceptor(new ReceivedCookiesInterceptor())
-//                        .build();
-//            } else {
-               OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                        .connectTimeout(1, TimeUnit.MINUTES)
-                        .readTimeout(30, TimeUnit.SECONDS)
-                        .writeTimeout(15, TimeUnit.SECONDS)
-                        .cookieJar(new PersistentCookieJar())
-                        .build();
-//            }
+            OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                    .connectTimeout(1, TimeUnit.MINUTES)
+                    .readTimeout(30, TimeUnit.SECONDS)
+                    .writeTimeout(15, TimeUnit.SECONDS)
+                    .cookieJar(new PersistentCookieJar())
+                    .build();
 
             return new retrofit2.Retrofit.Builder()
                     .baseUrl(BASE_HOST)
@@ -46,10 +35,8 @@ public class ApiWrapper {
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-//        }
         }
     }
-
 
 
 }

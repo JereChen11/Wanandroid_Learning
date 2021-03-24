@@ -2,37 +2,29 @@ package com.wanandroid.java.ui.wechat;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.wanandroid.java.data.bean.Article;
 import com.wanandroid.java.data.bean.ArticleData;
 import com.wanandroid.java.databinding.FragmentWeChatArticleListBinding;
-import com.wanandroid.java.ui.web.ArticleDetailWebViewActivity;
 import com.wanandroid.java.ui.adapter.ArticleListViewAdapter;
+import com.wanandroid.java.ui.base.BaseVmFragment;
 import com.wanandroid.java.ui.login.RegisterLoginActivity;
-
-import org.jetbrains.annotations.NotNull;
+import com.wanandroid.java.ui.web.ArticleDetailWebViewActivity;
 
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 /**
  * @author jere
  */
-public class WeChatArticleListFragment extends Fragment {
+public class WeChatArticleListFragment extends BaseVmFragment<WeChatArticleViewModel, FragmentWeChatArticleListBinding> {
     public static final String BLOGGER_ID_KEY = "BLOGGER_ID";
 
-    private FragmentWeChatArticleListBinding binding;
-    private WeChatArticleViewModel viewModel;
     private ArticleListViewAdapter articleListViewAdapter;
     private final ArrayList<Article> weChatArticles = new ArrayList<>();
     private int pageNumber = 1;
@@ -60,17 +52,7 @@ public class WeChatArticleListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentWeChatArticleListBinding.inflate(inflater, container, false);
-        return binding.getRoot();
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        viewModel = new ViewModelProvider(this, new WeChatVmFactory()).get(WeChatArticleViewModel.class);
+    protected void initView() {
         viewModel.setWeChatArticleListLd(pageNumber, bloggerId);
         viewModel.getWeChatArticleDataLd().observe(getViewLifecycleOwner(), weChatArticleDataObserver);
 
@@ -95,8 +77,8 @@ public class WeChatArticleListFragment extends Fragment {
                     }
                 });
 
-        binding.weChatArticleListRcy.setAdapter(articleListViewAdapter);
-        binding.weChatArticleListRcy.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        dataBinding.weChatArticleListRcy.setAdapter(articleListViewAdapter);
+        dataBinding.weChatArticleListRcy.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -107,7 +89,6 @@ public class WeChatArticleListFragment extends Fragment {
                 }
             }
         });
-
     }
 
     private final Observer<ArticleData> weChatArticleDataObserver = new Observer<ArticleData>() {

@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.permissionx.guolindev.PermissionX;
 import com.wanandroid.java.R;
 import com.wanandroid.java.databinding.ActivityPersonalInfomationBinding;
-import com.wanandroid.java.util.Settings;
+import com.wanandroid.java.util.SpSettings;
 
 import java.io.File;
 import java.io.IOException;
@@ -89,9 +89,9 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
     @Override
     protected void onResume() {
         super.onResume();
-        mBinding.personalInfoNameItem.setContentText(Settings.getInstance().getUserName());
-        if (!TextUtils.isEmpty(Settings.getInstance().getAvatarUrl())) {
-            setAvatar(Settings.getInstance().getAvatarUrl());
+        mBinding.personalInfoNameItem.setContentText(SpSettings.getInstance().getUserName());
+        if (!TextUtils.isEmpty(SpSettings.getInstance().getAvatarUrl())) {
+            setAvatar(SpSettings.getInstance().getAvatarUrl());
         }
     }
 
@@ -103,7 +103,7 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
                 case TAKE_PHOTO_REQUEST_CODE:
                     if (!TextUtils.isEmpty(imageUri.toString())) {
                         setAvatar(imageUri.toString());
-                        Settings.getInstance().setAvatarUrl(imageUri.toString());
+                        SpSettings.getInstance().setAvatarUrl(imageUri.toString());
                     }
                     break;
                 case FROM_ALBUM_REQUEST_CODE:
@@ -111,7 +111,7 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
                         Uri uri = data.getData();
                         if (uri != null && !TextUtils.isEmpty(uri.toString())) {
                             setAvatar(uri.toString());
-                            Settings.getInstance().setAvatarUrl(uri.toString());
+                            SpSettings.getInstance().setAvatarUrl(uri.toString());
                         }
                     }
                     break;

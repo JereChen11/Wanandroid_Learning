@@ -2,7 +2,6 @@ package com.wanandroid.java.ui.home;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -18,10 +17,11 @@ import com.wanandroid.java.R;
 import com.wanandroid.java.data.bean.Article;
 import com.wanandroid.java.data.bean.ArticleData;
 import com.wanandroid.java.data.bean.HomeBanner;
-import com.wanandroid.java.ui.web.ArticleDetailWebViewActivity;
-import com.wanandroid.java.ui.adapter.ArticleListViewAdapter;
 import com.wanandroid.java.databinding.FragmentHomeBinding;
+import com.wanandroid.java.ui.adapter.ArticleListViewAdapter;
+import com.wanandroid.java.ui.base.BaseVmFragment;
 import com.wanandroid.java.ui.login.RegisterLoginActivity;
+import com.wanandroid.java.ui.web.ArticleDetailWebViewActivity;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -31,18 +31,15 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 /**
  * @author jere
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseVmFragment<HomeViewModel, FragmentHomeBinding> {
     private static final String TAG = "HomeFragment";
 
     private ViewPager2 mBannerVp2;
@@ -53,10 +50,9 @@ public class HomeFragment extends Fragment {
     private ScheduledExecutorService mBannerScheduledExecutorService;
     private final ArrayList<Article> homeArticles = new ArrayList<>();
     private ArticleListViewAdapter articleListViewAdapter;
-    private FragmentHomeBinding mBinding;
     private int homeArticlePage = 0;
 
-    private Observer<List<HomeBanner>> bannerListDataObserver = new Observer<List<HomeBanner>>() {
+    private final Observer<List<HomeBanner>> bannerListDataObserver = new Observer<List<HomeBanner>>() {
         @Override
         public void onChanged(List<HomeBanner> homeBannerList) {
             if (homeBannerList != null) {
@@ -85,22 +81,7 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        mBinding = FragmentHomeBinding.inflate(inflater, container, false);
-        return mBinding.getRoot();
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+    protected void initView() {
         articleListViewAdapter = new ArticleListViewAdapter(homeArticles,
                 new ArticleListViewAdapter.AdapterItemClickListener() {
                     @Override
@@ -121,23 +102,22 @@ public class HomeFragment extends Fragment {
                         startActivity(new Intent(getActivity(), RegisterLoginActivity.class));
                     }
                 });
-        mBinding.homeArticleListRecycleView.setAdapter(articleListViewAdapter);
+        dataBinding.homeArticleListRecycleView.setAdapter(articleListViewAdapter);
 
 
-        final HomeViewModel homeVm = new ViewModelProvider(this).get(HomeViewModel.class);
-        homeVm.getHomeBannerListLd().observe(getViewLifecycleOwner(), bannerListDataObserver);
+        viewModel.getHomeBannerListLd().observe(getViewLifecycleOwner(), bannerListDataObserver);
 //        homeVm.setHomeBannerListLd();
-        homeVm.setRxJava2HomeBannerListLd();
-        homeVm.getHomeArticleDataLd().observe(getViewLifecycleOwner(), articleDataObserver);
-        homeVm.setHomeArticleDataLd(homeArticlePage);
+        viewModel.setRxJava2HomeBannerListLd();
+        viewModel.getHomeArticleDataLd().observe(getViewLifecycleOwner(), articleDataObserver);
+        viewModel.setHomeArticleDataLd(homeArticlePage);
 
-        mBinding.homeArticleListRecycleView.setNestedScrollingEnabled(false);
-        mBinding.homeNsv.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+        dataBinding.homeArticleListRecycleView.setNestedScrollingEnabled(false);
+        dataBinding.homeNsv.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 if (!v.canScrollVertically(1)) {
                     homeArticlePage++;
-                    homeVm.setHomeArticleDataLd(homeArticlePage);
+                    viewModel.setHomeArticleDataLd(homeArticlePage);
                 }
             }
         });
@@ -146,16 +126,15 @@ public class HomeFragment extends Fragment {
         initBannerVew();
         mBannerHandler = new BannerHandler(this);
         startAutoLoopBanner();
-
     }
 
     private void initBannerVew() {
-        mBannerVp2 = mBinding.homeBannerVp2;
+        mBannerVp2 = dataBinding.homeBannerVp2;
         indicateViews = new View[]{
-                mBinding.firstIndicateView,
-                mBinding.secondIndicateView,
-                mBinding.thirdIndicateView,
-                mBinding.fourthIndicateView};
+                dataBinding.firstIndicateView,
+                dataBinding.secondIndicateView,
+                dataBinding.thirdIndicateView,
+                dataBinding.fourthIndicateView};
         mBannerVpAdapter = new MyBannerVpAdapter(this, homeBannerDataList);
         mBannerVp2.setAdapter(mBannerVpAdapter);
         mBannerVp2.setCurrentItem(1);

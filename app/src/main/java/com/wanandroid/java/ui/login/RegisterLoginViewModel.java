@@ -1,6 +1,7 @@
 package com.wanandroid.java.ui.login;
 
 import com.wanandroid.java.data.bean.local.LoginRegisterResult;
+import com.wanandroid.java.data.repository.RegisterLoginRepository;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

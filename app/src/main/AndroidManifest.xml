@@ -24,7 +24,6 @@
         <activity android:name="com.wanandroid.java.ui.web.ArticleDetailWebViewActivity" />
         <activity android:name=".ui.account.SetNameActivity" />
         <activity android:name=".ui.account.PersonalInformationActivity" />
-        <activity android:name=".ui.aboutme.AboutMeActivity" />
         <activity
             android:name=".ui.home.HomeActivity"
             android:launchMode="singleTask">

@@ -1,4 +1,4 @@
-package com.wanandroid.java.ui.login;
+package com.wanandroid.java.data.repository;
 
 import android.text.TextUtils;
 
