@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -34,7 +35,7 @@ public class ArticleDetailWebViewActivity extends AppCompatActivity {
             webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
         }
         webView.setWebChromeClient(new WebChromeClient());
-        webView.setWebViewClient(new WebViewClient());
+        webView.setWebViewClient(new MyWebViewClient());
         webView.loadUrl(link);
     }
 
@@ -43,5 +44,13 @@ public class ArticleDetailWebViewActivity extends AppCompatActivity {
         return super.dispatchTouchEvent(ev);
     }
 
+    public static class MyWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            //指定都用webView进行加载，不用三方处理
+            return true;
+        }
+
+    }
 
 }
